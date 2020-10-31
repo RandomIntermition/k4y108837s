@@ -1,0 +1,26 @@
+<settings>
+<category label="Stream Options">
+     <setting id="SHOWLIVE" type="bool" label="Show Live On Launch" default="False"/>
+     <setting label="" type="lsep"/>
+     <setting id="livehd" type="bool" label="HD Live Streams" default="true"/>
+     <setting id="autoplay" label="AutoPlay" type="bool" default="true"/>
+     <setting id="catchup" label="Catchup Source" type="enum" default="0" enable="eq(-1,true)" values="HLS|RTMP|DASH"/>
+     <setting id="supplier" label="Supplier" type="enum" default="0" enable="eq(-2,true)" values="AKAMAI|LIMELIGHT|BIDI"/>
+     <setting id="favs" type="text" label="Favorites" default="" visible="false"/>
+</category>
+<category label="Auto-View">
+     <setting id="autosortorder" type="bool" label="Sort Automatically" default="true"/>
+     <setting label="" type="lsep"/>
+     <setting id="auto-view" type="bool" label="Enable Automatic View" default="false"/>
+     <setting id="episode-view" type="number" label="Set Episode View:" default="50" enable="!eq(-1,false)"/>
+</category>
+<category label="DEBUG">
+     <setting id="kill.plot" type="bool" label="disable plot" default="false"/>
+     <setting id="kill.ep" type="bool" label="disable episode" default="false"/>
+</category>
+</settings>
+
+
+
+
+

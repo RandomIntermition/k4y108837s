@@ -1,0 +1,27 @@
+keymap ref
+
+Kodi can process multiple keymap files and does so like this:
+
+    All *.xml files from the default install settings and userdata/keymaps/ folders are applied as keymaps.
+    All *.xml files are processed in alphabetical order.
+    Keymaps defined in an .xml file add to or override mappings in previous .xml file.
+    Keymaps defined in the userdata folder add to or override mappings in the global keymap.
+
+
+global keymap = keyboard.xml (found in userdata folder)
+
+
+
+The format is:::::
+
+      <window> 
+        <device> 
+          <gesture>action</gesture>
+        </device> 
+      </window>
+
+
+
+The <global> section is the 'default'
+setting and will be overridden by all
+other sections.

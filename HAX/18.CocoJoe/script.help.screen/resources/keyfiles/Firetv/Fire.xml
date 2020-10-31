@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<keymap>
+  <Global>
+    <keyboard>
+      <rewind>PageUp</rewind>
+      <fastforward>PageDown</fastforward>
+      <browser_home>ActivateWindow(Home)</browser_home>
+      <key id="0xf200">ContextMenu</key>
+    </keyboard>
+  </Global>
+  <Home>
+    <keyboard>
+      <browser_back>shutdownmenu</browser_back>
+      <backspace>shutdownmenu</backspace>
+      <menu>ActivateWindow(Favourites)</menu>
+      <key id="0xf200">ActivateWindow(Favourites)</key>
+    </keyboard>
+  </Home>
+  <FullscreenVideo>
+    <keyboard>
+      <menu>seek(-7)</menu>
+      <key id="0xf200">seek(-7)</key>
+      <backspace>Stop</backspace>
+      <browser_back>Stop</browser_back>
+      <rewind>Rewind</rewind>
+      <fastforward>FastForward</fastforward>
+    </keyboard>
+  </FullscreenVideo>
+  <VideoOSD>
+    <keyboard>
+      <menu>CodecInfo</menu>
+      <key id="0xf200">CodecInfo</key>
+    </keyboard>
+  </VideoOSD>
+  <FullscreenLiveTV>
+    <keyboard>
+      <menu>ActivateWindow(pvrosdchannels)</menu>
+      <key id="0xf200">ActivateWindow(pvrosdchannels)</key>
+    </keyboard>
+  </FullscreenLiveTV>
+  <pvrosdchannels>
+    <keyboard>
+      <menu>back</menu>
+      <key id="0xf200">back</key>
+    </keyboard>
+  </pvrosdchannels>
+  <MyFiles>
+    <keyboard>
+      <play_pause>Highlight</play_pause>
+    </keyboard>
+  </MyFiles>
+  <virtualkeyboard>
+    <keyboard>
+      <menu>shift</menu>
+      <key id="0xf200">shift</key>
+      <play_pause>enter</play_pause>
+      <rewind>backspace</rewind>
+      <fastforward>number0</fastforward>
+      <browser_back>PreviousMenu</browser_back>
+      <backspace>PreviousMenu</backspace>
+    </keyboard>
+  </virtualkeyboard>
+  <Visualisation>
+    <keyboard>
+      <browser_back>Fullscreen</browser_back>
+    </keyboard>
+  </Visualisation>
+  <Favourites>
+    <keyboard>
+      <browser_back>close</browser_back>
+    </keyboard>
+  </Favourites>
+  <NumericInput>
+    <keyboard>
+      <browser_back>Close</browser_back>
+    </keyboard>
+  </NumericInput>
+  <PVROSDChannels>
+    <keyboard>
+      <browser_back>Close</browser_back>
+    </keyboard>
+  </PVROSDChannels>
+  <PVROSDGuide>
+    <keyboard>
+      <browser_back>Close</browser_back>
+    </keyboard>
+  </PVROSDGuide>
+  <PVROSDDirector>
+    <keyboard>
+      <browser_back>Close</browser_back>
+    </keyboard>
+  </PVROSDDirector>
+  <PVROSDCutter>
+    <keyboard>
+      <browser_back>Close</browser_back>
+    </keyboard>
+  </PVROSDCutter>
+  <MyTVSettings>
+    <keyboard>
+      <browser_back>PreviousMenu</browser_back>
+    </keyboard>
+  </MyTVSettings>
+</keymap>

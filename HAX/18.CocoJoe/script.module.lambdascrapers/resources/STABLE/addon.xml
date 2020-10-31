@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.module.lambdascrapers" name="Lambdascrapers Module" version="2.3.0.2.9" provider-name="1Clowns">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0" />
+        <import addon="script.module.beautifulsoup4"/>
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.python.pluginsource" library="lib/default.py">
+        <provides>executable</provides>
+    </extension>
+        <extension point="xbmc.service" library="ManifestSettings.py" start="startup" />
+        <extension point="xbmc.addon.metadata">
+            <platform>all</platform>
+            <summary lang="en">Lambdascrapers Module</summary>
+            <news>scraper updates</news>
+            <description>Scrape common video host for URL of video for plugins requiring multi video hosts.</description>
+            <disclaimer lang="en">The author is not responsible for the content found using this addon. The author does not host any content. The author is not affiliated with Kodi or the XBMC Foundation.This is a Non-profit resource, organized for educational purposes, protected under the Fair-Use doctrine of the Copyright Act, permitting the unlicensed use of copyright-protected works.</disclaimer>
+                <license></license>
+        </extension>
+</addon>

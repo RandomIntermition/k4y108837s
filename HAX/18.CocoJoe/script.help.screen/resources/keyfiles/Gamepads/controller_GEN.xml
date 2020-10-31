@@ -1,0 +1,299 @@
+<keymap>
+  <global>
+    <joystick name="YuanChen Game Controller">
+      <altname>YuanChen Game Controller</altname>
+      <!-- TOP MENU --><button id="1">FullScreen</button>
+      <!-- Center Hat  --><button id="2">Select</button>
+      <!--  R2 --><button id="3">XBMC.ActivateWindow(Home)</button>
+      <!-- Options --><button id="4">ContextMenu</button>
+      <!--  L1  --><button id="5">VolumeUp</button>
+      <!--  R1? --><button id="6">FullScreen</button>
+      <!--  L2  --><button id="7">VolumeDown</button>
+      <!--  BACK  --><button id="8">PreviousMenu</button>
+      <!-- Display --><button id="9">Info</button>
+      <!-- START --><button id="10">Mute</button>
+      <!-- L3 --><button id="11">ActivateWindow(shutdownmenu)</button>
+      <!-- R3 --><button id="12">Screenshot</button>
+      <hat    id="1" position="left">Left</hat>
+      <hat    id="1" position="right">Right</hat>
+      <hat    id="1" position="up">Up</hat>
+      <hat    id="1" position="down">Down</hat>
+      <button id="5">VolumeUp</button>     
+      <button id="7">VolumeDown</button>
+      <axis limit="+1" id="3">AnalogSeekForward</axis>
+      <axis limit="-1" id="3">AnalogSeekBack</axis>
+      <axis limit="-1" id="2">ScrollUp</axis>
+      <axis limit="+1" id="2">ScrollDown</axis>
+
+    </joystick>
+  </global>
+
+  <Home>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">XBMC.ActivateWindow(Favourites)</button>
+    </joystick>
+  </Home>
+
+  <MyPictures>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">ParentDir</button>
+    </joystick>
+  </MyPictures>
+
+  <MyMusicPlaylist>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Playlist</button>
+    </joystick>
+  </MyMusicPlaylist>
+
+  <MyMusicPlaylistEditor>
+    <joystick name="YuanChen Game Controller">
+      <button id="3">Playlist</button>
+    </joystick>
+  </MyMusicPlaylistEditor>
+
+  <MyMusicFiles>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">ParentDir</button>
+      <button id="4">Queue</button>
+    </joystick>
+  </MyMusicFiles>
+
+  <MyMusicLibrary>
+    <joystick name="YuanChen Game Controller">
+      <button id="3">ParentDir</button>
+      <button id="4">Queue</button>
+    </joystick>
+  </MyMusicLibrary>
+
+  <FullscreenVideo>
+    <joystick name="YuanChen Game Controller">
+      <button id="10">Pause</button>
+      <button id="3">Stop</button>
+      <button id="9">AspectRatio</button>
+      <button id="">Rewind</button>
+      <button id="">FastForward</button>
+      <button id="4">OSD</button>
+
+      <hat    id="1" position="left">StepBack</hat>
+      <hat    id="1" position="right">StepForward</hat>
+      <hat    id="1" position="up">BigStepForward</hat>
+      <hat    id="1" position="down">BigStepBack</hat>
+    </joystick>
+  </FullscreenVideo>
+
+  <FullscreenInfo>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </FullscreenInfo>
+
+  <PlayerControls>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </PlayerControls>
+
+  <Visualisation>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="2">Pause</button>
+      <button id="3">Stop</button>
+      <button id="4">XBMC.ActivateWindow(VisualisationPresetList)</button>
+      <button id="5">Rewind</button>
+      <button id="6">FastForward</button>
+      <button id="10">XBMC.ActivateWindow(MusicOSD)</button>
+
+      <hat    id="1" position="left">SkipPrevious</hat>
+      <hat    id="1" position="right">SkipNext</hat>
+      <hat    id="1" position="up">NextPreset</hat>
+      <hat    id="1" position="left">PreviousPreset</hat>
+    </joystick>
+  </Visualisation>
+
+  <MusicOSD>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </MusicOSD>
+
+  <VisualisationSettings>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </VisualisationSettings>
+
+  <VisualisationPresetList>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </VisualisationPresetList>
+
+  <SlideShow>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="1">ZoomNormal</button>
+      <button id="2">Pause</button>
+      <button id="3">Stop</button>
+      <button id="4">Rotate</button>
+
+      <hat    id="1" position="left">PreviousPicture</hat>
+      <hat    id="1" position="right">NextPicture</hat>
+      <hat    id="1" position="up">ZoomIn</hat>
+      <hat    id="1" position="down">ZoomOut</hat>
+    </joystick>
+  </SlideShow>
+
+  <ScreenCalibration>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="2">NextCalibration</button>
+    </joystick>
+  </ScreenCalibration>
+
+  <SelectDialog>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </SelectDialog>
+
+  <VideoOSD>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </VideoOSD>
+
+  <OSDVideoSettings>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </OSDVideoSettings>
+
+  <OSDAudioSettings>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </OSDAudioSettings>
+
+  <VideoBookmarks>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </VideoBookmarks>
+
+  <MyVideoLibrary>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">ParentDir</button>
+      <button id="4">Queue</button>
+      <button id="5">Info</button>
+    </joystick>
+  </MyVideoLibrary>
+
+  <MyVideoFiles>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">ParentDir</button>
+      <button id="4">Queue</button>
+      <button id="5">Info</button>
+    </joystick>
+  </MyVideoFiles>
+
+  <MyVideoPlaylist>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Playlist</button>
+    </joystick>
+  </MyVideoPlaylist>
+
+  <VirtualKeyboard>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="1">Symbols</button>
+      <button id="3">BackSpace</button>
+      <button id="4">Shift</button>
+      <button id="5">CursorLeft</button>
+      <button id="6">CursorRight</button>
+      <button id="9">Close</button>
+      <button id="10">Enter</button>
+    </joystick>
+  </VirtualKeyboard>
+
+  <ContextMenu>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </ContextMenu>
+
+  <FileStackingDialog>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </FileStackingDialog>
+
+  <MusicInformation>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </MusicInformation>
+
+  <MovieInformation>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </MovieInformation>
+
+  <PictureInfo>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </PictureInfo>
+
+  <AddonInformation>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </AddonInformation>
+
+  <AddonSettings>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </AddonSettings>
+
+  <TextViewer>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </TextViewer>
+
+  <NumericInput>
+    <joystick name="YuanChen Game Controller">
+      <altname>Logitech Cordless RumblePad 2</altname>
+      <button id="3">Close</button>
+    </joystick>
+  </NumericInput>
+
+</keymap>

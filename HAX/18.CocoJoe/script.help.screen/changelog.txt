@@ -1,0 +1,58 @@
+[B]Changelog:[/B]
+[COLOR blue]
+[B]Next Version:[/B]
+- v18 updates
+[/COLOR]
+[COLOR red]
+[B]Version 3.0.2[/B]
+- FIX media button, (now opens and closes dialogue).
+[/COLOR]
+
+
+[B]Version 3.0.1 - 2.7.0[/B]
+- media button, changed to better match 'O' during playback.
+- added more noops to prevent errors
+- hamburger button, shows plot/playback info (default was 'show queue')
+-Search button(info in menus -OR- info during playback)
+-media button (shows codec info -OR- opens favourites in menus)
+-Search button(opens favourites)
+-media button (shows playback info)
+-exclaimation (stops playback)
+-cycle button (cycles views in menus & aspect ratio during playback)
+- settings rework
+- fix cache to temp for linux
+- FIX cache error
+- keychange (UPDATE-U)
+- REWRITE cache clean(settings)
+- changelog layout change.
+
+
+[B]Version 2.0.0 - 0.4.0[/B]
+- added package clean(settings)
+- added thumbnail clean(settings)
+- added cache clean(settings)
+- all settings links complete
+- load keymaps from settings
+- controls info
+- new keymaps
+- test auto repo
+- removed repo test
+- added more keymaps(devices)
+- removed devaddon (As available from zip)
+- changelog style change
+- change icon
+- keymaps add 'appleremote' and 'firetv'
+- keymap (full) add viewchange
+- keymap 'all' rename to 'full'
+- settings add 'v'
+- added BG and icon
+- added screens
+
+
+[B]Version 0.4.0 - 0.0.1[/B]
+- fixed some minor bugs
+- combined ALT addon view
+- added basic settings (part written)
+- rewrite addon.xml
+- added additional files
+- Initial write

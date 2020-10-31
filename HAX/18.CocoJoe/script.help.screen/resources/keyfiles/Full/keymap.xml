@@ -1,0 +1,67 @@
+<keymap>
+  <Global>
+    <keyboard>
+<!-- START OF KEYS -->
+      <h>PlayMedia(&quot;plugin://script.help.screen&quot;)</h>
+      <u>PlayMedia(&quot;plugin://plugin.video.placenta/?action=updateLibrary&amp;query=tool&quot;)</u>
+      <v>Container.NextViewMode</v> <!-- V cycle views, FYI opens visualisations during music playback -->
+      <f>ActivateWindow(favourites)</f> <!-- F opens favourites dialog -->
+    </keyboard>
+  </Global>
+  <FullScreenVideo>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <v>noop</v>
+<!-- START OF KEYS -->
+      <p>PlayPause</p>
+      <o>PlayerDebug</o>
+    </keyboard>
+  </FullScreenVideo>
+  <VideoOSD>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+    </keyboard>
+  </VideoOSD>
+  <FullscreenInfo>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+    </keyboard>
+  </FullscreenInfo>
+  <MovieInformation>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+    </keyboard>
+  </MovieInformation>
+  <MusicInformation>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+    </keyboard>
+  </MusicInformation>
+  <PictureInfo>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+    </keyboard>
+  </PictureInfo>
+ </keymap>

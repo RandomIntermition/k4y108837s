@@ -1,0 +1,42 @@
+[B]Playback Controls:[/B]
+[COLOR red][LIGHT](These controls only work During playback)[/LIGHT][/COLOR]
+
+     [B]SPACEBAR[/B]  -  [COLOR blue][I]Play/Pause[/I][/COLOR]
+
+     [B]X[/B]  -  [COLOR blue][I]Close/Stop Playback[/I][/COLOR]
+                [COLOR lightblue](This will Close/Stop Playback from ANY window)[/COLOR]
+
+     [B]F  [/B]&[B]  R[/B]  -  [COLOR blue][I]FastForward & Rewind[/I][/COLOR]
+                [COLOR lightblue](Increase Speed with each press: (x2) (x4) (x8) (x16) (x32) etc.)[/COLOR]
+
+     [B]F8[/B]  -  [COLOR blue][I]MUTE[/I][/COLOR]
+                [COLOR lightblue](Toggle Sound ON/OFF)[/COLOR]
+
+[B]Display During playback:[/B]
+
+     [B]I[/B]  -  [COLOR blue][I]Info[/I][/COLOR]
+                [COLOR lightblue](Display information of currently playing Video/Music)
+                (e.g. Synopsis, runtime, etc.)[/COLOR]
+
+     [B]M[/B]  -  [COLOR blue][I]Menu/OSD[/I][/COLOR]
+                [COLOR lightblue](Display/Hide on-screen Player-controls, aka OSD)[/COLOR]
+
+     [B]O[/B]  -  [COLOR blue][I]Playback Info[/I][/COLOR]
+                [COLOR lightblue](Displays basic video codec information about the current item)
+                (Use 'CTRL+O' for more useful streaming information)[/COLOR]
+
+
+[B]Video Navigation:[/B]
+
+     [B]PageUp[/B]       -  [COLOR blue][I]Next Item[/I][/COLOR]
+     [B]PageDown[/B]  -  [COLOR blue][I]Previous Item[/I][/COLOR]
+                [COLOR lightblue](Skip to Next/Previous Item in playlist)
+                (if not using a playlist: Skips to Next/Previous chapter in video)[/COLOR]
+
+     [B]HH:MM:SS[/B]
+     [B]00:00:00+ENTER[/B]  -  [COLOR blue][I]Jump to that time[/I][/COLOR]
+     [B]00:00:00+LEFT[/B]     -  [COLOR blue][I]Jump backwards that amount[/I][/COLOR]
+     [B]00:00:00+RIGHT[/B]  -  [COLOR blue][I]Jump Forwards that amount[/I][/COLOR]
+                [COLOR lightblue](Jump To, Forwards, or Backwards from a specific time in Video/Music)
+        e.g. (10 Seconds: 1+0)  (10 Minutes: 1+0+0+0)  (2Minutes30Seconds: 2+3+0)[/COLOR]
+[COLOR black].[/COLOR]

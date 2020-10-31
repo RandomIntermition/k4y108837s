@@ -1,0 +1,42 @@
+[B]Player Settings:[/B]
+[COLOR red][LIGHT](These controls only work During playback)[/LIGHT][/COLOR]
+
+     [B]A[/B]  -  [COLOR blue][I]Align audio with Video[/I][/COLOR]
+                [COLOR lightblue](Use left&right to align audio)
+                (Press ENTER to set)[/COLOR]
+
+     [B]Z[/B]  -  [COLOR blue][I]Zoom - change aspect ratio[/I][/COLOR]
+                [COLOR lightblue](cycles through all Screen sizes)[/COLOR]
+
+     [B]C[/B]  -  [COLOR blue][I]View Playlist[/I][/COLOR]
+                [COLOR lightblue](View Video playlist)[/COLOR]
+
+
+[B]Subtitle Settings:[/B]
+[COLOR red][LIGHT](These controls only work During playback)[/LIGHT][/COLOR]
+
+     [B]T[/B]  -  [COLOR blue][I]Toggle Subtitles[/I][/COLOR]
+                [COLOR lightblue](Toggle Subtitles ON/OFF)[/COLOR]
+
+     [B]CTRL+T[/B]  -  [COLOR blue][I]Toggle Subtitle Position[/I][/COLOR]
+                [COLOR lightblue](Cycles through all Subtitle Positions)[/COLOR]
+
+     [B]CTRL+UP[/B]          -  [COLOR blue][I]MOVE Subtitles UP[/I][/COLOR]
+     [B]CTRL+DOWN[/B]  -  [COLOR blue][I]MOVE Subtitles DOWN[/I][/COLOR]
+                [COLOR lightblue](Adjust Subtitles Position UP or DOWN)[/COLOR]
+
+
+[B]Music Player Settings:[/B]
+
+     [B]P[/B]  -  [COLOR blue][I]Preset Visualisations (MUSIC ONLY)[/I][/COLOR]
+                [COLOR lightblue](View Visualisation presets)[/COLOR]
+
+     [B]V[/B]  -  [COLOR blue][I]Visualisation Settings (MUSIC ONLY)[/I][/COLOR]
+                [COLOR lightblue](Change Visualisation Settings)[/COLOR]
+
+     [B]T[/B]  -  [COLOR blue][I]Toggle Track info[/I][/COLOR]
+                [COLOR lightblue](Toggle Track info ON/OFF)[/COLOR]
+
+     [B]N[/B]  -  [COLOR blue][I]View Playlist (MUSIC ONLY)[/I][/COLOR]
+                [COLOR lightblue](View Music playlist)[/COLOR]
+[COLOR black].[/COLOR]

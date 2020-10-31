@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+
+
+    <category label="[COLOR]Keymaps[/COLOR]">
+	  <setting label="Configurations:" type="lsep"/>
+
+	  <setting label="[B]Set Basic keys[/B]
+  Use this to access 'Help' with 'H'" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapbasic.py)"/>
+	  <setting label="" type="lsep"/>
+
+	  <setting label="[B]Set All keys[/B]  [COLOR red](Recommended)[/COLOR]
+  Shortcuts with 'F' | Update library with 'U' | Change views with 'V'" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapfull.py)"/>
+	  <setting label="" type="lsep"/>
+
+	  <setting label="[B]Set All Keys & CUSTOM keys[/B]  [COLOR red](Universal Remote only)[/COLOR]
+  Same as above with the addition of 6 Universal Remote keys." type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapfullcustom.py)"/>
+	  <setting label="" type="lsep"/>
+	  <setting type="sep"/>
+
+	  <setting label="Other settings:      [LIGHT](Reload keys or restart kodi for changes to take affect)[/LIGHT]" type="lsep"/>
+	  <setting label="[B][RELOAD Keys][/B]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/reloadkeys.py)"/>
+	  <setting label="[B][RESET Keys to Default][/B]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapdefault.py)"/>
+    </category>
+
+
+    <category label="[COLOR blue]LOGS[/COLOR]">
+	  <setting label="[COLOR blue]Log files:[/COLOR]" type="lsep"/>
+	  <setting label="" type="lsep"/>
+
+	  <setting label="" type="sep"/>
+	  <setting label=" - Changelog -    [COLOR lightblue](opens changelog for current addon)[/COLOR]" type="lsep"/>
+	  <setting label="    [COLOR green][Click to View][/COLOR]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/scripts/changelog.py)"/>
+	  <setting label="" type="sep"/>
+
+	  <setting label=" - Kodi Log -      [COLOR lightblue](opens Debug log for current session)[/COLOR]" type="lsep"/>
+	  <setting label="    [COLOR green][Click to View][/COLOR]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/scripts/kodilog.py)"/>
+	  <setting label="" type="sep"/>
+    </category>
+
+
+    <category label="[COLOR darkred]Clean[/COLOR]">
+	  <setting label="Delete Temporary files:" type="lsep"/>
+	  <setting label="[COLOR red][LIGHT](Deleting Temporary files may actually slow down Kodi)[CR](only use if no free space is available)[/LIGHT][/COLOR]" type="lsep"/>
+
+	  <setting label="" type="lsep"/>
+
+	  <setting label="" type="sep"/>
+	  <setting label=" - Clear cache -    [COLOR lightblue](Deletes temporary files cached by kodi)[/COLOR]" type="lsep"/>
+	  <setting label="    [COLOR green][Click to Clear][/COLOR]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/scripts/clearcache.py)"/>
+	  <setting label="" type="sep"/>
+
+	  <setting label=" - Clear Thumbnails -      [COLOR lightblue](Deletes temporary images cached by kodi)[/COLOR]" type="lsep"/>
+	  <setting label="    [COLOR green][Click to Clear][/COLOR]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/scripts/clearthumbnails.py)"/>
+	  <setting label="" type="sep"/>
+
+	  <setting label=" - Clear Packages -      [COLOR lightblue](Deletes temporary package zips cached by kodi)[/COLOR]" type="lsep"/>
+	  <setting label="    [COLOR green][Click to Clear][/COLOR]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/scripts/clearpackages.py)"/>
+	  <setting label="" type="sep"/>
+    </category>
+
+
+    <category label="[COLOR darkred]WARNING![/COLOR]">
+	  <setting label="WARNING:" type="lsep"/>
+	  <setting label="[COLOR red][B]Clicking the above settings may cause [I]'permanent'[/I]  changes to your device,[/B][CR]By clicking them, you do so at your own risk[/COLOR]" type="lsep"/>
+	  <setting label="" type="lsep"/>
+
+	  <setting label="" type="sep"/>
+	  <setting label="" type="sep"/>
+	  <setting label="" type="sep"/>
+    </category>
+
+
+
+</settings>

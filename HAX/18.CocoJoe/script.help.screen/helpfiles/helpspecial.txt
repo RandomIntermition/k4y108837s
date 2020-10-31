@@ -1,0 +1,28 @@
+[B]Special Commands:[/B]  (1/2)
+[COLOR red][LIGHT](These commands only work if keys have been enabled from settings)[/LIGHT][/COLOR]
+
+     [B]H[/B]  -  [COLOR blue][I]Open the help-screen[/I][/COLOR]
+
+     [B]V[/B]  -  [COLOR blue][I]Change the current view/layout[/I][/COLOR]
+                [COLOR lightblue](cycles through all viewtypes)[/COLOR]
+
+     [B]U[/B]  -  [COLOR blue][I]Update Library[/I][/COLOR]
+                [COLOR lightblue](Update the media library & Subscriptions)[/COLOR]
+
+     [B]F[/B]  -  [COLOR blue][I]Favourites Shortcut[/I][/COLOR]
+                [COLOR lightblue](Displays Favourites Dialogue, Except during FullScreenVideo)[/COLOR]
+
+[B]Special Commands:[/B]  (2/2)
+[COLOR red][LIGHT](These commands only work if keys have been enabled from settings)[/LIGHT][/COLOR]
+
+     [B]O[/B]  -  [COLOR blue][I]Codec Info[/I][/COLOR]
+                [COLOR lightblue](Displays Codec & Streaming info, when pressed during FullScreenVideo)
+                (Displays Player Info, if pressed while viewing any OnScreenDisplay)[/COLOR]
+
+
+
+
+
+
+
+[COLOR black].[/COLOR]

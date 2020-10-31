@@ -1,0 +1,101 @@
+<keymap>
+  <Global>
+    <keyboard>
+<!-- START OF KEYS -->
+      <h>PlayMedia(&quot;plugin://script.help.screen&quot;)</h>
+      <u>PlayMedia(&quot;plugin://plugin.video.placenta/?action=updateLibrary&amp;query=tool&quot;)</u>
+      <v>Container.NextViewMode</v> <!-- V cycle views, FYI opens visualisations during music playback -->
+      <f>ActivateWindow(favourites)</f> <!-- F opens favourites dialog -->
+<!-- START OF UNIVERSAL KEYS -->
+      <key id="61620">ActivateWindow(favourites)</key> <!-- search key used in place of F on remote, opens favourites -->
+      <key id="61952">info</key> <!-- media key, codec info during FullScreenVideo, otherwise info/I -->
+      <key id="61630">stop</key> <!-- exclamation key used in place of X on remote, stops playback -->
+      <key id="61585">Container.NextViewMode</key> <!-- 4boxes key used in place of V on remote, cycle views -->
+    </keyboard>
+  </Global>
+  <FullScreenVideo>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <v>noop</v>
+      <fastforward>noop</fastforward> <!-- fastforward key nooped, longpress error -->
+      <rewind>noop</rewind> <!-- rewind key nooped, longpress error -->
+<!-- START OF KEYS -->
+      <p>PlayPause</p>
+      <o>PlayerDebug</o>
+<!-- START OF UNIVERSAL KEYS -->
+      <key id="61620">noop</key> <!-- search key/favourites nooped, playback interupt -->
+      <key id="61952">PlayerDebug</key> <!-- media key used in place of O on remote, codec info -->
+      <key id="61630">stop</key> <!-- exclamation key used in place of X on remote, stops playback -->
+      <key id="61585">aspectratio</key> <!-- 4boxes key used in place of Z on remote, zoom/aspect ratio -->
+      <key id="61656">info</key> <!-- hamburger key, info/plot during FullScreenVideo, otherwise context/C -->
+      <play_pause>PlayPause</play_pause> <!-- remote built in key -->
+    </keyboard>
+  </FullScreenVideo>
+  <VideoOSD>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+<!-- START OF UNIVERSAL KEYS -->
+      <key id="61620">noop</key> <!-- search key/favourites nooped, playback interupt -->
+      <key id="61952">PlayerProcessInfo</key> <!-- media key used in place of O on remote, codec info -->
+    </keyboard>
+  </VideoOSD>
+  <PlayerProcessInfo>
+    <keyboard>
+      <key id="61952">PlayerProcessInfo</key> <!-- media key used in place of O on remote, codec info -->
+    </keyboard>
+</PlayerProcessInfo>
+  <FullscreenInfo>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+<!-- START OF UNIVERSAL KEYS -->
+      <key id="61620">noop</key> <!-- search key/favourites nooped, playback interupt -->
+      <key id="61656">back</key> <!-- hamburger key, back out of info/plot, otherwise context/C -->
+    </keyboard>
+  </FullscreenInfo>
+  <MovieInformation>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+<!-- START OF UNIVERSAL KEYS -->
+      <key id="61620">noop</key> <!-- search key/favourites nooped, playback interupt -->
+      <key id="61656">back</key> <!-- hamburger key, back out of info/plot, otherwise context/C -->
+    </keyboard>
+  </MovieInformation>
+  <MusicInformation>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+<!-- START OF UNIVERSAL KEYS -->
+      <key id="61620">noop</key> <!-- search key/favourites nooped, playback interupt -->
+      <key id="61656">back</key> <!-- hamburger key, back out of info/plot, otherwise context/C -->
+    </keyboard>
+  </MusicInformation>
+  <PictureInfo>
+    <keyboard>
+<!-- START OF NOOPS -->
+      <h>noop</h>
+      <u>noop</u>
+      <f>noop</f>
+<!-- START OF KEYS -->
+<!-- START OF UNIVERSAL KEYS -->
+      <key id="61620">noop</key> <!-- search key/favourites nooped, playback interupt -->
+      <key id="61656">back</key> <!-- hamburger key, back out of info/plot, otherwise context/C -->
+    </keyboard>
+  </PictureInfo>
+ </keymap>

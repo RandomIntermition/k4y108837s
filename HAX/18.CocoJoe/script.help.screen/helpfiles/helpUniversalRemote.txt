@@ -1,0 +1,28 @@
+[B]Universal Remote:[/B][COLOR lightblue](1)[/COLOR]
+[COLOR red][LIGHT](These Controls only work when universal keys are set & a compatible remote is used)[/LIGHT][/COLOR]
+
+     [B]media button[/B]  -  [COLOR blue][I]show/hide codec info during fullscreen playback[/I][/COLOR]
+                [COLOR lightblue](Displays Info Dialogue in menus & OSD)[/COLOR]
+
+     [B]exclaimation[/B]  -  [COLOR blue][I]Stop playback (long-press)[/I][/COLOR]
+                [COLOR lightblue](Hold to stop playback from any menu)[/COLOR]
+
+     [B]cycle button[/B]  -  [COLOR blue][I]Change the current view/aspect ratio[/I][/COLOR]
+                [COLOR lightblue](cycles through all viewtypes in menus -or- aspect ratios during playback)[/COLOR]
+
+
+
+[B]Universal Remote:[/B][COLOR lightblue](2)[/COLOR]
+[COLOR red][LIGHT](These Controls only work when universal keys are set & a compatible remote is used)[/LIGHT][/COLOR]
+
+     [B]Search icon [/B]  -  [COLOR blue][I]Info shortcut (long-press)[/I][/COLOR]
+                [COLOR lightblue](Displays Favourites Dialogue from any menu)[/COLOR]
+                [COLOR lightblue](Except during fullscreen playback)[/COLOR]
+
+     [B]Hamburger icon [/B]  -  [COLOR blue][I]Context/Info[/I][/COLOR]
+                [COLOR lightblue](Displays the context menu for thr highlighted item)[/COLOR]
+                [COLOR lightblue](OR, Plot summary during fullscreen playback)[/COLOR]
+
+
+
+[COLOR black].[/COLOR]

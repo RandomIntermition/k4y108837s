@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+
+    <!-- General -->
+    <category label="30009">
+        <setting label="30430" type="bool" id="auto_run" default="false"/>
+        <setting label="30373" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/favourites/delete_favourites/)"/>
+    </category>
+    <!-- General -->
+
+
+    <!-- Menus -->
+    <category label="30008">
+        
+        <!-- Default values -->
+        <setting label="30017" type="lsep" />
+
+            <!-- Restore default order of all menus -->
+            <setting label="30400" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/restore_default_order/)"/>
+
+            <!-- Unmask all hidden items -->
+            <setting label="30401" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_all_hidden_items/)"/>
+
+        <!-- Unmask main menus items -->
+        <setting label="30018" type="lsep" />
+
+            <!-- Main menu items -->
+            <setting label="30402" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=root)"/>
+
+            <!-- Live TV countries -->
+            <setting label="30403" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=live_tv)"/>
+
+            <!-- Catch-up TV countries -->
+            <setting label="30404" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=replay)"/>
+
+            <!-- Websites -->
+            <setting label="30405" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=websites)"/>
+
+        <!-- Unmask live TV channels -->
+        <setting label="30019" type="lsep" />
+
+            <!-- French channels -->
+            <setting label="30080" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=fr_live)"/>
+
+            <!-- Switzerland channels -->
+            <setting label="30083" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=ch_live)"/>
+
+            <!-- United Kingdom channels -->
+            <setting label="30084" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=uk_live)"/>
+
+            <!-- International channels -->
+            <setting label="30085" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=wo_live)"/>
+
+            <!-- Belgium channels -->
+            <setting label="30081" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=be_live)"/>
+
+            <!-- Japanese channels -->
+            <setting label="30082" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=jp_live)"/>
+
+            <!-- Canadian channels -->
+            <setting label="30086" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=ca_live)"/>
+
+            <!-- United States of America channels -->
+            <setting label="30087" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=us_live)"/>
+
+            <!-- Polish channels -->
+            <setting label="30088" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=pl_live)"/>
+
+            <!-- Spanish channels -->
+            <setting label="30089" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=es_live)"/>
+
+            <!-- Tunisia channels -->
+            <setting label="30090" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=tn_live)"/>
+
+            <!-- Italian channels -->
+            <setting label="30091" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=it_live)"/>
+
+            <!-- Dutch channels -->
+            <setting label="30092" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=nl_live)"/>
+
+            <!-- Chinese channels -->
+            <setting label="30093" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=cn_live)"/>
+
+            <!-- Cameroon channels -->
+            <setting label="30094" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=cm_live)"/>
+
+            <!-- Slovenian channels -->
+            <setting label="30095" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=si_live)"/>
+
+            <!-- Ethiopian channels -->
+            <setting label="30096" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=et_live)"/>
+
+       <!-- Unmask replay TV channels -->
+        <setting label="30020" type="lsep" />
+
+            <!-- French channels -->
+            <setting label="30080" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=fr_replay)"/>
+
+            <!-- Switzerland channels -->
+            <setting label="30083" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=ch_replay)"/>
+
+            <!-- United Kingdom channels -->
+            <setting label="30084" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=uk_replay)"/>
+
+            <!-- International channels -->
+            <setting label="30085" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=wo_replay)"/>
+
+            <!-- Belgium channels -->
+            <setting label="30081" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=be_replay)"/>
+
+            <!-- Japanese channels -->
+            <setting label="30082" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=jp_replay)"/>
+
+            <!-- Canadian channels -->
+            <setting label="30086" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=ca_replay)"/>
+
+            <!-- United States of America channels -->
+            <setting label="30087" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=us_replay)"/>
+
+            <!-- Polish channels -->
+            <setting label="30088" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=pl_replay)"/>
+
+            <!-- Spanish channels -->
+            <setting label="30089" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=es_replay)"/>
+
+            <!-- Tunisia channels -->
+            <setting label="30090" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=tn_replay)"/>
+
+            <!-- Italian channels -->
+            <setting label="30091" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=it_replay)"/>
+
+            <!-- Dutch channels -->
+            <setting label="30092" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=nl_replay)"/>
+
+            <!-- Chinese channels -->
+            <setting label="30093" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=cn_replay)"/>
+
+            <!-- Cameroon channels -->
+            <setting label="30094" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/menu_utils/unmask_items/?menu_id=cm_replay)"/>
+
+    </category>
+    <!-- Menus -->
+
+
+
+    <!-- Quality and Content -->
+    <category label="30002">
+
+        <!-- Video quality -->
+        <setting label="30150" type="lsep" />
+            <setting label="30151" type="labelenum" id="quality" values="BEST|DEFAULT|DIALOG" default="BEST"/>
+
+
+        <!-- Content -->
+        <setting label="30152" type="lsep" />
+
+            <!-- TV Guide -->
+            <setting label="30168" type="bool" id="tv_guide" default="true"/>
+
+            <!-- Subtitle -->
+            <setting label="30169" type="bool" id="active_subtitle" default="false"/>
+
+            <!-- International channels -->
+            <setting label="30085" type="lsep" subsetting="true" visible="eq(1,true)"/>
+            <!--<setting label="" type="bool" id="wo" default="true" visible="false"/>-->
+
+                <setting label="30153" type="labelenum" id="arte.language" values="FR|DE|EN|ES|PL|IT" default="FR"/>
+                <setting label="30155" type="labelenum" id="euronews.language" values="FR|EN|AR|DE|IT|ES|PT|RU|TR|FA|GR|HU" default="FR"/>
+                <setting label="30154" type="labelenum" id="france24.language" values="FR|EN|AR|ES" default="FR"/>
+                <setting label="30157" type="labelenum" id="dw.language" values="EN|DE|ES|AR" default="EN"/>
+                <setting label="30161" type="labelenum" id="qvc.language" values="JP|DE|IT|UK|US" default="UK"/>
+                <setting label="30162" type="labelenum" id="nhkworld.language" values="Outside Japan|In Japan" default="Outside Japan"/>
+                <setting label="30163" type="labelenum" id="cgtn.language" values="FR|EN|AR|ES|RU" default="FR"/>
+                <setting label="30166" type="labelenum" id="rt.language" values="FR|EN|AR|ES" default="FR"/>
+
+            <!-- French channels -->
+            <setting label="30080" type="lsep" subsetting="true" visible="eq(1,true)"/>
+            <!--<setting label="" type="bool" id="fr" default="true" visible="false"/>-->
+
+                <setting label="30158" type="labelenum" id="france3regions.language" values="Alpes|Alsace|Aquitaine|Auvergne|Bourgogne|Bretagne|Centre-Val de Loire|Chapagne-Ardenne|Corse|Côte d'Azur|Franche-Comté|Languedoc-Roussillon|Limousin|Lorraine|Midi-Pyrénées|Nord-Pas-de-Calais|Basse-Normandie|Haute-Normandie|Paris Île-de-France|Pays de la Loire|Picardie|Poitou-Charentes|Provence-Alpes|Rhône-Alpes|Nouvelle-Aquitaine" default="Alpes"/>
+                <setting label="30159" type="labelenum" id="la_1ere.language" values="Guadeloupe|Guyane|Martinique|Mayotte|Nouvelle Calédonie|Polynésie|Réunion|St-Pierre et Miquelon|Wallis et Futuna|Outre-mer" default="Guadeloupe"/>
+
+            <!-- Spain channels -->
+            <setting label="30089" type="lsep" subsetting="true" visible="eq(1,true)"/>
+            <!--<setting label="" type="bool" id="es" default="true" visible="false"/>-->
+
+                <setting label="30165" type="labelenum" id="realmadridtv.language" values="ES|EN" default="ES"/>
+
+            <!-- Polish channels -->
+            <setting label="30088" type="lsep" subsetting="true" visible="eq(1,true)"/>
+            <!--<setting label="" type="bool" id="pl" default="true" visible="false"/>-->
+
+                <setting label="30167" type="labelenum" id="tvp3.language" values="Białystok|Bydgoszcz|Gdańsk|Gorzów Wielkopolski|Katowice|Kielce|Kraków|Lublin|Łódź|Olsztyn|Opole|Poznań|Rzeszów|Szczecin|Warszawa|Wrocław" default="Białystok"/>
+
+            <!-- Canadian channels -->
+            <setting label="30086" type="lsep" subsetting="true" visible="eq(1,true)"/>
+            <!--<setting label="" type="bool" id="pl" default="true" visible="false"/>-->
+
+                <setting label="30164" type="labelenum" id="icitele.language" values="Vancouver|Regina|Toronto|Edmonton|Rimouski|Québec|Winnipeg|Moncton|Ottawa|Montréal" default="Montréal"/>
+                <setting label="30170" type="labelenum" id="cbc.language" values="Ottawa|Montreal|Charlottetown|Fredericton|Halifax|Windsor|Yellowknife|Winnipeg|Regina|Calgary|Edmonton|Vancouver|Toronto|St. John\'s" default="Ottawa"/>
+
+    </category>
+    <!-- Quality and Content -->
+
+
+
+
+    <!-- Downloads -->
+    <category label="30003">
+        <setting label="30012" type="lsep"/>
+        <setting label="30200" type="folder" id="dl_folder" source="" option="writeable"/>
+        <setting label="30201" type="labelenum" id="dl_quality" visible="true" values="SD|720p|1080p|Highest available" default="Highest available"/>
+        <setting label="30202" type="bool" id="dl_background" default="false" visible="true"/>
+        <setting label="30203" type="bool" id="dl_item_filename" default="false" visible="true"/>
+    </category>
+    <!-- Downloads -->
+
+
+
+
+    <!-- Accounts -->
+    <category label="30004">
+
+        <setting label="30080" type="lsep" subsetting="true" visible="eq(1,true)"/>
+        <!--<setting label="" type="bool" id="fr" default="true" visible="false"/>-->
+
+            <setting label="30240" type="text" id="nrj.login" default=""/>
+            <setting label="30241" type="text" id="nrj.password" option="hidden" default=""/>
+
+            <setting label="30244" type="text" id="6play.login" default=""/>
+            <setting label="30245" type="text" id="6play.password" option="hidden" default=""/>
+
+            <setting label="30248" type="text" id="abweb.login" default=""/>
+            <setting label="30249" type="text" id="abweb.password" option="hidden" default=""/>
+
+        <setting label="30081" type="lsep" subsetting="true" visible="eq(1,true)"/>
+        <!--<setting label="" type="bool" id="be" default="true" visible="false"/>-->
+
+            <setting label="30242" type="text" id="vrt.login" default=""/>
+            <setting label="30243" type="text" id="vrt.password" option="hidden" default=""/>
+
+            <setting label="30246" type="text" id="rtlplaybe.login" default=""/>
+            <setting label="30247" type="text" id="rtlplaybe.password" option="hidden" default=""/>
+
+        <setting label="30084" type="lsep" subsetting="true" visible="eq(1,true)"/>
+        <!--<setting label="" type="bool" id="be" default="true" visible="false"/>-->
+
+            <setting label="30250" type="text" id="uktvplay.login" default=""/>
+            <setting label="30251" type="text" id="uktvplay.password" option="hidden" default=""/>
+
+    </category>
+    <!-- Accounts -->
+
+
+
+
+
+
+
+
+
+    <!-- Advanced settings / Tools and other things to save -->
+    <category label="30005">
+        <setting label="30372" type="bool" id="log_pop_up" default="true"/>
+        <setting label="30370" type="action" action="RunPlugin(plugin://plugin.video.catchuptvandmore/resources/lib/addon_utils/clear_cache/)"/>
+        <setting label="" type="bool" id="show_hidden_items_information" default="true" visible="false"/>
+        <setting label="" type="bool" id="show_live_tv_m3u_info" default="true" visible="false"/>
+        <setting label="X-Forwarded-For" type="text" id="header_x-forwarded-for" default=""/>
+    </category>
+    <!-- Advanced settings / Tools and other things to save -->
+
+
+
+
+</settings>

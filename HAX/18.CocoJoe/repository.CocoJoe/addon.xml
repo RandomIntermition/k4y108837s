@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="repository.CocoJoe" version="1.0.0.2" name="CocoJoe Repository" provider-name="DONE">
+	<requires>
+		<import addon="xbmc.python" version="2.19.0" />
+	</requires>
+	<extension point="xbmc.addon.repository" name="CocoJoe repository">
+		<dir minversion="16.0.0">
+			<info compressed="false">https://raw.githubusercontent.com/RandomIntermition/k4y108837s/master/HAX/16.CocoJoe/CocoJoe.xml</info>
+			<checksum>https://raw.githubusercontent.com/RandomIntermition/k4y108837s/master/HAX/16.CocoJoe/CocoJoe.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/RandomIntermition/k4y108837s/master/HAX/16.CocoJoe/</datadir>
+		</dir>
+		<dir minversion="18.0.0">
+			<info compressed="false">https://raw.githubusercontent.com/RandomIntermition/k4y108837s/master/HAX/18.CocoJoe/CocoJoe.xml</info>
+			<checksum>https://raw.githubusercontent.com/RandomIntermition/k4y108837s/master/HAX/18.CocoJoe/CocoJoe.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/RandomIntermition/k4y108837s/master/HAX/18.CocoJoe/</datadir>
+		</dir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">CocoJoe repository</summary>
+		<description lang="en">This repository contains ALTERED addons, DO NOT USE!.</description>
+		<disclaimer lang="en">The Author is NOT responsible for [COLOR red]PERMANENT DAMAGE![/COLOR] to your device, or [COLOR red]THEFT OF PERSONAL FILES[/COLOR].</disclaimer>
+		<platform>all</platform>
+		<news>fixed URL again</news>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+		</assets>
+	</extension>
+</addon>

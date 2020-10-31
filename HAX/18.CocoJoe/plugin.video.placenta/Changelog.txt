@@ -1,0 +1,467 @@
+
+
+
+ver 2.3.0.3.9
+new livestreams (swift)
+(minor edits to remove need for settings)
+new mod jsonbm
+
+
+
+ver 2.3.0.3.8
+add useragents
+update sme files
+update live
+fix live
+update open
+no real changes
+
+
+
+ver 2.3.0.3.7
+mod update
+scrapes check
+ip files
+
+
+
+
+
+ver 2.3.0.3.6
+small scrapes update
+new streams added (streamlive)
+(calls streamip to play)
+chg to: default and NAV to reflect new entry
+UPD acron streams
+mod chk
+lots of mod changes, note for damage.
+mod cache major rework, format changes only
+mod cient major rework, might break
+
+
+
+
+ver 2.3.0.3.5
+in tvshows, tvdb key update
+(was using v.old for some reason)
+added dont.limit setting to lambda
+FIX added control to scrapes with filter
+(needed to grab settings)
+added bind setting pre-scrap for dont.filter
+RENAME playback tab, 'results settings'
+FIX control opensettings to work with v18.
+
+
+
+ver 2.3.0.3.4
+add alt filter setting (sources.dont.filter)
+(will remove all filtering limits from pys)
+(limitless now means dont limit source)
+(all/custom to indicate if source settings are ignored)
+mod chk
+scrapes chk
+
+
+
+ver 2.3.0.3.3
+scrapes
+cf update
+append _fil to all with custom filters
+also update filt limit ref .py
+complete retest quick
+
+
+ver 2.3.0.3.2
+FIX forgot to enddirectory in new streams menu
+FIX removed idea of zxtra as sorted by url, so won't work.
+ADD extra sources setting (adds lasthope aswell as current set)
+(lasthope still available as independant set)
+ADD extra sources setting (added to main settings aswell as lambda)
+
+
+
+ver 2.3.0.3.1
+added extra scrapes section
+(renamed with zx to bottom of list)
+fix/update scrapes
+update settings manifest to match new section
+artwork icon update
+added stream section (24/7 and live)
+
+
+
+ver 2.3.0.3.0
+scrapes limit refig
+added scrapes limit template in stables
+update stables folder backups
+update hostblocklist in sources
+
+
+
+ver 2.3.0.2.9
+log0 update
+remove dead sets
+rejig manifest for dead sets
+mod check
+scrapes check
+change defauly bypass in lambdasettings
+(not that it matters as is set/updates by plac before each search)
+NEW SET - Lasthope (for storing obscur unwanted scrapes that still work)
+(e.g. forign and subs hardcoded ect)
+
+
+ver 2.3.0.2.8
+scrapes check
+mod check
+cf update
+
+
+ver 2.3.0.2.7.1
+scrapes check
+
+
+ver 2.3.0.2.7
+scrpes
+mod check and updates
+vers-match module and scrapes
+
+
+ver 2.3.0.2.6
+cf
+scrapes
+mod check
+
+
+ver 2.3.0.2.5
+check modules
+update series of modules
+update cf
+update scrapes
+update sets
+remove dead scrapes
+
+
+ver 2.3.0.2.4
+update several modules
+update scrapes
+
+
+ver 2.3.0.2.3
+NOT added js2py to lambda
+(switch cf for open to old instead)
+remove dead sets
+update cf
+update scrapes
+removed ALL dead sets
+update Manifestsettings to reflect removed sets.
+
+
+ver 2.3.0.2.2
+update scrapes
+update cf
+update host blocks in sources
+update alls sets
+
+
+ver 2.3.0.2.1
+edit some sets
+add set
+(marked dupe sets)
+update some scrapes
+
+
+
+ver 2.3.0.2.0
+remove dead set (global)
+update sets
+add new scrape
+
+ver 2.3.0.1.9
+finally fixed cf
+quick recheck cf scrapes
+
+
+
+ver 2.3.0.1.8
+fix error causing scrape fails
+update source utils
+(added function from scrub that exists
+in some scrapes to limit to one per host
+BUT fixed at "false" as not adding a setting for it)
+(don't use this limit code but leave in anyway as 
+prevents need to edit scrapes one by one)
+another update source utils
+(added function from oveasy that checks stream info)
+RE-ADD host blocks in sources
+
+
+ver 2.3.0.1.7
+fix errors causing scrape fail
+update source util
+update source util (lambda)
+minor update scrapes
+
+ver 2.3.0.1.6
+update cf
+full check sort scrapes
+
+ver 2.3.0.1.5
+check cf
+quick update scrapes
+add dupe source check
+(checks for dupe sources after scrape all)
+(rather than from individual scrapes)
+(no longer needs to be coded into individual scrapes)
+added setting to enable/disable new dupe source check
+sources py updated (to add dupe source check)
+
+ver 2.3.0.1.4
+switch civit for 13
+update scrape
+check cf
+fully update scrape sets
+mark old sets for delete
+
+ver 2.3.0.1.3
+scrape update
+cf update
+source_util update
+update scrape settings manifest
+(combined all PREMIUM to one folder)
+
+ver 2.3.0.1.1
+check/fix scrape
+update open
+
+ver 2.3.0.1
+check/fix several scrape
+remove redundant provider from settings and code (civit)
+removed dead code from source
+
+ver 2.3.0.0
+cf update
+scrape update
+source update
+dupe check
+
+ver 2.2.9.9
+removed dead sets
+fix dupe scrape
+remove dead scrape
+remove scrape from broken sites.
+
+ver 2.2.9.8
+fix hostdict
+fix many scrape
+remove dead scrape
+
+ver 2.2.9.7
+scrape update
+cf update
+
+ver 2.2.9.6
+scrape updates only
+
+ver 2.2.9.5
+cf update
+source_utils update
+scrape updates
+
+ver 2.2.9.4
+fix scrape specific host blocks
+small scrape updates
+cf revert
+
+ver 2.2.9.3
+remove dead host blocks
+(now needs to be coded per scrape)
+
+ver 2.2.9.2
+fix cf
+manual fix some scrape
+
+ver 2.2.9.1
+fix urlresolver not showing from tools
+block dead hosts
+add ignores for dead hosts to scrapes
+add new temp scrape folder (mostly for dupes)
+
+ver 2.2.9.0
+block bad host (blockhostdict)
+block dead host
+
+ver 2.2.8.9
+fix cf
+update artwork
+
+ver 2.2.8.8
+fix cf
+update scraps
+
+ver 2.2.8.7
+change string trakt lists to 'other lists'
+fix trakt
+add sync-to-library from trakt start-up and settings.
+update libtools for sync
+
+ver 2.2.8.6
+rework scraper settings
+now avoids error where multiple providers could be selected.
+change 'SD in autoplay' setting title
+rework dialog
+add 'Top' quality
+rework sources file
+
+ver 2.2.8.1
+added new sets
+fixed spaces in settings
+add back set civit
+add set open
+FIX 'bypass' (comment out in placenta sources)
+add/fix open set (dependencies needed)
+
+ver 2.2.7.5
+remove old set (civit)
+add more settings
+scraper updates
+
+ver 2.2.7.0
+change indicator default to LOCAL(was trakt)
+change scraping dialog
+new set supremacy
+
+ver 2.2.6.8
+module updates
+added top 10
+rework comingsoon
+rework latest release
+
+ver 2.2.6.5
+fix settings error
+del dead scrapers
+
+ver 2.2.6.5
+fix typo in manifest
+edit english strings
+add provider strings for civit
+edit scraper defaults
+change scraper string ID (reset defaults)
+edit settings module string (one for all)
+
+ver 2.2.6.1
+major settings update
+scraper sets update
+scraper settings update
+scraper service update
+added disable individual providers
+rewrite some old settings headers
+
+ver 2.2.5.1
+dupe removed
+
+ver 2.2.5
+fix cert sections
+fix secure url
+fix remove old sets from settings
+add new sets in settings
+
+ver 2.2.4
+added library to movie/tv sections (hidden by default)
+
+ver 2.2.2
+remove old sets
+add new sets
+
+ver 2.2.1
+error fix
+
+ver 2.2.0
+changed scraper sets
+update sets
+added scraper provider in settings
+removed built in scrapers
+added error on 'no scrapers'
+
+ver 2.1.0
+changed scraper sets
+
+ver 2.0.9
+several changes.
+trakt:
+-removed featured
+-added collection to tvshows (when enabled in settings)
+trakt manager:
+-re-arranged to proper order
+-color layout and wording changed.
+settings:
+-just a layout change
+scrapers:
+-removed outdated sets
+
+ver 2.0.8
+switch thevideo to vev
+
+ver 2.0.7
+add scrapers (exodus)
+
+ver 2.0.5
+fixed in theatre
+
+ver 2.0.4
+scraper limit setting added
+limitless added to dialog when enabled
+
+ver 2.0.3
+scraper updates
+
+ver 2.0.2
+fixes trakt lists
+added setting, hide trakt lists from main menu
+moved setting, hide trakt lists to trakt section
+
+ver 2.0.1
+removed some menu items
+
+ver 2.0.0
+added new scraper lists
+added trakt settings
+added trakt to movies menu
+now only need change settings.xml
+(when new scraper sets)
+
+ver 1.9.0
+quick scraper fix
+nothing more
+removed 'All'
+
+ver 1.8.0
+-- BUMP FOR RELEASE --
+
+ver 1.4.7
+-check all scrapers
+-removed dead scrapers
+-fix scrapers
+-fixed settings
+-fixed search
+-fixed search history
+-fixed search for kodi v18
+-added ALT scrapers
+-added ALT scraper settings
+('enable'/'type'/'shortcut to settings')
+-fixed kodi 17/18 resume back compat.
+
+
+FORK POINT
+ver 1.4.6
+_____________________________________
+ver 1.2.3
+	- A Few tweaks
+	- Fixed existing providers
+ver 1.2.2
+	- A Few tweaks
+	- Scraper updates
+v1.2.1
+    - Updated Settings
+    - Replaced Alluc	
+v1.2.0
+    - Builder Edition updates

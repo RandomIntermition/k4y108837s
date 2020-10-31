@@ -1,0 +1,132 @@
+
+
+
+v1.9.8
+
+added debug option (hide ep)
+(TEMP FIX for missing episodes with apostrophe)
+
+
+v1.9.5
+
+added 0-9 to a-z
+
+
+v1.9.0
+
+fixed genre
+fixed channels
+added debug option (hide plot)
+(TEMP FIX for some missing episodes with apostrophe)
+
+v1.8.0
+
+fixed video id
+fixed playback
+added multi-views for home
+
+
+v1.7.0
+
+adjusted sort order
+added automatic sort setting
+fixed genre pop (now all show as folders to avoid errors)
+fixed 'next page' for all categories
+added seperate 'next page' for episodes (called more episodes)
+
+
+v1.6.5
+
+added sort order (by title) to episode lists
+
+
+v1.6.0
+
+comment out proxy junk
+remove proxy settings
+
+
+v1.5.0
+
+fix for shows with VERY few eps.
+added 'show other eps' for shows with very few eps.
+(above additions only show OTHER eps, not current ep linked through from)
+-added new mode needed for above change.
+(switches 'show all' for 'show other' eps)
+-added alt split string for html of very few eps pages.
+
+
+v1.4.0
+
+fix A to Z again
+fix channel
+fix popular
+fix 'view all' for pop/channel/atoz
+grouped code for 'programme' pages to a single string.
+
+TRIMMED DEAD CODE
+
+
+v1.2.0
+
+fix A to Z
+
+
+v1.1.0
+
+fix URLS (all)
+fix fixed search
+add 'clear history' to search context
+add 'Home' link search screen (prevents doubling)
+prep for remove proxy next version.
+add new mode (900) for links to addon ROOT.
+
+
+
+v1.0.5
+
+fix popular scrape
+fix genre scrape
+fix all episode scrape
+fix popular playback
+fix popular error
+
+
+v1.0.0
+
+various fixes
+comment out old code
+fix settings
+fix genre close
+fix popular layout
+fix clear search
+fix grab all
+change icon
+fix many many plot fixes
+
+
+v0.7
+BRANCH POINT
+
+-shuffle menu items
+-fixed genre link
+-fixed genre next page
+-search fix
+-display fix (plot)
+
+
+
+
+________________________________________
+
+v0.5
+
+Fixed search
+Fixed some lists not opening due to Welsh chars
+
+Fixed playback for live and catchup
+Fixed Live
+Added Popular
+Added More Functions
+Right Click On Any Availables to Grab Full Listings
+Initial Release

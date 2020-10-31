@@ -1,0 +1,42 @@
+[B]Basic Controls:[/B]
+[COLOR red][LIGHT](These controls only work in the relevant menu)[/LIGHT][/COLOR]
+
+     [B]I[/B]  -  [COLOR blue][I]Info[/I][/COLOR]
+                [COLOR lightblue](Display information of current item)  (e.g. Synopsis, runtime, etc.)[/COLOR]
+
+     [B]W[/B]  -  [COLOR blue][I]Mark as Watched/Unwatched[/I][/COLOR]
+
+     [B]C[/B]  -  [COLOR blue][I]Context/Right-Click[/I]  (same as: 'Long-Press' ENTER/RETURN)[/COLOR]
+                [COLOR lightblue](Opens the context/options menu)[/COLOR]
+
+     [B]SHIFT+LETTER[/B]  -  [COLOR blue][I]Jump to X[/I][/COLOR]
+                [COLOR lightblue](Jump to First item begining with that letter in list)[/COLOR]
+
+[B]Playlist Controls:[/B]
+[COLOR red][LIGHT](These controls only work in the relevant menu)[/LIGHT][/COLOR]
+
+     [B]Q[/B]  -  [COLOR blue][I]Queue[/I][/COLOR]
+                [COLOR lightblue](Queue/add item to current playlist)[/COLOR]
+
+     [B]U[/B]  -  [COLOR blue][I]Move item UP(Playlist)[/I][/COLOR]
+                [COLOR lightblue](Moves an item UP one palce in a playlist)[/COLOR]
+
+     [B]D[/B]  -  [COLOR blue][I]Move item DOWN(Playlist)[/I][/COLOR]
+                [COLOR lightblue](Moves an item DOWN one palce in a playlist)[/COLOR]
+
+
+
+[B]Other System Controls:[/B]
+[COLOR red][LIGHT](These controls work from most menu's)[/LIGHT][/COLOR]
+
+     [B]S[/B]  -  [COLOR blue][I]Shutdown Menu[/I][/COLOR]
+                [COLOR lightblue](Displays the Shutdown options menu)[/COLOR]
+
+     [B]X[/B]  -  [COLOR blue][I]Close/Stop Playback[/I][/COLOR]
+                [COLOR lightblue](This will Close/Stop Playback from ANY window)[/COLOR]
+
+     [B]TAB[/B]  -  [COLOR blue][I]Switch to Video/Menu[/I][/COLOR]
+                [COLOR lightblue](Toggles between FullScreenVideo and Menu screen)[/COLOR]
+
+
+[COLOR black].[/COLOR]

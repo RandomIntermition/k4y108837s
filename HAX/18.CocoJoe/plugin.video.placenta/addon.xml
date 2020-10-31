@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.placenta" version="2.3.0.3.9" name="Placenta" provider-name="Team Aftebirth">
+	<requires>
+           <import addon="xbmc.python" version="2.19.0" />
+           <import addon="script.module.placenta" />
+           <import addon="script.placenta.artwork" />
+           <import addon="script.placenta.metadata" />
+           <import addon="script.module.resolveurl" />
+           <import addon="script.module.requests" />
+           <import addon="script.module.metahandler" />
+           <import addon="plugin.video.youtube" />
+           <import addon="script.module.lambdascrapers" />
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="default.py">
+		<provides>video</provides>
+        <provides>audio</provides>
+	</extension>
+	<extension point="xbmc.service" library="service.py" start="startup" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Placenta</summary>
+		<description>Fork with alternate sources.</description>
+        <disclaimer lang="en">The author is not responsible for the content found using this addon.</disclaimer>
+		<platform>all</platform>
+        <reuselanguageinvoker>false</reuselanguageinvoker>
+        <news>mostly scraper updates</news>
+		<license></license>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+    			<screenshot>resources/screenshots/screenshot-01.jpg</screenshot>
+    			<screenshot>resources/screenshots/screenshot-02.jpg</screenshot>
+    			<screenshot>resources/screenshots/screenshot-03.jpg</screenshot>
+    			<screenshot>resources/screenshots/screenshot-04.jpg</screenshot>
+		</assets>
+		<news></news>
+	</extension>
+</addon>

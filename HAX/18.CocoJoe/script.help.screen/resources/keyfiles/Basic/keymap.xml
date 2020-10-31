@@ -1,0 +1,13 @@
+<keymap>
+  <Global>
+    <keyboard>
+      <h>PlayMedia(&quot;plugin://script.help.screen&quot;)</h>
+    </keyboard>
+  </Global>
+  <FullScreenVideo>
+    <keyboard>
+      <h>noop</h>
+      <p>PlayPause</p>
+    </keyboard>
+  </FullScreenVideo>
+ </keymap>

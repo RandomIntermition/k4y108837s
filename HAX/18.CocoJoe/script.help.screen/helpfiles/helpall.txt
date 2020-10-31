@@ -1,0 +1,182 @@
+[B]Basic Controls:[/B]
+[COLOR red][LIGHT](These controls only work in the relevant menu)[/LIGHT][/COLOR]
+
+     [B]I[/B]  -  [COLOR blue][I]Info[/I][/COLOR]
+                [COLOR lightblue](Display information of current item)  (e.g. Synopsis, runtime, etc.)[/COLOR]
+
+     [B]W[/B]  -  [COLOR blue][I]Mark as Watched/Unwatched[/I][/COLOR]
+
+     [B]C[/B]  -  [COLOR blue][I]Context/Right-Click[/I]  (same as: 'Long-Press' ENTER/RETURN)[/COLOR]
+                [COLOR lightblue](Opens the context/options menu)[/COLOR]
+
+     [B]SHIFT+LETTER[/B]  -  [COLOR blue][I]Jump to X[/I][/COLOR]
+                [COLOR lightblue](Jump to First item begining with that letter in list)[/COLOR]
+
+[B]Playlist Controls:[/B]
+[COLOR red][LIGHT](These controls only work in the relevant menu)[/LIGHT][/COLOR]
+
+     [B]Q[/B]  -  [COLOR blue][I]Queue[/I][/COLOR]
+                [COLOR lightblue](Queue/add item to current playlist)[/COLOR]
+
+     [B]U[/B]  -  [COLOR blue][I]Move item UP(Playlist)[/I][/COLOR]
+                [COLOR lightblue](Moves an item UP one palce in a playlist)[/COLOR]
+
+     [B]D[/B]  -  [COLOR blue][I]Move item DOWN(Playlist)[/I][/COLOR]
+                [COLOR lightblue](Moves an item DOWN one palce in a playlist)[/COLOR]
+
+
+
+[B]Other System Controls:[/B]
+[COLOR red][LIGHT](These controls work from most menu's)[/LIGHT][/COLOR]
+
+     [B]S[/B]  -  [COLOR blue][I]Shutdown Menu[/I][/COLOR]
+                [COLOR lightblue](Displays the Shutdown options menu)[/COLOR]
+
+     [B]X[/B]  -  [COLOR blue][I]Close/Stop Playback[/I][/COLOR]
+                [COLOR lightblue](This will Close/Stop Playback from ANY window)[/COLOR]
+
+     [B]TAB[/B]  -  [COLOR blue][I]Switch to Video/Menu[/I][/COLOR]
+                [COLOR lightblue](Toggles between FullScreenVideo and Menu screen)[/COLOR]
+
+
+[COLOR black].[/COLOR]
+[B]Playback Controls:[/B]
+[COLOR red][LIGHT](These controls only work During playback)[/LIGHT][/COLOR]
+
+     [B]SPACEBAR[/B]  -  [COLOR blue][I]Play/Pause[/I][/COLOR]
+
+     [B]X[/B]  -  [COLOR blue][I]Close/Stop Playback[/I][/COLOR]
+                [COLOR lightblue](This will Close/Stop Playback from ANY window)[/COLOR]
+
+     [B]F  [/B]&[B]  R[/B]  -  [COLOR blue][I]FastForward & Rewind[/I][/COLOR]
+                [COLOR lightblue](Increase Speed with each press: (x2) (x4) (x8) (x16) (x32) etc.)[/COLOR]
+
+     [B]F8[/B]  -  [COLOR blue][I]MUTE[/I][/COLOR]
+                [COLOR lightblue](Toggle Sound ON/OFF)[/COLOR]
+
+[B]Display During playback:[/B]
+
+     [B]I[/B]  -  [COLOR blue][I]Info[/I][/COLOR]
+                [COLOR lightblue](Display information of currently playing Video/Music)
+                (e.g. Synopsis, runtime, etc.)[/COLOR]
+
+     [B]M[/B]  -  [COLOR blue][I]Menu/OSD[/I][/COLOR]
+                [COLOR lightblue](Display/Hide on-screen Player-controls, aka OSD)[/COLOR]
+
+     [B]O[/B]  -  [COLOR blue][I]Playback Info[/I][/COLOR]
+                [COLOR lightblue](Displays basic video codec information about the current item)
+                (Use 'CTRL+O' for more useful streaming information)[/COLOR]
+
+
+[B]Video Navigation:[/B]
+
+     [B]PageUp[/B]       -  [COLOR blue][I]Next Item[/I][/COLOR]
+     [B]PageDown[/B]  -  [COLOR blue][I]Previous Item[/I][/COLOR]
+                [COLOR lightblue](Skip to Next/Previous Item in playlist)
+                (if not using a playlist: Skips to Next/Previous chapter in video)[/COLOR]
+
+     [B]HH:MM:SS[/B]
+     [B]00:00:00+ENTER[/B]  -  [COLOR blue][I]Jump to that time[/I][/COLOR]
+     [B]00:00:00+LEFT[/B]     -  [COLOR blue][I]Jump backwards that amount[/I][/COLOR]
+     [B]00:00:00+RIGHT[/B]  -  [COLOR blue][I]Jump Forwards that amount[/I][/COLOR]
+                [COLOR lightblue](Jump To, Forwards, or Backwards from a specific time in Video/Music)
+        e.g. (10 Seconds: 1+0)  (10 Minutes: 1+0+0+0)  (2Minutes30Seconds: 2+3+0)[/COLOR]
+[COLOR black].[/COLOR]
+[B]Player Settings:[/B]
+[COLOR red][LIGHT](These controls only work During playback)[/LIGHT][/COLOR]
+
+     [B]A[/B]  -  [COLOR blue][I]Align audio with Video[/I][/COLOR]
+                [COLOR lightblue](Use left&right to align audio)
+                (Press ENTER to set)[/COLOR]
+
+     [B]Z[/B]  -  [COLOR blue][I]Zoom - change aspect ratio[/I][/COLOR]
+                [COLOR lightblue](cycles through all Screen sizes)[/COLOR]
+
+     [B]C[/B]  -  [COLOR blue][I]View Playlist[/I][/COLOR]
+                [COLOR lightblue](View Video playlist)[/COLOR]
+
+
+[B]Subtitle Settings:[/B]
+[COLOR red][LIGHT](These controls only work During playback)[/LIGHT][/COLOR]
+
+     [B]T[/B]  -  [COLOR blue][I]Toggle Subtitles[/I][/COLOR]
+                [COLOR lightblue](Toggle Subtitles ON/OFF)[/COLOR]
+
+     [B]CTRL+T[/B]  -  [COLOR blue][I]Toggle Subtitle Position[/I][/COLOR]
+                [COLOR lightblue](Cycles through all Subtitle Positions)[/COLOR]
+
+     [B]CTRL+UP[/B]          -  [COLOR blue][I]MOVE Subtitles UP[/I][/COLOR]
+     [B]CTRL+DOWN[/B]  -  [COLOR blue][I]MOVE Subtitles DOWN[/I][/COLOR]
+                [COLOR lightblue](Adjust Subtitles Position UP or DOWN)[/COLOR]
+
+
+[B]Music Player Settings:[/B]
+
+     [B]P[/B]  -  [COLOR blue][I]Preset Visualisations (MUSIC ONLY)[/I][/COLOR]
+                [COLOR lightblue](View Visualisation presets)[/COLOR]
+
+     [B]V[/B]  -  [COLOR blue][I]Visualisation Settings (MUSIC ONLY)[/I][/COLOR]
+                [COLOR lightblue](Change Visualisation Settings)[/COLOR]
+
+     [B]T[/B]  -  [COLOR blue][I]Toggle Track info[/I][/COLOR]
+                [COLOR lightblue](Toggle Track info ON/OFF)[/COLOR]
+
+     [B]N[/B]  -  [COLOR blue][I]View Playlist (MUSIC ONLY)[/I][/COLOR]
+                [COLOR lightblue](View Music playlist)[/COLOR]
+[COLOR black].[/COLOR]
+[B]Special Commands:[/B]  (1/2)
+[COLOR red][LIGHT](These commands only work if keys have been enabled from settings)[/LIGHT][/COLOR]
+
+     [B]H[/B]  -  [COLOR blue][I]Open the help-screen[/I][/COLOR]
+
+     [B]V[/B]  -  [COLOR blue][I]Change the current view/layout[/I][/COLOR]
+                [COLOR lightblue](cycles through all viewtypes)[/COLOR]
+
+     [B]U[/B]  -  [COLOR blue][I]Update Library[/I][/COLOR]
+                [COLOR lightblue](Update the media library & Subscriptions)[/COLOR]
+
+     [B]F[/B]  -  [COLOR blue][I]Favourites Shortcut[/I][/COLOR]
+                [COLOR lightblue](Displays Favourites Dialogue, Except during FullScreenVideo)[/COLOR]
+
+[B]Special Commands:[/B]  (2/2)
+[COLOR red][LIGHT](These commands only work if keys have been enabled from settings)[/LIGHT][/COLOR]
+
+     [B]O[/B]  -  [COLOR blue][I]Codec Info[/I][/COLOR]
+                [COLOR lightblue](Displays Codec & Streaming info, when pressed during FullScreenVideo)
+                (Displays Player Info, if pressed while viewing any OnScreenDisplay)[/COLOR]
+
+
+
+
+
+
+
+[COLOR black].[/COLOR]
+[B]Universal Remote:[/B][COLOR lightblue](1)[/COLOR]
+[COLOR red][LIGHT](These Controls only work when universal keys are set & a compatible remote is used)[/LIGHT][/COLOR]
+
+     [B]media button[/B]  -  [COLOR blue][I]show/hide codec info during fullscreen playback[/I][/COLOR]
+                [COLOR lightblue](Displays Info Dialogue in menus & OSD)[/COLOR]
+
+     [B]exclaimation[/B]  -  [COLOR blue][I]Stop playback (long-press)[/I][/COLOR]
+                [COLOR lightblue](Hold to stop playback from any menu)[/COLOR]
+
+     [B]cycle button[/B]  -  [COLOR blue][I]Change the current view/aspect ratio[/I][/COLOR]
+                [COLOR lightblue](cycles through all viewtypes in menus -or- aspect ratios during playback)[/COLOR]
+
+
+
+[B]Universal Remote:[/B][COLOR lightblue](2)[/COLOR]
+[COLOR red][LIGHT](These Controls only work when universal keys are set & a compatible remote is used)[/LIGHT][/COLOR]
+
+     [B]Search icon [/B]  -  [COLOR blue][I]Info shortcut (long-press)[/I][/COLOR]
+                [COLOR lightblue](Displays Favourites Dialogue from any menu)[/COLOR]
+                [COLOR lightblue](Except during fullscreen playback)[/COLOR]
+
+     [B]Hamburger icon [/B]  -  [COLOR blue][I]Context/Info[/I][/COLOR]
+                [COLOR lightblue](Displays the context menu for thr highlighted item)[/COLOR]
+                [COLOR lightblue](OR, Plot summary during fullscreen playback)[/COLOR]
+
+
+
+[COLOR black].[/COLOR]

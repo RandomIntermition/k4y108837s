@@ -1,0 +1,16 @@
+[B]1.0.0.1[/B]
+- URL update
+- now includes versioning for 16 and 18
+- both still cocojoe (and updated backups)
+
+[B]0.0.5[/B]
+- another URL update
+
+[B]0.0.3[/B]
+- another URL update
+
+[B]0.0.2[/B]
+- URL update
+
+[B]0.0.1[/B]
+- Initial version

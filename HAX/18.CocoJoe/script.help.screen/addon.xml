@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.help.screen" name="Helper" version="3.0.2" provider-name="DONE">
+	<requires>
+		<import addon="xbmc.python" version="2.14.0"/>
+	</requires>
+	<extension point="xbmc.python.script" library="addon.py">
+		<provides>executable</provides>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">On-Screen Help</summary>
+		<description lang="en">
+Description:
+Displays list of basic keys and their function,
+Along with some special keys and their function.
+
+- Select a Category for more information.
+- View settings to load key configurations.
+
+
+
+	</description>
+	<disclaimer lang="en">
+This addon is NOT affiliated with official Kodi.
+[COLOR red](Special keys require additional setup)[/COLOR]
+	</disclaimer>
+	<news>
+[B]WHAT'S NEW:[/B]
+
+- fix Universal remote functions
+</news>
+		<license>Free to Use</license>
+		<language></language>
+		<forum></forum>
+		<source></source>
+		<website>Kodi.tv</website>
+		<email></email>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot>resources/screenshot-01.jpg</screenshot>
+			<screenshot>resources/screenshot-02.jpg</screenshot>
+			<screenshot>resources/screenshot-03.jpg</screenshot>
+			<screenshot>resources/screenshot-04.jpg</screenshot>
+			<screenshot>resources/screenshot-05.jpg</screenshot>
+		</assets>
+       	</extension>
+</addon>

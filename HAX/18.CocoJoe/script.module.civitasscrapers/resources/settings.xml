@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <category label="Providers">
+        <setting type="sep" />
+        <setting id="module.provider" label="Choose Module Scraper" type="action" option="close" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=ScraperChoice)" default="Civitasscrapers" />
+        <setting type="sep" />
+        <setting label="Civitas Scrapers Default Providers" type="action" option="close" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=Defaults&amp;setting=true&amp;open_id='1.2')"/>
+        <setting label="Disable All Providers" type="action" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=toggleAll&amp;setting=false&amp;open_id=0.1)" option="close"/>
+        <setting label="Enable All Providers" type="action" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=ToggleProviderAll&amp;action=EnableModuleAll)" option="close"/>
+        <setting type="sep" />
+        <setting id="provider.123moviehd" type="bool" label="$NUMBER[123]MOVIEHD" default="true" />
+        <setting id="provider.animetoon" type="bool" label="ANIMETOON" default="true" />
+        <setting id="provider.bnwmovies" type="bool" label="BNWMOVIES" default="true" />  
+        <setting id="provider.cartoonhd" type="bool" label="CARTOONHD" default="true" />
+        <setting id="provider.cartoonwire" type="bool" label="CARTOONWIRE" default="true" />
+        <setting id="provider.cmovieshdbz" type="bool" label="CMOVIESHDBZ" default="true" /> 
+        <setting id="provider.coolmoviezone" type="bool" label="COOLMOVIEZONE" default="true" />   
+        <setting id="provider.deepmovie" type="bool" label="DEEPMOVIE" default="true" />  
+        <setting id="provider.fmovies" type="bool" label="FMOVIES" default="true" />  
+        <setting id="provider.freefmovies" type="bool" label="FREEFMOVIES" default="true" />  
+        <setting id="provider.freeputlocker" type="bool" label="FREEPUTLOCKER" default="true" />  
+        <setting id="provider.furk" type="bool" label="FURK" default="true" /> 
+        <setting id="provider.gogoanime" type="bool" label="GOGOANIME" default="true" />
+        <setting id="provider.gowatchseries" type="bool" label="GOWATCHSERIES" default="true" />
+        <setting id="provider.hackimdb" type="bool" label="HACKIMDB" default="true" /> 
+        <setting id="provider.hdmto" type="bool" label="HDMTO" default="true" /> 
+        <setting id="provider.hdpopcorns" type="bool" label="HDPOPCORNS" default="true" /> 
+        <setting id="provider.iwaatch" type="bool" label="IWAATCH" default="fasle" /> 
+        <setting id="provider.library" type="bool" label="LIBRARY" default="true" />
+        <setting id="provider.movie4kis" type="bool" label="MOVIE4KIS" default="true" /> 
+        <setting id="provider.odb" type="bool" label="ODB" default="true" /> 
+        <setting id="provider.ororo" type="bool" label="ORORO" default="true" />
+        <setting id="provider.primewire" type="bool" label="PRIMEWIRE" default="true" />
+        <setting id="provider.projectfreetv" type="bool" label="PROJECTFREETV" default="true" />
+        <setting id="provider.putlocker" type="bool" label="PUTLOCKER" default="true" />
+        <setting id="provider.putlockerfree" type="bool" label="PUTLOCKERFREE" default="true" />
+        <setting id="provider.reddit" type="bool" label="REDDIT" default="true" /> 
+        <setting id="provider.seehd" type="bool" label="SEEHD" default="true" />  
+        <setting id="provider.series9" type="bool" label="SERIES9" default="true" /> 
+        <setting id="provider.seriesonline" type="bool" label="SERIESONLINE" default="true" /> 
+        <setting id="provider.sezonlukdizi" type="bool" label="SEZONLUKDIZI" default="true" />  
+        <setting id="provider.solarmovie" type="bool" label="SOLARMOVIE" default="true" />
+        <setting id="provider.solarmoviez" type="bool" label="SOLARMOVIEZ" default="true" />
+        <setting id="provider.swatchseries" type="bool" label="SWATCHSERIES" default="true" /> 
+        <setting id="provider.tvbox" type="bool" label="TVBOX" default="true" /> 
+        <setting id="provider.vidics" type="bool" label="VIDICS" default="true" />
+        <setting id="provider.watchseries" type="bool" label="WATCHSERIES" default="true" /> 
+    </category>
+
+    <category label="Foreign">
+        <setting label="Disable All Foreign Providers" type="action" option="close" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=toggleAllForeign&amp;setting=false&amp;open_id='1.1')"/>
+        <setting label="Enable All Foreign Providers" type="action" option="close" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=toggleAllForeign&amp;setting=true&amp;open_id='1.2')"/>
+        <setting label="Spanish" type="lsep" />
+        <setting id="provider.megapelistv" type="bool" label="MEGAPELISTV" default="false" />
+        <setting id="provider.peliculasdk" type="bool" label="PELICULASDK" default="false" />
+        <setting id="provider.pelisplustv" type="bool" label="PELISPLUSTV" default="false" />
+        <setting id="provider.pepecine" type="bool" label="PEPCINE" default="false" />
+        <setting id="provider.seriespapaya" type="bool" label="SERIESPAPAYA" default="false" />
+        <setting label="German" type="lsep" />
+        <setting id="provider.gamatotv" type="bool" label="GAMATOTV" default="false" />
+        <setting id="provider.liomenoi" type="bool" label="LIOMENOI" default="false" />
+        <setting id="provider.tainiesonline" type="bool" label="TAINIESONLINE" default="false" />
+        <setting id="provider.tainiomania" type="bool" label="TAINIOMANIA" default="false" />
+        <setting id="provider.xrysoi" type="bool" label="XRYSOI" default="false" />
+        <setting label="Polish" type="lsep" />
+        <setting id="provider.alltube" type="bool" label="ALLTUBE" default="false" />
+        <setting id="provider.boxfilm" type="bool" label="BOXFILM" default="false" />
+        <setting id="provider.cdahd" type="bool" label="CDAHD" default="false" />
+        <setting id="provider.cdax" type="bool" label="CDAX" default="false" />
+        <setting id="provider.ekinomaniak" type="bool" label="EKINOMANIAK" default="false" />
+        <setting id="provider.ekinotv" type="bool" label="EKINTOV" default="false" />
+        <setting id="provider.filiser" type="bool" label="FILISER" default="false" />
+        <setting id="provider.filmwebbooster" type="bool" label="FILMWEBBOOSTER" default="false" />
+        <setting id="provider.iitv" type="bool" label="IITV" default="false" />
+        <setting id="provider.movieneo" type="bool" label="MOVIENEO" default="false" />
+        <setting id="provider.openkatalog" type="bool" label="OPENKATALOG" default="false" />
+        <setting id="provider.paczamy" type="bool" label="PACZAMY" default="false" />
+        <setting id="provider.segos" type="bool" label="SEGOS (need login)" default="false" />
+        <setting id="provider.szukajkatv" type="bool" label="SZUKAJKATV" default="false" />
+        <setting id="provider.trt" type="bool" label="TRT" default="false" />
+    </category>
+
+    <category label="Debrid Only">
+        <setting label="Disable All Debrid Providers" type="action" option="close" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=toggleAllDebrid&amp;setting=false&amp;open_id='1.1')"/>
+        <setting label="Enable All Debrid Providers" type="action" option="close" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=toggleAllDebrid&amp;setting=true&amp;open_id='1.2')"/>
+        <setting type="sep" />
+        <setting id="provider.0day" type="bool" label="$NUMBER[0]DAY" default="true" />
+        <setting id="provider.300mbfilms" type="bool" label="$NUMBER[300]MBFILMS" default="true" />
+        <setting id="provider.300mbdownload" type="bool" label="$NUMBER[300]MBDOWNLOAD" default="true" /> 
+        <setting id="provider.bestmoviez" type="bool" label="BESTMOVIEZ" default="true" /> 
+        <setting id="provider.ddlspot" type="bool" label="DDLSPOT" default="true" />
+        <setting id="provider.ddlvalley" type="bool" label="DDLVALLEY" default="true" /> 
+        <setting id="provider.directdl" type="bool" label="DIRECTDL" default="true" />
+        <setting id="provider.filmxy" type="bool" label="FILMXY" default="true" />  
+        <setting id="provider.iwantmyshow" type="bool" label="IWANTMYSHOW" default="true" /> 
+        <setting id="provider.moviesleak" type="bool" label="MOVIESLEAK" default="true" />
+        <setting id="provider.mvrls" type="bool" label="MVRLS" default="true" /> 
+        <setting id="provider.myvideolink" type="bool" label="MYVIDEOLINK" default="true" /> 
+        <setting id="provider.playmovies" type="bool" label="PLAYMOVIES" default="true" /> 
+        <setting id="provider.rapidmoviez" type="bool" label="RAPIDMOVIEZ" default="true" /> 
+        <setting id="provider.rlsbb" type="bool" label="RLSBB" default="true" />
+        <setting id="provider.scenerls" type="bool" label="SCENERLS" default="true" /> 
+        <setting id="provider.scnsrc" type="bool" label="SCNSRC" default="true" /> 
+        <setting id="provider.tvdownload" type="bool" label="TVDOWNLOAD" default="true" />
+        <setting id="provider.ultrahdindir" type="bool" label="ULTRAHDINDIR" default="true" /> 
+        <setting id="provider.ultrhd" type="bool" label="ULTRHD" default="true" /> 
+        <setting id="provider.wrzcraft" type="bool" label="WRZCRAFT" default="true" /> 
+    </category>
+
+    <category label="Torrent (cached)">
+        <setting label="Disable All Torrent Providers" type="action" option="close" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=toggleAllTorrent&amp;setting=false&amp;open_id='1.1')"/>
+        <setting label="Enable All Torrent Providers" type="action" option="close" action="RunPlugin(plugin://script.module.civitasscrapers/?mode=toggleAllTorrent&amp;setting=true&amp;open_id='1.2')"/>
+        <setting type="sep" />
+        <setting id="provider.1337x" type="bool" label="$NUMBER[1337]x" default="true" /> 
+        <setting id="provider.eztv" type="bool" label="EZTV" default="true" /> 
+        <setting id="provider.glodls" type="bool" label="GLODLS" default="true" /> 
+        <setting id="provider.kickass2" type="bool" label="KICKASS$NUMBER[2]" default="true" /> 
+        <setting id="provider.limetorrents" type="bool" label="LIMETORRENTS" default="true" />
+        <setting id="provider.piratebay" type="bool" label="PIRATEBAY" default="true" /> 
+        <setting id="provider.torrentapi" type="bool" label="TORRENTAPI" default="true" /> 
+        <setting id="provider.torrentdownloads" type="bool" label="TORRENTDOWNLOADS" default="true" /> 
+        <setting id="provider.yify" type="bool" label="YIFY" default="true" /> 
+        <setting id="provider.zoogle" type="bool" label="ZOOGLE" default="true" /> 
+    </category>
+<!--    <category label="Debug">\-->
+<!--        <setting id="addon_debug" type="bool" label="Enable Debug" default="true" />-->
+<!--    </category>-->
+</settings>
