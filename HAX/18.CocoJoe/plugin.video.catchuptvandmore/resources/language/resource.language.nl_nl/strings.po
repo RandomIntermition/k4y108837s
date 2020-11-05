@@ -432,6 +432,97 @@ msgstr "UKTVPlay wachtwoord"
 
 
 
+# delete_for_submission_start
+# OpenVPN (from 30340 to 30369)
+
+msgctxt "#30340"
+msgid "Enable VPN feature"
+msgstr "Activeer VPN functionaliteit"
+
+msgctxt "#30341"
+msgid "OpenVPN filepath"
+msgstr "OpenVPN bestandspad"
+
+msgctxt "#30342"
+msgid "Import OpenVPN configuration file"
+msgstr "Importeer OpenVPN configuratiebestand"
+
+msgctxt "#30343"
+msgid "Delete OpenVPN configuration file"
+msgstr "Verwijder OpenVPN configuratiebestand"
+
+msgctxt "#30344"
+msgid "Additional arguments"
+msgstr "Additionele argumenten"
+
+msgctxt "#30345"
+msgid "Run OpenVPN with superuser privileges (sudo)"
+msgstr "Lanceer OpenVPN met superuser-privileges (sudo)"
+
+msgctxt "#30346"
+msgid "Ask for sudo password"
+msgstr "Vraag naar sudo wachtwoord"
+
+msgctxt "#30347"
+msgid "Connect VPN"
+msgstr "Verbind VPN"
+
+msgctxt "#30348"
+msgid "Choose a name for OpenVPN configuration"
+msgstr "Kies een naam voor de OpenVPN configuratie"
+
+msgctxt "#30349"
+msgid "This OpenVPN configuration name already exists. Overwrite?"
+msgstr "Deze OpenVPN configuratienaam bestaat reeds. Overschrijven?"
+
+msgctxt "#30350"
+msgid "Import cancelled"
+msgstr "Importeren geannuleerd"
+
+msgctxt "#30351"
+msgid "Import failed. You must specify a name for the OpenVPN configuration"
+msgstr "Importeren mislukt. U dient een naam voor de OpenVPN configuratie op te geven"
+
+msgctxt "#30352"
+msgid "Select OpenVPN configuration to run"
+msgstr "Kies de uit te voeren OpenVPN configuratie"
+
+msgctxt "#30353"
+msgid "Enter your sudo password"
+msgstr "Voer uw sudo wachtwoord in"
+
+msgctxt "#30354"
+msgid "Started VPN connection"
+msgstr "VPN verbinding gestart"
+
+msgctxt "#30355"
+msgid "Stopped VPN connection"
+msgstr "VPN verbinding gestopt"
+
+msgctxt "#30356"
+msgid "An existing OpenVPN instance appears to be running."
+msgstr "Er lijkt reeds een OpenVPN instantie te lopen."
+
+msgctxt "#30357"
+msgid "Disconnect it?"
+msgstr "Deze verbreken?"
+
+msgctxt "#30358"
+msgid "An error has occurred while trying to connect OpenVPN"
+msgstr "Er is een fout opgetreden bij het opbouwen van de verbinding"
+
+msgctxt "#30359"
+msgid "Disconnect VPN"
+msgstr "Verbreek VPN verbinding"
+
+msgctxt "#30360"
+msgid "Select OpenVPN configuration to delete"
+msgstr "Selecteer de te verwijderen OpenVPN configuratie"
+
+msgctxt "#30361"
+msgid "Connect/Disconnect VPN"
+msgstr "Verbind/Verbreek VPN"
+# delete_for_submission_end
 
 
 # Advanced settings (from 30370 to 30399)

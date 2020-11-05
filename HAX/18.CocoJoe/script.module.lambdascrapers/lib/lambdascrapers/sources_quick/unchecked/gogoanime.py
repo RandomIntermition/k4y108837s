@@ -13,8 +13,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['gogoanime.io']
-        self.base_link = 'https://www9.gogoanime.io/'
+        self.domains = ['gogoanime.so']
+        self.base_link = 'https://www9.gogoanime.so/'
         self.search_link = '/search.html?keyword=%s'
         self.episode_link = '/%s-episode-%s'
 

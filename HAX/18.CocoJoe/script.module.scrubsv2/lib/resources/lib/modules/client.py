@@ -156,11 +156,13 @@ def request(url, close=True, redirect=True, error=False, verify=True, proxy=None
             return result
         elif output == 'geturl':
             result = response.geturl()
-            if close is True: response.close()
+            if close is True:
+                response.close()
             return result
         elif output == 'headers':
             result = response.headers
-            if close is True: response.close()
+            if close is True:
+                response.close()
             return result
         elif output == 'chunk':
             try:
@@ -227,10 +229,12 @@ def request(url, close=True, redirect=True, error=False, verify=True, proxy=None
                 cookie = cf
             except:
                 pass
-            if close is True: response.close()
+            if close is True:
+                response.close()
             return (result, response_code, response_headers, _headers, cookie)
         else:
-            if close is True: response.close()
+            if close is True:
+                response.close()
             return result
     except Exception as e:
         log_utils.log('Request-Error: (%s) => %s' % (str(e), url), log_utils.LOGDEBUG)
@@ -296,14 +300,18 @@ def parseDOM(html, name='', attrs=None, ret=False):
 
 
 def replaceHTMLCodes(txt):
-    # txt = re.sub("(&#[0-9]+)([^;^0-9]+)", "\\1;\\2", txt)
+    txt = re.sub("(&#[0-9]+)([^;^0-9]+)", "\\1;\\2", txt)
     txt = HTMLParser.HTMLParser().unescape(txt)
     txt = txt.replace("&quot;", "\"")
     txt = txt.replace("&amp;", "&")
     txt = txt.replace("&lt;", "<")
     txt = txt.replace("&gt;", ">")
+    txt = txt.replace("%2B", "+")
+    txt = txt.replace("\/", "/")
+    txt = txt.replace("\\", "")
     txt = txt.strip()
     return txt
+
 
 def replaceHTMLCodesALT(txt):
     txt = re.sub("(&#[0-9]+)([^;^0-9]+)", "\\1;\\2", txt)

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re
 from resources.lib.modules import client
@@ -10,9 +10,9 @@ from resources.lib.modules import source_utils
 class source:
     def __init__(self):
         self.priority = 1
-        self.language = ['en']  #  coolmoviezone.online
-        self.domains = ['coolmoviezone.io']
-        self.base_link = 'https://coolmoviezone.io'
+        self.language = ['en']  #  Old  coolmoviezone.online  coolmoviezone.io  coolmoviezone.pro
+        self.domains = ['coolmoviezone.cc']
+        self.base_link = 'https://coolmoviezone.cc'
 
 
     def movie(self, imdb, title, localtitle, aliases, year):

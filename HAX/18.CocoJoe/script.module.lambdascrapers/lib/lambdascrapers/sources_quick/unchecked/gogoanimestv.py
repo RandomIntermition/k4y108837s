@@ -14,7 +14,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['gogoanimes.ai', 'gogoanimes.tv']
-        self.base_link = 'https://gogoanimes.ai/'
+        self.base_link = 'https://gogoanimes.tv/'
         self.search_link = '/search.html?keyword=%s'
         self.episode_link = '/%s-episode-%s'
 

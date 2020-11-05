@@ -1,10 +1,12 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
-import re,urllib,urlparse
+import re, urllib, urlparse
 from resources.lib.modules import client
 from resources.lib.modules import debrid
 from resources.lib.modules import source_utils
+import traceback
+from resources.lib.modules import log_utils
 
 
 class source:
@@ -99,7 +101,9 @@ class source:
                 except:
                     pass
             return sources
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('---SceneDDL - Exception: \n' + str(failure))
             return sources
 
 

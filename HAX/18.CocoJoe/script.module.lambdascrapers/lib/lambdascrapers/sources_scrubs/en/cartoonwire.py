@@ -1,9 +1,11 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 05-06-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re
-from resources.lib.modules import client,cleantitle
-from resources.lib.modules import directstream,source_utils
+from resources.lib.modules import client
+from resources.lib.modules import cleantitle
+from resources.lib.modules import directstream
+from resources.lib.modules import source_utils
 
 
 class source:
@@ -12,18 +14,15 @@ class source:
         self.language = ['en']
         self.genre_filter = ['animation', 'anime']
         self.domains = ['watchcartoononline.info', 'cartoonwire.to']
-        self.base_link = 'https://watchcartoononline.info'
+        self.base_link = 'https://cartoonwire.to'
         self.search_link = '/?s=%s'
-        # https://watchcartoononline.info/?s=zeroman
 
 
-    # https://watchcartoononline.info/wonder-park-2019/
-    # https://watchcartoononline.info/friends-naki-on-the-monster-island-2011/
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            title = cleantitle.geturl(title)
-            url = '%s-%s' % (title, year)
-            url = self.base_link + '/' + url
+            mtitle = cleantitle.geturl(title)
+            intel = '/%s-%s' % (mtitle, year)
+            url = self.base_link + intel
             return url
         except:
             return
@@ -32,21 +31,19 @@ class source:
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
             headers = {'User-Agent': client.randomagent()}
-            tvtit = cleantitle.geturl(tvshowtitle)
-            url = self.base_link + self.search_link % tvtit
-            r = client.request(url, headers=headers, timeout='3')
+            tvtitle = cleantitle.geturl(tvshowtitle)
+            url = self.base_link + self.search_link % tvtitle
+            r = client.request(url, headers=headers, timeout='5')
             u = client.parseDOM(r, "div", attrs={"class": "ml-item"})
             for i in u:
                 t = re.compile('<a href="(.+?)"').findall(i)
                 for r in t:
-                    if cleantitle.get(tvtit) in cleantitle.get(r):
+                    if cleantitle.get(tvtitle) in cleantitle.get(r):
                         return source_utils.strip_domain(url)
         except:
             return
 
 
-    # https://watchcartoononline.info/episode/zeroman-episode-13/
-    # https://watchcartoononline.info/episode/guardians-of-the-galaxy-season-3-episode-23/
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
         try:
             if not url:

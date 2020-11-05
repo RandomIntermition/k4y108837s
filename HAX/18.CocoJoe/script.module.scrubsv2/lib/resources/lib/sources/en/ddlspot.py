@@ -1,19 +1,20 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 # Created by Tempest
 
-import re,urllib,urlparse
+import re, urllib, urlparse
 from resources.lib.modules import client
 from resources.lib.modules import debrid
 from resources.lib.modules import source_utils
+
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
         self.domains = ['ddlspot.com']
-        self.base_link = 'http://www.ddlspot.com'
-        self.search_link = '/search/?q=%s&m=1&x=0&y=0'
+        self.base_link = 'http://www.ddlspot.com/'
+        self.search_link = 'search/?q=%s&m=1&x=0&y=0'
 
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -57,8 +58,7 @@ class source:
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
             title = data['tvshowtitle'] if 'tvshowtitle' in data else data['title']
-            hdlr = 'S%02dE%02d' % (int(data['season']), int(data['episode'])) \
-                if 'tvshowtitle' in data else data['year']
+            hdlr = 'S%02dE%02d' % (int(data['season']), int(data['episode'])) if 'tvshowtitle' in data else data['year']
             query = '%s S%02dE%02d' % (data['tvshowtitle'], int(data['season']), int(data['episode'])) \
                 if 'tvshowtitle' in data else '%s %s' % (data['title'], data['year'])
             url = self.search_link % urllib.quote_plus(query)
@@ -98,8 +98,6 @@ class source:
                     for t in u:
                         r = re.compile('a href=".+?" rel=".+?">(.+?)<').findall(t)
                         for url in r:
-                            if host2 in str(sources):
-                                continue
                             if any(x in url for x in ['.rar', '.zip', '.iso']):
                                 raise Exception()
                             quality, info = source_utils.get_release_quality(url)
@@ -111,7 +109,7 @@ class source:
             if check:
                 sources = check
             return sources
-        except Exception:
+        except:
             return sources
 
 

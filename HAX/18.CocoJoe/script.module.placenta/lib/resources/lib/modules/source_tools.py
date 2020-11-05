@@ -1,34 +1,34 @@
 # Original file: schism_meta and code bits from others.
 # Contents: all sorts of random code for source work lol.
 
-import re,sys,urllib,urllib2,urlparse,time
-import requests,random,base64,unicodedata
+import re, urllib, urlparse
+import requests, time,random ,base64 ,unicodedata
 import HTMLParser
 import traceback
 from resources.lib.modules import log_utils
 
-RES_8K   =  ['8k', 'hd8k', 'hd8k ', '8khd', '8khd ', '4320p', '4320i', 'hd4320', '4320hd', '4320p ', '4320i ', 'hd4320 ', '4320hd ', '5120p', '5120i', 'hd5120', '5120hd', '5120p ', '5120i ', 'hd5120 ', '5120hd ', '8192p', '8192i', 'hd8192', '8192hd', '8192p ', '8192i ', 'hd8192 ', '8192hd ']
-RES_6K   =  ['6k', 'hd6k', 'hd6k ', '6khd', '6khd ', '3160p', '3160i', 'hd3160', '3160hd', '3160p ', '3160i ', 'hd3160 ', '3160hd ', '4096p', '4096i', 'hd4096', '4096hd', '4096p ', '4096i ', 'hd4096 ', '4096hd ']
-RES_4K   =  ['4k', 'hd4k', 'hd4k ', '4khd', '4khd ', 'uhd', 'ultrahd', 'ultra hd', 'ultra high', '2160', '2160p', '2160i', 'hd2160', '2160hd', '2160 ', '2160p ', '2160i ', 'hd2160 ', '2160hd ', '1716p', '1716i', 'hd1716', '1716hd', '1716p ', '1716i ', 'hd1716 ', '1716hd ', '2664p', '2664i', 'hd2664', '2664hd', '2664p ', '2664i ', 'hd2664 ', '2664hd ', '3112p', '3112i', 'hd3112', '3112hd', '3112p ', '3112i ', 'hd3112 ', '3112hd ', '2880p', '2880i', 'hd2880', '2880hd', '2880p ', '2880i ', 'hd2880 ', '2880hd ']
-RES_2K   =  ['2k', 'hd2k', 'hd2k ', '2khd', '2khd ', '2048p', '2048i', 'hd2048', '2048hd', '2048p ', '2048i ', 'hd2048 ', '2048hd ', '1332p', '1332i', 'hd1332', '1332hd', '1332p ', '1332i ', 'hd1332 ', '1332hd ', '1556p', '1556i', 'hd1556', '1556hd', '1556p ', '1556i ', 'hd1556 ', '1556hd ', ]
-RES_1080 =  ['1080', '1080p', '1080i', 'hd1080', '1080hd', '1080 ', '1080p ', '1080i ', 'hd1080 ', '1080hd ', '1200p', '1200i', 'hd1200', '1200hd', '1200p ', '1200i ', 'hd1200 ', '1200hd ']
-RES_HD   =  ['720', '720p', '720i', 'hd720', '720hd', 'hd', '720 ', '720p ', '720i ', 'hd720 ', '720hd ']
-RES_SD   =  ['576', '576p', '576i', 'sd576', '576sd', '576 ', '576p ', '576i ', 'sd576 ', '576sd ', '480', '480p', '480i', 'sd480', '480sd', '480 ', '480p ', '480i ', 'sd480 ', '480sd ', '360', '360p', '360i', 'sd360', '360sd', '360 ', '360p ', '360i ', 'sd360 ', '360sd ', '240', '240p', '240i', 'sd240', '240sd', '240 ', '240p ', '240i ', 'sd240 ', '240sd ']
-SCR =  ['dvdscr', 'screener', 'scr', 'r5', 'r6', 'dvdscr ', 'r5 ', 'r6 ']
-CAM =  ['camrip', 'cam rip', 'tsrip', 'ts rip', 'hdcam', 'hd cam', 'hdts', 'hd ts', 'dvdcam', 'dvd cam', 'dvdts', 'dvd ts', 'cam', 'telesync', 'tele sync', 'ts', 'camrip ', 'tsrip ', 'hdcam ', 'hdts ', 'dvdcam ', 'dvdts ', 'telesync ']
+RES_8K   =  ['8k', 'hd8k', '8khd', '4320p', '4320i', 'hd4320', '4320hd', '5120p', '5120i', 'hd5120', '5120hd', '8192p', '8192i', 'hd8192', '8192hd']
+RES_6K   =  ['6k', 'hd6k', '6khd', '3160p', '3160i', 'hd3160', '3160hd', '4096p', '4096i', 'hd4096', '4096hd']
+RES_4K   =  ['4k', 'hd4k', '4khd', 'uhd', 'ultrahd', 'ultra hd', 'ultra high', '2160', '2160p', '2160i', 'hd2160', '2160hd', '1716p', '1716i', 'hd1716', '1716hd', '2664p', '2664i', 'hd2664', '2664hd', '3112p', '3112i', 'hd3112', '3112hd', '2880p', '2880i', 'hd2880', '2880hd']
+RES_2K   =  ['2k', 'hd2k', '2khd', '2048p', '2048i', 'hd2048', '2048hd', '1332p', '1332i', 'hd1332', '1332hd', '1556p', '1556i', 'hd1556', '1556hd']
+RES_1080 =  ['1080', '1080p', '1080i', 'hd1080', '1080hd', '1200p', '1200i', 'hd1200', '1200hd']
+RES_HD   =  ['720', '720p', '720i', 'hd720', '720hd', 'hd']
+RES_SD   =  ['576', '576p', '576i', 'sd576', '576sd', '480', '480p', '480i', 'sd480', '480sd', '360', '360p', '360i', 'sd360', '360sd', '240', '240p', '240i', 'sd240', '240sd']
+SCR =  ['dvdscr', 'screener', 'scr', 'r5', 'r6']
+CAM =  ['camrip', 'cam rip', 'tsrip', 'ts rip', 'hdcam', 'hd cam', 'hdts', 'hd ts', 'dvdcam', 'dvd cam', 'dvdts', 'dvd ts', 'cam', 'telesync', 'tele sync', 'ts']
 
-CODEC_H265 = ['hevc', 'h265', 'x265', '265', 'hevc ', 'h265 ', 'x265 ']
-CODEC_H264 = ['avc', 'h264', 'x264', '264', 'h264 ', 'x264 ']
-CODEC_XVID = ['xvid', 'xvid ']
+CODEC_H265 = ['hevc', 'h265', 'x265', '265']
+CODEC_H264 = ['avc', 'h264', 'x264', '264']
+CODEC_XVID = ['xvid']
 CODEC_DIVX = ['divx', 'divx ', 'div2', 'div2 ', 'div3', 'div3 ']
-CODEC_MPEG = ['mp4', 'mpeg', 'm4v', 'mpg', 'mpg1', 'mpg2', 'mpg3', 'mpg4', 'mp4 ', 'mpeg ', 'msmpeg', 'msmpeg4', 'mpegurl', 'm4v ', 'mpg ', 'mpg1 ', 'mpg2 ', 'mpg3 ', 'mpg4 ', 'msmpeg ', 'msmpeg4 ']
+CODEC_MPEG = ['mp4', 'mpeg', 'm4v', 'mpg', 'mpg1', 'mpg2', 'mpg3', 'mpg4', 'msmpeg', 'msmpeg4', 'mpegurl']
 CODEC_AVI  = ['avi']
 CODEC_MKV  = ['mkv', 'mkv ', 'matroska', 'matroska ']
 
-AUDIO_8CH = ['ch8', '8ch', 'ch7', '7ch', '7 1', 'ch7 1', '7 1ch', 'ch8 ', '8ch ', 'ch7 ', '7ch ']
-AUDIO_6CH = ['ch6', '6ch', 'ch6', '6ch', '6 1', 'ch6 1', '6 1ch', '5 1', 'ch5 1', '5 1ch', 'ch6 ', '6ch ', 'ch6 ', '6ch ']
-AUDIO_2CH = ['ch2', '2ch', 'stereo', 'dualaudio', 'dual', '2 0', 'ch2 0', '2 0ch', 'ch2 ', '2ch ', 'stereo ', 'dualaudio ', 'dual ']
-AUDIO_1CH = ['ch1', '1ch', 'mono', 'monoaudio', 'ch1 0', '1 0ch', 'ch1 ', '1ch ', 'mono ']
+AUDIO_8CH = ['ch8', '8ch', 'ch7', '7ch', '7 1', 'ch7 1', '7 1ch']
+AUDIO_6CH = ['ch6', '6ch', 'ch6', '6ch', '6 1', 'ch6 1', '6 1ch', '5 1', 'ch5 1', '5 1ch']
+AUDIO_2CH = ['ch2', '2ch', 'stereo', 'dualaudio', 'dual', '2 0', 'ch2 0', '2 0ch']
+AUDIO_1CH = ['ch1', '1ch', 'mono', 'monoaudio', 'ch1 0', '1 0ch']
 
 VIDEO_3D = ['3d', 'sbs', 'hsbs', 'sidebyside', 'side by side', 'stereoscopic', 'tab', 'htab', 'topandbottom', 'top and bottom']
 
@@ -55,43 +55,7 @@ def get_host(url):
     except:
         elements = urlparse.urlparse(url)
         host = elements.netloc
-    return host
-
-
-def get_quality(txt):
-    txt = txt.lower()
-    if any(value in txt for value in RES_4K):
-        quality = "4K"
-    elif any(value in txt for value in RES_2K):
-        quality = "2K"
-    elif any(value in txt for value in RES_1080):
-        quality = "1080p"
-    elif any(value in txt for value in RES_HD):
-        quality = "720p"
-    elif any(value in txt for value in RES_SD):
-        quality = "TrueSD"
-    else:
-        quality = "SD"
-    return quality
-
-
-def get_info(txt):
-    txt = txt.lower()
-    info = ''
-    codec = get_codec(txt)
-    audio = get_audio(txt)
-    size = get_size(txt)
-    video3d = get_3D(txt)	
-    if codec == '0' or codec == '':
-        codec = ''
-    if audio == '0' or audio == '':
-        audio = ''
-    if size == '0' or size == '':
-        size = ''
-    if video3d == '0' or video3d == '':
-        video3d = ''			
-    info = video3d + size + codec + audio
-    return info	
+    return host.replace('www.', '')
 
 
 def get_codec(txt):
@@ -176,8 +140,48 @@ def get_gvideo_quality(url):
         return quality
 
 
+def get_quality(txt, txt2=''):
+    txt = txt.lower()
+    if not txt2 == '':
+        txt = txt.lower() + ' ' + txt2.lower()
+    if any(value in txt for value in RES_4K):
+        quality = "4K"
+    elif any(value in txt for value in RES_2K):
+        quality = "2K"
+    elif any(value in txt for value in RES_1080):
+        quality = "1080p"
+    elif any(value in txt for value in RES_HD):
+        quality = "720p"
+    elif any(value in txt for value in RES_SD):
+        quality = "SD"
+    else:
+        quality = "SD"
+    return quality
+
+
+def get_info(txt, txt2=''):
+    txt = txt.lower()
+    if not txt2 == '':
+        txt = txt.lower() + ' ' + txt2.lower()
+    info = ''
+    codec = get_codec(txt)
+    audio = get_audio(txt)
+    size = get_size(txt)
+    video3d = get_3D(txt)	
+    if codec == '0' or codec == '':
+        codec = ''
+    if audio == '0' or audio == '':
+        audio = ''
+    if size == '0' or size == '':
+        size = ''
+    if video3d == '0' or video3d == '':
+        video3d = ''			
+    info = video3d + size + codec + audio
+    return info	
+
+
 def checkHost(url, hostList):
-    host = ''
+    host = get_host(url)
     validHost = False
     for i in hostList:
         if i.lower() in url.lower():
@@ -189,12 +193,11 @@ def checkHost(url, hostList):
 
 def check_site(host):
     try:
-        Resolve = ['openload', 'oload', 'streamango', 'downace', 'rapidvideo',
-            'vidoza', 'clicknupload', 'estream', 'vidnode', 'vidzi', 'putload', 'blazefile',
-            'gorillavid', 'yourupload', 'entervideo', 'youtube', 'youtu', 'vimeo', 'vk',
-            'streamcherry', 'mp4upload', 'trollvid', 'vidstreaming', 'dailymotion',
-            'uptostream', 'uptobox', 'vidcloud', 'vcstream', 'vidto', 'flashx', 'thevideo',
-            'vshare', 'vidup', 'xstreamcdn', 'vev', 'xvidstage'
+        Resolve = ['downace', 'gorillavid', 'yourupload', 'entervideo', 'vimeo',
+            'vidoza', 'clicknupload', 'estream', 'vidnode', 'vidzi', 'putload',
+            'mp4upload', 'trollvid', 'vidstreaming', 'dailymotion', 'blazefile',
+            'uptostream', 'uptobox', 'vidcloud', 'vcstream', 'vidto', 'flashx', 
+            'vshare', 'vidup', 'xstreamcdn', 'vev', 'xvidstage', 'rapidvideo'
         ]
         Debrid = ['1fichier', 'rapidgator', 'userscloud', 'vidlox', 'filefactory',
             'turbobit', 'nitroflare'
@@ -212,7 +215,7 @@ websites = set()
 def check_dupes(url):
     from urlparse import urlparse
     parsed = urlparse(url)
-    website = parsed.hostname + parsed.path  # play with these a little
+    website = parsed.hostname + parsed.path
     if website in websites:
         return False
     websites.add(website)
@@ -317,5 +320,4 @@ def check_quality(text=""):
     if "4k" in text:
         text_quality += " [COLOR FF16A085][4K][/COLOR]"
     return text_quality
-
 

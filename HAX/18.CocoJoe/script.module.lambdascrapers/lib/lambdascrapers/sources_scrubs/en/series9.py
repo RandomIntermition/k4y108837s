@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
-import re,requests,urllib,urlparse
+import re, requests, urllib, urlparse
 from resources.lib.modules import client
 from resources.lib.modules import cleantitle
 from resources.lib.modules import directstream
@@ -14,7 +14,7 @@ class source:
         self.priority = 1
         self.language = ['en']  # Removed  seriesonline.io  series9.co  series9.io
         self.domains = ['series9.to']
-        self.base_link = 'https://series9.to'
+        self.base_link = 'https://www5.series9.to'
         self.search_link = '/movie/search/%s'
 
 
@@ -135,7 +135,7 @@ class source:
                     match = getSum.findSum(r)
                     for url in match:
                         url = "https:" + url if not url.startswith('http') else url
-                        url = requests.get(url).url if 'vidnode' in url else url
+                        url = requests.get(url).url if 'api.vidnode' in url else url
                         valid, host = source_utils.is_host_valid(url, hostDict)
                         if valid:
                             quality, info = source_utils.get_release_quality(url, url)

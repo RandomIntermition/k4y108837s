@@ -25,7 +25,7 @@ from resources.lib.modules import log_utils
 from resources.lib.modules import source_utils
 from resources.lib.modules import cfscrape
 
-class source:
+class s0urce:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
@@ -174,7 +174,7 @@ class source:
                     info = ' | '.join(info)
                     host = client.replaceHTMLCodes(host)
                     host = host.encode('utf-8')
-                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': host2, 'info': info, 'direct': False, 'debridonly': False})
+                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': host2, 'info': info, 'direct': False, 'debridonly': True})
                     
                 except:
                     pass

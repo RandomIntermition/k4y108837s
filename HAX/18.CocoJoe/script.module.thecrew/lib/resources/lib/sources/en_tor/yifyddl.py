@@ -23,12 +23,12 @@ from resources.lib.modules import log_utils
 from resources.lib.modules import source_utils
 
 
-class source:
+class s0urce:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
         self.domains = ['yifyddl.movie']
-        self.base_link = 'https://yifyddl.movie/'
+        self.base_link = 'https://yifyddl.co'
         self.search_link = '/movie/%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -50,13 +50,12 @@ class source:
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
             query = '%s %s' % (data['title'], data['year'])
             url = self.search_link % urllib.quote(query)
-            url = urlparse.urljoin(self.base_link, url).replace('%20', '-')
+            url = urlparse.urljoin(self.base_link, url).replace('%20', '-').replace('%3A-','-')
             html = client.request(url)
             try:
                 results = client.parseDOM(html, 'div', attrs={'class': 'ava1'})
             except:
-                failure = traceback.format_exc()
-                log_utils.log('YIFYDLL - Exception: \n' + str(failure))
+
                 return sources
             for torrent in results:
                 link = re.findall('a data-torrent-id=".+?" href="(magnet:.+?)" class=".+?" title="(.+?)"', torrent, re.DOTALL)
@@ -76,8 +75,7 @@ class source:
 
             return sources
         except:
-            failure = traceback.format_exc()
-            log_utils.log('YIFYDLL - Exception: \n' + str(failure))
+
             return
 
     def resolve(self, url):

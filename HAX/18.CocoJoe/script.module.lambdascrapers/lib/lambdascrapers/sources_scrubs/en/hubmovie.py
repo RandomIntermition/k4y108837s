@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 # Need to add a year check in sometime to make sure there isnt false hits.
 
 import re
@@ -22,7 +22,7 @@ class source:
             search_id = cleantitle.getsearch(title)
             search_url = self.base_link + self.search_link  %(search_id.replace(':', ' ').replace(' ', '%20'))
             search_results = client.request(search_url)
-            match = re.compile('<a href=".(.+?)">',re.DOTALL).findall(search_results)
+            match = re.compile('<a href=".(.+?)">', re.DOTALL).findall(search_results)
             for link in match:
                 if cleantitle.geturl(title).lower() in link:
                     url = self.base_link + link
@@ -39,7 +39,7 @@ class source:
             if url == None:
                 return sources
             html = client.request(url)
-            links = re.compile('<div class="link_go">.+?<a href="(.+?)" target="_blank">',re.DOTALL).findall(html)
+            links = re.compile('<div class="link_go">.+?<a href="(.+?)" target="_blank">', re.DOTALL).findall(html)
             for link in links:
                 valid, host = source_utils.is_host_valid(link, hostDict)
                 if valid:

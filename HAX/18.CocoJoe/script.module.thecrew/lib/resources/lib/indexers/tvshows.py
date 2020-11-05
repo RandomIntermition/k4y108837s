@@ -36,6 +36,7 @@ from resources.lib.modules import utils
 from resources.lib.indexers import navigator
 
 import os,sys,re,json,urllib,urlparse,datetime
+import requests
 
 params = dict(urlparse.parse_qsl(sys.argv[2].replace('?',''))) if len(sys.argv) > 1 else dict()
 
@@ -45,6 +46,7 @@ action = params.get('action')
 
 class tvshows:
     def __init__(self):
+        self.count = int(control.setting('page.item.limit'))
         self.list = []
 
         self.imdb_link = 'https://www.imdb.com'
@@ -53,7 +55,7 @@ class tvshows:
         self.logo_link = 'https://i.imgur.com/'
         self.tvdb_key = control.setting('tvdb.user')
         if self.tvdb_key == '' or self.tvdb_key == None:
-            self.tvdb_key = '1D62F2F90030C444'
+            self.tvdb_key = '27bef29779bbffe947232dc310a91f0c'
         self.datetime = (datetime.datetime.utcnow() - datetime.timedelta(hours = 5))
         self.trakt_user = control.setting('trakt.user').strip()
         self.imdb_user = control.setting('imdb.user').replace('ur', '')
@@ -63,27 +65,27 @@ class tvshows:
 
         self.search_link = 'https://api.trakt.tv/search/show?limit=20&page=1&query='
         self.tvmaze_info_link = 'https://api.tvmaze.com/shows/%s'
-        self.tvdb_info_link = 'https://thetvdb.com/api/%s/series/%s/%s.xml' % (self.tvdb_key, '%s', self.lang)
+        self.tvdb_info_link = 'https://thetvdb.com/api/%s/series/%s/%s.zip.xml' % (self.tvdb_key, '%s', self.lang)
         self.fanart_tv_art_link = 'https://webservice.fanart.tv/v3/tv/%s'
         self.fanart_tv_level_link = 'https://webservice.fanart.tv/v3/level'
         self.tvdb_by_imdb = 'https://thetvdb.com/api/GetSeriesByRemoteID.php?imdbid=%s'
         self.tvdb_by_query = 'https://thetvdb.com/api/GetSeries.php?seriesname=%s'
         self.tvdb_image = 'https://thetvdb.com/banners/'
 
-        self.persons_link = 'https://www.imdb.com/search/name?count=100&name='
-        self.personlist_link = 'https://www.imdb.com/search/name?count=100&gender=male,female'
-        self.popular_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=moviemeter,asc&count=40&start=1'
-        self.airing_link = 'https://www.imdb.com/search/title?title_type=tv_episode&release_date=date[1],date[0]&sort=moviemeter,asc&count=40&start=1'
-        self.active_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=10,&production_status=active&sort=moviemeter,asc&count=40&start=1'
-        #self.premiere_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&languages=en&num_votes=10,&release_date=date[60],date[0]&sort=moviemeter,asc&count=40&start=1'
-        self.premiere_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&languages=en&num_votes=10,&release_date=date[60],date[0]&sort=release_date,desc&count=40&start=1'
-        self.rating_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=5000,&release_date=,date[0]&sort=user_rating,desc&count=40&start=1'
-        self.views_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=num_votes,desc&count=40&start=1'
-        self.person_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&role=%s&sort=year,desc&count=40&start=1'
-        self.genre_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=40&start=1'
-        self.keyword_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&keywords=%s&sort=moviemeter,asc&count=40&start=1'
-        self.language_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=40&start=1'
-        self.certification_link = 'https://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&certificates=us:%s&sort=moviemeter,asc&count=40&start=1'
+        self.imdb_link = 'http://www.imdb.com'
+        self.persons_link = 'http://www.imdb.com/search/name?count=100&name='
+        self.personlist_link = 'http://www.imdb.com/search/name?count=100&gender=male,female'
+        self.popular_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=moviemeter,asc&count=%d&start=1' % self.count
+        self.airing_link = 'http://www.imdb.com/search/title?title_type=tv_episode&release_date=date[1],date[0]&sort=moviemeter,asc&count=%d&start=1' % self.count
+        self.active_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=10,&production_status=active&sort=moviemeter,asc&count=%d&start=1' % self.count
+        self.premiere_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&languages=en&num_votes=10,&release_date=date[60],date[0]&sort=release_date,desc&count=%d&start=1' % self.count
+        self.rating_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=5000,&release_date=,date[0]&sort=user_rating,desc&count=%d&start=1' % self.count
+        self.views_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&release_date=,date[0]&sort=num_votes,desc&count=%d&start=1' % self.count
+        self.person_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&role=%s&sort=year,desc&count=%d&start=1' % ('%s', self.count)
+        self.genre_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&genres=%s&sort=moviemeter,asc&count=%d&start=1' % ('%s', self.count)
+        self.keyword_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&keywords=%s&sort=moviemeter,asc&count=%d&start=1' % ('%s', self.count)
+        self.language_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&num_votes=100,&production_status=released&primary_language=%s&sort=moviemeter,asc&count=%d&start=1' % ('%s', self.count)
+        self.certification_link = 'http://www.imdb.com/search/title?title_type=tv_series,mini_series&release_date=,date[0]&certificates=%s&sort=moviemeter,asc&count=%d&start=1' % ('%s', self.count)
         self.trending_link = 'https://api.trakt.tv/shows/trending?limit=40&page=1'
 
         self.traktlists_link = 'https://api.trakt.tv/users/me/lists'
@@ -97,6 +99,7 @@ class tvshows:
         self.imdblist2_link = 'https://www.imdb.com/list/%s/?view=detail&sort=date_added,desc&title_type=tvSeries,miniSeries&start=1'
         self.imdbwatchlist_link = 'https://www.imdb.com/user/ur%s/watchlist?sort=alpha,asc' % self.imdb_user
         self.imdbwatchlist2_link = 'https://www.imdb.com/user/ur%s/watchlist?sort=date_added,desc' % self.imdb_user
+
 
     def get(self, url, idx=True, create_directory=True):
         try:
@@ -258,31 +261,32 @@ class tvshows:
 
     def genres(self):
         genres = [
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Action[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'action', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Adventure[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'adventure', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Animation[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'animation', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Anime[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'anime', False),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Biography[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'biography', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Comedy[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'comedy', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Crime[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'crime', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Drama[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'drama', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Family[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'family', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Fantasy[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'fantasy', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Game-Show[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'game_show', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]History[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'history', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Horror[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'horror', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Music[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'music', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Musical[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'musical', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Mystery[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'mystery', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]News[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'news', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Reality-TV[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'reality_tv', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Romance[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'romance', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Science Fiction[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'sci_fi', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Sport[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'sport', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Talk-Show[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'talk_show', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Thriller[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'thriller', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]War[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'war', True),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Western[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'western', True)
+            ('Action', 'action', True),
+            ('Adventure', 'adventure', True),
+            ('Animation', 'animation', True),
+            ('Anime', 'anime', False),
+            ('Biography', 'biography', True),
+            ('Comedy', 'comedy', True),
+            ('Crime', 'crime', True),
+            ('Drama', 'drama', True),
+            ('Family', 'family', True),
+            ('Fantasy', 'fantasy', True),
+            ('Game-Show', 'game_show', True),
+            ('History', 'history', True),
+            ('Horror', 'horror', True),
+            ('Music ', 'music', True),
+            ('Musical', 'musical', True),
+            ('Mystery', 'mystery', True),
+            ('News', 'news', True),
+            ('Reality-TV', 'reality_tv', True),
+            ('Romance', 'romance', True),
+            ('Science Fiction', 'sci_fi', True),
+            ('Sport', 'sport', True),
+            ('Talk-Show', 'talk_show', True),
+            ('Thriller', 'thriller', True),
+            ('War', 'war', True),
+            ('Western', 'western', True)
+
         ]
 
         for i in genres: self.list.append(
@@ -298,69 +302,70 @@ class tvshows:
 
     def networks(self):
         networks = [
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]A&E[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/29/ae', 'https://i.imgur.com/xLDfHjH.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]ABC[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/3/abc', 'https://i.imgur.com/qePLxos.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]AMC[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/20/amc', 'https://i.imgur.com/ndorJxi.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]AT-X[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/167/at-x', 'https://i.imgur.com/JshJYGN.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Adult Swim[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/10/adult-swim', 'https://i.imgur.com/jCqbRcS.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Amazon[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/webchannels/3/amazon', 'https://i.imgur.com/ru9DDlL.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Animal Planet[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/92/animal-planet', 'https://i.imgur.com/olKc4RP.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Audience[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/31/audience-network', 'https://i.imgur.com/5Q3mo5A.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]BBC America[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/15/bbc-america', 'https://i.imgur.com/TUHDjfl.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]BBC Four[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/51/bbc-four', 'https://i.imgur.com/PNDalgw.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]BBC One[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/12/bbc-one', 'https://i.imgur.com/u8x26te.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]BBC Three[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/webchannels/71/bbc-three', 'https://i.imgur.com/SDLeLcn.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]BBC Two[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/37/bbc-two', 'https://i.imgur.com/SKeGH1a.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]BET[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/56/bet', 'https://i.imgur.com/ZpGJ5UQ.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Bravo[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/52/bravo', 'https://i.imgur.com/TmEO3Tn.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]CBC[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/36/cbc', 'https://i.imgur.com/unQ7WCZ.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]CBS[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/2/cbs', 'https://i.imgur.com/8OT8igR.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]CTV[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/48/ctv', 'https://i.imgur.com/qUlyVHz.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]CW[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/5/the-cw', 'https://i.imgur.com/Q8tooeM.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]CW Seed[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/webchannels/13/cw-seed', 'https://i.imgur.com/nOdKoEy.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Cartoon Network[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/11/cartoon-network', 'https://i.imgur.com/zmOLbbI.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Channel 4[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/45/channel-4', 'https://i.imgur.com/6ZA9UHR.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Channel 5[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/135/channel-5', 'https://i.imgur.com/5ubnvOh.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Cinemax[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/19/cinemax', 'https://i.imgur.com/zWypFNI.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Comedy Central[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/23/comedy-central', 'https://i.imgur.com/ko6XN77.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Crackle[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/webchannels/4/crackle', 'https://i.imgur.com/53kqZSY.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Discovery Channel[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/66/discovery-channel', 'https://i.imgur.com/8UrXnAB.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Discovery ID[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/89/investigation-discovery', 'https://i.imgur.com/07w7BER.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Disney Channel[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/78/disney-channel', 'https://i.imgur.com/ZCgEkp6.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Disney XD[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/25/disney-xd', 'https://i.imgur.com/PAJJoqQ.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]E! Entertainment[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/43/e', 'https://i.imgur.com/3Delf9f.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]E4[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/41/e4', 'https://i.imgur.com/frpunK8.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]FOX[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/4/fox', 'https://i.imgur.com/6vc0Iov.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]FX[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/13/fx', 'https://i.imgur.com/aQc1AIZ.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Freeform[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/26/freeform', 'https://i.imgur.com/f9AqoHE.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]HBO[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/8/hbo', 'https://i.imgur.com/Hyu8ZGq.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]HGTV[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/192/hgtv', 'https://i.imgur.com/INnmgLT.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Hallmark[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/50/hallmark-channel', 'https://i.imgur.com/zXS64I8.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]History Channel[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/53/history', 'https://i.imgur.com/LEMgy6n.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Hulu[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/webchannels/2/hulu', 'https://i.imgur.com/uSD2Cdw.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]ITV[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/35/itv', 'https://i.imgur.com/5Hxp5eA.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Lifetime[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/18/lifetime', 'https://i.imgur.com/tvYbhen.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]MTV[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/22/mtv', 'https://i.imgur.com/QM6DpNW.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]NBC[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/1/nbc', 'https://i.imgur.com/yPRirQZ.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]National Geographic[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/42/national-geographic-channel', 'https://i.imgur.com/XCGNKVQ.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Netflix[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/webchannels/1/netflix', 'https://i.imgur.com/jI5c3bw.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Nickelodeon[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/27/nickelodeon', 'https://i.imgur.com/OUVoqYc.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]PBS[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/85/pbs', 'https://i.imgur.com/r9qeDJY.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Showtime[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/9/showtime', 'https://i.imgur.com/SawAYkO.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Sky1[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/63/sky-1', 'https://i.imgur.com/xbgzhPU.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Starz[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/17/starz', 'https://i.imgur.com/Z0ep2Ru.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Sundance[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/33/sundance-tv', 'https://i.imgur.com/qldG5p2.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Syfy[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/16/syfy', 'https://i.imgur.com/9yCq37i.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]TBS[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/32/tbs', 'https://i.imgur.com/RVCtt4Z.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]TLC[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/80/tlc', 'https://i.imgur.com/c24MxaB.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]TNT[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/14/tnt', 'https://i.imgur.com/WnzpAGj.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]TV Land[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/57/tvland', 'https://i.imgur.com/1nIeDA5.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Travel Channel[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/82/travel-channel', 'https://i.imgur.com/mWXv7SF.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]TruTV[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/84/trutv', 'https://i.imgur.com/HnB3zfc.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Youtube Red[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/webchannels/43/youtube-premium', 'https://i.imgur.com/ZfewP1Y.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]USA[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/30/usa-network', 'https://i.imgur.com/Doccw9E.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]VH1[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/55/vh1', 'https://i.imgur.com/IUtHYzA.png'),
-        ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]WGN[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', '/networks/28/wgn-america', 'https://i.imgur.com/TL6MzgO.png')
+        ('A&E', '/networks/29/ae', 'https://i.imgur.com/xLDfHjH.png'),
+        ('ABC', '/networks/3/abc', 'https://i.imgur.com/qePLxos.png'),
+        ('AMC', '/networks/20/amc', 'https://i.imgur.com/ndorJxi.png'),
+        ('AT-X', '/networks/167/at-x', 'https://i.imgur.com/JshJYGN.png'),
+        ('Adult Swim', '/networks/10/adult-swim', 'https://i.imgur.com/jCqbRcS.png'),
+        ('Amazon', '/webchannels/3/amazon', 'https://i.imgur.com/ru9DDlL.png'),
+        ('Animal Planet', '/networks/92/animal-planet', 'https://i.imgur.com/olKc4RP.png'),
+        ('Audience', '/networks/31/audience-network', 'https://i.imgur.com/5Q3mo5A.png'),
+        ('BBC America', '/networks/15/bbc-america', 'https://i.imgur.com/TUHDjfl.png'),
+        ('BBC Four', '/networks/51/bbc-four', 'https://i.imgur.com/PNDalgw.png'),
+        ('BBC One', '/networks/12/bbc-one', 'https://i.imgur.com/u8x26te.png'),
+        ('BBC Three', '/webchannels/71/bbc-three', 'https://i.imgur.com/SDLeLcn.png'),
+        ('BBC Two', '/networks/37/bbc-two', 'https://i.imgur.com/SKeGH1a.png'),
+        ('BET', '/networks/56/bet', 'https://i.imgur.com/ZpGJ5UQ.png'),
+        ('Bravo', '/networks/52/bravo', 'https://i.imgur.com/TmEO3Tn.png'),
+        ('CBC', '/networks/36/cbc', 'https://i.imgur.com/unQ7WCZ.png'),
+        ('CBS', '/networks/2/cbs', 'https://i.imgur.com/8OT8igR.png'),
+        ('CTV', '/networks/48/ctv', 'https://i.imgur.com/qUlyVHz.png'),
+        ('CW', '/networks/5/the-cw', 'https://i.imgur.com/Q8tooeM.png'),
+        ('CW Seed', '/webchannels/13/cw-seed', 'https://i.imgur.com/nOdKoEy.png'),
+        ('Cartoon Network', '/networks/11/cartoon-network', 'https://i.imgur.com/zmOLbbI.png'),
+        ('Channel 4', '/networks/45/channel-4', 'https://i.imgur.com/6ZA9UHR.png'),
+        ('Channel 5', '/networks/135/channel-5', 'https://i.imgur.com/5ubnvOh.png'),
+        ('Cinemax', '/networks/19/cinemax', 'https://i.imgur.com/zWypFNI.png'),
+        ('Comedy Central', '/networks/23/comedy-central', 'https://i.imgur.com/ko6XN77.png'),
+        ('Crackle', '/webchannels/4/crackle', 'https://i.imgur.com/53kqZSY.png'),
+        ('Discovery Channel', '/networks/66/discovery-channel', 'https://i.imgur.com/8UrXnAB.png'),
+        ('Discovery ID', '/networks/89/investigation-discovery', 'https://i.imgur.com/07w7BER.png'),
+        ('Disney Channel', '/networks/78/disney-channel', 'https://i.imgur.com/ZCgEkp6.png'),
+        ('Disney +', '/webchannels/287/disney', 'https://static.tvmaze.com/uploads/images/large_landscape/174/435560.jpg'),
+        ('Disney XD', '/networks/25/disney-xd', 'https://i.imgur.com/PAJJoqQ.png'),
+        ('E! Entertainment', '/networks/43/e', 'https://i.imgur.com/3Delf9f.png'),
+        ('E4', '/networks/41/e4', 'https://i.imgur.com/frpunK8.png'),
+        ('FOX', '/networks/4/fox', 'https://i.imgur.com/6vc0Iov.png'),
+        ('FX', '/networks/13/fx', 'https://i.imgur.com/aQc1AIZ.png'),
+        ('Freeform', '/networks/26/freeform', 'https://i.imgur.com/f9AqoHE.png'),
+        ('HBO', '/networks/8/hbo', 'https://i.imgur.com/Hyu8ZGq.png'),
+        ('HGTV', '/networks/192/hgtv', 'https://i.imgur.com/INnmgLT.png'),
+        ('Hallmark', '/networks/50/hallmark-channel', 'https://i.imgur.com/zXS64I8.png'),
+        ('History Channel', '/networks/53/history', 'https://i.imgur.com/LEMgy6n.png'),
+        ('Hulu', '/webchannels/2/hulu', 'https://i.imgur.com/uSD2Cdw.png'),
+        ('ITV', '/networks/35/itv', 'https://i.imgur.com/5Hxp5eA.png'),
+        ('Lifetime', '/networks/18/lifetime', 'https://i.imgur.com/tvYbhen.png'),
+        ('MTV', '/networks/22/mtv', 'https://i.imgur.com/QM6DpNW.png'),
+        ('NBC', '/networks/1/nbc', 'https://i.imgur.com/yPRirQZ.png'),
+        ('National Geographic', '/networks/42/national-geographic-channel', 'https://i.imgur.com/XCGNKVQ.png'),
+        ('Netflix', '/webchannels/1/netflix', 'https://i.imgur.com/jI5c3bw.png'),
+        ('Nickelodeon', '/networks/27/nickelodeon', 'https://i.imgur.com/OUVoqYc.png'),
+        ('PBS', '/networks/85/pbs', 'https://i.imgur.com/r9qeDJY.png'),
+        ('Showtime', '/networks/9/showtime', 'https://i.imgur.com/SawAYkO.png'),
+        ('Sky1', '/networks/63/sky-1', 'https://i.imgur.com/xbgzhPU.png'),
+        ('Starz', '/networks/17/starz', 'https://i.imgur.com/Z0ep2Ru.png'),
+        ('Sundance', '/networks/33/sundance-tv', 'https://i.imgur.com/qldG5p2.png'),
+        ('Syfy', '/networks/16/syfy', 'https://i.imgur.com/9yCq37i.png'),
+        ('TBS', '/networks/32/tbs', 'https://i.imgur.com/RVCtt4Z.png'),
+        ('TLC', '/networks/80/tlc', 'https://i.imgur.com/c24MxaB.png'),
+        ('TNT', '/networks/14/tnt', 'https://i.imgur.com/WnzpAGj.png'),
+        ('TV Land', '/networks/57/tvland', 'https://i.imgur.com/1nIeDA5.png'),
+        ('Travel Channel', '/networks/82/travel-channel', 'https://i.imgur.com/mWXv7SF.png'),
+        ('TruTV', '/networks/84/trutv', 'https://i.imgur.com/HnB3zfc.png'),
+        ('Youtube Red', '/webchannels/43/youtube-premium', 'https://i.imgur.com/ZfewP1Y.png'),
+        ('USA', '/networks/30/usa-network', 'https://i.imgur.com/Doccw9E.png'),
+        ('VH1', '/networks/55/vh1', 'https://i.imgur.com/IUtHYzA.png'),
+        ('WGN', '/networks/28/wgn-america', 'https://i.imgur.com/TL6MzgO.png')
         ]
 
         for i in networks:
@@ -371,36 +376,36 @@ class tvshows:
 
     def languages(self):
         languages = [
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Arabic[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'ar'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Bosnian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'bs'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Bulgarian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'bg'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Chinese[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'zh'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Croatian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'hr'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Dutch[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'nl'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]English[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'en'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Finnish[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'fi'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]French[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'fr'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]German[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'de'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Greek[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'el'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Hebrew[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'he'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Hindi[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'hi'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Hungarian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'hu'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Icelandic[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'is'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Italian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'it'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Japanese[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'ja'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Korean[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'ko'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Norwegian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'no'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Persian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'fa'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Polish[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'pl'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Portuguese[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'pt'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Punjabi[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'pa'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Romanian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'ro'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Russian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'ru'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Serbian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'sr'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Spanish[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'es'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Swedish[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'sv'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Turkish[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'tr'),
-            ('[COLOR dodgerblue][B]¤[/B][/COLOR] [B][COLOR white]Ukrainian[/COLOR][/B] [COLOR dodgerblue][B]¤[/B][/COLOR]', 'uk')
+            ('Arabic', 'ar'),
+            ('Bosnian', 'bs'),
+            ('Bulgarian', 'bg'),
+            ('Chinese', 'zh'),
+            ('Croatian', 'hr'),
+            ('Dutch', 'nl'),
+            ('English', 'en'),
+            ('Finnish', 'fi'),
+            ('French', 'fr'),
+            ('German', 'de'),
+            ('Greek', 'el'),
+            ('Hebrew', 'he'),
+            ('Hindi', 'hi'),
+            ('Hungarian', 'hu'),
+            ('Icelandic', 'is'),
+            ('Italian', 'it'),
+            ('Japanese', 'ja'),
+            ('Korean', 'ko'),
+            ('Norwegian', 'no'),
+            ('Persian', 'fa'),
+            ('Polish', 'pl'),
+            ('Portuguese', 'pt'),
+            ('Punjabi', 'pa'),
+            ('Romanian', 'ro'),
+            ('Russian', 'ru'),
+            ('Serbian', 'sr'),
+            ('Spanish', 'es'),
+            ('Swedish', 'sv'),
+            ('Turkish', 'tr'),
+            ('Ukrainian', 'uk')
         ]
 
         for i in languages: self.list.append({'name': str(i[0]), 'url': self.language_link % i[1], 'image': 'international2.png', 'action': 'tvshows'})
@@ -1001,7 +1006,8 @@ class tvshows:
             if tvdb == '0' and not imdb == '0':
                 url = self.tvdb_by_imdb % imdb
 
-                result = client.request(url, timeout='10')
+                #result = client.request(url, timeout='10')
+                result = requests.get(url).content
 
                 try:
                     tvdb = client.parseDOM(result, 'seriesid')[0]
@@ -1024,7 +1030,8 @@ class tvshows:
 
                 years = [str(self.list[i]['year']), str(int(self.list[i]['year'])+1), str(int(self.list[i]['year'])-1)]
 
-                tvdb = client.request(url, timeout='10')
+                #tvdb = client.request(url, timeout='10')
+                tvdb = requests.get(url).content
                 tvdb = re.sub(r'[^\x00-\x7F]+', '', tvdb)
                 tvdb = client.replaceHTMLCodes(tvdb)
                 tvdb = client.parseDOM(tvdb, 'Series')
@@ -1038,7 +1045,8 @@ class tvshows:
                     tvdb = '0'
 
             url = self.tvdb_info_link % tvdb
-            item = client.request(url, timeout='10')
+            #item = client.request(url, timeout='10')
+            item = requests.get(url).content
             if item is None:
                 raise Exception()
 
@@ -1405,7 +1413,7 @@ class tvshows:
 
                 item.setArt(art)
                 item.addContextMenuItems(cm)
-                item.setInfo(type='Video', infoLabels = meta)
+                item.setInfo(type='Video', infoLabels=control.metadataClean(meta))
 
                 video_streaminfo = {'codec': 'h264'}
                 item.addStreamInfo('video', video_streaminfo)

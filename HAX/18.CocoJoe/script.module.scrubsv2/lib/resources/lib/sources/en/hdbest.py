@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re, requests
 from resources.lib.modules import cleantitle
@@ -24,12 +24,10 @@ class source:
             searchName = cleantitle.getsearch(title)
             searchURL = self.base_link + self.search_link % (searchName.replace(':', ' ').replace(' ', '+'), year)
             searchPage = self.session.get(searchURL, headers=self.headers).content
-            results = re.compile('<a class="clip-link".+?title="(.+?)" href="(.+?)">',re.DOTALL).findall(searchPage)
+            results = re.compile('<a class="clip-link".+?title="(.+?)" href="(.+?)">', re.DOTALL).findall(searchPage)
             for zName, url in results:
-                if cleantitle.geturl(title).lower() in cleantitle.geturl(zName).lower():
-                    if year in str(zName):
-                        return url
-            return
+                if cleantitle.geturl(title).lower() in cleantitle.geturl(zName).lower() and year in cleantitle.geturl(zName).lower():
+                    return url
         except:
             return
 

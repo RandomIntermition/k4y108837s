@@ -1,11 +1,13 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 # Created by Tempest
 
-import re,urllib,urlparse
+import re, urllib, urlparse
 from resources.lib.modules import client
 from resources.lib.modules import debrid
 from resources.lib.modules import source_utils
+import traceback
+from resources.lib.modules import log_utils
 
 
 class source:
@@ -94,13 +96,14 @@ class source:
                         r = client.parseDOM(t, 'a', ret='href')
                         for url in r:
                             quality, info = source_utils.get_release_quality(url)
-                            #if 'SD' in quality: continue
                             valid, host = source_utils.is_host_valid(url, hostDict)
                             sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': True})
                 except:
                     pass
             return sources
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('---MaxRLS - Exception: \n' + str(failure))
             return sources
 
 

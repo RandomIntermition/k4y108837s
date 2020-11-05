@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import more_sources
@@ -9,6 +9,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
+        self.domains = ['gomostream.com']
         self.base_link = 'https://gomostream.com'
 
 

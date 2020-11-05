@@ -1,9 +1,12 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 06-17-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
-import re,urllib,urlparse
-from resources.lib.modules import client,cleantitle,debrid
-from resources.lib.modules import dom_parser2,source_utils
+import re, urllib, urlparse
+from resources.lib.modules import client
+from resources.lib.modules import cleantitle
+from resources.lib.modules import debrid
+from resources.lib.modules import dom_parser
+from resources.lib.modules import source_utils
 
 
 class source:
@@ -17,12 +20,12 @@ class source:
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            query = cleantitle.geturl(title).replace('-','+') + '+' + year
+            query = cleantitle.geturl(title).replace('-', '+') + '+' + year
             url2 = urlparse.urljoin(self.base_link, self.search_link % query)
             url = {'imdb': imdb, 'title': title, 'year': year, 'url': url2, 'content': 'movie'}
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
 
@@ -31,7 +34,7 @@ class source:
             url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year}
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
 
@@ -43,14 +46,14 @@ class source:
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
             tvshowtitle = data['tvshowtitle']
             year = data['year']
-            query = '%s+s%02de%02d' % (cleantitle.geturl(tvshowtitle).replace('-','+'), int(season),int(episode))
+            query = '%s+s%02de%02d' % (cleantitle.geturl(tvshowtitle).replace('-', '+'), int(season), int(episode))
             url2 = urlparse.urljoin(self.base_link, self.search_link % (query))
             url = urlparse.parse_qs(url)
             url = dict([(i, url[i][0]) if url[i] else (i, '') for i in url])
-            url = {'imdb': imdb, 'title': title, 'year': year, 'url': url2, 'content': 'episdoe', 'tvshowtitle': tvshowtitle, 'season': season, 'episode': episode, 'premiered': premiered}
+            url = {'imdb': imdb, 'title': title, 'year': year, 'url': url2, 'content': 'episode', 'tvshowtitle': tvshowtitle, 'season': season, 'episode': episode, 'premiered': premiered}
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
 
@@ -75,8 +78,8 @@ class source:
             premiered = data['premiered'] if 'premiered' in data else '0'
             _headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:61.0) Gecko/20100101 Firefox/61.0'}
             r = client.request(url, headers=_headers)
-            posts = dom_parser2.parse_dom(r, 'article', {'class': ['post','excerpt']})
-            posts = [(dom_parser2.parse_dom(i, 'a', req=['href','title']), i.content) for i in posts if imdb in i.content or title.lower() in i.content.lower() and hdlr.lower() in i.content.lower()]
+            posts = dom_parser.parse_dom(r, 'article', {'class': ['post', 'excerpt']})
+            posts = [(dom_parser.parse_dom(i, 'a', req=['href', 'title']), i.content) for i in posts if imdb in i.content or title.lower() in i.content.lower() and hdlr.lower() in i.content.lower()]
             posts = [(i[0][0].attrs['title'], i[0][0].attrs['href'], i[1]) for i in posts]
             items = []
             for item in posts:
@@ -86,13 +89,13 @@ class source:
                     name = client.replaceHTMLCodes(name)
                     if content == 'episode':
                         if not hdlr2.lower() in item[1].lower():
-                            if not premiered.replace('-','').replace('+','') in item[1].lower().replace('-','').replace('+',''):
+                            if not premiered.replace('-', '').replace('+', '') in item[1].lower().replace('-', '').replace('+', ''):
                                 raise Exception()
                     url = item[1]
                     r = client.request(url, headers=_headers)
                     data += client.parseDOM(r, 'div', attrs={'id': 'content'})
                     data += client.parseDOM(r, 'div', attrs={'id': 'comments'})
-                    urls = dom_parser2.parse_dom(data, 'a', req='href')
+                    urls = dom_parser.parse_dom(data, 'a', req='href')
                     urls = [i.attrs['href'] for i in urls]
                     for url in urls:
                         try:
@@ -112,16 +115,16 @@ class source:
                                 size = float(re.sub('[^0-9|/.|/,]', '', size))/div
                                 size = '%.2f GB' % size
                                 info.append(size)
-                            except Exception:
+                            except:
                                 pass
                             info = ' | '.join(info)
                             sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': True})
-                        except Exception:
+                        except:
                             pass
-                except Exception:
+                except:
                     pass
             return sources
-        except Exception:
+        except:
              return sources
 
 

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re
 from resources.lib.modules import cfscrape
@@ -13,7 +13,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['1putlocker.io']
-        self.base_link = 'https://www15.1putlocker.io'
+        self.base_link = 'https://1putlocker.io'
         self.scraper = cfscrape.create_scraper()
 
 
@@ -38,8 +38,7 @@ class source:
         try:
             if url == None:
                 return
-            tvshowtitle = url
-            url = self.base_link + '/episode/%s-season-%s-episode-%s/' % (tvshowtitle, season, episode)
+            url = self.base_link + '/episode/%s-season-%s-episode-%s/' % (url, season, episode)
             return url
         except:
             return
@@ -56,10 +55,11 @@ class source:
                 if 'gomostream.com' in url:
                     for source in more_sources.more_gomo(url, hostDict):
                         sources.append(source)
-                quality, info = source_utils.get_release_quality(url, url)
-                valid, host = source_utils.is_host_valid(url, hostDict)
-                if valid:
-                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': False})
+                else:
+                    quality, info = source_utils.get_release_quality(url, url)
+                    valid, host = source_utils.is_host_valid(url, hostDict)
+                    if valid:
+                        sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info, 'direct': False, 'debridonly': False})
             return sources
         except:
             return sources

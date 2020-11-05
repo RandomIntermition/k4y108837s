@@ -10,8 +10,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['gomovies.sc']
-        self.base_link = 'https://gomovies.sc'
+        self.domains = ['gomoviesfree.page']
+        self.base_link = 'https://www12.gomoviesfree.page'
         self.search_movie = '/browsing-for/%s+%s/'
 
 
@@ -22,7 +22,7 @@ class source:
             i = client.request(i)
             i = client.parseDOM(i, "div", attrs={"class": "movies-list movies-list-full"})
             for r in i:
-                r = re.compile('<a href="(https://gomovies.sc/movie/.+?)" .+? title=".+?"').findall(r)
+                r = re.compile('<a href="(https://gomoviesfree.page/movie/.+?)" .+? title=".+?"').findall(r)
                 for url in r:
                     url = url + 'watching/'
             return url

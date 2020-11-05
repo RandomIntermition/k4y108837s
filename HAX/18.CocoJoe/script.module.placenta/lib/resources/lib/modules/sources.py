@@ -152,7 +152,7 @@ class sources:
                 item.addStreamInfo('video', video_streaminfo)
 
                 item.addContextMenuItems(cm)
-                item.setInfo(type='Video', infoLabels = meta)
+                item.setInfo(type='Video', infoLabels=control.metadataClean(meta))
 
                 control.addItem(handle=syshandle, url=sysurl, listitem=item, isFolder=False)
             except:
@@ -351,7 +351,7 @@ class sources:
 
         ## BELOW COMMENTED OUT
         ### was affecting bypass limit
-        #### enabling would remove prividers with existing(false) setting even if bypass was enabled
+        #### enabling would remove providers with existing(false) setting even if bypass was enabled
         #### lambda already removes 'false'-set providers by only allowing true set, when bypass isn't enabled.
         #sourceDict = [(i[0], i[1]) for i in sourceDict if not i[2] == 'false']
 
@@ -1256,13 +1256,16 @@ class sources:
         except:
             self.hostDict = []
 
-        self.hostprDict = ['1fichier.com', 'oboom.com', 'rapidgator.net', 'rg.to', 'uploaded.net', 'uploaded.to', 'ul.to', 'filefactory.com', 'nitroflare.com', 'turbobit.net', 'uploadrocket.net']
+        self.hostprDict = ['1fichier.com', 'oboom.com', 'rapidgator.net', 'rg.to', 'uploaded.net', 'uploaded.to', 'uploadgig.com', 'ul.to', 'filefactory.com', 'nitroflare.com', 'turbobit.net', 'uploadrocket.net', 'multiup.org']
 
-        self.hostcapDict = ['hugefiles.net', 'kingfiles.net', 'openload.io', 'openload.co', 'oload.stream', 'oload.tv', 'thevideo.me', 'thevideo.io', 'vidup.me', 'streamin.to', 'torba.se', 'flashx.tv', 'vshare.eu', 'vshare.io', 'vev.io', 'vidup.io']
+        self.hostcapDict = ['hugefiles.net', 'kingfiles.net', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se', 'flashx.tv', 'vshare.eu', 'vshare.io', 'vev.io']
 
-        self.hosthqDict = ['gvideo', 'google.com', 'openload.io', 'openload.co', 'oload.stream', 'oload.tv', 'vev.io', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'streamango.com', 'xstreamcdn.com', 'idtbox.com', 'streamvid.co']
+        self.hosthqDict = ['gvideo', 'google.com', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'xstreamcdn.com', 'idtbox.com', 'streamvid.co', 'vidlox.tv']
 
-        self.hostblockDict = ['flashx.tv', 'powvideo.net', 'povvideo.net', 'thevideo.me', 'thevideo.io', 'tvad.me', 'streamplay.to', 'speedvid.net', 'estream.to', 'vidtodoo.com', 'vidtodo.com', 'hqq.tv', 'waaw.tv', 'netu.tv', 'movdivx.com', 'divxme.com', 'divxstage.eu'] ## 'myshare.link'
+        self.hostblockDict = ['youtube.com', 'flashx.tv', 'powvideo.net', 'povvideo.net', 'thevideo.me', 'thevideo.io', 'tvad.me', 'streamplay.to', 'speedvid.net', 'estream.to', 'vidtodoo.com',
+                              'vidtodo.com', 'hqq.tv', 'waaw.tv', 'netu.tv', 'movdivx.com', 'divxme.com', 'divxstage.eu', 'streamflv.com', 'rapidvideo.com', 'rapidvideo.is', 'rapidvid.to', 'openload.io',
+                              'openload.co', 'oload.tv', 'oload.stream', 'oload.win', 'oload.download', 'oload.info', 'oload.icu', 'oload.fun', 'oload.space', 'openload.pw', 'streamango.com', 'streamcherry.com',
+                              'fruitstreams.com', 'fruitadblock.net', 'fruithosted.net', 'fruithosts.net'] ## 'myshare.link'
 
     def getPremColor(self, n):
         if n == '0': n = 'blue'

@@ -10,8 +10,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['mkvhub.com']
-        self.base_link = 'https://www.mkvhub.com'
+        self.domains = ['mkvhub.net']
+        self.base_link = 'https://www.mkvhub.net'
         self.search_link = '/search/%s/feed/rss2/'
 
 

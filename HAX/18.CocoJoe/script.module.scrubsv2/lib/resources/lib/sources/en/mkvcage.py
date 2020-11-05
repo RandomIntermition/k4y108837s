@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 # Created by Tempest
 
-import re,urllib,urlparse
+import re, urllib, urlparse
 from resources.lib.modules import cfscrape
 from resources.lib.modules import client
 from resources.lib.modules import debrid
@@ -13,17 +13,11 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en', 'de', 'fr', 'ko', 'pl', 'pt', 'ru']
-        self.domains = ['mkvcage.com', 'mkvcage.me', 'mkvcage.fun', 'mkvcage.cc']
-        self.base_link = 'https://www.mkvcage.com/'
+        self.domains = ['mkvcage.nl', 'mkvcage.com', 'mkvcage.me', 'mkvcage.fun', 'mkvcage.cc']
+        self.base_link = 'https://www.mkvcage.nl/'
         self.search_link = '?s=%s'
         self.scraper = cfscrape.create_scraper()
 
-
-# Spare domains found that are most likely new scrapers.
-# https://www.mkvcage.site/
-# https://www.mkvcage.org/
-# https://mkvcage.tv/
-# https://katmoviehd.to/
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:

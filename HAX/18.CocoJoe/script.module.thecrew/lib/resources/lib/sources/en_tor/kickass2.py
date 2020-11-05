@@ -24,11 +24,11 @@ import urlparse
 from resources.lib.modules import cache, cleantitle, client, control, debrid, log_utils, source_utils
 
 
-class source:
+class s0urce:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['kickass.vc', 'kickasstorrents.bz', 'kkickass.com', 'kkat.net', 'kickass-kat.com', 'kickasst.net', 'kickasst.org', 'kickasstorrents.id', 'thekat.cc', 'thekat.ch']
+        self.domains = ['kickass.love', 'kkickass.com', 'kkat.net', 'kickass-kat.com', 'kickasst.net', 'kickasst.org', 'kickasstorrents.id', 'thekat.cc', 'thekat.ch']
         self._base_link = None
         self.search_link = '/usearch/%s'
         self.min_seeders = int(control.setting('torrent.min.seeders'))

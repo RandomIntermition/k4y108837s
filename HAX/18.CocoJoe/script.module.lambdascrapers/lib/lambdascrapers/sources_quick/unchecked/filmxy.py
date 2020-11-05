@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re
 from resources.lib.modules import cfscrape
 from resources.lib.modules import cleantitle
 from resources.lib.modules import source_utils
 
+
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en'] # Old  filmxy.me  filmxy.ws  filmxy.one
-        self.domains = ['filmxy.live']
-        self.base_link = 'https://www.filmxy.live'
+        self.domains = ['filmxy.tv', 'filmxy.nl', 'filmxy.live']
+        self.base_link = 'https://www.filmxy.tv'
         self.movie_link = '/%s-%s'
         self.scraper = cfscrape.create_scraper()
 

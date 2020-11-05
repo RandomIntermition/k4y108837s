@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 # New Scraper for a New domain. Old Scraper and Domain were different.
 
 import re
@@ -24,7 +24,7 @@ class source:
             searchName = cleantitle.getsearch(title)
             searchURL = self.base_link + self.search_link % (searchName.replace(':', ' ').replace(' ', '+'))
             searchPage = self.scraper.get(searchURL).content
-            results = re.compile('<a href="(.+?)">(.+?)</a>.+?<span class="year">(.+?)</span>',re.DOTALL).findall(searchPage)
+            results = re.compile('<a href="(.+?)">(.+?)</a>.+?<span class="year">(.+?)</span>', re.DOTALL).findall(searchPage)
             for url, zName, zYear in results:
                 if cleantitle.geturl(title).lower() in cleantitle.geturl(zName).lower():
                     if year in str(zYear):

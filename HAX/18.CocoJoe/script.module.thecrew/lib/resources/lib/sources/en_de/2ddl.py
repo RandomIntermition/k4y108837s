@@ -1,55 +1,44 @@
 # -*- coding: utf-8 -*-
 
-"""
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+'''
+**Created by Tempest**
+Updated For New Domain and changed
+'''
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
+import re, urllib, urlparse
 
-import re
-import urllib
-import urlparse
 
 from resources.lib.modules import client
-from resources.lib.modules import cleantitle
 from resources.lib.modules import debrid
 from resources.lib.modules import source_utils
-from resources.lib.modules import cfscrape
+from resources.lib.modules import cleantitle
+from resources.lib.modules import dom_parser
 
 
-class source:
+
+class s0urce:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['2ddl.ws']
-        self.base_link = 'https://2ddl.vg'
-        self.search_link = '/search/%s/feed/rss2/'
+        self.domains = ['onceddl.net']
+        self.base_link = 'https://2ddl.ms'
+        self.search_link = '/?q=%s'
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            title = title.replace('\'', '').replace(',', '').replace('-', '').replace(':', '')
             url = {'imdb': imdb, 'title': title, 'year': year}
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            tvshowtitle = tvshowtitle.replace('\'', '').replace(',', '').replace('-', '').replace(':', '')
             url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year}
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
     def episode(self, url, imdb, tvdb, title, premiered, season, episode):
@@ -62,7 +51,7 @@ class source:
             url['title'], url['premiered'], url['season'], url['episode'] = title, premiered, season, episode
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
     def sources(self, url, hostDict, hostprDict):
@@ -72,108 +61,68 @@ class source:
             if url is None:
                 return sources
 
-            if debrid.status() == False: raise Exception()
-
-            scraper = cfscrape.create_scraper()
+            if debrid.status() is False:
+                raise Exception()
 
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
-
             title = data['tvshowtitle'] if 'tvshowtitle' in data else data['title']
-
             hdlr = 'S%02dE%02d' % (int(data['season']), int(data['episode'])) if 'tvshowtitle' in data else data['year']
 
             query = '%s S%02dE%02d' % (
-                data['tvshowtitle'],
-                int(data['season']),
-                int(data['episode'])) if 'tvshowtitle' in data else '%s %s' % (
-                data['title'],
-                data['year'])
-            query = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', ' ', query)
+            data['tvshowtitle'], int(data['season']), int(data['episode'])) if 'tvshowtitle' in data else '%s %s' % (
+            data['title'], data['year'])
+            query = re.sub('(\\\|/| -|:|\.|;|\*|\?|"|\'|<|>|\|)', ' ', query)
 
             url = self.search_link % urllib.quote_plus(query)
-            url = urlparse.urljoin(self.base_link, url)
-            html = scraper.get(url).content
-            posts = client.parseDOM(html, 'item')
+            url = urlparse.urljoin(self.base_link, url).replace('%3A+', '-').replace('+', '-').replace('--', '-').lower()
+
+            r = client.request(url)
+            r = client.parseDOM(r, 'h2', attrs={'class': 'title'})
+            r = [re.findall('(?s)<a class=.*?f="([^"]*)">([^<]*)', i, re.DOTALL)[0] for i in r]
 
             hostDict = hostprDict + hostDict
-
             items = []
-
-            for post in posts:
+            for item in r:
                 try:
-                    t = client.parseDOM(post, 'title')[0]
-                    u = re.findall('<link>(.+?)</link>', post, re.IGNORECASE)[0]
-                    items += [(t, u)]
-                except Exception:
+                    t = item[1]
+                    t1 = re.sub('(\.|\(|\[|\s)(\d{4}|S\d*E\d*|S\d+|3D)(\.|\)|\]|\s|)(.+|)', '', t)
+
+                    if not cleantitle.get(t1) == cleantitle.get(title): raise Exception()
+
+                    y = re.findall('[\.|\(|\[|\s](\d{4}|S\d*E\d*|S\d*)[\.|\)|\]|\s]', t)[-1].upper()
+
+                    if not y == hdlr: raise Exception()
+
+                    data = client.request(item[0])
+                    data = re.findall('<a href="([^"]*)',data)
+
+                    u = [(t, i) for i in data]
+                    items += u
+
+                except:
                     pass
 
             for item in items:
                 try:
-                    if title.lower() not in item[0].lower():
-                        continue
+                    name = item[0]
+                    name = client.replaceHTMLCodes(name)
+
+                    quality, info = source_utils.get_release_quality(name, item[1])
 
                     url = item[1]
-                    html = scraper.get(url).content
-
-                    try:
-                        download_area = client.parseDOM(html, 'div', attrs={'class': 'postpage_movie_download_area'})
-                        for box in download_area:
-                            if '<span>Single Links</span>' not in box:
-                                continue
-                            link_boxes = re.findall('anch_multilink">(.+?)</div>', box, re.DOTALL)
-                            if link_boxes is None:
-                                continue
-                            for link_section in link_boxes:
-                                url = re.findall('href="(.+?)"', link_section, re.DOTALL)[0]
-                                if any(x in url for x in ['.rar', '.zip', '.iso']):
-                                    continue
-                                url = client.replaceHTMLCodes(url)
-                                url = url.encode('utf-8')
-                                valid, host = source_utils.is_host_valid(url, hostDict)
-                                if not valid:
-                                    continue
-                                host = client.replaceHTMLCodes(host)
-                                host = host.encode('utf-8')
-
-                                name = item[0]
-                                name = client.replaceHTMLCodes(name)
-
-                                t = re.sub('(\.|\(|\[|\s)(\d{4}|S\d*E\d*|S\d*|3D)(\.|\)|\]|\s|)(.+|)', '', name, flags=re.I)
-
-                                if not cleantitle.get(t) == cleantitle.get(title):
-                                    continue
-
-                                y = re.findall('[\.|\(|\[|\s](\d{4}|S\d*E\d*|S\d*)[\.|\)|\]|\s]', name)[-1].upper()
-
-                                if not y == hdlr:
-                                    continue
-
-                                quality, info = source_utils.get_release_quality(name, url)
-
-                                try:
-                                    size = re.findall('((?:\d+\.\d+|\d+\,\d+|\d+)\s*(?:GB|GiB|MB|MiB))', item[2])[-1]
-                                    div = 1 if size.endswith(('GB', 'GiB')) else 1024
-                                    size = float(re.sub('[^0-9|/.|/,]', '', size)) / div
-                                    size = '[B]%.2f GB[/B]' % size
-                                    info.append(size)
-                                except Exception:
-                                    pass
-
-                                info = ' | '.join(info)
-                                sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info,
-                                                'direct': False, 'debridonly': True})
-                    except Exception:
-                        continue
-                except Exception:
+                    if any(x in url for x in ['.rar', '.zip', '.iso', 'www.share-online.biz', 'https://ouo.io','http://guard.link']): raise Exception()
+                    url = client.replaceHTMLCodes(url)
+                    url = url.encode('utf-8')
+                    valid, host = source_utils.is_host_valid(url, hostDict)
+                    host = client.replaceHTMLCodes(host)
+                    host = host.encode('utf-8')
+                    info = ' | '.join(info)
+                    sources.append({'source': host, 'quality': quality, 'language': 'en', 'url': url, 'info': info,'direct': False, 'debridonly': True})
+                except:
                     pass
-
-            check = [i for i in sources if not i['quality'] == 'CAM']
-            if check:
-                sources = check
-
             return sources
-        except Exception:
+        except:
             return sources
 
     def resolve(self, url):

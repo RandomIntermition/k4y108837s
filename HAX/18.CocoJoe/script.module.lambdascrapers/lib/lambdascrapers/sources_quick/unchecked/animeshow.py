@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
-import re,urlparse
+import re, urlparse
 from resources.lib.modules import client
 from resources.lib.modules import cleantitle
 from resources.lib.modules import source_tools
@@ -13,6 +13,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
+        self.genre_filter = ['animation', 'anime']
         self.domains = ['animeshow.tv']
         self.base_link = 'http://www.animeshow.tv'
         self.search_link = '/find.html?key=%s'

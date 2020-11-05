@@ -1,6 +1,14 @@
 
 
 
+ver 2.3.0.4.0
+2020 UPDATE
+update modules
+update modules lambda
+update scrapes
+
+
+
 ver 2.3.0.3.9
 new livestreams (swift)
 (minor edits to remove need for settings)

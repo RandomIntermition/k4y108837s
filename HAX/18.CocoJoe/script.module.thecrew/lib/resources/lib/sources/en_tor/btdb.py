@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 '''
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,13 +20,13 @@ from resources.lib.modules import client
 from resources.lib.modules import cfscrape
 
 
-class source:
+class s0urce:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
         self.domains = ['btdb.eu']
-        self.base_link = 'https://btdb.eu/'
-        self.search_link = '?s=%s'
+        self.base_link = 'https://btdb.eu'
+        self.search_link = '/search/%s/'
         self.scraper = cfscrape.create_scraper()
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -78,21 +77,31 @@ class source:
             query = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', ' ', query)
 
             url = self.search_link % urllib.quote_plus(query)
-            url = urlparse.urljoin(self.base_link, url)
+            url = urlparse.urljoin(self.base_link, url).replace('+', '%20')
+
+            headers = {'Referer': self.base_link,'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0'}
 
             try:
-                r = self.scraper.get(url).content
-                posts = client.parseDOM(r, 'li class="search-ret-item"')
+                r = self.scraper.get(url, headers=headers).content
+                posts = client.parseDOM(r, "div", attrs={"class": "media"})
                 for post in posts:
-                    link = re.findall('<h2 class="item-title"><a href=".+?" title=".+?">(.+?)</span></a></h2>.+?a title="Download using magnet" href="(magnet:.+?)".+?Size: <span class="item-meta-info-value">(.+?)</span>', post, re.DOTALL)
-                    for name, url, size in link:
+                    link = re.findall('a href="(magnet:.+?)"', post, re.DOTALL)
+                    try:
+                        size = re.findall('((?:\d+\,\d+\.\d+|\d+\.\d+|\d+\,\d+|\d+)\s*(?:GiB|MiB|GB|MB))', post)[0]
+                        div = 1 if size.endswith('GB') else 1024
+                        size = float(re.sub('[^0-9|/.|/,]', '', size.replace(',', '.'))) / div
+                        size = '%.2f GB' % size
+                    except BaseException:
+                        size = '0'
+                    for url in link:
                         if hdlr not in url:
                             continue
-                        quality = source_utils.check_direct_url(name)
                         url = url.split('&tr')[0]
-                        if any(x in url for x in ['trailer', 'extras', 'sample', '.jpg', '.rar', '.zip']):
+                        quality, info = source_utils.get_release_quality(url)
+                        if any(x in url for x in ['FRENCH', 'Ita', 'italian', 'TRUEFRENCH', '-lat-', 'Dublado']):
                             continue
-                        info = size
+                        info.append(size)
+                        info = ' | '.join(info)
                         sources.append(
                             {'source': 'Torrent', 'quality': quality, 'language': 'en', 'url': url, 'info': info,
                              'direct': False, 'debridonly': True})

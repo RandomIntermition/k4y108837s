@@ -2,7 +2,7 @@
 # -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
 
 import re,urllib,urlparse
-from resources.lib.modules import client2 as client
+from resources.lib.modules import client
 from resources.lib.modules import control
 from resources.lib.modules import cleantitle
 from resources.lib.modules import debrid

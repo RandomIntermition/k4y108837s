@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re
 from resources.lib.modules import client
@@ -50,7 +50,7 @@ class source:
                 return sources
             r = client.request(url)
             match = re.compile('<iframe src=".+?//(.+?)/(.+?)"').findall(r)
-            for host,url in match:
+            for host, url in match:
                 url = 'https://%s/%s' % (host, url)
                 host = host.replace('www.', '')
                 valid, host = source_utils.is_host_valid(host, hostDict)

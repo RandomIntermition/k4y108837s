@@ -13,15 +13,15 @@ import urlparse
 from resources.lib.modules import cleantitle
 from resources.lib.modules import client
 from resources.lib.modules import proxy
-# openloadmovie.ws opens to openloadmovie.org always.
+# openloadmovies.ch opens to openloadmovie.org always.
 # could remove it but o well it can go down first.
 
 class source:
 	def __init__(self):
 		self.priority = 1
 		self.language = ['en']
-		self.domains = ['openloadmovie.org','openloadmovie.ws']
-		self.base_link = 'https://openloadmovie.ws'
+		self.domains = ['openloadmovie.org','openloadmovies.ch']
+		self.base_link = 'https://openloadmovies.ch'
 
 	def movie(self, imdb, title, localtitle, aliases, year):
 		try:

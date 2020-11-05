@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 # Created by Tempest
 
-import re,urllib,urlparse
+import re, urllib, urlparse
+from resources.lib.modules import cfscrape
 from resources.lib.modules import client
 from resources.lib.modules import debrid
 from resources.lib.modules import source_utils
@@ -12,9 +13,10 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en', 'de', 'fr', 'ko', 'pl', 'pt', 'ru']
-        self.domains = ['mkvcage.cc', 'mkvcage.fun']
-        self.base_link = 'https://www.mkvcage.fun/'
+        self.domains = ['mkvcage.nl', 'mkvcage.com', 'mkvcage.me', 'mkvcage.fun', 'mkvcage.cc']
+        self.base_link = 'https://www.mkvcage.nl/'
         self.search_link = '?s=%s'
+        self.scraper = cfscrape.create_scraper()
 
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -66,12 +68,12 @@ class source:
             query = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', ' ', query)
             url = self.search_link % urllib.quote_plus(query)
             url = urlparse.urljoin(self.base_link, url)
-            r = client.request(url)
+            r = self.scraper.get(url).content
             posts = client.parseDOM(r, 'h2', attrs={'class': 'entry-title'})
             for post in posts:
                 data = client.parseDOM(post, 'a', ret='href')
                 for u in data:
-                    r = client.request(u)
+                    r = self.scraper.get(u).content
                     r = client.parseDOM(r, 'div', attrs={'class': 'clearfix entry-content'})
                     for t in r:
                         link = re.findall('a class="buttn magnet" href="(.+?)"', t)[0]

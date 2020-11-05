@@ -1,8 +1,9 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2018 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
+import re
+from resources.lib.modules import client
 from resources.lib.modules import cleantitle
-from resources.lib.modules import getSum
 from resources.lib.modules import source_utils
 
 
@@ -11,8 +12,9 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['telepisodes.org']
-        self.base_link = 'https://www.telepisodes.org'
+        self.base_link = 'https://telepisodes.org'
         self.tvshow_link = '/tv-series/%s/season-%s/episode-%s/'
+        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:67.0) Gecko/20100101 Firefox/67.0', 'Referer': self.base_link}
 
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
@@ -27,8 +29,7 @@ class source:
         try:
             if not url:
                 return
-            tvshowtitle = url
-            url = self.base_link + self.tvshow_link % (tvshowtitle, season, episode)
+            url = self.base_link + self.tvshow_link % (url, season, episode)
             return url
         except:
             return
@@ -40,16 +41,15 @@ class source:
             if url == None:
                 return sources
             hostDict = hostprDict + hostDict
-            page = getSum.get(url)
-            match = getSum.findEm(page, 'title="(.+?)" target="_blank" href="(.+?)"')
-            if match:
-                for hoster, url in match:
-                    url = self.base_link + url
-                    valid, host = source_utils.is_host_valid(hoster, hostDict)
-                    if valid:
-                        if source_utils.limit_hosts() is True and host in str(sources):
-                            continue
-                        sources.append({'source': host, 'quality': 'SD', 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
+            page = client.request(url, headers=self.headers)
+            match = re.compile('rel="nofollow ugc" title="(.+?)" target="_blank" href="(.+?)">', flags=re.DOTALL|re.IGNORECASE).findall(page)
+            for hoster, url in match:
+                url = self.base_link + url
+                valid, host = source_utils.is_host_valid(hoster, hostDict)
+                if source_utils.limit_hosts() is True and host in str(sources):
+                    continue
+                if valid:
+                    sources.append({'source': host, 'quality': 'SD', 'language': 'en', 'url': url, 'direct': False, 'debridonly': False})
             return sources
         except:
             return sources
@@ -57,13 +57,12 @@ class source:
 
     def resolve(self, url):
         try:
-            page2 = getSum.get(url)
-            match2 = getSum.findEm(page2, 'class="mybutton vidlink button-link" target="_blank" href="/open/site/(.+?)"')
-            if match2:
-                for link in match2:
-                    link = self.base_link + "/open/site/" + link
-                    url = getSum.get(link, Type='redirect')
-                    return url
+            page2 = client.request(url, headers=self.headers)
+            match2 = re.compile('href="/open/site/(.+?)"', flags=re.DOTALL|re.IGNORECASE).findall(page2)
+            for link in match2:
+                link = self.base_link + "/open/site/" + link
+                link = client.request(link, timeout='10', output='geturl')
+                return link
         except:
             return
 

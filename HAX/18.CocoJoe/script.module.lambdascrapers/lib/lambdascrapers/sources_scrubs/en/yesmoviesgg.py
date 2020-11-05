@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
+# vidnode could be improved but resolve redirect works for now.
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import getSum
@@ -10,8 +11,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['yesmovies.gg']
-        self.base_link = 'https://yesmovies.gg'
+        self.domains = ['yesmovies.fm', 'yesmovies.gg']
+        self.base_link = 'https://www6.yesmovies.fm'
         self.movie_link = '/film/%s/watching.html?ep=0'
         self.tvshow_link = '/film/%s-season-%s/watching.html?ep=%s'
 
@@ -72,5 +73,8 @@ class source:
 
 
     def resolve(self, url):
+        if 'api.vidnode.net' in url:
+            url = getSum.get(url, type='redirect')
         return url
+
 

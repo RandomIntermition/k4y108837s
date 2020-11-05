@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re
 from resources.lib.modules import client
@@ -48,7 +48,7 @@ class source:
                     t = client.request(url)
                     t = client.parseDOM(t, "div", attrs={"id": "content-embed"})
                     for u in t:
-                        i = re.findall('src="(.+?)"', u)[0].replace('load_player.html?e=', 'episode/embed/')
+                        i = re.findall('<iframe.+?src="(.+?)"', u)[0].replace('load_player.html?e=', 'episode/embed/')
                         i = client.request(i).replace("\\", "")
                         u = re.findall('"(https.+?)"', i)
                         for url in u:

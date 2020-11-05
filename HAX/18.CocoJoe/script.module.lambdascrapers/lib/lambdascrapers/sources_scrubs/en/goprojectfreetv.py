@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2018 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2018 by JewBMX in Scrubs.
 
 from resources.lib.modules import cleantitle
 from resources.lib.modules import getSum
@@ -11,7 +11,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['goprojectfreetv.com']
-        self.base_link = 'https://www.goprojectfreetv.com'
+        self.base_link = 'https://www1.goprojectfreetv.com'
         self.tvshow_link = '/watch-%s-season-%s-episode-%s-online/'
 
 

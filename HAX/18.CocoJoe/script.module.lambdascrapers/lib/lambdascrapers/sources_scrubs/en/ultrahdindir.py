@@ -1,11 +1,11 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 # Fixed by Tempest
 
-import re,urllib,urlparse
+import re, urllib, urlparse
 from resources.lib.modules import client
 from resources.lib.modules import debrid
-from resources.lib.modules import dom_parser2
+from resources.lib.modules import dom_parser
 
 
 class source:
@@ -35,7 +35,7 @@ class source:
                 raise Exception()
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
-            title = data['title'].replace(':','').lower()
+            title = data['title'].replace(':', '').lower()
             year = data['year']
             query = '%s %s' % (data['title'], data['year'])
             query = re.sub('(\\\|/| -|:|;|\*|\?|"|\'|<|>|\|)', ' ', query)
@@ -43,8 +43,8 @@ class source:
             post = 'do=search&subaction=search&search_start=0&full_search=0&result_from=1&story=%s' % urllib.quote_plus(query)
             r = client.request(url, post=post)
             r = client.parseDOM(r, 'div', attrs={'class': 'box-out margin'})
-            r = [(dom_parser2.parse_dom(i, 'div', attrs={'class':'news-title'})) for i in r if data['imdb'] in i]
-            r = [(dom_parser2.parse_dom(i[0], 'a', req='href')) for i in r if i]
+            r = [(dom_parser.parse_dom(i, 'div', attrs={'class':'news-title'})) for i in r if data['imdb'] in i]
+            r = [(dom_parser.parse_dom(i[0], 'a', req='href')) for i in r if i]
             r = [(i[0].attrs['href'], i[0].content) for i in r if i]
             hostDict = hostprDict + hostDict
             for item in r:
@@ -53,7 +53,7 @@ class source:
                     s = re.findall('((?:\d+\.\d+|\d+\,\d+|\d+)\s*(?:GB|GiB|Gb|MB|MiB|Mb))', name)
                     s = s[0] if s else '0'
                     data = client.request(item[0])
-                    data = dom_parser2.parse_dom(data, 'div', attrs={'id': 'r-content'})
+                    data = dom_parser.parse_dom(data, 'div', attrs={'id': 'r-content'})
                     data = re.findall('\s*<b><a href="(.+?)".+?</a></b>', data[0].content, re.DOTALL)
                     for url in data:
                         try:

@@ -1,12 +1,13 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re, urllib, urlparse
-from resources.lib.modules import client
 from resources.lib.modules import cfscrape
 from resources.lib.modules import cleantitle
 from resources.lib.modules import dom_parser
 from resources.lib.modules import source_utils
+import traceback
+from resources.lib.modules import log_utils
 
 
 class source:
@@ -15,13 +16,13 @@ class source:
         self.language = ['en']
         self.domains = ['tvbox.ag']
         self.base_link = 'http://tvbox.ag'
-        self.search_link = 'http://tvbox.ag/search?q=%s'
+        self.search_link = '/search?q=%s'
         self.scraper = cfscrape.create_scraper()
 
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:            
-            query = self.search_link % urllib.quote_plus(cleantitle.query(title))           
+            query = self.base_link + self.search_link % urllib.quote_plus(cleantitle.query(title))           
             for i in range(3):
                 result = self.scraper.get(query).content
                 if not result == None:
@@ -38,13 +39,15 @@ class source:
                     break
             url = url.encode('utf-8')
             return url
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('---TVbox - Exception: \n' + str(failure))
             return
 
 
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
-            query = self.search_link % urllib.quote_plus(cleantitle.query(tvshowtitle))
+            query = self.base_link + self.search_link % urllib.quote_plus(cleantitle.query(tvshowtitle))
             for i in range(3):
                 result = self.scraper.get(query).content
                 if not result == None:
@@ -61,7 +64,9 @@ class source:
                     break
             url = url.encode('utf-8')
             return url
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('---TVbox - Exception: \n' + str(failure))
             return
 
 
@@ -82,7 +87,9 @@ class source:
             url = result.attrs['href']
             url = url.encode('utf-8')
             return url
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('---TVbox - Exception: \n' + str(failure))
             return
 
 
@@ -110,7 +117,9 @@ class source:
                 except:
                     pass
             return sources
-        except:
+        except Exception:
+            failure = traceback.format_exc()
+            log_utils.log('---TVbox - Exception: \n' + str(failure))
             return sources
 
 

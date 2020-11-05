@@ -1,8 +1,7 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
 import re
-from resources.lib.modules import client
 from resources.lib.modules import cfscrape
 from resources.lib.modules import cleantitle
 from resources.lib.modules import more_sources
@@ -14,7 +13,7 @@ class source:
         self.priority = 1
         self.language = ['en']
         self.domains = ['cartoonhd.to']
-        self.base_link = 'https://www.cartoonhd.to'
+        self.base_link = 'https://cartoonhd.to'
         self.search_link = '/?s=%s'
         self.scraper = cfscrape.create_scraper()
 
@@ -24,7 +23,7 @@ class source:
             searchName = cleantitle.getsearch(title)
             searchURL = self.base_link + self.search_link % (searchName.replace(':', ' ').replace(' ', '+'))
             searchPage = self.scraper.get(searchURL).content
-            results = re.compile('<a href="(.+?)">(.+?)</a>.+?<span class="year">(.+?)</span>',re.DOTALL).findall(searchPage)
+            results = re.compile('<a href="(.+?)">(.+?)</a>.+?<span class="year">(.+?)</span>', re.DOTALL).findall(searchPage)
             for url, zName, zYear in results:
                 if cleantitle.geturl(title).lower() in cleantitle.geturl(zName).lower():
                     if year in str(zYear):

@@ -1,8 +1,11 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 02-01-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
-import re,urllib,urlparse,json,base64
-from resources.lib.modules import cleantitle,client,source_utils,dom_parser
+import re, urllib, urlparse, json, base64
+from resources.lib.modules import client
+from resources.lib.modules import cleantitle
+from resources.lib.modules import dom_parser
+from resources.lib.modules import source_utils
 import traceback
 from resources.lib.modules import log_utils
 
@@ -11,7 +14,7 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['watchseriesfree.to','seriesfree.to']
+        self.domains = ['seriesfree.to']  #  Old  watchseriesfree.to
         self.base_link = 'https://seriesfree.to'
         self.search_link = 'https://seriesfree.to/search/%s'
 
@@ -30,7 +33,7 @@ class source:
                     return url
         except Exception:
             failure = traceback.format_exc()
-            log_utils.log('---seriesfree.to Testing - Exception: \n' + str(failure))
+            log_utils.log('---SeriesFree - Exception: \n' + str(failure))
             return
 
 
@@ -44,12 +47,12 @@ class source:
             premiered = re.compile('(\d{4})-(\d{2})-(\d{2})').findall(premiered)[0]
             premiered = '%s/%s/%s' % (premiered[2], premiered[1], premiered[0])
             items = dom_parser.parse_dom(result, 'a', attrs={'itemprop':'url'})
-            url = [i.attrs['href'] for i in items if bool(re.compile('<span\s*>%s<.*?itemprop="episodeNumber">%s<\/span>' % (season,episode)).search(i.content))][0]
+            url = [i.attrs['href'] for i in items if bool(re.compile('<span\s*>%s<.*?itemprop="episodeNumber">%s<\/span>' % (season, episode)).search(i.content))][0]
             url = url.encode('utf-8')
             return url
         except Exception:
             failure = traceback.format_exc()
-            log_utils.log('---seriesfree.to Testing - Exception: \n' + str(failure))
+            log_utils.log('---SeriesFree - Exception: \n' + str(failure))
             return
 
 
@@ -65,7 +68,7 @@ class source:
                     break
             dom = dom_parser.parse_dom(result, 'div', attrs={'class':'links', 'id': 'noSubs'})
             result = dom[0].content
-            links = re.compile('<tr\s*>\s*<td><i\s+class="fa fa-youtube link-logo"></i>([^<]+).*?href="([^"]+)"\s+class="watch',re.DOTALL).findall(result)         
+            links = re.compile('<tr\s*>\s*<td><i\s+class="fa fa-youtube link-logo"></i>([^<]+).*?href="([^"]+)"\s+class="watch', re.DOTALL).findall(result)         
             for link in links[:5]:
                 try:
                     url2 = urlparse.urljoin(self.base_link, link[1])
@@ -85,10 +88,11 @@ class source:
             return sources
         except Exception:
             failure = traceback.format_exc()
-            log_utils.log('---seriesfree.to Testing - Exception: \n' + str(failure))
+            log_utils.log('---SeriesFree - Exception: \n' + str(failure))
             return sources
 
 
     def resolve(self, url):
         return url
+
 

@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 
-import re,os
-from resources.lib.modules import client,control
+import os, re, urllib
+#from uniscrape.modules import client
+#from uniscrape.modules import common
+from resources.lib.modules import client
+from resources.lib.modules import control as common
 
 
 def request(data):
@@ -32,12 +35,12 @@ def solvemedia(data):
         response = 'http://api.solvemedia.com' + response
         response = keyboard(response)
         post = {}
-        f = client.parseDOM(result, 'form', attrs={'action': 'verify.noscript'})[0]
-        k = client.parseDOM(f, 'input', ret='name', attrs={'type': 'hidden'})
+        f = client.parseDOM(result, 'form', attrs = {'action': 'verify.noscript'})[0]
+        k = client.parseDOM(f, 'input', ret='name', attrs = {'type': 'hidden'})
         for i in k:
-            post.update({i: client.parseDOM(f, 'input', ret='value', attrs={'name': i})[0]})
+            post.update({i: client.parseDOM(f, 'input', ret='value', attrs = {'name': i})[0]})
         post.update({'adcopy_response': response})
-        client.request('http://api.solvemedia.com/papi/verify.noscript', post=post)
+        client.request('http://api.solvemedia.com/papi/verify.noscript', post=urllib.urlencode(post))
         return {'adcopy_challenge': post['adcopy_challenge'], 'adcopy_response': 'manual_challenge'}
     except:
         pass
@@ -48,7 +51,7 @@ def recaptcha(data):
         url = []
         if data.startswith('http://www.google.com'):
             url += [data]
-        url += client.parseDOM(data, 'script', ret='src', attrs={'type': 'text/javascript'})
+        url += client.parseDOM(data, 'script', ret='src', attrs = {'type': 'text/javascript'})
         url = [i for i in url if 'http://www.google.com' in i]
         if not len(url) > 0:
             return
@@ -56,8 +59,7 @@ def recaptcha(data):
         challenge = re.compile("challenge\s+:\s+'(.+?)'").findall(result)[0]
         response = 'http://www.google.com/recaptcha/api/image?c=' + challenge
         response = keyboard(response)
-        return {'recaptcha_challenge_field': challenge, 'recaptcha_challenge': challenge,
-                'recaptcha_response_field': response, 'recaptcha_response': response}
+        return {'recaptcha_challenge_field': challenge, 'recaptcha_challenge': challenge, 'recaptcha_response_field': response, 'recaptcha_response': response}
     except:
         pass
 
@@ -80,7 +82,7 @@ def numeric(data):
         if not len(url) > 0:
             return
         result = sorted(url, key=lambda ltr: int(ltr[0]))
-        response = ''.join(str(int(num[1]) - 48) for num in result)
+        response = ''.join(str(int(num[1])-48) for num in result)
         return {'code': response}
     except:
         pass
@@ -88,17 +90,17 @@ def numeric(data):
 
 def keyboard(response):
     try:
-        i = os.path.join(control.dataPath, 'img')
-        f = control.openFile(i, 'w')
+        i = os.path.join(common.dataPath, 'img')
+        f = common.openFile(i, 'w')
         f.write(client.request(response))
         f.close()
-        f = control.image(450, 5, 375, 115, i)
-        d = control.windowDialog
+        f = common.image(450, 5, 375, 115, i)
+        d = common.windowDialog
         d.addControl(f)
-        control.deleteFile(i)
+        common.deleteFile(i)
         d.show()
         t = 'Type the letters in the image'
-        k = control.keyboard('', t)
+        k = common.keyboard('', t)
         k.doModal()
         c = k.getText() if k.isConfirmed() else None
         if c == '':
@@ -108,5 +110,4 @@ def keyboard(response):
         return c
     except:
         return
-
 

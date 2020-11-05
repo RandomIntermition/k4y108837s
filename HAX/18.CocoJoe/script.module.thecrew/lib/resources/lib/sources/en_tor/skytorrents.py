@@ -21,13 +21,13 @@ from resources.lib.modules import debrid
 from resources.lib.modules import source_utils
 
 
-class source:
+class s0urce:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
         self.domains = ['www.skytorrents.lol']
-        self.base_link = 'https://www.skytorrents.lol/'
-        self.search_link = '?query=%s'
+        self.base_link = 'https://www.skytorrents.to'
+        self.search_link = '/?search=%s'
         self.min_seeders = int(control.setting('torrent.min.seeders'))
 
     def movie(self, imdb, title, localtitle, aliases, year):

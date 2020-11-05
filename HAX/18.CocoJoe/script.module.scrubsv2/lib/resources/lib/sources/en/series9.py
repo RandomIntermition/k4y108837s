@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
-import re,requests,urllib,urlparse
+import re, requests, urllib, urlparse
 from resources.lib.modules import client
 from resources.lib.modules import cleantitle
 from resources.lib.modules import directstream
@@ -14,7 +14,7 @@ class source:
         self.priority = 1
         self.language = ['en']  # Removed  seriesonline.io  series9.co  series9.io
         self.domains = ['series9.to']
-        self.base_link = 'https://www4.series9.to'
+        self.base_link = 'https://www5.series9.to'
         self.search_link = '/movie/search/%s'
 
 

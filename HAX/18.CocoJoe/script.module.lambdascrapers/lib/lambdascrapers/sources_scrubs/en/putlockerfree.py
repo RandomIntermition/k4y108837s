@@ -1,34 +1,47 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 07-25-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
+# Normal movie search is crapcha right now so ghetto we go lol.
 
 import re
-from resources.lib.modules import client,cleantitle,source_utils
+from resources.lib.modules import client
+from resources.lib.modules import cleantitle
+from resources.lib.modules import source_utils
 
 
 class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['putlockerfree.sc']
-        self.base_link = 'https://www3.putlockerfree.sc'
+        self.domains = ['putlockersfree.sc', 'putlockerfree.sc']
+        self.base_link = 'https://putlockersfree.sc'
         self.search_link = '/search-query/%s+%s'
 
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
-            mtitle = cleantitle.geturl(title).replace('-', '+')
-            u = self.base_link + self.search_link % (mtitle, year)
-            u = client.request(u)
-            i = client.parseDOM(u, "div", attrs={"class": "movies-list movies-list-full"})
-            for r in i:
-                r = re.compile('<a href="(.+?)"').findall(r)
-                for url in r:
-                    ctitle = cleantitle.geturl(title).replace("+", "-")
-                    if not ctitle in url:
-                        continue
-                    return url
+            mtitle = cleantitle.geturl(title)
+            url = self.base_link + '/films/%s-%s/' % (mtitle, year)
+            url = client.request(url, timeout='10', output='geturl')
+            return url
         except:
             return
+
+
+    #def movie(self, imdb, title, localtitle, aliases, year):
+        #try:
+            #mtitle = cleantitle.geturl(title).replace('-', '+')
+            #u = self.base_link + self.search_link % (mtitle, year)
+            #u = client.request(u)
+            #i = client.parseDOM(u, "div", attrs={"class": "movies-list movies-list-full"})
+            #for r in i:
+                #r = re.compile('<a href="(.+?)"').findall(r)
+                #for url in r:
+                    #ctitle = cleantitle.geturl(title).replace("+", "-")
+                    #if not ctitle in url:
+                        #continue
+                    #return url
+        #except:
+            #return
 
 
     def sources(self, url, hostDict, hostprDict):

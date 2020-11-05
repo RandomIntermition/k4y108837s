@@ -2,7 +2,7 @@
 # --[getSum v1.4]--|--[From JewBMX]--
 # Lazy Module to make life a little easier.
 
-import re, time, traceback, xbmcgui
+import re, time, traceback
 from resources.lib.modules import log_utils
 import HTMLParser
 

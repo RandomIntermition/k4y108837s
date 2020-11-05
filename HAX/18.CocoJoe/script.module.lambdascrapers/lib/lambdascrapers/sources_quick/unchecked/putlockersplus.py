@@ -11,8 +11,8 @@ class source:
 	def __init__(self):
 		self.priority = 1
 		self.language = ['en'] #_Down,________Ok,___________Clean,_______Craptcha,______Slow__
-		self.domains = ['putlockers.plus', 'putlockers.fm', 'putlockers.ws', 'putlockers.gs', 'putlockerz.io']
-		self.base_link = 'http://www0.putlockers.plus'
+		self.domains = ['putlockers.vc', 'putlockers.fm', 'putlockers.ws', 'putlockers.gs', 'putlockerz.io']
+		self.base_link = 'http://www0.putlockers.vc'
 		self.search_link = '/search-movies/%s.html'
 		self.scraper = cfscrape.create_scraper()
 		# old  putlocker.tl
@@ -25,9 +25,9 @@ class source:
 			query = find.replace('-','+')
 			url = self.base_link + self.search_link % query
 			r = self.scraper.get(url).content
-			match = re.compile('<a href="http://www0.putlockers.plus/watch/(.+?)-' + find + '.html"').findall(r)
+			match = re.compile('<a href="http://www0.putlockers.vc/watch/(.+?)-' + find + '.html"').findall(r)
 			for url_id in match:
-				url = 'http://www0.putlockers.plus/watch/' + url_id + '-' + find + '.html'
+				url = 'http://www0.putlockers.vc/watch/' + url_id + '-' + find + '.html'
 				r = self.scraper.get(url).content
 				return url
 		except:
@@ -51,9 +51,9 @@ class source:
 			find = query.replace('+','-')
 			url = self.base_link + self.search_link % query
 			r = self.scraper.get(url).content
-			match = re.compile('<a href="http://www0.putlockers.plus/watch/(.+?)-' + find + '.html"').findall(r)
+			match = re.compile('<a href="http://www0.putlockers.vc/watch/(.+?)-' + find + '.html"').findall(r)
 			for url_id in match:
-				url = 'http://www0.putlockers.plus/watch/' + url_id + '-' + find + '.html'
+				url = 'http://www0.putlockers.vc/watch/' + url_id + '-' + find + '.html'
 				r = self.scraper.get(url).content
 				match = re.compile('<a class="episode episode_series_link" href="(.+?)">' + episode + '</a>').findall(r)
 				for url in match:
@@ -69,7 +69,7 @@ class source:
 				return sources
 			r = self.scraper.get(url).content
 			try:
-				match = re.compile('<p class="server_version"><img src="http://www0.putlockers.plus/themes/movies/img/icon/server/(.+?).png" width="16" height="16" /> <a href="(.+?)">').findall(r)
+				match = re.compile('<p class="server_version"><img src="http://www0.putlockers.vc/themes/movies/img/icon/server/(.+?).png" width="16" height="16" /> <a href="(.+?)">').findall(r)
 				for host, url in match:
 					if url == None:
 						return sources

@@ -1,18 +1,32 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 06-17-2019 by JewBMX in Scrubs.
+# -Cleaned and Checked on 10-16-2019 by JewBMX in Scrubs.
 
-import re,urllib,urlparse
-from resources.lib.modules import client,debrid,source_utils,cfscrape
+import re, urllib, urlparse
+from resources.lib.modules import client
+from resources.lib.modules import cfscrape
+from resources.lib.modules import debrid
+from resources.lib.modules import source_utils
+import traceback
+from resources.lib.modules import log_utils
 
 
 class source:
     def __init__(self):
         self.priority = 1
-        self.language = ['en']
-        self.domains = ['0daywarez.us', '0dayddl.com']
-        self.base_link = 'https://0dayddl.com/'
+        self.language = ['en']  #  Old  0dayddl.com  0dayddl.xyz
+        self.domains = ['0daywarez.us']
+        self.base_link = 'https://0daywarez.us/'
         self.search_link = '?s=%s'
         self.scraper = cfscrape.create_scraper()
+
+
+# 0dayddl.biz
+# 0dayreleases.com
+# 0dayrls.eu
+# 0daywarez.us
+# downduck.eu
+# downturk.eu
+# warezcorner.biz
 
 
     def movie(self, imdb, title, localtitle, aliases, year):
@@ -20,7 +34,7 @@ class source:
             url = {'imdb': imdb, 'title': title, 'year': year}
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
 
@@ -29,7 +43,7 @@ class source:
             url = {'imdb': imdb, 'tvdb': tvdb, 'tvshowtitle': tvshowtitle, 'year': year}
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
 
@@ -42,7 +56,7 @@ class source:
             url['title'], url['premiered'], url['season'], url['episode'] = title, premiered, season, episode
             url = urllib.urlencode(url)
             return url
-        except Exception:
+        except:
             return
 
 
@@ -110,7 +124,9 @@ class source:
                 sources = check
             return sources
         except Exception:
-            return
+            failure = traceback.format_exc()
+            log_utils.log('---0dayWarez - Exception: \n' + str(failure))
+            return sources
 
 
     def resolve(self, url):
