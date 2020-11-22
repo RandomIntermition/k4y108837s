@@ -31,7 +31,7 @@ from codequick import Script, Listitem
 from resources.lib import web_utils
 from resources.lib import addon_utils
 from resources.lib import download
-from resources.lib.kodi_utils import get_selected_item_art, get_selected_item_label, get_selected_item_info
+from resources.lib.kodi_utils import get_selected_item_art, get_selected_item_label, get_selected_item_info, INPUTSTREAM_PROP
 
 import inputstreamhelper
 import json
@@ -323,7 +323,7 @@ def get_francetv_video_stream(plugin,
         return final_video_url
     elif 'dash' in all_video_datas[0][0]:
         if download_mode:
-            xbmcgui.Dialog().ok('Info', plugin.localize(30603))
+            xbmcgui.Dialog().ok(plugin.localize(14116), plugin.localize(30603))
             return False
 
         is_helper = inputstreamhelper.Helper('mpd')
@@ -331,7 +331,7 @@ def get_francetv_video_stream(plugin,
             return False
 
         item = Listitem()
-        item.property['inputstreamaddon'] = 'inputstream.adaptive'
+        item.property[INPUTSTREAM_PROP] = 'inputstream.adaptive'
         item.property['inputstream.adaptive.manifest_type'] = 'mpd'
         item.label = get_selected_item_label()
         item.art.update(get_selected_item_art())

@@ -4,9 +4,16 @@
 - v18 updates
 [/COLOR]
 [COLOR red]
-[B]Version 3.0.2[/B]
-- FIX media button, (now opens and closes dialogue).
+[B]Version 3.0.7[/B]
+- ADD windows10 universal keys
+- Home key is back/X key
+- power/search/exclaimation all out of use system keys cannot be nooped
 [/COLOR]
+
+
+
+[B]Version 3.0.2 - [/B]
+- FIX media button, (now opens and closes dialogue).
 
 
 [B]Version 3.0.1 - 2.7.0[/B]

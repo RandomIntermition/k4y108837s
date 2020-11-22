@@ -212,7 +212,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.27~beta12" provider-name="SylvainCecchetto,wwark">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.28~beta05" provider-name="SylvainCecchetto,wwark">
   <requires>
     <import addon="xbmc.python" version="2.25.0"/>
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -255,25 +255,14 @@
     <email>catch.up.tv.and.more at gmail dot com</email>
     <source>https://github.com/Catch-up-TV-and-More/plugin.video.catchuptvandmore</source>
     <news>
-[Version 0.2.27]
-[CA - ICI Télé] Fix Catch-Up TV
-[CA - TéléQuebec] Fix Catch-Up TV (New contents)
-[BE - RTBF] Fix Live TV (Tipik)
-[US - NY Times] Fix Website
-[BE - Télésambre] Add Live TV
-[BE - RTBF] Fix HTTP 400 during play catchup TV
-[CA - Noovo] Fix Live TV and Rename V Télé to Noovo
-[CH - RTS] Add DRM support for catchup TV
-[WO - Arte] Fix some sub-categories not shown on Catchup TV
-[FR - FranceTV] Add DRM support for catchup TV
-[CA - TeleQuebec] Fix Live TV
-[FR - MyCanal] Fix Catch-up TV
-[FR - Gulli] Fix Live TV
-[FR - BSmart] Fix Live TV
-[FR - BFM Business] Fix Catch-up TV
-[UK - DPLAY] Add Live TV and Catch-up TV (Quest, Quest Red, Really, ...)
-[UK - QuestOD] Move code to Dplay
-[CA - TV5Unis] Fix Catch-up TV
+[Version 0.2.28]
+[BE - TV Lux] Fix Live TV
+[FR - CulturePub] Fix WebSite
+[BE - RTBF] Fix Catch-up TV
+[CA - TVA] Fix Live TV and re-add LCN Live TV
+[FR - L'Equipe TV] Fix Live TV
+[WO - Arte] Fix Catch-up TV
+[FR - AutoPlus] Fix Website
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
@@ -549,7 +538,7 @@ Added support for BBC Scotland.
   </extension>
 </addon>
 
-<addon id="plugin.video.placenta" version="2.3.0.4.0" name="Placenta" provider-name="Team Aftebirth">
+<addon id="plugin.video.placenta" version="2.3.0.4.1" name="Placenta" provider-name="Team Aftebirth">
 	<requires>
            <import addon="xbmc.python" version="2.19.0" />
            <import addon="script.module.placenta" />
@@ -642,7 +631,7 @@ Added support for BBC Scotland.
   </extension>
 </addon>
 
-<addon id="plugin.video.tempest" version="5.0.77" name="Tempest" provider-name="Tempest">
+<addon id="plugin.video.tempest" version="5.0.79" name="Tempest" provider-name="Tempest">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.tempest.artwork" />
@@ -669,14 +658,15 @@ Added support for BBC Scotland.
 			<fanart>fanart.jpg</fanart>
 		</assets>
 		<news>
-			v5.0.77
-- Updated Foregin Channels
-- Updated YourSpors
+			v5.0.79
+- Added Scrapers
+- Updated Scrapers
+- Removed Dead Scrapers
 		</news>
 	</extension>
 </addon>
 
-<addon id="plugin.video.temptv" version="2.0.79" name="[COLOR fuchsia]TempTV[/COLOR]" provider-name="Tempest, JewBMX">
+<addon id="plugin.video.temptv" version="2.0.80" name="[COLOR fuchsia]TempTV[/COLOR]" provider-name="Tempest, JewBMX">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.temptv.artwork" />
@@ -701,14 +691,13 @@ Added support for BBC Scotland.
 			<fanart>fanart.jpg</fanart>
 		</assets>
 		<news>
-			v2.0.79
-- Updated Foregin Channels
-- Updated YourSpors
+			v2.0.80
+- Updated UstvGo (Thanks jigoop1)
 		</news>
 	</extension>
 </addon>
 
-<addon id="plugin.video.thecrew" version="0.0.95" name="[COLOR orchid]THE CREW[/COLOR]" provider-name="The Crew">
+<addon id="plugin.video.thecrew" version="0.0.96" name="[COLOR orchid]THE CREW[/COLOR]" provider-name="The Crew">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.thecrew" />
@@ -1725,7 +1714,7 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 	</extension>
 </addon>
 
-<addon id="script.help.screen" name="Helper" version="3.0.2" provider-name="DONE">
+<addon id="script.help.screen" name="Helper" version="3.0.7" provider-name="DONE">
 	<requires>
 		<import addon="xbmc.python" version="2.14.0"/>
 	</requires>
@@ -1753,7 +1742,7 @@ This addon is NOT affiliated with official Kodi.
 	<news>
 [B]WHAT'S NEW:[/B]
 
-- fix Universal remote functions
+- added universal remote for windows
 </news>
 		<license>Free to Use</license>
 		<language></language>
@@ -1999,7 +1988,7 @@ This addon is NOT affiliated with official Kodi.
   </extension>
 </addon>
 
-<addon id="script.module.lambdascrapers" name="Lambdascrapers Module" version="2.3.0.4.0" provider-name="1Clowns">
+<addon id="script.module.lambdascrapers" name="Lambdascrapers Module" version="2.3.0.4.1" provider-name="1Clowns">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
         <import addon="script.module.beautifulsoup4"/>
@@ -2125,7 +2114,7 @@ This addon is NOT affiliated with official Kodi.
 	</extension>
 </addon>
 
-<addon id="script.module.placenta" name="Placenta Module" version="2.3.0.4.0" provider-name="Team Aftebirth">
+<addon id="script.module.placenta" name="Placenta Module" version="2.3.0.4.1" provider-name="Team Aftebirth">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="script.module.beautifulsoup4"/>
@@ -2270,14 +2259,15 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
   </extension>
 </addon>
 
-<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.12" provider-name="gujal">
+<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.14" provider-name="gujal">
     <requires>
         <!-- <import addon="xbmc.python" version="3.0.0" /> -->
-        <import addon="script.module.six" version="0.0.1"/>
+        <import addon="script.module.six" />
+        <import addon="script.module.kodi-six" />
         <import addon="plugin.video.youtube" optional="true" />
         <import addon="script.module.python.twitch" optional="true" />
         <import addon="script.module.cryptopy" version="1.2.6" optional="true" />
-        <import addon="plugin.video.gdrive" optional="true" />
+        <import addon="plugin.googledrive" optional="true" />
     </requires>
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.python.pluginsource" library="lib/default.py" />
@@ -2422,7 +2412,7 @@ Documentation: https://github.com/tamland/kodi-plugin-routing</description>
   </extension>
 </addon>
 
-<addon id="script.module.thecrew" name="[COLOR orchid]THE CREW MODULE[/COLOR]" version="0.0.95" provider-name="The Crew">
+<addon id="script.module.thecrew" name="[COLOR orchid]THE CREW MODULE[/COLOR]" version="0.0.96b" provider-name="The Crew">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.beautifulsoup4"/>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.help.screen" name="Helper" version="3.0.2" provider-name="DONE">
+<addon id="script.help.screen" name="Helper" version="3.0.7" provider-name="DONE">
 	<requires>
 		<import addon="xbmc.python" version="2.14.0"/>
 	</requires>
@@ -27,7 +27,7 @@ This addon is NOT affiliated with official Kodi.
 	<news>
 [B]WHAT'S NEW:[/B]
 
-- fix Universal remote functions
+- added universal remote for windows
 </news>
 		<license>Free to Use</license>
 		<language></language>

@@ -1,5 +1,12 @@
 
 
+ver 2.3.0.4.1
+update modules directstream
+update modules lambda directstream
+update scrapes
+FIX movie scrapes (two causing issue)
+(left in but removed movie section)
+
 
 ver 2.3.0.4.0
 2020 UPDATE

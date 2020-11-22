@@ -12,9 +12,9 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['rlsbb.ru']
-        self.base_link = 'http://rlsbb.ru'
-        self.search_base_link = 'http://search.rlsbb.ru'
+        self.domains = ['rlsbb.to']
+        self.base_link = 'http://rlsbb.to'
+        self.search_base_link = 'http://search.rlsbb.to'
         self.search_cookie = 'serach_mode=rlsbb'
         self.search_link = '/lib/search526049.php?phrase=%s&pindex=1&content=true'
         self.headers = {'User-Agent': client.agent()}
@@ -65,7 +65,7 @@ class source:
             url = self.search_link % urllib.quote_plus(query)
             url = urlparse.urljoin(self.base_link, url)
 
-            url = "http://rlsbb.ru/" + query
+            url = "http://rlsbb.to/" + query
             if 'tvshowtitle' not in data: url = url + "-1080p"
 
             r = cfscrape.get(url, headers=self.headers).content
@@ -79,7 +79,7 @@ class source:
                 query = query.replace("&", "and")
                 query = query.replace("  ", " ")
                 query = query.replace(" ", "-")
-                url = "http://rlsbb.ru/" + query
+                url = "http://rlsbb.to/" + query
                 r = cfscrape.get(url, headers=self.headers).content
 
             for loopCount in range(0, 2):
@@ -90,7 +90,7 @@ class source:
                     query = query.replace("&", " and ").replace("  ", " ").replace(" ", "-")
                     query = query + "-" + premDate
 
-                    url = "http://rlsbb.ru/" + query
+                    url = "http://rlsbb.to/" + query
                     url = url.replace('The-Late-Show-with-Stephen-Colbert','Stephen-Colbert')
 
                     r = cfscrape.get(url, headers=self.headers).content

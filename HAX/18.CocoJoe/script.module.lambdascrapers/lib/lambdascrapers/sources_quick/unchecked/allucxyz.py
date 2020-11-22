@@ -19,22 +19,6 @@ class source:
         self.scraper = cfscrape.create_scraper()
 
 
-    def movie(self, imdb, title, localtitle, aliases, year):
-        try:
-            searchName = cleantitle.getsearch(title)
-            searchURL = self.base_link + self.search_link % (searchName.replace(':', ' ').replace(' ', '+'))
-            searchPage = self.scraper.get(searchURL).content
-            results = re.compile('<a href="(.+?)">(.+?)</a>.+?<span class="year">(.+?)</span>',re.DOTALL).findall(searchPage)
-            for url, zName, zYear in results:
-                if cleantitle.geturl(title).lower() in cleantitle.geturl(zName).lower():
-                    if year in str(zYear):
-                        url = url + "?watching"
-                        return url
-            return
-        except:
-            return
-
-
     def tvshow(self, imdb, tvdb, tvshowtitle, localtvshowtitle, aliases, year):
         try:
             url = cleantitle.geturl(tvshowtitle)

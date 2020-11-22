@@ -1,26 +1,7 @@
-# -*- coding: UTF-8 -*-
-"""
-    LambdaScrapers Module
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-"""
-
-# Addon Name: LambdaScrapers Module
-# Addon id: script.module.lambdascrapers
+# -*- coding: utf-8 -*-
 
 import re, os, urllib, urlparse, json, binascii
-from lambdascrapers.modules import client
+from resources.lib.modules import client
 
 
 def google(url):
@@ -51,7 +32,6 @@ def google(url):
             result = [i.split('|')[-1] for i in result.split(',')]
             result = sum([googletag(i, append_height=True) for i in result], [])
 
-
         elif netloc == 'photos':
             result = result.replace('\r', '').replace('\n', '').replace('\t', '')
             result = re.compile('"\d*/\d*x\d*.+?","(.+?)"').findall(result)[0]
@@ -61,7 +41,6 @@ def google(url):
             result = [urllib.unquote(i) for i in result]
 
             result = sum([googletag(i, append_height=True) for i in result], [])
-
 
         elif netloc == 'picasaweb':
             id = re.compile('#(\d*)').findall(url)[0]
@@ -78,9 +57,8 @@ def google(url):
             result = [i['url'] for i in result if 'video' in i['type']]
             result = sum([googletag(i, append_height=True) for i in result], [])
 
-
         elif netloc == 'plus':
-            id = (urlparse.urlparse(url).path).split('/')[-1]
+            id = urlparse.urlparse(url).path.split('/')[-1]
 
             result = result.replace('\r', '').replace('\n', '').replace('\t', '')
             result = result.split('"%s"' % id)[-1].split(']]')[0]
@@ -104,7 +82,8 @@ def google(url):
             i.pop('height', None)
             i.update({'url': i['url'] + '|%s' % urllib.urlencode(headers)})
 
-        if not url: return
+        if not url:
+            return
         return url
     except:
         return
@@ -149,6 +128,7 @@ def googletag(url, append_height=False):
     else:
         return []
 
+
 def googlepass(url):
     try:
         try:
@@ -161,7 +141,8 @@ def googlepass(url):
             url = url.replace('http://', 'https://')
         else:
             url = url.replace('https://', 'http://')
-        if headers: url += '|%s' % urllib.urlencode(headers)
+        if headers:
+            url += '|%s' % urllib.urlencode(headers)
         return url
     except:
         return
@@ -190,7 +171,7 @@ def vk(url):
 
         url = []
         try:
-            url += [{'quality': 'HD', 'url': sources['720']}]
+            url += [{'quality': '720', 'url': sources['720']}]
         except:
             pass
         try:
@@ -201,17 +182,20 @@ def vk(url):
             url += [{'quality': 'SD', 'url': sources['480']}]
         except:
             pass
-        if not url == []: return url
+        if not url == []:
+            return url
         try:
             url += [{'quality': 'SD', 'url': sources['360']}]
         except:
             pass
-        if not url == []: return url
+        if not url == []:
+            return url
         try:
             url += [{'quality': 'SD', 'url': sources['240']}]
         except:
             pass
-        if not url == []: return url
+        if not url == []:
+            return url
     except:
         return
 
@@ -233,7 +217,8 @@ def odnoklassniki(url):
             sd += [{'quality': quali, 'url': i.get('url')} for i in result if i.get('name').lower() == name]
 
         url = hd + sd[:1]
-        if not url == []: return url
+        if not url == []:
+            return url
     except:
         return
 
@@ -282,3 +267,27 @@ def yandex(url):
         return
 
 
+def fastmedia(url):
+    try:
+        cookie = client.request(url, output='cookie')
+
+        r = client.request(url, cookie=cookie)
+        r = re.sub(r'[^\x00-\x7F]+', ' ', r)
+
+        sk = re.findall('"sk"\s*:\s*"([^"]+)', r)[0]
+
+        idstring = re.findall('"id"\s*:\s*"([^"]+)', r)[0]
+
+        idclient = binascii.b2a_hex(os.urandom(16))
+
+        post = {'idClient': idclient, 'version': '3.9.2', 'sk': sk, '_model.0': 'do-get-resource-url', 'id.0': idstring}
+        post = urllib.urlencode(post)
+
+        r = client.request('https://yadi.sk/models/?_m=do-get-resource-url', post=post, cookie=cookie)
+        r = json.loads(r)
+
+        url = r['models'][0]['data']['file']
+
+        return url
+    except:
+        return

@@ -20,11 +20,11 @@ class trailer:
                 self.key_link = client.devApi()
             else:
                 self.key_link = client.youtubeApi()
-        try: self.key_link = '&key=%s' % self.key_link
-        except: pass
-        self.search_link = 'https://www.googleapis.com/youtube/v3/search?part=id&type=video&maxResults=5&q=%s' + self.key_link
+        else:
+            self.key_link = self.key
+        self.search_link = 'https://www.googleapis.com/youtube/v3/search?part=id&type=video&maxResults=5&q=%s&key=%s'
         self.youtube_watch = 'https://www.youtube.com/watch?v=%s'
-        self.headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'}
+        self.headers = {'User-Agent': client.agent()}
 
     def play(self, name='', url='', windowedtrailer=0):
         try:
@@ -74,7 +74,7 @@ class trailer:
                 raise Exception()
         except:
             query = name + ' trailer'
-            query = self.search_link % urllib.quote_plus(query)
+            query = self.search_link % (urllib.quote_plus(query), self.key_link)
             return self.search(query)
 
     def search(self, url):

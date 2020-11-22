@@ -38,6 +38,21 @@ class source:
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
+            results_limit = 100
+            verystream_limit = 18
+            clipwatch_limit = 10
+            entervideo_limit = 10
+            megamp4_limit = 7
+            vidcloud_limit = 4
+            flix555_limit = 4
+            vidzi_limit = 4
+            skyvids_limit = 4
+            vev_limit = 4
+            vshare_limit = 3
+            vidoza_limit = 3
+            vidlox_limit = 3
+            vidup_limit = 3
+            videobee_limit = 3
             if url == None:
                 return sources
             hostDict = hostprDict + hostDict
@@ -45,6 +60,54 @@ class source:
             match = re.compile('rel="nofollow ugc" title="(.+?)" target="_blank" href="(.+?)">', flags=re.DOTALL|re.IGNORECASE).findall(page)
             for hoster, url in match:
                 url = self.base_link + url
+                if url in str(sources): continue
+                if control.setting('sources.dont.filter') == 'false':
+                        
+                        if results_limit < 1: continue
+                        else: results_limit -= 1
+
+                        if 'verystream' in host:
+                            if verystream_limit < 1: continue
+                            else: verystream_limit -= 1
+                        if 'clipwatch' in host:
+                            if clipwatch_limit < 1: continue
+                            else: clipwatch_limit -= 1
+                        if 'entervideo' in host:
+                            if entervideo_limit < 1: continue
+                            else: entervideo_limit -= 1
+                        if 'megamp4' in host:
+                            if megamp4_limit < 1: continue
+                            else: megamp4_limit -= 1
+                        if 'vidcloud' in host:
+                            if vidcloud_limit < 1: continue
+                            else: vidcloud_limit -= 1
+                        if 'flix555' in host:
+                            if flix555_limit < 1: continue
+                            else: flix555_limit -= 1
+                        if 'vidzi' in host:
+                            if vidzi_limit < 1: continue
+                            else: vidzi_limit -= 1
+                        if 'skyvids' in host:
+                            if skyvids_limit < 1: continue
+                            else: skyvids_limit -= 1
+                        if 'vev' in host:
+                            if vev_limit < 1: continue
+                            else: vev_limit -= 1
+                        if 'vshare' in host:
+                            if vshare_limit < 1: continue
+                            else: vshare_limit -= 1
+                        if 'vidoza' in host:
+                            if vidoza_limit < 1: continue
+                            else: vidoza_limit -= 1
+                        if 'vidlox' in host:
+                            if vidlox_limit < 1: continue
+                            else: vidlox_limit -= 1
+                        if 'vidup' in host:
+                            if vidup_limit < 1: continue
+                            else: vidup_limit -= 1
+                        if 'videobee' in host:
+                            if videobee_limit < 1: continue
+                            else: videobee_limit -= 1
                 valid, host = source_utils.is_host_valid(hoster, hostDict)
                 if source_utils.limit_hosts() is True and host in str(sources):
                     continue

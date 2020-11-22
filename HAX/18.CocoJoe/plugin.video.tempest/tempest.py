@@ -636,9 +636,12 @@ def toggleAll(setting, query=None, sourceList=None):
         control.setSetting(source_setting, setting)
     control.openSettings(query)
 
+
 if mode == "toggleAllNormal":
-    sourcelist = ['5movies', 'anime1', 'animeram', 'animetoon', 'cartoonhd', 'icefilms', 'projectfreetv', 'series9',
-                  'showbox', 'swatchseries', 'toonova', 'watchepisodes4', 'watchfree', 'watchseries', 'watchserieshd',]
+    sourcelist = ['2embed', '5movies', 'anime1', 'animeram', 'animetoon', 'cartoonhd', 'anymovies', 'filmheaven',
+                  'fmovies', 'lunchflix', 'movie2k', 'projectfreetv', 'retrovisionmedia', 'series9', 'showbox',
+                  'soap2day', 'soap2day1', 'ssoap2day', 'swatchseries', 'themoviebay', 'toonova', 'watchepisodes4',
+                  'watchseries', 'watchserieshd']
     toggleAll(params['setting'], params['query'], sourcelist)
 
 if mode == "toggleAllDebrid":
@@ -647,8 +650,7 @@ if mode == "toggleAllDebrid":
     toggleAll(params['setting'], params['query'], sourcelist)
 
 if mode == "toggleAllTorrent":
-    sourcelist = ['7torrents', '1337x', 'btdb', 'btscene', 'ettv', 'eztv', 'glodls', 'hevcbay', 'ibit', 'idope', 'isohunt2',
-                  'kickass2', 'limetorr', 'magnetdl',  'mkvhub', 'piratebay', 'skytorrents',
-                  'solidtorrents', 'topnow', 'torrapi', 'torrdown', 'torrentgalaxy', 'torrentquest', 'yifyddl', 'ytsam',
-                  'zoogle']
+    sourcelist = ['7torrents', '1337x', 'btdb', 'btscene', 'ettv', 'eztv', 'glodls', 'ibit', 'idope', 'isohunt2',
+                  'kickass2', 'limetorr', 'magnetdl',  'mkvhub', 'piratebay', 'skytorrents', 'solidtorrents', 'topnow',
+                  'torrapi', 'torrdown', 'torrentgalaxy', 'torrentquest', 'watchordown', 'yifyddl', 'ytsam', 'zoogle']
     toggleAll(params['setting'], params['query'], sourcelist)

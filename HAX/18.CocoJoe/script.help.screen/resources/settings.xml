@@ -3,24 +3,35 @@
 
 
     <category label="[COLOR]Keymaps[/COLOR]">
-	  <setting label="Configurations:" type="lsep"/>
+	  <setting label="Configurations:
+    " type="lsep"/>
 
 	  <setting label="[B]Set Basic keys[/B]
-  Use this to access 'Help' with 'H'" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapbasic.py)"/>
-	  <setting label="" type="lsep"/>
+     Use this to access 'Help' with 'H'" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapbasic.py)"/>
+	  <setting label="
+    " type="lsep"/>
 
 	  <setting label="[B]Set All keys[/B]  [COLOR red](Recommended)[/COLOR]
-  Shortcuts with 'F' | Update library with 'U' | Change views with 'V'" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapfull.py)"/>
-	  <setting label="" type="lsep"/>
+     Shortcuts with 'F' | Update library with 'U' | Change views with 'V'" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapfull.py)"/>
+	  <setting label="
+    " type="lsep"/>
 
-	  <setting label="[B]Set All Keys & CUSTOM keys[/B]  [COLOR red](Universal Remote only)[/COLOR]
-  Same as above with the addition of 6 Universal Remote keys." type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapfullcustom.py)"/>
-	  <setting label="" type="lsep"/>
-	  <setting type="sep"/>
+	  <setting label="[B]Set All Keys & CUSTOM Linux keys[/B]  [COLOR red](Universal Remote only)[/COLOR]
+     Same as above with the addition of 6 Universal Remote keys." type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapcustomlinux.py)"/>
+	  <setting label="
+    " type="lsep"/>
 
-	  <setting label="Other settings:      [LIGHT](Reload keys or restart kodi for changes to take affect)[/LIGHT]" type="lsep"/>
-	  <setting label="[B][RELOAD Keys][/B]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/reloadkeys.py)"/>
-	  <setting label="[B][RESET Keys to Default][/B]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapdefault.py)"/>
+	  <setting label="[B]Set All Keys & CUSTOM Windows10 keys[/B]  [COLOR red](Universal Remote only)[/COLOR]
+     Same as above with only 3 additional Universal Remote keys." type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapcustomwindows.py)"/>
+	  <setting label="
+    " type="lsep"/>
+
+	  <setting label="
+    [LIGHT](Reload keys or restart kodi for changes to take affect)[/LIGHT]" type="lsep"/>
+	  <setting label="
+    [B][RELOAD Keys][/B]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/reloadkeys.py)"/>
+	  <setting label="
+    [B][RESET Keys to Default][/B]" type="action" action="RunScript(special://home/addons/script.help.screen/resources/keyscripts/keymapdefault.py)"/>
     </category>
 
 

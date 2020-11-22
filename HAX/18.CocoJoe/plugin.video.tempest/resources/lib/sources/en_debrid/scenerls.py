@@ -81,7 +81,7 @@ class source:
 
                 posts = client.parseDOM(r, 'div', attrs={'class': 'post'})
 
-                items = []; dupes = []
+                items = []
 
                 for post in posts:
                     try:

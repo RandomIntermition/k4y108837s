@@ -13,8 +13,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['eztv.io']
-        self.base_link = 'https://eztv.io/'
+        self.domains = ['eztv.re', 'eztv.io']
+        self.base_link = 'https://eztv.re'
         self.search_link = '/search/%s'
         self.min_seeders = int(control.setting('torrent.min.seeders'))
         self.headers = {'User-Agent': client.agent()}
