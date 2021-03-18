@@ -1,55 +1,24 @@
 # -*- coding: utf-8 -*-
-"""
-    Catch-up TV & More
-    Original work (C) JUL1EN094, SPM, SylvainCecchetto
-    Copyright (C) 2016  SylvainCecchetto
+# Copyright: (c) JUL1EN094, SPM, SylvainCecchetto
+# Copyright: (c) 2016, SylvainCecchetto
+# GNU General Public License v2.0+ (see LICENSE.txt or https://www.gnu.org/licenses/gpl-2.0.txt)
 
-    This file is part of Catch-up TV & More.
+# This file is part of Catch-up TV & More
 
-    Catch-up TV & More is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Catch-up TV & More is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with Catch-up TV & More; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
-
-# The unicode_literals import only has
-# an effect on Python 2.
-# It makes string literals as unicode like in Python 3
 from __future__ import unicode_literals
-
 from builtins import str
-from builtins import range
-from codequick import Route, Resolver, Listitem, utils, Script
-
-
-from resources.lib import web_utils
-from resources.lib import download
-from resources.lib.menu_utils import item_post_treatment
-from resources.lib.kodi_utils import get_kodi_version, get_selected_item_art, get_selected_item_label, get_selected_item_info, INPUTSTREAM_PROP
-from resources.lib.addon_utils import get_item_media_path
-
-# Verify md5 still present in hashlib python 3 (need to find another way if it is not the case)
-# https://docs.python.org/3/library/hashlib.html
-from hashlib import md5
+import json
 
 import inputstreamhelper
-import json
-import os
-import re
+from codequick import Route, Resolver, Listitem, utils, Script
+from kodi_six import xbmcgui, xbmcplugin
 import urlquick
-from itertools import chain
-from kodi_six import xbmc
-from kodi_six import xbmcgui
-from kodi_six import xbmcplugin
+
+from resources.lib import web_utils
+from resources.lib.addon_utils import get_item_media_path
+from resources.lib.kodi_utils import get_selected_item_art, get_selected_item_label, get_selected_item_info, INPUTSTREAM_PROP
+from resources.lib.menu_utils import item_post_treatment
+
 
 # TO DO
 # Readd Playlist (if needed)
@@ -58,8 +27,7 @@ from kodi_six import xbmcplugin
 
 URL_ROOT = utils.urljoin_partial("https://www.tf1.fr")
 
-URL_VIDEO_STREAM = 'https://delivery.tf1.fr/mytf1-wrd/%s?format=%s'
-# videoId, format['hls', 'dash']
+URL_VIDEO_STREAM = 'https://mediainfo.tf1.fr/mediainfocombo/%s?context=MYTF1&pver=4008002&platform=web&os=linux&osVersion=unknown&topDomain=www.tf1.fr'
 
 URL_LICENCE_KEY = 'https://drm-wide.tf1.fr/proxy?id=%s|Content-Type=&User-Agent=Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3041.0 Safari/537.36&Host=drm-wide.tf1.fr|R{SSM}|'
 # videoId
@@ -210,7 +178,7 @@ def handle_videos(video_items):
 
         item.set_callback(get_video_url,
                           video_id=video_id)
-        item_post_treatment(item, is_playable=True, is_downloadable=True)
+        item_post_treatment(item, is_playable=True, is_downloadable=False)
         yield item
 
 
@@ -287,82 +255,63 @@ def get_video_url(plugin,
                   download_mode=False,
                   **kwargs):
 
-    video_format = 'hls'
-    url_json = URL_VIDEO_STREAM % (video_id, video_format)
+    url_json = URL_VIDEO_STREAM % video_id
     htlm_json = urlquick.get(url_json,
                              headers={'User-Agent': web_utils.get_random_ua()},
                              max_age=-1)
     json_parser = json.loads(htlm_json.text)
 
-    if json_parser['code'] >= 400:
+    if json_parser['delivery']['code'] > 400:
         plugin.notify('ERROR', plugin.localize(30716))
         return False
 
-    # Check DRM in the m3u8 file
-    manifest = urlquick.get(json_parser["url"],
-                            headers={
-                                'User-Agent': web_utils.get_random_ua()},
-                            max_age=-1).text
-    if 'drm' in manifest:
+    if download_mode:
+        xbmcgui.Dialog().ok('Info', plugin.localize(30603))
+        return False
 
-        if get_kodi_version() < 18:
-            xbmcgui.Dialog().ok('Info', plugin.localize(30602))
-            return False
-        else:
-            video_format = 'dash'
+    is_helper = inputstreamhelper.Helper('mpd', drm='widevine')
+    if not is_helper.check_inputstream():
+        return False
 
-    if video_format == 'hls':
+    item = Listitem()
+    item.path = json_parser['delivery']['url']
+    item.label = get_selected_item_label()
+    item.art.update(get_selected_item_art())
+    item.info.update(get_selected_item_info())
+    item.property[INPUTSTREAM_PROP] = 'inputstream.adaptive'
+    item.property['inputstream.adaptive.manifest_type'] = 'mpd'
+    item.property['inputstream.adaptive.license_type'] = 'com.widevine.alpha'
+    item.property['inputstream.adaptive.license_key'] = URL_LICENCE_KEY % video_id
 
-        final_video_url = json_parser["url"].replace('2800000', '4000000')
-        if download_mode:
-            return download.download_video(final_video_url)
-        return final_video_url
-
-    else:
-        if download_mode:
-            xbmcgui.Dialog().ok('Info', plugin.localize(30603))
-            return False
-
-        url_json = URL_VIDEO_STREAM % (video_id, video_format)
-        htlm_json = urlquick.get(
-            url_json,
-            headers={'User-Agent': web_utils.get_random_ua()},
-            max_age=-1)
-        json_parser = json.loads(htlm_json.text)
-
-        is_helper = inputstreamhelper.Helper('mpd', drm='widevine')
-        if not is_helper.check_inputstream():
-            return False
-
-        item = Listitem()
-        item.path = json_parser["url"]
-        item.label = get_selected_item_label()
-        item.art.update(get_selected_item_art())
-        item.info.update(get_selected_item_info())
-        item.property[INPUTSTREAM_PROP] = 'inputstream.adaptive'
-        item.property['inputstream.adaptive.manifest_type'] = 'mpd'
-        item.property[
-            'inputstream.adaptive.license_type'] = 'com.widevine.alpha'
-        item.property[
-            'inputstream.adaptive.license_key'] = URL_LICENCE_KEY % video_id
-
-        return item
+    return item
 
 
 @Resolver.register
 def get_live_url(plugin, item_id, **kwargs):
-    video_id = 'L_%s' % item_id.upper()
 
-    video_format = 'hls'
-    url_json = URL_VIDEO_STREAM % (video_id, video_format)
+    video_id = 'L_%s' % item_id.upper()
+    url_json = URL_VIDEO_STREAM % video_id
     htlm_json = urlquick.get(url_json,
                              headers={'User-Agent': web_utils.get_random_ua()},
                              max_age=-1)
     json_parser = json.loads(htlm_json.text)
 
-    if json_parser['code'] > 400:
+    if json_parser['delivery']['code'] > 400:
         plugin.notify('ERROR', plugin.localize(30713))
         return False
-    else:
-        return json_parser['url'].replace('master_2000000.m3u8',
-                                          'master_4000000.m3u8')
+
+    is_helper = inputstreamhelper.Helper('mpd', drm='widevine')
+    if not is_helper.check_inputstream():
+        return False
+
+    item = Listitem()
+    item.path = json_parser['delivery']['url']
+    item.label = get_selected_item_label()
+    item.art.update(get_selected_item_art())
+    item.info.update(get_selected_item_info())
+    item.property[INPUTSTREAM_PROP] = 'inputstream.adaptive'
+    item.property['inputstream.adaptive.manifest_type'] = 'mpd'
+    item.property['inputstream.adaptive.license_type'] = 'com.widevine.alpha'
+    item.property['inputstream.adaptive.license_key'] = URL_LICENCE_KEY % video_id
+
+    return item

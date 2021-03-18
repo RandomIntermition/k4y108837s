@@ -89,13 +89,15 @@
         <setting type="sep" />
         <setting id="provider.2embed" type="bool" label="2EMBED" default="true" />
         <setting id="provider.5movies" type="bool" label="5MOVIES" default="true" />
+        <setting id="provider.allmoviesforyou" type="bool" label="ALLMOVIES" default="true" />
         <setting id="provider.anime1" type="bool" label="ANIME1" default="true" />
         <setting id="provider.animeram" type="bool" label="ANIMERAM" default="true" />
         <setting id="provider.animetoon" type="bool" label="ANIMETOON" default="true" />
-        <setting id="provider.cartoonhd" type="bool" label="CARTOONHD" default="true" />
         <setting id="provider.anymovies" type="bool" label="ANYMOVIES" default="true" />
-        <setting id="provider.filmheaven" type="bool" label="FILMHEAVEN" default="true" />
-        <setting id="provider.fmovies" type="bool" label="FMOVIES-132MOVIES-ONLINE" default="true" />
+        <setting id="provider.cartoonhd" type="bool" label="CARTOONHD" default="true" />
+        <setting id="provider.dbgo" type="bool" label="DBGO" default="true" />
+        <setting id="provider.filmxy" type="bool" label="FILMXY" default="true" />
+        <setting id="provider.fsapi" type="bool" label="FSAPI" default="true" />
         <setting id="provider.lunchflix" type="bool" label="LUNCHFLIX" default="true" />
         <setting id="provider.movie2k" type="bool" label="MOVIE2K" default="true" />
         <setting id="provider.projectfreetv" type="bool" label="PROJECTFREETV" default="true" />
@@ -103,13 +105,13 @@
         <setting id="provider.showbox" type="bool" label="SHOWBOX" default="true" />
         <setting id="provider.soap2day" type="bool" label="SOAP2DAY" default="true" />
         <setting id="provider.soap2day1" type="bool" label="SOAP2DAY1" default="true" />
+        <setting id="provider.sockshares" type="bool" label="SOCKSHARES" default="true" />
         <setting id="provider.ssoap2day" type="bool" label="SSOAP2DAY" default="true" />
         <setting id="provider.swatchseries" type="bool" label="SWATCHSERIES" default="true" />
-        <setting id="provider.themoviebay" type="bool" label="THEMOVIEBAY" default="true" />
         <setting id="provider.toonova" type="bool" label="TOONOVA" default="true" />
+        <setting id="provider.vidnext" type="bool" label="VIDNEXT" default="false" />
+        <setting id="provider.vidsrc" type="bool" label="VIDSRC" default="true" />
         <setting id="provider.watchepisodes4" type="bool" label="WATCHEPISODES4" default="true" />
-        <setting id="provider.watchseries" type="bool" label="WATCHSERIES" default="true" />
-        <setting id="provider.watchserieshd" type="bool" label="WATCHSERIESHD" default="true" />
         <setting type="sep" />
         <setting label="Local Scrapers" type="lsep" enable="false" />
         <setting id="provider.library" type="bool" label="LIBRARY" default="false" />

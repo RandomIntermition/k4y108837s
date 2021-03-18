@@ -1,13 +1,11 @@
 # -*- coding: UTF-8 -*-
-# -Cleaned and Checked on 08-24-2019 by JewBMX in Scrubs.
 # -Cleaned and Checked on 04-14-2020 by Tempest.
 
-import urllib, urlparse
+import urllib, urlparse, re
 import traceback
-from resources.lib.modules import client,  log_utils
-from resources.lib.modules import cleantitle
-from resources.lib.modules import directstream
-from resources.lib.modules import source_utils
+from resources.lib.modules import client
+from resources.lib.modules import log_utils
+from resources.lib.modules import scrape_source
 from resources.lib.sources import cfscrape
 
 
@@ -69,10 +67,13 @@ class source:
             pass
 
     def sources(self, url, hostDict, hostprDict):
+        sources = []
         try:
-            sources = []
             if url is None:
                 return sources
+
+            hostDict = hostprDict + hostDict
+
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
             headers = {}
@@ -89,33 +90,23 @@ class source:
             links = client.parseDOM(result, 'a', ret='href')
             i = 0
             for t in links:
-                if i == 10:
+                if i == 25:
                     break
                 try:
                     t = t.split('=')[1]
                     t = urlparse.urljoin(self.base_link, self.video_link % t)
                     result = client.request(t, post={}, headers={'User-Agent': client.agent(), 'Referer': url})
+                    if 'href=' in result:
+                        result = re.findall("href='(.+?)'", result)[0]
                     u = result if 'http' in result else 'http:' + result
-                    if 'google' in u:
-                        valid, hoster = source_utils.is_host_valid(u, hostDict)
-                        urls, host, direct = source_utils.check_directstreams(u, hoster)
-                        for x in urls:
-                            sources.append(
-                                {'source': host, 'quality': x['quality'], 'language': 'en', 'url': x['url'],
-                                 'direct': direct, 'debridonly': False})
-                    else:
-                        valid, hoster = source_utils.is_host_valid(u, hostDict)
-                        if valid:
-                            try:
-                                u.decode('utf-8')
-                                sources.append(
-                                    {'source': hoster, 'quality': 'SD', 'language': 'en', 'url': u, 'direct': False,
-                                     'debridonly': False})
-                                i += 1
-                            except:
-                                pass
+                    u = u.replace('http:', 'https:')
+                    u.decode('utf-8')
+                    for source in scrape_source.getMore(u, hostDict):
+                        sources.append(source)
+                    i += 1
                 except:
                     pass
+
             return sources
         except Exception:
             failure = traceback.format_exc()
@@ -123,7 +114,4 @@ class source:
             return sources
 
     def resolve(self, url):
-        if 'google' in url:
-            return directstream.googlepass(url)
-        else:
-            return url
+        return url

@@ -1202,7 +1202,7 @@ class sources:
         placenta_scraperset = placenta_addonid.getSetting('module.version')    ## sets 'scraper set'      aka quick/scrubs etc
         placenta_extrainclude = placenta_addonid.getSetting('module.lasthope')    ## sets 'include extra' aka bulky junk links
         placenta_bypasslimit = placenta_addonid.getSetting('bypass.limit')     ## sets 'bypass limit'     aka ignores scrapes enable/disables
-        placenta_dontfilter = placenta_addonid.getSetting('sources.dont.filter')     ## sets 'bypass limit'     aka ignores scrapes enable/disables
+        placenta_dontfilter = placenta_addonid.getSetting('sources.dont.filter')     ## sets 'show max results'     aka ignores scrapers individual filter/limit list
 
         #### BELOW - chooses scrapers and binds settings
 
@@ -1260,7 +1260,7 @@ class sources:
 
         self.hostcapDict = ['hugefiles.net', 'kingfiles.net', 'thevideo.me', 'vidup.me', 'streamin.to', 'torba.se', 'flashx.tv', 'vshare.eu', 'vshare.io', 'vev.io']
 
-        self.hosthqDict = ['gvideo', 'google.com', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'xstreamcdn.com', 'idtbox.com', 'streamvid.co', 'vidlox.tv']
+        self.hosthqDict = ['gvideo', 'google.com', 'rapidvideo.com', 'raptu.com', 'filez.tv', 'uptobox.com', 'uptostream.com', 'xvidstage.com', 'xstreamcdn.com', 'idtbox.com', 'streamvid.co', 'vidlox.tv', 'mstream.xyz', 'streamsb.net']
 
         self.hostblockDict = ['youtube.com', 'flashx.tv', 'powvideo.net', 'povvideo.net', 'thevideo.me', 'thevideo.io', 'tvad.me', 'streamplay.to', 'speedvid.net', 'estream.to', 'vidtodoo.com',
                               'vidtodo.com', 'hqq.tv', 'waaw.tv', 'netu.tv', 'movdivx.com', 'divxme.com', 'divxstage.eu', 'streamflv.com', 'rapidvideo.com', 'rapidvideo.is', 'rapidvid.to', 'openload.io',

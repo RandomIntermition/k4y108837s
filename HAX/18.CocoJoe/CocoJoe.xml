@@ -1,5 +1,144 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
+<addon id="context.venom" version="1.1.0" name="Venom - Global Context Menu Items" provider-name="Venom">
+	<requires>
+		<import addon="xbmc.python" version="2.23.0" />
+		<import addon="script.module.requests" version="2.19.1" />
+	</requires>
+	<extension point="kodi.context.item">
+		<menu id="kodi.core.main">
+			<item library="contextSettings.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - CM Settings</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.settings)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true)
+				</visible>
+			</item>
+			<item library="traktManager.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Trakt Manager</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.traktManager)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,season) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="clearProviders.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Clear Providers</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.clearProviders)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="clearBookmark.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Clear Item Bookmark</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.clearBookmark)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+<!-- 					!String.IsEqual(ListItem.Property(resumetime),0) + -->
+					!String.IsEqual(ListItem.Property(venom_resumetime),0) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="rescrape.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Rescrape Item</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.rescrape)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+
+<!-- Future for Library CM to Rescrape -->
+<!-- 					!String.IsEmpty(Window(home).Property(context.venom.rescrape)) +
+					[String.Contains(ListItem.Path,plugin.video.venom) + String.IsEqual(ListItem.FileExtension,strm) | String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play)] +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)] -->
+				</visible>
+			</item>
+			<item library="playFromHere.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Play from here</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.playFromHere)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					String.IsEqual(ListItem.dbtype,episode)
+				</visible>
+			</item>
+			<item library="autoPlay.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Auto Play</label>
+				<visible>
+					String.IsEmpty(Window(home).Property(plugin.video.venom.autoPlay)) +
+					!String.IsEmpty(Window(home).Property(context.venom.autoPlay)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="sourceSelect.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Source Select</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(plugin.video.venom.autoPlay)) +
+					!String.IsEmpty(Window(home).Property(context.venom.sourceSelect)) +
+					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="findSimilar.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Find Similar</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.findSimilar)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,movie)]
+				</visible>
+			</item>
+			<item library="browseSeries.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Browse Series</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.browseSeries)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,tvshow)]
+				</visible>
+			</item>
+			<item library="browseEpisodes.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Browse Episodes</label>
+				<visible>
+					!String.IsEmpty(Window(home).Property(context.venom.browseEpisodes)) +
+					String.StartsWith(ListItem.path,plugin://plugin.video.venom/) +
+					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					String.IsEqual(ListItem.dbtype,episode)
+				</visible>
+			</item>
+		</menu>
+	</extension>
+	<extension point="xbmc.service" library="service.py" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">Venom - This Addon is currently in beta. Please be aware there may be bugs present</summary>
+		<description lang="en">Adds Global Contextual Menu Items for Venom menu items throughout Kodi</description>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<forum></forum>
+		<website>https://github.com/123Venom/context.venom</website>
+		<source>https://github.com/123Venom/context.venom</source>
+		<disclaimer lang="en"></disclaimer>
+		<assets>
+			<icon>icon.png</icon>
+			<fanart>fanart.jpg</fanart>
+			<screenshot></screenshot>
+		</assets>
+		<news>
+[B][COLOR red]Update - v1.1.0 - Oct. 05, 2020[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Service module cleanup.[/I]
+[COLOR yellow]--[/COLOR][I] Changed to new fanart.[/I]
+		</news>
+	</extension>
+</addon>
+
 <addon id="metadata.tvdb.com"
        name="The TVDB"
        version="3.0.16"
@@ -143,10 +282,10 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.asgard" name="Asgard" version="1.0.7" provider-name="Narcacist">
+<addon id="plugin.video.asgard" name="Asgard" version="1.1.0" provider-name="Narcacist">
     <requires>
         <import addon="xbmc.python" version="2.19.0" />
-        <import addon="script.module.universalscrapers" version="1.0.0" />
+        <import addon="script.module.universaldebrid" version="1.2.3" />
         <import addon="script.module.python.koding.aio.alt" version="1.1"/>
         <import addon="script.module.beautifulsoup" version="3.2.1" />
         <import addon="script.module.requests" version="2.9.1" />
@@ -161,7 +300,7 @@
     <extension point="xbmc.python.pluginsource" library="default.py">
         <provides>video</provides>
     </extension>
-    <extension point="xbmc.service" library="service.py" start="[login|startup]" />
+    <extension point="xbmc.jen" library="service.py" start="[login|startup]" />
     <extension point="xbmc.addon.metadata">
         <summary lang="en">Welcome to Asgard</summary>
         <description lang="en">“Asgard is not a place, it's a people.”</description>
@@ -212,9 +351,9 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.28~beta05" provider-name="SylvainCecchetto,wwark">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.33~beta00" provider-name="SylvainCecchetto,wwark">
   <requires>
-    <import addon="xbmc.python" version="2.25.0"/>
+    <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
     <import addon="script.module.youtube.dl" version="18.225.0"/>
     <import addon="script.module.requests" version="2.12.4"/>
@@ -255,14 +394,8 @@
     <email>catch.up.tv.and.more at gmail dot com</email>
     <source>https://github.com/Catch-up-TV-and-More/plugin.video.catchuptvandmore</source>
     <news>
-[Version 0.2.28]
-[BE - TV Lux] Fix Live TV
-[FR - CulturePub] Fix WebSite
-[BE - RTBF] Fix Catch-up TV
-[CA - TVA] Fix Live TV and re-add LCN Live TV
-[FR - L'Equipe TV] Fix Live TV
-[WO - Arte] Fix Catch-up TV
-[FR - AutoPlus] Fix Website
+[Version 0.2.32]
+[ALL] Remove notification "Plugin CUTVMore non compatible Kodi 19"
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
@@ -387,7 +520,7 @@ Visit WebSite - http://mpdb.tv/#home which host the french forum used by users o
     </extension>
 </addon>
 
-<addon id="plugin.video.iplayerwww" name="iPlayer WWW" version="3.0.48" provider-name="CaptainT, Cas, ihurst, primaeval">
+<addon id="plugin.video.iplayerwww" name="iPlayer WWW" version="3.0.49" provider-name="CaptainT, Cas, ihurst, primaeval">
   <requires>
     <import addon="xbmc.python" version="2.25.0"/>
     <import addon="script.module.requests" version="2.7.0"/>
@@ -400,7 +533,7 @@ Visit WebSite - http://mpdb.tv/#home which host the french forum used by users o
     <description lang="en">This add-on enables playing of Live and Catchup TV (UK only) and Radio content (UK or international) from the BBC iPlayer website. It is not created, maintained or in any way affiliated with the BBC. The add-on only provides an interface to access the BBC iPlayer website from Kodi.</description>
     <platform>all</platform>
     <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-    <forum>http://forum.kodi.tv/showthread.php?tid=239378</forum>
+    <forum>https://forum.kodi.tv/showthread.php?tid=353349</forum>
     <source>https://github.com/vonH/plugin.video.iplayerwww</source>
     <disclaimer lang="en">This add-on is a front end to the BBC iPlayer website. It is not an official BBC product. A UK TV Licence is required to watch the live, catch-up, or on-demand TV content.</disclaimer>
     <assets>
@@ -408,8 +541,10 @@ Visit WebSite - http://mpdb.tv/#home which host the french forum used by users o
         <fanart>resources/fanart.jpg</fanart>
     </assets>
     <news>
-v3.0.48
-Added support for BBC Scotland.
+v3.0.49
+Fixes for new subtitle XML format.
+Added initial compatibility with Python 3 (does not work on 19 yet).
+Fixed issue for programmes with multiple pages.
    </news>
   </extension>
 </addon>
@@ -631,7 +766,7 @@ Added support for BBC Scotland.
   </extension>
 </addon>
 
-<addon id="plugin.video.tempest" version="5.0.79" name="Tempest" provider-name="Tempest">
+<addon id="plugin.video.tempest" version="5.0.87" name="Tempest" provider-name="Tempest">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.tempest.artwork" />
@@ -658,15 +793,14 @@ Added support for BBC Scotland.
 			<fanart>fanart.jpg</fanart>
 		</assets>
 		<news>
-			v5.0.79
-- Added Scrapers
-- Updated Scrapers
-- Removed Dead Scrapers
+			v5.0.87
+- UstvGo Fix
+- Scraper Updates
 		</news>
 	</extension>
 </addon>
 
-<addon id="plugin.video.temptv" version="2.0.80" name="[COLOR fuchsia]TempTV[/COLOR]" provider-name="Tempest, JewBMX">
+<addon id="plugin.video.temptv" version="2.0.83" name="[COLOR fuchsia]TempTV[/COLOR]" provider-name="Tempest, JewBMX">
 	<requires>
 		<import addon="xbmc.python" version="2.19.0" />
 		<import addon="script.temptv.artwork" />
@@ -691,13 +825,13 @@ Added support for BBC Scotland.
 			<fanart>fanart.jpg</fanart>
 		</assets>
 		<news>
-			v2.0.80
-- Updated UstvGo (Thanks jigoop1)
+			v2.0.83
+- Fixed UstvGo
 		</news>
 	</extension>
 </addon>
 
-<addon id="plugin.video.thecrew" version="0.0.96" name="[COLOR orchid]THE CREW[/COLOR]" provider-name="The Crew">
+<addon id="plugin.video.thecrew" version="0.0.98" name="[COLOR orchid]THE CREW[/COLOR]" provider-name="The Crew">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.thecrew" />
@@ -707,7 +841,6 @@ Added support for BBC Scotland.
         <import addon="script.module.resolveurl" />
         <import addon="script.module.metahandler" />
         <import addon="plugin.video.youtube" optional="true" />
-        <import addon="script.crew.sports" optional="true" />
         <import addon="script.module.inputstreamhelper" version="0.3.3"/>
     </requires>
     <extension point="xbmc.python.pluginsource" library="thecrew.py">
@@ -730,7 +863,7 @@ Added support for BBC Scotland.
     </extension>
 </addon>
 
-<addon id="plugin.video.youtube" name="YouTube" version="6.5.0" provider-name="anxdpanic, bromix">
+<addon id="plugin.video.youtube" name="YouTube" version="6.8.9" provider-name="anxdpanic, bromix">
     <requires>
         <import addon="xbmc.python" version="2.20.0"/>
         <import addon="script.module.six" version="1.11.0"/>
@@ -744,21 +877,11 @@ Added support for BBC Scotland.
     <extension point="xbmc.python.module" library="resources/lib/"/>
     <extension point="xbmc.addon.metadata">
         <news>
-6.5.0
-[add] Video quality selection to Settings - MPEG-DASH
-[add] Limit to 30fps to Settings - MPEG-DASH
-[add] Uploads playlist to channel playlists
-[chg] Use search for channel videos instead of the Uploads playlist
-[fix] Signature cipher, some videos unplayable (ie. music videos)
-[fix] Playback monitoring using Python 3
-[fix] unescape html entities in title and plot
-[fix] handling of invalid grant when refreshing access token
-[fix] adding suggested videos when played from some widgets
-[fix] http server /client_ip using Python 3 |contrib: t6|
-[upd] refactor youtube_resolver.resolve
-[lang] el_gr strings |contrib: twilight0|
-[lang] es_es strings |contrib: roliverosc|
-[lang] ko_kr strings |contrib: parkmino|
+[fix] my subscriptions section using YouTube RSS |contrib: PureHemp|
+[fix] items per page settings on Kodi 19
+[chg] recommendations only available for users with custom history playlist id configured
+[chg] no longer show watch later unless custom watch later playlist is configured
+[rem] remove usage of discontinued api and dual login (no longer required)
         </news>
         <assets>
             <icon>icon.png</icon>
@@ -776,7 +899,7 @@ Added support for BBC Scotland.
         <summary lang="hu_HU">YouTube kiegészítő</summary>
         <description lang="hu_HU">A YouTube világ egyik legnagyobb videómegosztó weboldala.</description>
         <summary lang="es_ES">Plugin para YouTube</summary>
-        <description lang="es_ES">YouTube es uno de los sitios web para compartir videos más grande del mundo.</description>
+        <description lang="es_ES">YouTube es uno de los sitios web más grande del mundo para compartir vídeos.</description>
         <disclaimer lang="es_ES">Este add-on no está respaldado por Google</disclaimer>
         <summary lang="es_MX">Plugin para YouTube</summary>
         <description lang="es_MX">YouTube es uno de los más grandes sitios web de intercambio de videos del mundo.</description>
@@ -799,29 +922,28 @@ Added support for BBC Scotland.
         <description lang="nb_NO">YouTube er en av verdens største nettsider for videodeling.</description>
         <summary lang="ko_KR">유튜브 플러그인</summary>
         <description lang="ko_KR">유튜브는 세상에서 가장 큰 동영상 공유 사이트 중의 하나입니다.</description>
-        <language></language>
+        <summary lang="cs_CZ">Plugin pro YouTube</summary>
+        <description lang="cs_CZ">YouTube je jedna z největších webových stránek světa sdílející video.</description>
+        <disclaimer lang="cs_CZ">Tento plugin není schválen společností Google</disclaimer>
+        <summary lang="tr_TR">YouTube için eklenti</summary>
+        <description lang="tr_TR">YouTube, dünya üzerindeki en büyük video paylaşma platformlarından birisidir</description>
+        <disclaimer lang="tr_TR">Bu eklenti Google tarafından üretilmemiştir</disclaimer>
         <platform>all</platform>
         <license>GPL-2.0-only</license>
-        <forum>https://forum.kodi.tv/showthread.php?tid=325740</forum>
+        <forum>https://ytaddon.panicked.xyz/forum</forum>
         <website>https://www.youtube.com</website>
-        <email>ytplugin at datanet dot ws</email>
-        <source>https://github.com/jdf76/plugin.video.youtube</source>
+        <source>https://github.com/anxdpanic/plugin.video.youtube</source>
         <reuselanguageinvoker>true</reuselanguageinvoker>
     </extension>
 </addon>
 
-<addon id="repository.addons4kodi" name="Addons4Kodi Repository" version="1.3" provider-name="A4K">
+<addon id="repository.addons4kodi" name="Addons4Kodi Repository" version="1.4" provider-name="A4K">
 	<extension point="xbmc.addon.repository" name="Addons4Kodi Repository">
 		<dir>
             <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.addons4kodi/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.addons4kodi/master/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.addons4kodi/master/zips/</datadir>
         </dir>
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openmeta/master/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openmeta/master/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openmeta/master/zips/</datadir>
-		</dir>
         <dir>
             <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
@@ -1446,13 +1568,24 @@ Added support for BBC Scotland.
         </extension>
     </addon>
 
-<addon id="repository.venom" name="[COLOR red]Venom[/COLOR] Repository" version="1.9" provider-name="Venom">
+<addon id="repository.venom" name="[COLOR red]Venom[/COLOR] Repository" version="1.14" provider-name="Venom">
 	<extension point="xbmc.addon.repository" name="Venom Repo">
-
 		<dir>
 			<info compressed="false">https://raw.githubusercontent.com/123Venom/zips/master/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/123Venom/zips/master/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/123Venom/zips/master/</datadir>
+		</dir>
+
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/</datadir>
+		</dir>
+
+		<dir>
+			<info compressed="false">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/</datadir>
 		</dir>
 
 		<dir>
@@ -1467,34 +1600,27 @@ Added support for BBC Scotland.
 			<datadir zip="true">https://raw.githubusercontent.com/skyfsza/repository.auramod/master/</datadir>
 		</dir>
 
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
+		<dir minversion="18.0" maxversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/leia/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/packages/leia/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/leia/</datadir>
+		</dir>
+		<dir minversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/matrix/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/packages/matrix/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/matrix/</datadir>
 		</dir>
 
 		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/packages/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/packages</datadir>
-		</dir>
-
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openmeta/master/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openmeta/master/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openmeta/master/zips/</datadir>
+			<info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zip</datadir>
 		</dir>
 
 		<dir>
 			<info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
-		</dir>
-
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
 		</dir>
 
 		<dir>
@@ -1510,7 +1636,13 @@ Added support for BBC Scotland.
 			<datadir zip="true">https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/</datadir>
 		</dir>
 
+		<dir minversion="17.9.0">
+			<info compressed="true">https://github.com/mikesilvo164/repo.aeon.nox.silvo/raw/master/leia/addons.xml</info>
+			<checksum>https://github.com/mikesilvo164/repo.aeon.nox.silvo/raw/master/leia/addons.xml.md5</checksum>
+			<datadir zip="true">https://github.com/mikesilvo164/repo.aeon.nox.silvo/raw/master/leia</datadir>
+		</dir>
 	</extension>
+
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en">[B][COLOR red]Venom[/COLOR][/B] - We do not host any of the contents streamed</summary>
 		<description lang="en">[B][COLOR red]Venom[/COLOR][/B] - This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.The author does not host any of the content in this addon and takes no responsibility for content found.</description>
@@ -1520,11 +1652,13 @@ Added support for BBC Scotland.
 		<assets>
 			<icon>icon.png</icon>
 			<fanart>fanart.jpg</fanart>
+			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Update - v1.9 - Aug 15, 2020[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Added AutoWidgets.[/I]
-[COLOR yellow]--[/COLOR][I] Added a4kSubtitles.[/I]
+[B][COLOR red]Update - v1.14 - Jan. 26, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Removed OpenMeta repository as it's been removed
+    from a4k-openproject.[/I]
+[COLOR yellow]--[/COLOR][I] Added a4kstreaming repository.[/I]
 		</news>
 	</extension>
 </addon>
@@ -1553,6 +1687,34 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
                 <forum>https://www.tvaddons.co/forums</forum>
                 <website>https://www.tvaddons.co</website>
 	</extension>
+</addon>
+
+<addon id="resource.images.catchuptvandmore"
+       name="Catch-up TV &amp; More channel logos and artwork"
+       version="1.0.12"
+       provider-name="SylvainCecchetto,wwark">
+  <requires>
+    <import addon="kodi.resource" version="1.0.0"/>
+  </requires>
+  <extension point="kodi.resource.images" compile="false"/>
+  <extension point="xbmc.addon.metadata">
+    <reuselanguageinvoker>true</reuselanguageinvoker>
+    <summary lang="en_GB">Channel logos and artwork used in Catch-up TV &amp; More</summary>
+    <description lang="en_GB">Channel logos and artwork used in Catch-up TV &amp; More</description>
+    <platform>all</platform>
+    <license>GPL-2.0</license>
+    <website>https://catch-up-tv-and-more.github.io/</website>
+    <email>catch.up.tv.and.more at gmail dot com</email>
+    <source>https://github.com/Catch-up-TV-and-More/resource.images.catchuptvandmore</source>
+    <news>
+[Version 1.0.12]
+[Updates] update existing logos
+    </news>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+  </extension>
 </addon>
 
 ﻿<addon id="script.crew.sports"  name="[COLOR deeppink]THE CREW SPORTS[/COLOR]" version="0.0.28" provider-name="The Crew">
@@ -1800,21 +1962,21 @@ This addon is NOT affiliated with official Kodi.
     </extension>
 </addon>
 
-<addon id="script.module.codequick" name="CodeQuick" provider-name="willforde" version="0.9.14">
+<addon id="script.module.codequick" name="CodeQuick" provider-name="willforde" version="1.0.1">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
-        <import addon="script.module.youtube.dl" version="18.0.0"/>
-        <import addon="script.module.htmlement" version="0.2.3"/>
+        <import addon="script.module.youtube.dl" version="19.912.1"/>
+        <import addon="script.module.htmlement" version="1.0.0"/>
+        <import addon="script.module.requests" version="2.22.0"/>
     </requires>
     <extension point="xbmc.python.module" library="lib"/>
     <extension point="xbmc.addon.metadata">
         <summary lang="en_GB">Framework for creating kodi add-on's.</summary>
         <description lang="en_GB">Codequick is a framework for kodi add-on's. The goal of this framework is to simplify add-on development. This is achieved by reducing the amount of boilerplate code to a minimum, automating tasks like route dispatching and sort method selection. Ultimately allowing the developer to focus primarily on scraping content from websites and passing it to kodi.</description>
-        <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+        <license>GPL-2.0-only</license>
         <source>https://github.com/willforde/script.module.codequick</source>
         <email>willforde+codequick@gmail.com</email>
         <platform>all</platform>
-        <language>en</language>
         <assets>
             <icon>resources/icon.png</icon>
         </assets>
@@ -1921,31 +2083,53 @@ This addon is NOT affiliated with official Kodi.
    </extension>
 </addon>
 
-<addon id="script.module.inputstreamhelper"
-       version="0.3.5"
-       name="InputStream Helper"
-       provider-name="emilsvennesson">
-    <requires>
-        <import addon="xbmc.python" version="2.25.0"/>
-        <import addon="script.module.kodi-six" version="0.0.4"/>
-        <import addon="script.module.requests" version="2.9.1"/>
-    </requires>
-    <extension library="lib" point="xbmc.python.module"/>
-    <extension point="xbmc.addon.metadata">
-        <description lang="en_GB">A simple Kodi module that makes life easier for add-on developers relying on InputStream based add-ons and DRM playback.</description>
-        <description lang="el_GR">Μία απλή μονάδα για το Kodi η οποία διευκολύνει την ζωή των προγραμματιστών οι οποίοι εξαρτώνται από τα πρόσθετσ InputStream και αναπαραγωγή τύπου DRM.</description>
-        <news>2019.08.15 v0.3.5
-        + Auto install inputstream.adaptive (mediaminister)
-        + Fix latest Widevine version detection (dagwieers)
-        + Check for Widevine updates on new release (mediaminister)
+<addon id="script.module.inputstreamhelper" name="InputStream Helper" version="0.5.2" provider-name="emilsvennesson, dagwieers, mediaminister, horstle">
+  <requires>
+    <!--py3 compliant-->
+    <import addon="xbmc.python" version="2.25.0"/>
+    <import addon="script.module.pysocks" version="1.6.8" optional="true"/>
+  </requires>
+  <!-- This is needed to get an add-on icon -->
+  <extension point="xbmc.python.script" library="default.py">
+    <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.python.module" library="lib"/>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Kodi InputStream and DRM playback made easy</summary>
+    <summary lang="de_DE">Kodi InputStream und DRM Wiedergabe einfach gemacht</summary>
+    <summary lang="el_GR">Βοηθός Inputstream για το Kodi και εύκολη αναπαραγωγή DRM</summary>
+    <summary lang="fr_FR">La lecture Kodi InputStream et DRM en toute simplicité</summary>
+    <summary lang="es_ES">Kodi InputStream y reproducción DRM echa fácil</summary>
+    <description lang="en_GB">A simple Kodi module that makes life easier for add-on developers relying on InputStream based add-ons and DRM playback.</description>
+    <description lang="de_DE">Dieses einfache Kodi-Modul macht das Leben für Addon Entwickler einfacher, die auf InputStream basierte Addons und DRM Wiedergabe angewiesen sind.</description>
+    <description lang="el_GR">Μία απλή μονάδα για το Kodi η οποία διευκολύνει την ζωή των προγραμματιστών οι οποίοι εξαρτώνται από τα πρόσθετσ InputStream και αναπαραγωγή τύπου DRM.</description>
+    <description lang="ru_RU">Простой модуль для Kodi, который облегчает жизнь разработчикам дополнений, с использованием InputStream дополнений и воспроизведения DRM контента.</description>
+    <description lang="fr_FR">Un simple module Kodi qui simplifie la vie des développeurs de modules complémentaires en s’appuyant sur des modules complémentaires basés sur InputStream et sur la lecture de DRM.</description>
+    <description lang="es_ES">Un módulo Kodi simple que hace la vida más fácil para los desarrolladores de complementos que dependen de complementos basados en InputStream y reproducción de DRM.</description>
+    <news>
+v0.5.2 (2020-12-13)
+- Update Chrome OS ARM hardware id's
+
+v0.5.1 (2020-10-02)
+- Fix incorrect ARM HWIDs: PHASER and PHASER360
+- Added Hebrew translations
+- Updated Dutch, Japanese and Korean translations
+
+v0.5.0 (2020-06-25)
+- Extract Widevine CDM directly from Chrome OS, minimizing disk space usage and eliminating the need for root access
+- Improve progress dialog while extracting Widevine CDM on ARM devices
+- Support resuming interrupted downloads on unreliable internet connections
+- Reshape InputStream Helper information dialog
+- Updated Dutch, English, French, German, Greek, Hungarian, Romanian, Russian, Spanish and Swedish translations
     </news>
-        <platform>all</platform>
-        <license>MIT License</license>
-        <source>https://github.com/emilsvennesson/script.module.inputstreamhelper</source>
-        <assets>
-            <icon>resources/icon.png</icon>
-        </assets>
-    </extension>
+    <platform>all</platform>
+    <license>MIT</license>
+    <website>https://github.com/emilsvennesson/script.module.inputstreamhelper/wiki</website>
+    <source>https://github.com/emilsvennesson/script.module.inputstreamhelper</source>
+    <assets>
+      <icon>resources/icon.png</icon>
+    </assets>
+  </extension>
 </addon>
 
 <addon id="script.module.js2py" name="js2py" version="0.6.6" provider-name="Addons4Kodi">
@@ -2057,8 +2241,8 @@ This addon is NOT affiliated with official Kodi.
 
 <addon id="script.module.metahandler"
      name="metahandler"
-     version="3.0.6"
-     provider-name="Eldorado, jsergio">
+     version="3.99.02"
+     provider-name="Eldorado">
   <requires>
     <import addon="xbmc.python" version="2.1.0" />
     <import addon="script.module.simplejson" version="3.3.0"/>
@@ -2066,17 +2250,18 @@ This addon is NOT affiliated with official Kodi.
     <import addon="script.module.myconnpy" version="1.1.6"/>
   </requires>
   <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.python.pluginsource" library="lib/default.py" />
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">Downloads Artwork for TV shows, Movies and Music videos for addons and stores them in a local SQLITE database</summary>
-    <description lang="en">Queries, stores, and returns metadata for TV shows, Movies and Musicvideos. [CR]Sources:[CR]www.thetvdb.com[CR]www.themoviedb.org[CR]www.imdb.com[CR]www.omdbapi.com[CR]This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
-    <disclaimer lang="en"></disclaimer>
-    <language></language>
-    <platform>all</platform>
-    <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-    <forum></forum>
-    <website></website>
-    <email></email>
-    <source></source>
+      <platform>all</platform>
+      <summary lang="en">Downloads Artwork for TV shows, Movies and Music videos for addons and stores them in a local SQLITE database</summary>
+      <description lang="en">Queries, stores, and returns metadata for TV shows, Movies and Musicvideos. [CR]Sources:[CR]www.thetvdb.com[CR]www.themoviedb.org[CR]www.imdb.com[CR]www.omdbapi.com[CR]This product uses the TMDb API but is not endorsed or certified by TMDb.</description>
+      <disclaimer lang="en"></disclaimer>
+      <language></language>
+      <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
+      <forum></forum>
+      <website></website>
+      <email></email>
+      <source></source>
   </extension>
 </addon>
 
@@ -2259,14 +2444,13 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
   </extension>
 </addon>
 
-<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.14" provider-name="gujal">
+<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.25" provider-name="gujal">
     <requires>
         <!-- <import addon="xbmc.python" version="3.0.0" /> -->
         <import addon="script.module.six" />
         <import addon="script.module.kodi-six" />
         <import addon="plugin.video.youtube" optional="true" />
         <import addon="script.module.python.twitch" optional="true" />
-        <import addon="script.module.cryptopy" version="1.2.6" optional="true" />
         <import addon="plugin.googledrive" optional="true" />
     </requires>
     <extension point="xbmc.python.module" library="lib" />
@@ -2412,7 +2596,7 @@ Documentation: https://github.com/tamland/kodi-plugin-routing</description>
   </extension>
 </addon>
 
-<addon id="script.module.thecrew" name="[COLOR orchid]THE CREW MODULE[/COLOR]" version="0.0.96b" provider-name="The Crew">
+<addon id="script.module.thecrew" name="[COLOR orchid]THE CREW MODULE[/COLOR]" version="0.0.98" provider-name="The Crew">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.beautifulsoup4"/>
@@ -2505,6 +2689,32 @@ Documentation: https://github.com/tamland/kodi-plugin-routing</description>
       <icon>resources/icon.png</icon>
     </assets>
   </extension>
+</addon>
+
+<addon id="script.module.universaldebrid" name="Universal Debrid" version="1.2.3" provider-name="Team Universal">
+    <requires>
+        <import addon="xbmc.python" version="2.1.0"/>
+        <import addon="script.module.beautifulsoup" version="3.2.1"/>
+        <import addon="script.module.futures" version="2.2.0"/>
+        <import addon="script.module.requests"/>
+        <import addon="script.module.six"/>
+        <import addon="repository.universalscrapers"/>
+	<import addon="script.module.resolveurl" version="5.0.00" optional="true"/>
+
+                <!--<import addon="script.mrknow.urlresolver" version="2016.10.30.2" optional="true"/>-->
+    </requires>
+    <extension point="xbmc.python.module" library="lib"/>
+    <extension point="xbmc.python.pluginsource" library="lib/default.py">
+        <provides>executable</provides>
+    </extension>
+        <extension point="xbmc.addon.metadata">
+            <platform>all</platform>
+            <summary lang="en">Scrape common video host for URL's to be playable in XBMC/Kodi.</summary>
+            <description lang="en">Scrape common video host for URL's to be playable in XBMC/Kodi, simplifying addon development of video plugins requiring multi video hosts.
+            </description>
+            <license>GPL v3</license>
+            <source>https://</source>
+        </extension>
 </addon>
 
 <addon id="script.module.universalscrapers" name="Universal Scrapers" version="1.2.3" provider-name="Team Universal">

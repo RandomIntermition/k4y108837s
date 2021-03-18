@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
-# Add Tv Later
 """
     **Created by Tempest**
     **If you see this in a addon other than Tempest and says it was
     created by someone other than Tempest they stole it from me**
 """
 
-import re, urllib, urlparse, requests, base64
+import re, urllib, urlparse, requests
 import traceback
 from resources.lib.modules import log_utils
 from resources.lib.modules import client
-from resources.lib.modules import source_utils, control
+from resources.lib.modules import scrape_source
 
 
 class source:
@@ -19,9 +18,9 @@ class source:
         self.language = ['en']
         self.domains = ['movie2k.123movies.online']
         self.base_link = 'https://movie2k.123movies.online'
-        self.search_link = '/?search=%s&movie=&x=0&y=0'
-        self.search_link2 = '/?search=%s&tv=&x=0&y=0'
-        self.headers={'User-Agent': client.agent(), 'Referer': self.base_link}
+        self.search_link = '/?cat=tv&search=%s&exact=&actor=&director=&year=%s&advanced_search=true'
+        self.search_link2 = '/?cat=movie&search=%s&exact=&actor=&director=&year=%s&advanced_search=true'
+        self.headers = {'User-Agent': client.agent(), 'Referer': self.base_link}
 
     def movie(self, imdb, title, localtitle, aliases, year):
         try:
@@ -63,35 +62,56 @@ class source:
 
             data = urlparse.parse_qs(url)
             data = dict([(i, data[i][0]) if data[i] else (i, '') for i in data])
+            title = data['tvshowtitle'] if 'tvshowtitle' in data else data['title']
 
-            if 'tvdb' in data:
-                urls = self.search_link2 % (data['tvshowtitle'], data['season'], data['episode'])
+            if 'tvshowtitle' in data:
+                urls = self.search_link % (data['tvshowtitle'], data['year'])
+                url = urlparse.urljoin(self.base_link, urls)
+                posts = requests.get(url, headers={'User-Agent': client.agent(), 'Referer': urls}).content
+                url = re.findall(
+                    '<div class="title"><a title=".+?" href="(.+?)">(.+?)</a></div><div class="year"> (.+?)</div>',
+                    posts)
+                for url, title, year in url:
+                    if data['tvshowtitle'] in title and data['year'] in year:
+                        code = url.split('movie2k-')[1]
+                        url = requests.get(url, headers={'User-Agent': client.agent(), 'Referer': urls}).content
+                        url = "https://movie2k.123movies.online/watch-tv-%s-season-%s-episode-%s-online-movie2k-%s" % (data['tvshowtitle'], data['season'], data['episode'], code)
+                        url = requests.get(url, headers={'User-Agent': client.agent(), 'Referer': url}).content
+                        more_links = re.compile('<a href="(.+?)">View More Links</a></li></ul>').findall(url)[0]
+                        if more_links:
+                            url = requests.get(more_links,
+                                               headers={'User-Agent': client.agent(), 'Referer': more_links}).content
+                            url = re.findall('href="(.+?)" id="#iframe"', url)
+                            items += url
+                        else:
+                            url = re.findall('href="(.+?)" id="#iframe"', url)
+                            items += url
+
             else:
-                urls = self.search_link % urllib.quote_plus(data['title'])
-            try:
+                urls = self.search_link2 % (data['title'], data['year'])
                 url = urlparse.urljoin(self.base_link, urls)
                 posts = requests.get(url, headers=self.headers).content
-                url = re.findall('href="(.+?)"><img alt=".+?" title=".+?"', posts)[0]
-                url = self.base_link + url + '-full'
-                url = requests.get(url, headers={'User-Agent': client.agent(), 'Referer': urls}).content
-                url = re.compile('class="" href="(.+?)"').findall(url)
-                url = [i for i in url]
-                items += url
-            except:
-                pass
-            try:
-                for url in items:
-                    url = url.split('link=')[1].split('&host')[0]
-                    url = base64.b64decode(url)
-                    if 'voxzer' in url: continue
-                    url = url.split('new&&&')[1].split('&&&link')[0]
-                    valid, host = source_utils.is_host_valid(url, hostDict)
-                    if valid:
-                        sources.append(
-                            {'source': host, 'quality': 'SD', 'language': 'en', 'url': url,
-                             'direct': False, 'debridonly': False})
-            except:
-                pass
+                url = re.findall(
+                    '<div class="title"><a title=".+?" href="(.+?)">(.+?)</a></div><div class="year"> (.+?)</div>',
+                    posts)
+                for url, title, year in url:
+                    if data['title'] in title and data['year'] in year:
+                        url = self.base_link + url
+                        url = requests.get(url, headers={'User-Agent': client.agent(), 'Referer': urls}).content
+                        more_links = re.compile('<a href="(.+?)">View More Links</a></li></ul>').findall(url)[0]
+                        url = re.compile('href="(.+?)" id="#iframe"').findall(url)
+                        items += url
+
+            for item in items:
+                try:
+                    url = requests.get(item, headers={'User-Agent': client.agent(), 'Referer': item}).content
+                    url = re.findall('target="_blank">(.+?)</a>', url)[0]
+                    if url.startswith('//'):
+                        url = 'https:' + url
+                    for source in scrape_source.getMore(url, hostDict):
+                        sources.append(source)
+                except:
+                    pass
 
             return sources
         except Exception:

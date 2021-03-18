@@ -1,39 +1,20 @@
 # -*- coding: utf-8 -*-
-"""
-    Catch-up TV & More
-    Copyright (C) 2016  SylvainCecchetto
+# Copyright: (c) 2016, SylvainCecchetto
+# GNU General Public License v2.0+ (see LICENSE.txt or https://www.gnu.org/licenses/gpl-2.0.txt)
 
-    This file is part of Catch-up TV & More.
+# This file is part of Catch-up TV & More
 
-    Catch-up TV & More is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Catch-up TV & More is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with Catch-up TV & More; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
-
-# The unicode_literals import only has
-# an effect on Python 2.
-# It makes string literals as unicode like in Python 3
 from __future__ import unicode_literals
-from codequick import Script
-"""
-The following dictionaries describe
-the addon's tree architecture.
-* Key: item id
-* Value: item infos
-    - route (folder)/resolver (playable URL): Callback function to run once this item is selected
-    - thumb: Item thumb path relative to "media" folder
-    - fanart: Item fanart path relative to "meia" folder
-"""
+
+# The following dictionaries describe
+# the addon's tree architecture.
+# * Key: item id
+# * Value: item infos
+#     - route (folder)/resolver (playable URL): Callback function to run once this item is selected
+#     - thumb: Item thumb path relative to "media" folder
+#     - fanart: Item fanart path relative to "media" folder
+
+root = 'live_tv'
 
 menu = {
     'rtl_tvi': {
@@ -89,6 +70,7 @@ menu = {
         'label': 'RTBF Auvio',
         'thumb': 'channels/be/auvio.png',
         'fanart': 'channels/be/auvio_fanart.jpg',
+        'm3u_group': 'Belgique fr',
         'enabled': True,
         'order': 8
     },
@@ -172,7 +154,7 @@ menu = {
         'thumb': 'channels/be/nrjhitstvbe.png',
         'fanart': 'channels/be/nrjhitstvbe_fanart.jpg',
         'm3u_group': 'Belgique fr',
-        'enabled': True,
+        'enabled': False,
         'order': 17
     },
     'rtl_sport': {
@@ -235,6 +217,7 @@ menu = {
         'thumb': 'channels/be/laune.png',
         'fanart': 'channels/be/laune_fanart.jpg',
         'xmltv_id': 'C164.api.telerama.fr',
+        'm3u_group': 'Belgique fr',
         'enabled': True,
         'order': 24
     },
@@ -244,6 +227,7 @@ menu = {
         'thumb': 'channels/be/tipik.png',
         'fanart': 'channels/be/tipik_fanart.jpg',
         'xmltv_id': 'C187.api.telerama.fr',
+        'm3u_group': 'Belgique fr',
         'enabled': True,
         'order': 25
     },
@@ -253,6 +237,7 @@ menu = {
         'thumb': 'channels/be/latrois.png',
         'fanart': 'channels/be/latrois_fanart.jpg',
         'xmltv_id': 'C892.api.telerama.fr',
+        'm3u_group': 'Belgique fr',
         'enabled': True,
         'order': 26
     },
@@ -261,6 +246,7 @@ menu = {
         'label': 'Antenne Centre TV',
         'thumb': 'channels/be/actv.png',
         'fanart': 'channels/be/actv_fanart.jpg',
+        'm3u_group': 'Belgique fr',
         'enabled': True,
         'order': 27
     },
@@ -269,7 +255,71 @@ menu = {
         'label': 'Télésambre',
         'thumb': 'channels/be/telesambre.png',
         'fanart': 'channels/be/telesambre_fanart.jpg',
+        'm3u_group': 'Belgique fr',
         'enabled': True,
         'order': 28
-    }
+    },
+    'atv': {
+        'resolver': '/resources/lib/channels/be/atv:get_live_url',
+        'label': 'ATV (Antwerpen)',
+        'thumb': 'channels/be/atv.png',
+        'fanart': 'channels/be/atv_fanart.jpg',
+        'm3u_group': 'België nl',
+        'enabled': True,
+        'order': 29,
+    },
+    'bruzz': {
+        'resolver': '/resources/lib/channels/be/bruzz:get_live_url',
+        'label': 'BRUZZ (Brussel)',
+        'thumb': 'channels/be/bruzz.png',
+        'fanart': 'channels/be/bruzz_fanart.jpg',
+        'm3u_group': 'België nl',
+        'enabled': True,
+        'order': 30,
+    },
+    'focuswtv': {
+        'resolver': '/resources/lib/channels/be/focuswtv:get_live_url',
+        'label': 'Focus & WTV (West-Vlaanderen)',
+        'thumb': 'channels/be/focuswtv.png',
+        'fanart': 'channels/be/focuswtv_fanart.jpg',
+        'm3u_group': 'België nl',
+        'enabled': True,
+        'order': 31,
+    },
+    'robtv': {
+        'resolver': '/resources/lib/channels/be/robtv:get_live_url',
+        'label': 'ROB-tv (Oost-Brabant)',
+        'thumb': 'channels/be/robtv.png',
+        'fanart': 'channels/be/robtv_fanart.jpg',
+        'm3u_group': 'België nl',
+        'enabled': True,
+        'order': 32,
+    },
+    'tvl': {
+        'resolver': '/resources/lib/channels/be/tvl:get_live_url',
+        'label': 'TVL (Limburg)',
+        'thumb': 'channels/be/tvl.png',
+        'fanart': 'channels/be/tvl_fanart.jpg',
+        'm3u_group': 'België nl',
+        'enabled': True,
+        'order': 33,
+    },
+    'tvoost': {
+        'resolver': '/resources/lib/channels/be/tvoost:get_live_url',
+        'label': 'TV Oost (Oost-Vlaanderen)',
+        'thumb': 'channels/be/tvoost.png',
+        'fanart': 'channels/be/tvoost_fanart.jpg',
+        'm3u_group': 'België nl',
+        'enabled': True,
+        'order': 34,
+    },
+    'hln_live': {
+        'resolver': '/resources/lib/channels/be/hln_live:get_live_url',
+        'label': 'HLN Live',
+        'thumb': 'channels/be/hln_live.png',
+        'fanart': 'channels/be/hln_live_fanart.jpg',
+        'm3u_group': 'België nl',
+        'enabled': True,
+        'order': 35,
+    },
 }

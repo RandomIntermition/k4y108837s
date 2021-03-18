@@ -8,8 +8,10 @@ import re,urllib,urlparse
 import traceback
 from resources.lib.modules import log_utils
 from resources.lib.modules import client
-from resources.lib.modules import debrid, control
-from resources.lib.modules import source_utils, rd_check
+from resources.lib.modules import debrid
+from resources.lib.modules import control
+from resources.lib.modules import source_utils
+from resources.lib.modules import rd_check
 
 
 class source:

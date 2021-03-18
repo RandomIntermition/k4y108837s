@@ -4,11 +4,11 @@
 
 import re, urllib, urlparse, base64, json, time
 import traceback
-from resources.lib.modules import client, log_utils
+from resources.lib.modules import client
+from resources.lib.modules import log_utils
 from resources.lib.modules import cleantitle
 from resources.lib.modules import directstream
-from resources.lib.modules import source_utils
-
+from resources.lib.modules import scrape_source
 
 class source:
     def __init__(self):
@@ -93,7 +93,7 @@ class source:
             r = client.request(url, headers=headers, output='extended', timeout='10')
             if imdb not in r[0]:
                 url = self.searchMovie2(title, data['year'], headers)
-                r = client.request(url, headers=headers, output='extended', timeout='10')
+                r = client.request(url, headers=headers, timeout='10')
             cookie = r[4]; headers = r[3]; result = r[0]
             try:
                 r = re.findall('(https:.*?redirector.*?)[\'\"]', result)
@@ -123,25 +123,8 @@ class source:
             r = str(json.loads(r))
             r = re.findall('\'(http.+?)\'', r) + re.findall('\"(http.+?)\"', r)
             for i in r:
-                if 'google' in i:
-                    quality = 'SD'
-                    if 'googleapis' in i:
-                        quality = source_utils.check_sd_url(i)
-                    elif 'googleusercontent' in i:
-                        i = directstream.googleproxy(i)
-                        quality = directstream.googletag(i)[0]['quality']
-                    sources.append({'source': 'gvideo', 'quality': quality, 'language': 'en', 'url': i, 'direct': True, 'debridonly': False})
-                elif 'llnwi.net' in i or 'vidcdn.pro' in i:
-                    quality = source_utils.check_sd_url(i)
-                    sources.append({'source': 'CDN', 'quality': quality, 'language': 'en', 'url': i, 'direct': True, 'debridonly': False})
-                else:
-                    valid, hoster = source_utils.is_host_valid(i, hostDict)
-                    if valid:
-                        quality = source_utils.check_sd_url(i)
-                        if 'vidnode.net' in i:
-                            i = i.replace('vidnode.net', 'vidcloud9.com')
-                            hoster = 'vidcloud9'
-                        sources.append({'source': hoster, 'quality': quality, 'language': 'en', 'url': i, 'direct': False, 'debridonly': False})
+                for source in scrape_source.getMore(i, hostDict):
+                    sources.append(source)
             return sources
         except Exception:
             failure = traceback.format_exc()

@@ -1,63 +1,31 @@
 # -*- coding: utf-8 -*-
-"""
-    Catch-up TV & More
-    Copyright (C) 2016  SylvainCecchetto
+# Copyright: (c) 2016, SylvainCecchetto
+# GNU General Public License v2.0+ (see LICENSE.txt or https://www.gnu.org/licenses/gpl-2.0.txt)
 
-    This file is part of Catch-up TV & More.
+# This file is part of Catch-up TV & More
 
-    Catch-up TV & More is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Catch-up TV & More is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with Catch-up TV & More; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
-
-# The unicode_literals import only has
-# an effect on Python 2.
-# It makes string literals as unicode like in Python 3
 from __future__ import unicode_literals
-
-# Core imports
-import os
-import json
 import importlib
+import json
+import os
 
-# Kodi imports
 from codequick import Script, utils
-from kodi_six import xbmc
-from kodi_six import xbmcvfs
-from kodi_six import xbmcgui
+from kodi_six import xbmc, xbmcvfs, xbmcgui
 
-# Local imports
+from resources.lib.addon_utils import get_item_label
+import resources.lib.favourites as fav
+from resources.lib.kodi_utils import get_kodi_version
 # delete_for_submission_start
 from resources.lib.vpn import add_vpn_context
 # delete_for_submission_end
-from resources.lib.kodi_utils import get_kodi_version
-import resources.lib.favourites as fav
-
-from resources.lib.addon_utils import get_item_label
 
 MENUS_SETTINGS_FP = os.path.join(Script.get_info('profile'), "menus_settings.json")
-"""
-Json file that keeps, for each menu of the addon,
-what elements are hidden and the order of items in each menu
 
-"""
+# Json file that keeps, for each menu of the addon,
+# what elements are hidden and the order of items in each menu
 
 
-"""Utility functions to deal with user menus settings
-
-"""
-
-
+# Utility functions to deal with user menus settings
 def get_menus_settings():
     """Get menus settings dict from json file
 
@@ -144,11 +112,7 @@ def set_item_order(item_id, menu_id, order):
     save_menus_settings(menus_settings)
 
 
-"""Utility functions used to build a Kodi menu
-
-"""
-
-
+# Utility functions used to build a Kodi menu
 def get_sorted_menu(plugin, menu_id):
     """Get ordered 'menu_id' menu without disabled and hidden items
 
@@ -288,10 +252,7 @@ def item_post_treatment(item, is_playable=False, is_downloadable=False):
     return
 
 
-"""Context menu callback functions
-
-"""
-
+# Context menu callback functions
 
 @Script.register
 def move_item(plugin, direction, item_id, menu_id):
@@ -345,11 +306,7 @@ def hide_item(plugin, item_id, menu_id):
     xbmc.executebuiltin('Container.Refresh()')
 
 
-"""Settings callback functions
-
-
-"""
-
+# Settings callback functions
 
 @Script.register
 def restore_default_order(plugin):
@@ -384,35 +341,41 @@ def unmask_all_hidden_items(plugin):
 
 
 @Script.register
-def unmask_items(plugin, menu_id):
-    """Callback function of 'Unmask items' setting buttons
+def unmask_items(plugin):
+    """Callback function of 'Select items to unmask' setting button.
 
     Args:
         plugin (codequick.script.Script)
-        menu_id (str): Menu for which we cant to unmask items
     """
 
     menus_settings = get_menus_settings()
-    if menu_id not in menus_settings:
+
+    multiselect_map = []
+    multiselect_items = []
+
+    for menu_id, items in menus_settings.items():
+        for item_id, item in items.items():
+            if not item.get('hidden', False):
+                continue
+
+            current_lvl = menu_id
+            last_item_id = item_id
+            labels = []
+            while current_lvl is not None:
+                module = importlib.import_module('resources.lib.skeletons.' + current_lvl)
+                labels.insert(0, get_item_label(last_item_id, module.menu[last_item_id]))
+                last_item_id = current_lvl
+                current_lvl = module.root
+            multiselect_items.append(' - '.join(labels))
+            multiselect_map.append((menu_id, item_id))
+
+    seleted_items = xbmcgui.Dialog().multiselect(
+        plugin.localize(30402),
+        multiselect_items)
+    if seleted_items is None:
         return
 
-    menu = importlib.import_module('resources.lib.skeletons.' + menu_id).menu
-
-    hidden_items = []
-    hidden_items_labels = []
-    for item_id, item in menus_settings[menu_id].items():
-        if item.get('hidden', False):
-            hidden_items.append(item_id)
-            hidden_items_labels.append(get_item_label(item_id, menu[item_id]))
-
-    if not hidden_items:
-        return
-
-    seleted_item = xbmcgui.Dialog().select(
-        plugin.localize(30406),
-        hidden_items_labels)
-    if seleted_item == -1:
-        return
-
-    menus_settings[menu_id][hidden_items[seleted_item]].pop('hidden')
+    for seleted_item in seleted_items:
+        (menu_id, item_id) = multiselect_map[seleted_item]
+        menus_settings[menu_id][item_id].pop('hidden')
     save_menus_settings(menus_settings)

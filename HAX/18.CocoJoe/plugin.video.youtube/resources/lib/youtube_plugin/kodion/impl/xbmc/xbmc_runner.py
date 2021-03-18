@@ -27,15 +27,17 @@ class XbmcRunner(AbstractProviderRunner):
 
     def run(self, provider, context=None):
 
+        self.handle = context.get_handle()
+
         try:
             results = provider.navigate(context)
         except KodionException as ex:
             if provider.handle_exception(context, ex):
                 context.log_error(ex.__str__())
                 xbmcgui.Dialog().ok("Exception in ContentProvider", ex.__str__())
+            xbmcplugin.endOfDirectory(self.handle, succeeded=False)
             return
 
-        self.handle = context.get_handle()
         self.settings = context.get_settings()
 
         result = results[0]
@@ -62,6 +64,7 @@ class XbmcRunner(AbstractProviderRunner):
 
             xbmcplugin.endOfDirectory(
                 self.handle, succeeded=True,
+                updateListing=options.get(AbstractProvider.RESULT_UPDATE_LISTING, False),
                 cacheToDisc=options.get(AbstractProvider.RESULT_CACHE_TO_DISC, True))
         else:
             # handle exception
@@ -116,6 +119,9 @@ class XbmcRunner(AbstractProviderRunner):
         if directory_item.is_action():
             is_folder = False
             item.setProperty('isPlayable', 'false')
+
+        if directory_item.next_page:
+            item.setProperty('specialSort', 'bottom')
 
         if directory_item.get_channel_subscription_id():  # make channel_subscription_id property available for keymapping
             item.setProperty('channel_subscription_id', directory_item.get_channel_subscription_id())

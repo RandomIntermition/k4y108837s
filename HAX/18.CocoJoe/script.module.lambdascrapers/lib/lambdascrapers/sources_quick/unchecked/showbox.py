@@ -138,6 +138,10 @@ class source:
                     valid, hoster = source_utils.is_host_valid(i, hostDict)
                     if valid:
                         quality = source_utils.check_sd_url(i)
+                        if "streamsb" in hoster:
+                            quality = "720p"
+                        if "mstream" in hoster:
+                            quality = "720p"
                         if 'vidnode.net' in i:
                             i = i.replace('vidnode.net', 'vidcloud9.com')
                             hoster = 'vidcloud9'

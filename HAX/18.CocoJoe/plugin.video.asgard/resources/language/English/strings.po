@@ -1,822 +1,1270 @@
-# Addon Name: Asgard
-# Addon id: plugin.video.asgard
-# Addon Provider: Narcacist
 msgid ""
 msgstr ""
-"Project-Id-Version: Jen\n"
+"Project-Id-Version: Mando\n"
+"Report-Msgid-Bugs-To: http://trac.xbmc.org/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2020-04-20 04:18-0600\n"
-"Language-Team: English\n"
-"Language: en\n"
+"PO-Revision-Date: 2017-09-27 10:42+0300\n"
+"Last-Translator: A. Dambledore\n"
+"Language-Team: Eng2Heb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgctxt "#30200"
-msgid "User Account"
-msgstr ""
-
-msgctxt "#30201"
-msgid "Username"
-msgstr ""
-
-msgctxt "#30202"
-msgid "Password"
-msgstr ""
-
-msgctxt "#30203"
-msgid "Hide Successful Login Messages"
-msgstr ""
-
-msgctxt "#30204"
-msgid "Login URL"
-msgstr ""
-
-msgctxt "#30205"
-msgid "Login Verified Message"
-msgstr ""
-
-msgctxt "#30206"
-msgid "Username Form Name"
-msgstr ""
-
-msgctxt "#30207"
-msgid "Password Form Name"
-msgstr ""
-
-msgctxt "#30208"
-msgid "Session Length (in Hours)"
-msgstr ""
-
-msgctxt "#30209"
-msgid "Login Notification Style"
-msgstr ""
-
-msgctxt "#30210"
-msgid "Text to Display on Successful Login"
-msgstr ""
-
-msgctxt "#30211"
-msgid "Text to Display on Failed Login"
-msgstr ""
-
-msgctxt "#30212"
-msgid "Text to Display if No Login Provided"
-msgstr ""
-
-msgctxt "#30401"
-msgid "[COLOR teal]Are You Sure?[/COLOR]"
-msgstr ""
-
-msgctxt "#30402"
-msgid "[COLOR teal]Process Complete[/COLOR]"
-msgstr ""
-
-msgctxt "#30491"
-msgid "This View is Now Default"
-msgstr ""
-
-msgctxt "#30500"
-msgid "[I]Next Page[/I]"
-msgstr ""
-
-msgctxt "#30701"
-msgid "[COLOR blue]Settings[/COLOR]"
-msgstr ""
-
-msgctxt "#30702"
-msgid "[COLOR orange]Search[/COLOR]"
-msgstr ""
-
-msgctxt "#30703"
-msgid "[COLOR purple]Clear History[/COLOR]"
-msgstr ""
-
-msgctxt "#30704"
-msgid "Link"
-msgstr ""
-
-msgctxt "#30705"
-msgid "[COLOR red]Unplayable Stream[/COLOR]"
-msgstr ""
-
-msgctxt "#30706"
-msgid "Discover Great Streaming Playlists!"
-msgstr ""
-
-msgctxt "#30707"
-msgid "[COLOR orange]Trailer[/COLOR]"
-msgstr ""
-
-msgctxt "#30708"
-msgid "Information"
-msgstr ""
-
-msgctxt "#30711"
-msgid "Set Movies View"
-msgstr ""
-
-msgctxt "#30712"
-msgid "Set TV Shows View"
-msgstr ""
-
-msgctxt "#30713"
-msgid "Set Seasons View"
-msgstr ""
-
-msgctxt "#30714"
-msgid "Set Episodes View"
-msgstr ""
-
-msgctxt "#30715"
-msgid "General"
-msgstr ""
-
-msgctxt "#30716"
-msgid "Metadata"
-msgstr ""
-
-msgctxt "#30717"
-msgid "Enable Metadata"
-msgstr ""
-
-msgctxt "#30718"
-msgid "Cache"
-msgstr ""
-
-msgctxt "#30719"
-msgid "Clear Cache"
-msgstr ""
-
-msgctxt "#30720"
-msgid "Path"
-msgstr ""
-
-msgctxt "#30721"
-msgid "Downloads"
-msgstr ""
-
-msgctxt "#30722"
-msgid "Download Item"
-msgstr ""
-
-msgctxt "#30723"
-msgid "Credits"
-msgstr ""
-
-msgctxt "#30724"
-msgid "Show Credits"
-msgstr ""
-
-msgctxt "#30725"
-msgid "Add-on Settings"
-msgstr ""
-
-msgctxt "#30726"
-msgid "[COLOR teal]Opening Stream[/COLOR]"
-msgstr ""
-
-msgctxt "#30727"
-msgid "Accounts"
-msgstr ""
-
-msgctxt "#30728"
-msgid "User"
-msgstr ""
-
-msgctxt "#30729"
-msgid "Email"
-msgstr ""
-
-msgctxt "#30730"
-msgid "Password"
-msgstr ""
-
-msgctxt "#30731"
-msgid "[COLOR orange]Please Wait...[/COLOR]"
-msgstr ""
-
-msgctxt "#30732"
-msgid "Opening Image"
-msgstr ""
-
-msgctxt "#30733"
-msgid "Scraper Settings"
-msgstr ""
-
-msgctxt "#30734"
-msgid "Open Scraper Settings"
-msgstr ""
-
-msgctxt "#30735"
-msgid "Filtering Options"
-msgstr ""
-
-msgctxt "#30736"
-msgid "Allow uptobox Links"
-msgstr ""
-
-msgctxt "#30737"
-msgid "Allow thevideo.me Links"
-msgstr ""
-
-msgctxt "#30738"
-msgid "Allow vidup.me Links"
-msgstr ""
-
-msgctxt "#30739"
-msgid "Try searching for alternate spelling if present (slower)"
-msgstr ""
-
-msgctxt "#30740"
-msgid "Third Party"
-msgstr ""
-
-msgctxt "#30741"
-msgid "Resolver Settings"
-msgstr ""
-
-msgctxt "#30742"
-msgid "Open Resolver Settings"
-msgstr ""
-
-msgctxt "#30743"
-msgid "Enable Debrid"
-msgstr ""
-
-msgctxt "#30744"
-msgid "Enable Link Selection Dialog"
-msgstr ""
-
-msgctxt "#30745"
-msgid "Enable Link Selection Fallthrough"
-msgstr ""
-
-msgctxt "#30746"
-msgid "Allow flashx Links"
-msgstr ""
-
-msgctxt "#30747"
-msgid "Allow videoshare Links"
-msgstr ""
-
-msgctxt "#30751"
-msgid "Scoreboard"
-msgstr ""
-
-msgctxt "#30752"
-msgid "Archived Games"
-msgstr ""
-
-msgctxt "#30753"
-msgid "Live Games require some modifications to get working, please visit Forum."
-msgstr ""
-
-msgctxt "#30754"
-msgid "If list returns BLANK, Feed is not up yet."
-msgstr ""
-
-msgctxt "#30755"
-msgid "Feed Not Available Yet"
-msgstr ""
-
-msgctxt "#30756"
-msgid "Pick A Bandwidth"
-msgstr ""
-
-msgctxt "#30757"
-msgid "Offer to install required 3rd party repositories"
-msgstr ""
-
-msgctxt "#30758"
-msgid "Enable Debugging Mode"
-msgstr ""
-
-msgctxt "#30760"
-msgid "Message Options"
-msgstr ""
-
-msgctxt "#30761"
-msgid "Enable Possibly Offensive Messages"
-msgstr ""
-
-msgctxt "#30762"
-msgid "Parts of this addon may rely on certain[CR]third party addons."
-msgstr ""
-
-msgctxt "#30763"
-msgid "[CR]"
-msgstr ""
-
-msgctxt "#30764"
-msgid "You can choose whether or not to install[CR]the relevant repos."
-msgstr ""
-
-msgctxt "#30765"
-msgid "We recommend installing the relevant repos[CR]to ensure your addons auto-update."
-msgstr ""
-
-msgctxt "#30766"
-msgid "Offer to install required 3rd party addons"
-msgstr ""
-
-msgctxt "#30767"
-msgid "Disable All Loading Messages"
-msgstr ""
-
-msgctxt "#30770"
-msgid "Dev Mode"
-msgstr ""
-
-msgctxt "#30807"
-msgid "Please Wait..."
-msgstr ""
-
-msgctxt "#30808"
-msgid "Checking login details and update files"
-msgstr ""
-
-msgctxt "#30825"
-msgid "Wrong Password"
-msgstr ""
-
-msgctxt "#30826"
-msgid "You have entered an incorrect password for this account, please check settings and try again."
-msgstr ""
-
-msgctxt "#30827"
-msgid "Wrong Username"
-msgstr ""
-
-msgctxt "#30828"
-msgid "You have not entered a valid username, please either correct your login details or register for FREE at www.noobsandnerds.com."
-msgstr ""
-
-msgctxt "#30829"
-msgid "Account Restricted"
-msgstr ""
-
-msgctxt "#30830"
-msgid "There is a ban on your account, the most likely cause for this is account sharing. Please make sure you haven\'t accidentally left your login details on a shared computer."
-msgstr ""
-
-msgctxt "#30831"
-msgid "Re-Activate Account"
-msgstr ""
-
-msgctxt "#30832"
-msgid "You need to re-activate your account on the new Forum. Simply visit the Forum at www.noobsandnerds.com and login with your existing credentials."
-msgstr ""
-
-msgctxt "#30833"
-msgid "Servers Busy"
-msgstr ""
-
-msgctxt "#30834"
-msgid "Sorry the servers appear to be struggling with demand, please try again. Sorry for any inconvenience, we are currently working on improving the speeds."
-msgstr ""
-
-msgctxt "#30835"
-msgid "No Login Details"
-msgstr ""
-
-msgctxt "#30836"
-msgid "You have enabled the login feature but not entered any details. Please add your login details or disable the option."
-msgstr ""
-
-msgctxt "#30843"
-msgid "Login (for Playlisters Only)"
-msgstr ""
-
-msgctxt "#30844"
-msgid "Forum to Use for Login"
-msgstr ""
-
-msgctxt "#30845"
-msgid "Username"
-msgstr ""
-
-msgctxt "#30846"
-msgid "Password"
-msgstr ""
-
-msgctxt "#30897"
-msgid "[COLOR=gold]----------------------------------------------------[/COLOR]"
-msgstr ""
-
-msgctxt "#30900"
-msgid "[COLOR=gold]Use Latest Test Version (donators only)[/COLOR]"
-msgstr ""
-
-msgctxt "#30901"
-msgid "Check Login Details"
-msgstr ""
-
-msgctxt "#30902"
-msgid "Please double check your login credentials, once entered correctly try running the add-on to activate the test version then come back and try again."
-msgstr ""
-
-msgctxt "#30903"
-msgid "Log Options - Add an email to receive a link to your log"
-msgstr ""
-
-msgctxt "#30904"
-msgid "Enable Debug Mode (enable if asking for help on Forum)"
-msgstr ""
-
-msgctxt "#30905"
-msgid "Always Skip kodi.old.log (log from previous run)"
-msgstr ""
-
-msgctxt "#30906"
-msgid "Email Address"
-msgstr ""
-
-msgctxt "#30907"
-msgid "[COLOR=gold]Click to Upload Log[/COLOR]"
-msgstr ""
-
-msgctxt "#30933"
-msgid "-- Open Test Settings"
-msgstr ""
-
-msgctxt "#30962"
-msgid "You need to enable the login option to use the test version. This feature is only available to members who have donated towards the noobsandnerds development fund. You can disable this option to continue using the standard version."
-msgstr ""
-
-msgctxt "#30963"
-msgid "No test version available"
-msgstr ""
-
-msgctxt "#30964"
-msgid "There is no test version available for this add-on at this time."
-msgstr ""
-
-msgctxt "#30965"
-msgid "Error"
-msgstr ""
-
-msgctxt "#30966"
-msgid "Sorry there was an error trying to retrieve the latest test version, the developer may be working on pushing a new update."
-msgstr ""
-
-msgctxt "#30967"
-msgid "REPOSITORY REQUIRED"
-msgstr ""
-
-msgctxt "#30968"
-msgid "One of the addons required are hosted on a third party repository. If you don\'t have this installed you may miss out on important updates from the developer. Do you want to install?:"
-msgstr ""
-
-msgctxt "#30969"
-msgid "INSTALLING REPOSITORY"
-msgstr ""
-
-msgctxt "#30970"
-msgid "Please Wait..."
-msgstr ""
-
-msgctxt "#30971"
-msgid "CHECKING UPDATES"
-msgstr ""
-
-msgctxt "#30972"
-msgid "Just checking for any updates on the repo."
-msgstr ""
-
-msgctxt "#30973"
-msgid "UNABLE TO INSTALL REPO!"
-msgstr ""
-
-msgctxt "#30974"
-msgid "Sorry there was an error trying to install this repository, please let the team at noobsandnerds.com know so they can update the Add-on Portal. Thank you."
-msgstr ""
-
-msgctxt "#30975"
-msgid "UPDATE AVAILABLE"
-msgstr ""
-
-msgctxt "#30976"
-msgid "The noobsandnerds Add-on Portal is showing a newer version of [COLOR=gold]%s[/COLOR] is available. Would you like to update to version: [COLOR=dodgerblue]%s ?[/COLOR]"
-msgstr ""
-
-msgctxt "#30977"
-msgid "ADDON REQUIRED"
-msgstr ""
-
-msgctxt "#30978"
-msgid "The following third party add-on is required, if you don\'t have this installed you may find certain features fail to work. Do you want to install?"
-msgstr ""
-
-msgctxt "#30979"
-msgid "INSTALLING UPDATES"
-msgstr ""
-
-msgctxt "#32501"
-msgid "Start From Beginning"
-msgstr ""
-
-msgctxt "#32502"
-msgid "Resume From %s"
-msgstr ""
-
-msgctxt "#32503"
-msgid "Resume"
-msgstr ""
-
-msgctxt "#32504"
-msgid "EIMify Your Jen"
-msgstr ""
-
-msgctxt "#32505"
-msgid "Meta Info Language"
-msgstr ""
-
-msgctxt "#32506"
-msgid "Select Language"
-msgstr ""
-
-msgctxt "#32507"
-msgid "Metadata Provider"
-msgstr ""
-
-msgctxt "#32508"
-msgid "Movie Metadata Provider"
-msgstr ""
-
-msgctxt "#32509"
-msgid "TV Metadata Provider"
-msgstr ""
-
-msgctxt "#32510"
-msgid "Link Selection"
-msgstr ""
-
-msgctxt "#32511"
-msgid "Select Default Link"
-msgstr ""
-
-msgctxt "#32512"
-msgid "Choose Jen Theme"
-msgstr ""
-
-msgctxt "#32513"
-msgid "Select Theme"
-msgstr ""
-
-msgctxt "#32514"
-msgid "GIFs"
-msgstr ""
-
-msgctxt "#32515"
-msgid "Enable GIFs"
-msgstr ""
-
-msgctxt "#30000"
-msgid "Choose TV Metadata Provider"
-msgstr ""
-
-msgctxt "#30001"
-msgid "Run Setup Wizard?"
-msgstr ""
-
-msgctxt "#30002"
-msgid "Enable GIF support?\\n"
-msgstr ""
-
-msgctxt "#30003"
-msgid "Clear Scraper Cache?"
-msgstr ""
-
-msgctxt "#30004"
-msgid "HD"
-msgstr ""
-
-msgctxt "#30005"
-msgid "BOTH"
-msgstr ""
-
-msgctxt "#30006"
-msgid "returned empty for "
-msgstr ""
-
-msgctxt "#30007"
-msgid "Choose Selector Type"
-msgstr ""
-
-msgctxt "#30008"
-msgid "Sorry, server is down"
-msgstr ""
-
-msgctxt "#30009"
-msgid "May cause issues on lower end devices"
-msgstr ""
-
-msgctxt "#30010"
-msgid "Testings"
-msgstr ""
-
-msgctxt "#30011"
+"Language: en\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 2.0.4\n"
+
+#English
+msgctxt "#32001"
+msgid "Play the next episode - "
+msgstr "Play the next episode - "
+
+msgctxt "#32002"
+msgid " Episode -"
+msgstr " Episode -"
+
+msgctxt "#32003"
+msgid "Play current episode - "
+msgstr "Play current episode - "
+
+msgctxt "#32004"
+msgid "Open season's episodes"
+msgstr "Open season's episodes"
+
+msgctxt "#32005"
+msgid "Open season selection"
+msgstr "Open season selection"
+
+msgctxt "#32006"
+msgid "Play the next episode - "
+msgstr "Play the next episode - "
+
+msgctxt "#32007"
+msgid "Play the next episode - "
+msgstr "Play the next episode - "
+
+msgctxt "#32008"
+msgid "Play previous episode - "
+msgstr "Play previous episode - "
+
+msgctxt "#32009"
+msgid "Start over"
+msgstr "Start over"
+
+msgctxt "#32010"
+msgid "% Please Wait "
+msgstr "% Please Wait "
+
+msgctxt "#32011"
+msgid "Welcome to version -"
+msgstr "Welcome to version -"
+
+msgctxt "#32012"
+msgid "Popular"
+msgstr "Popular"
+
+msgctxt "#32013"
+msgid "On The Air"
+msgstr "On The Air"
+
+msgctxt "#32014"
+msgid "New Tv Shows"
+msgstr "New Tv Shows"
+
+msgctxt "#32015"
+msgid "New Episodes"
+msgstr "New Episodes"
+
+msgctxt "#32016"
+msgid "Genre"
+msgstr "Genre"
+
+msgctxt "#32017"
+msgid "Years"
+msgstr "Years"
+
+msgctxt "#32018"
+msgid "Networks"
+msgstr "Networks"
+
+msgctxt "#32019"
+msgid "Advance Content selection"
+msgstr "Advance Content selection"
+
+msgctxt "#32020"
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
-msgctxt "#30012"
-msgid "TMDB"
-msgstr ""
+msgctxt "#32021"
+msgid "Search History"
+msgstr "Search History"
 
-msgctxt "#30013"
-msgid "Processing Lists"
-msgstr ""
+msgctxt "#32022"
+msgid "Last Link Played"
+msgstr "Last Link Played"
 
-msgctxt "#30014"
-msgid "Clear GIF Cache?"
-msgstr ""
+msgctxt "#32023"
+msgid "Series Tracker"
+msgstr "Series Tracker"
 
-msgctxt "#30015"
-msgid "Message"
-msgstr ""
+msgctxt "#32024"
+msgid "Movies"
+msgstr "Movie World"
 
-msgctxt "#30016"
-msgid "Choose Theme"
-msgstr ""
+msgctxt "#32025"
+msgid "TV Shows"
+msgstr "TV World"
 
-msgctxt "#30017"
-msgid "HD/SD"
-msgstr ""
+msgctxt "#32026"
+msgid "Trakt World - No Account Needed"
+msgstr "Trakt World - No Account Needed"
 
-msgctxt "#30018"
-msgid "TVDB"
-msgstr ""
+msgctxt "#32027"
+msgid "Trakt"
+msgstr "Trakt"
 
-msgctxt "#30019"
-msgid "Clear XML cache?"
-msgstr ""
+msgctxt "#32028"
+msgid "---Whats New---"
+msgstr "---Whats New---"
 
-msgctxt "#30020"
-msgid "Clear Metadata?"
-msgstr ""
-
-msgctxt "#30021"
-msgid "%s of %s"
-msgstr ""
-
-msgctxt "#30022"
-msgid "TRAKT"
-msgstr ""
-
-msgctxt "#30023"
-msgid "You are crossing the Bifröst"
-msgstr ""
-
-msgctxt "#30024"
-msgid "Link Selector"
-msgstr ""
-
-msgctxt "#30025"
-msgid "SD"
-msgstr ""
-
-msgctxt "#30026"
-msgid "Remove Search"
-msgstr ""
-
-msgctxt "#30027"
-msgid "no local file found, and server seems down"
-msgstr ""
-
-msgctxt "#30028"
-msgid "Clear Queue"
-msgstr ""
-
-msgctxt "#30029"
-msgid "Queue Season"
-msgstr ""
-
-msgctxt "#30030"
-msgid "Queue Episode"
-msgstr ""
-
-msgctxt "#30031"
-msgid "Set Episode View"
-msgstr ""
-
-msgctxt "#30032"
-msgid "Please Wait"
-msgstr ""
-
-msgctxt "#30033"
-msgid "The Allfather is watching"
-msgstr ""
-
-msgctxt "#30034"
-msgid "Set Movie View"
-msgstr ""
-
-msgctxt "#30035"
-msgid "GIF not found: "
-msgstr ""
-
-msgctxt "#30036"
-msgid "Queue TV Show"
-msgstr ""
-
-msgctxt "#30037"
-msgid "Previous Playback Detected"
-msgstr ""
-
-msgctxt "#30038"
-msgid "Restart"
-msgstr ""
-
-msgctxt "#30039"
-msgid "Extended Info"
-msgstr ""
-
-msgctxt "#30040"
-msgid "Queue Cleared"
-msgstr ""
-
-msgctxt "#30041"
+msgctxt "#32029"
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
-msgctxt "#30042"
-msgid "Finished Queueing"
-msgstr ""
+msgctxt "#32030"
+msgid "Resume Watching"
+msgstr "Resume Watching"
 
-msgctxt "#30043"
-msgid "Processing Item"
-msgstr ""
+msgctxt "#32031"
+msgid "My RD History"
+msgstr "My RD History"
 
-msgctxt "#30044"
-msgid "Queue Is Empty"
-msgstr ""
+msgctxt "#32032"
+msgid "RD Torrents"
+msgstr "RD Torrents"
 
-msgctxt "#30045"
-msgid "Set TV Show View"
-msgstr ""
+msgctxt "#32033"
+msgid "Actor"
+msgstr "Actor"
 
-msgctxt "#30046"
-msgid "Set View"
-msgstr ""
+msgctxt "#32034"
+msgid "Scraper Check"
+msgstr "Scraper Check"
 
-msgctxt "#30047"
-msgid "Queue Movie"
-msgstr ""
+msgctxt "#32035"
+msgid "In Theaters"
+msgstr "In Theaters"
 
-msgctxt "#30048"
-msgid "View Set For %s"
-msgstr ""
+msgctxt "#32036"
+msgid "Popular Movies"
+msgstr "Popular Movies"
 
-msgctxt "#30049"
-msgid "Trailer"
-msgstr ""
+msgctxt "#32037"
+msgid "3D Movies"
+msgstr "3-D Movies"
 
-msgctxt "#30050"
-msgid "Play Queue"
-msgstr ""
+msgctxt "#32038"
+msgid "Genre"
+msgstr "Genre"
 
-msgctxt "#30051"
-msgid "Loading Database File"
-msgstr ""
+msgctxt "#32039"
+msgid "Years"
+msgstr "Years"
 
-msgctxt "#30052"
-msgid "Show Queue"
-msgstr ""
+msgctxt "#32040"
+msgid "Studio"
+msgstr "Studio"
 
-msgctxt "#30053"
-msgid "Enter Search Term"
-msgstr ""
+msgctxt "#32041"
+msgid "Advance Content Selection"
+msgstr "Advance Content Selection"
 
-msgctxt "#30054"
-msgid "Add Search"
-msgstr ""
+msgctxt "#32042"
+msgid "Search Movie"
+msgstr "Search Movie"
 
-msgctxt "#30055"
-msgid "Try Uncached"
-msgstr ""
+msgctxt "#32043"
+msgid "Search History"
+msgstr "Search History"
 
-msgctxt "#30056"
-msgid "Queue Item"
-msgstr ""
+msgctxt "#32044"
+msgid "History"
+msgstr "History"
 
-msgctxt "#30057"
-msgid "Processing Metadata"
-msgstr ""
+msgctxt "#32045"
+msgid "Classic Movies"
+msgstr "Classic Movies"
 
-msgctxt "#30058"
-msgid "Set Season View"
-msgstr ""
+msgctxt "#32046"
+msgid "Western Movies"
+msgstr "Western Movies"
 
-msgctxt "#30059"
-msgid "All Episodes"
-msgstr ""
+msgctxt "#32047"
+msgid "3D Movies (Free)"
+msgstr "3-D Movies (Free)"
 
-msgctxt "#30060"
-msgid "Root XML Location"
-msgstr ""
+msgctxt "#32048"
+msgid "Movie Lists"
+msgstr "Movie Lists"
 
-msgctxt "#30061"
-msgid "Search DB Location"
-msgstr ""
+msgctxt "#32049"
+msgid "Tv Lists"
+msgstr "Tv Lists"
+
+msgctxt "#32050"
+msgid "Tv Calendar"
+msgstr "Tv Calendar"
+
+msgctxt "#32051"
+msgid "Progress"
+msgstr "Progress"
+
+msgctxt "#32052"
+msgid "Episodes Watchlist"
+msgstr "Episodes Watchlist"
+
+msgctxt "#32053"
+msgid "Series Watchlist"
+msgstr "Series Watchlist"
+
+msgctxt "#32054"
+msgid "TV Collection"
+msgstr "TV Collection"
+
+msgctxt "#32055"
+msgid "Shows Watchlist"
+msgstr "Shows Watchlist"
+
+msgctxt "#32056"
+msgid "Shows Recommendations"
+msgstr "Shows Recommendations"
+
+msgctxt "#32057"
+msgid "Movies Watchlist"
+msgstr "Movies Watchlist"
+
+msgctxt "#32058"
+msgid "Movies Recommendations"
+msgstr "Movies Recommendations"
+
+msgctxt "#32059"
+msgid "Watched Movies"
+msgstr "Watched Movies"
+
+msgctxt "#32060"
+msgid "Watched Shows"
+msgstr "Watched Shows"
+
+msgctxt "#32061"
+msgid "Movies Collection"
+msgstr "Movies Collection"
+
+msgctxt "#32062"
+msgid "Liked Lists"
+msgstr "Liked Lists"
+
+msgctxt "#32063"
+msgid "Resume Watching Movies"
+msgstr "Resume Watching Movies"
+
+msgctxt "#32064"
+msgid "Resume Watching Episodes"
+msgstr "Resume Watching Episodes"
+
+msgctxt "#32065"
+msgid "People watching This %s now: "
+msgstr "People watching This %s now: "
+
+msgctxt "#32066"
+msgid "show"
+msgstr "show"
+
+msgctxt "#32067"
+msgid "Watchers: [COLOR lightblue]"
+msgstr "Watchers: [COLOR lightblue]"
+
+msgctxt "#32068"
+msgid "[/COLOR],Plays: [COLOR lightblue]"
+msgstr "[/COLOR],Plays: [COLOR lightblue]"
+
+msgctxt "#32069"
+msgid "'[/COLOR]\nVotes: [COLOR lightblue]'"
+msgstr "'[/COLOR]\nVotes: [COLOR lightblue]'"
+
+msgctxt "#32070"
+msgid " Checking Cached "
+msgstr " Checking Cached "
+
+msgctxt "#32071"
+msgid "Updating links , check cached"
+msgstr "Updating links , check cached"
+
+msgctxt "#32072"
+msgid " Please wait "
+msgstr " Please wait "
+
+msgctxt "#32073"
+msgid "Searching"
+msgstr "Searching"
+
+msgctxt "#32074"
+msgid "Loading files"
+msgstr "Loading files"
+
+msgctxt "#32075"
+msgid "Remaining: "
+msgstr "Remaining: "
+
+msgctxt "#32076"
+msgid "Checking one click"
+msgstr "Checking one click"
+
+msgctxt "#32077"
+msgid "Playing"
+msgstr "Playing"
+
+msgctxt "#32078"
+msgid "Rest"
+msgstr "Rest"
+
+msgctxt "#32079"
+msgid "Closing"
+msgstr "Closing"
+
+msgctxt "#32080"
+msgid "Updating links , check cached"
+msgstr "Updating links , check cached"
+
+msgctxt "#32081"
+msgid "Getting sources"
+msgstr "Getting sources"
+
+msgctxt "#32082"
+msgid "Collecting sources"
+msgstr "Collecting sources"
+
+msgctxt "#32083"
+msgid "Saving next episode"
+msgstr "Saving next episode"
+
+msgctxt "#32084"
+msgid "Organizing"
+msgstr "Organizing"
+
+msgctxt "#32085"
+msgid "No links found"
+msgstr "No links found"
+
+msgctxt "#32086"
+msgid "Building menu"
+msgstr "Building menu"
+
+msgctxt "#32087"
+msgid "Open filtered links"
+msgstr "Open filtered links"
+
+msgctxt "#32088"
+msgid "Open rejected links"
+msgstr "Open rejected links"
+
+msgctxt "#32089"
+msgid "All: "
+msgstr "All: "
+
+msgctxt "#32090"
+msgid ", Dup.: "
+msgstr ", Dup.: "
+
+msgctxt "#32091"
+msgid "[COLOR yellow] Cached: "
+msgstr "[COLOR yellow] Cached: "
+
+msgctxt "#32092"
+msgid "Cleared"
+msgstr "Cleared"
+
+msgctxt "#32093"
+msgid "Collecting"
+msgstr "Collecting"
+
+msgctxt "#32094"
+msgid "playing"
+msgstr "playing"
+
+msgctxt "#32095"
+msgid "Resume from "
+msgstr "Resume from "
+
+msgctxt "#32096"
+msgid "Marked as watched"
+msgstr "Marked as watched"
+
+msgctxt "#32097"
+msgid "Watched removed"
+msgstr "Watched removed"
+
+msgctxt "#32098"
+msgid "No trailer"
+msgstr "No trailer"
+
+msgctxt "#32099"
+msgid "TV shows"
+msgstr "TV shows"
+
+msgctxt "#32100"
+msgid "Movie"
+msgstr "Movie"
+
+msgctxt "#32101"
+msgid "Season "
+msgstr "Season "
+
+msgctxt "#32102"
+msgid "-Episode "
+msgstr "-Episode "
+
+msgctxt "#32103"
+msgid "[/COLOR]\n[COLOR gold] out of "
+msgstr "[/COLOR]\n[COLOR gold] out of "
+
+msgctxt "#32104"
+msgid " episode for this season[/COLOR]\n"
+msgstr " episode for this season[/COLOR]\n"
+
+msgctxt "#32105"
+msgid "This show was over or canceled"
+msgstr "This show was over or canceled"
+
+msgctxt "#32106"
+msgid "Next episode at "
+msgstr "Next episode at "
+
+msgctxt "#32107"
+msgid " Unknown "
+msgstr " Unknown "
+
+msgctxt "#32108"
+msgid " Season's Episodes  [/COLOR]\n"
+msgstr " Season's Episodes  [/COLOR]\n"
+
+msgctxt "#32109"
+msgid "Ended"
+msgstr "Ended"
+
+msgctxt "#32110"
+msgid "Movie"
+msgstr "Movie"
+
+msgctxt "#32111"
+msgid "Canceled"
+msgstr "Canceled"
+
+msgctxt "#32112"
+msgid "Sync complete"
+msgstr "Sync complete"
+
+msgctxt "#32113"
+msgid " Aired at "
+msgstr " Aired at "
+
+msgctxt "#32114"
+msgid "Sync trakt"
+msgstr "Sync trakt"
+
+msgctxt "#32115"
+msgid "Clear history"
+msgstr "Clear history"
+
+msgctxt "#32116"
+msgid "Loading"
+msgstr "Loading"
+
+msgctxt "#32117"
+msgid "Removed"
+msgstr "Removed"
+
+msgctxt "#32118"
+msgid "Clear Resume points"
+msgstr "Clear Resume points"
+
+msgctxt "#32119"
+msgid "Are you sure there is no way back...?"
+msgstr "Are you sure there is no way back...?"
+
+msgctxt "#32120"
+msgid "Remove from series tracker"
+msgstr "Remove from series tracker"
+
+msgctxt "#32121"
+msgid "Are you sure you want to remove "
+msgstr "Are you sure you want to remove "
+
+msgctxt "#32122"
+msgid " from series tracker?"
+msgstr " from series tracker?"
+
+msgctxt "#32123"
+msgid "Mark as unwatched"
+msgstr "Mark as unwatched"
+
+msgctxt "#32124"
+msgid "Movies"
+msgstr "Movies"
+
+msgctxt "#32125"
+msgid "People Watching [Movies]"
+msgstr "People Watching [Movies]"
+
+msgctxt "#32126"
+msgid "Popular [Movies]"
+msgstr "Popular [Movies]"
+
+msgctxt "#32127"
+msgid "Most Played [Movies]"
+msgstr "Most Played [Movies]"
+
+msgctxt "#32128"
+msgid "Most Watched [Movies]"
+msgstr "Most Watched [Movies]"
+
+msgctxt "#32129"
+msgid "Most Collected [Movies]"
+msgstr "Most Collected [Movies]"
+
+msgctxt "#32130"
+msgid "Most Anticipated [Movies]"
+msgstr "Most Anticipated [Movies]"
+
+msgctxt "#32131"
+msgid "Most Grossing Weekly [Movies]"
+msgstr "Most Grossing Weekly [Movies]"
+
+msgctxt "#32132"
+msgid "People Watching [TV]"
+msgstr "People Watching [TV]"
+
+msgctxt "#32133"
+msgid "Popular [TV]"
+msgstr "Popular [TV]"
+
+msgctxt "#32134"
+msgid "Most Played [TV]"
+msgstr "Most Played [TV]"
+
+msgctxt "#32135"
+msgid "Most Collected [TV]"
+msgstr "Most Collected [TV]"
+
+msgctxt "#32136"
+msgid "Most Anticipated [TV]"
+msgstr "Most Anticipated [TV]"
+
+msgctxt "#32137"
+msgid "Lists"
+msgstr "Lists"
+
+msgctxt "#32138"
+msgid "Trending Lists [TV]"
+msgstr "Trending Lists [TV]"
+
+msgctxt "#32139"
+msgid "Popular Lists [TV]"
+msgstr "Popular Lists [TV]"
+
+msgctxt "#32140"
+msgid "Global lock"
+msgstr "Global lock"
+
+msgctxt "#32141"
+msgid "lock all displays of the addon?"
+msgstr "lock all displays of the addon?"
+
+msgctxt "#32142"
+msgid "Updated to "
+msgstr "Updated to "
+
+msgctxt "#32143"
+msgid "Won\'t sync with trakt"
+msgstr "Won\'t sync with trakt"
+
+msgctxt "#32144"
+msgid "Lists"
+msgstr "Lists"
+
+msgctxt "#32145"
+msgid "Next page"
+msgstr "Next page"
+
+msgctxt "#32146"
+msgid "Remove"
+msgstr "Remove"
+
+msgctxt "#32147"
+msgid "from history"
+msgstr "from history"
+
+msgctxt "#32148"
+msgid "Search Actor"
+msgstr "Search Actor"
+
+msgctxt "#32149"
+msgid "Choose"
+msgstr "Choose"
+
+msgctxt "#32150"
+msgid "Override local DB?"
+msgstr "Override local DB?"
+
+msgctxt "#32151"
+msgid "Sending"
+msgstr "Sending"
+
+msgctxt "#32153"
+msgid "Error posting the kodi.log file"
+msgstr "Error posting the kodi.log file"
+
+msgctxt "#32154"
+msgid "Error posting the old log file"
+msgstr "Error posting the old log file"
+
+msgctxt "#32155"
+msgid "Error posting the crashlog file"
+msgstr "Error posting the crashlog file"
+
+msgctxt "#32156"
+msgid "Reading log"
+msgstr "Reading log"
+
+msgctxt "#32157"
+msgid "Cleaning log"
+msgstr "Cleaning log"
+
+msgctxt "#32158"
+msgid "Do you want to view your"
+msgstr "Do you want to view your"
+
+msgctxt "#32159"
+msgid "or upload it to"
+msgstr "or upload it to"
+
+msgctxt "#32160"
+msgid "Log uploader"
+msgstr "Log uploader"
+
+msgctxt "#32161"
+msgid "Remove from series tracker"
+msgstr "Remove from series tracker"
+
+msgctxt "#32162"
+msgid "Queue item"
+msgstr "Queue item"
+
+msgctxt "#32163"
+msgid "Lists"
+msgstr "Lists"
+
+
+msgctxt "#32164"
+msgid "Trakt watched"
+msgstr "Trakt watched"
+
+msgctxt "#32165"
+msgid "Trakt unwatched"
+msgstr "Trakt unwatched"
+
+msgctxt "#32166"
+msgid "Info"
+msgstr "Info"
+
+msgctxt "#32167"
+msgid "Play trailer"
+msgstr "Play trailer"
+
+msgctxt "#32168"
+msgid "Settings"
+msgstr "Settings"
+
+msgctxt "#32169"
+msgid "Queue item"
+msgstr "Queue item"
+
+msgctxt "#32170"
+msgid "Trakt manager"
+msgstr "Trakt manager"
+
+msgctxt "#32171"
+msgid "Trakt watched"
+msgstr "Trakt watched"
+
+msgctxt "#32172"
+msgid "Trakt unwatched"
+msgstr "Trakt unwatched"
+
+msgctxt "#32173"
+msgid "Remove resume time"
+msgstr "Remove resume time"
+
+msgctxt "#32174"
+msgid "Browse series"
+msgstr "Browse series"
+
+msgctxt "#32175"
+msgid "Remove resume point"
+msgstr "Remove resume point"
+
+msgctxt "#32176"
+msgid "Clear Cache"
+msgstr "Clear Cache"
+
+msgctxt "#32177"
+msgid "Set view type"
+msgstr "Set view type"
+
+msgctxt "#32178"
+msgid "Scrape 3-D"
+msgstr "Scrape 3-D"
+
+msgctxt "#32179"
+msgid "Set view type"
+msgstr "Set view type"
+
+msgctxt "#32180"
+msgid "Remove from history"
+msgstr "Remove from history"
+
+msgctxt "#32181"
+msgid "From year"
+msgstr "From year"
+
+msgctxt "#32182"
+msgid "To year"
+msgstr "To year"
+
+msgctxt "#32183"
+msgid " No results"
+msgstr " No results"
+
+msgctxt "#32184"
+msgid "Page"
+msgstr "Page"
+
+msgctxt "#32185"
+msgid "Out of"
+msgstr "Out of"
+
+msgctxt "#32186"
+msgid "Results"
+msgstr "Results"
+
+msgctxt "#32187"
+msgid " Aired At "
+msgstr " Aired At "
+
+msgctxt "#32188"
+msgid "Add to [B]Collection[/B]"
+msgstr "Add to [B]Collection[/B]"
+
+msgctxt "#32189"
+msgid "Remove from [B]Collection[/B]"
+msgstr "Remove from [B]Collection[/B]"
+
+msgctxt "#32190"
+msgid "Add to [B]Watchlist[/B]"
+msgstr "Add to [B]Watchlist[/B]"
+
+msgctxt "#32191"
+msgid "Remove from [B]Watchlist[/B]"
+msgstr "Remove from [B]Watchlist[/B]"
+
+msgctxt "#32192"
+msgid "Add to [B]new List[/B]"
+msgstr "Add to [B]new List[/B]"
+
+msgctxt "#32193"
+msgid "Sending Req."
+msgstr "Sending Req."
+
+msgctxt "#32194"
+msgid ""Add to "
+msgstr ""Add to "
+
+msgctxt "#32195"
+msgid "Remove from "
+msgstr "Remove from "
+
+msgctxt "#32196"
+msgid "Sending selection"
+msgstr "Sending selection"
+
+msgctxt "#32197"
+msgid "Clear"
+msgstr "Clear"
+
+msgctxt "#32198"
+msgid "Resume points"
+msgstr "Resume points"
+
+msgctxt "#32199"
+msgid "All times"
+msgstr "All times"
+
+msgctxt "#32200"
+msgid "Yearly"
+msgstr "Yearly"
+
+msgctxt "#32201"
+msgid "Monthly"
+msgstr "Monthly"
+
+msgctxt "#32202"
+msgid "Weekly"
+msgstr "Weekly"
+
+msgctxt "#32203"
+msgid "Ended or canceled"
+msgstr "Ended or canceled"
+
+msgctxt "#32204"
+msgid "Enable debrid service"
+msgstr "Enable debrid service"
+
+msgctxt "#32205"
+msgid "Theme"
+msgstr "Theme"
+
+msgctxt "#32206"
+msgid "TMDB pages to scan (Each page is 20 results)"
+msgstr "TMDB pages to scan (Each page is 20 results)"
+
+msgctxt "#32207"
+msgid "Order networks by"
+msgstr "Order networks by"
+
+msgctxt "#32208"
+msgid "Popular"
+msgstr "Popular"
+
+msgctxt "#32209"
+msgid "Release date"
+msgstr "Release date"
+
+msgctxt "#32210"
+msgid "Votes"
+msgstr "Votes"
+
+msgctxt "#32211"
+msgid "Show progress"
+msgstr "Show progress"
+
+msgctxt "#32212"
+msgid "Filter out sources more then GB"
+msgstr "Filter out sources more then GB"
+
+msgctxt "#32213"
+msgid "Hours held in cache"
+msgstr "Hours held in cache"
+
+msgctxt "#32214"
+msgid "Mark Trakt watched after % of movie/tv show"
+msgstr "Mark Trakt watched after % of movie/tv show"
+
+msgctxt "#32215"
+msgid "New sources menu"
+msgstr "New sources menu"
+
+msgctxt "#32216"
+msgid "Use display lock"
+msgstr "Use display lock"
+
+msgctxt "#32217"
+msgid "Tmdb adult filter"
+msgstr "Tmdb adult filter"
+
+msgctxt "#32218"
+msgid "Clear Trakt"
+msgstr "Clear Trakt"
+
+msgctxt "#32219"
+msgid "*** Sync track to DB ***"
+msgstr "*** Sync track to DB ***"
+
+msgctxt "#32220"
+msgid "Upload Log"
+msgstr "Upload Log"
+
+msgctxt "#32221"
+msgid "Filters"
+msgstr "Filters"
+
+msgctxt "#32222"
+msgid "Quality"
+msgstr "Quality"
+
+msgctxt "#32223"
+msgid "Maximum quality"
+msgstr "Maximum quality"
+
+msgctxt "#32224"
+msgid "Minimum quality"
+msgstr "Minimum quality"
+
+msgctxt "#32225"
+msgid "Encoding"
+msgstr "Encoding"
+
+msgctxt "#32226"
+msgid "Encoding filter"
+msgstr "Encoding filter"
+
+msgctxt "#32227"
+msgid "Show 3d Sources"
+msgstr "Show 3d Sources"
+
+msgctxt "#32228"
+msgid "Show hevc sources"
+msgstr "Show hevc sources"
+
+msgctxt "#32229"
+msgid "Show low quality Sources (CAM)"
+msgstr "Show low quality Sources (CAM)"
+
+msgctxt "#32230"
+msgid "Filter non english (not 100%)"
+msgstr "Filter non english (not 100%)"
+
+msgctxt "#32231"
+msgid "Debrid"
+msgstr "Debrid"
+
+msgctxt "#32232"
+msgid "Enable debrid service"
+msgstr "Enable debrid service"
+
+msgctxt "#32233"
+msgid "Choose debrid service"
+msgstr "Choose debrid service"
+
+msgctxt "#32234"
+msgid "Clear Real-Debrid"
+msgstr "Clear Real-Debrid"
+
+msgctxt "#32235"
+msgid "Re-auth Real-Debrid"
+msgstr "Re-auth Real-Debrid"
+
+msgctxt "#32236"
+msgid "Clear Premiumize"
+msgstr "Clear Premiumize"
+
+msgctxt "#32237"
+msgid "Re-auth Premiumize"
+msgstr "Re-auth Premiumize"
+
+msgctxt "#32238"
+msgid "Enable debrid service"
+msgstr "Enable debrid service"
+
+msgctxt "#32239"
+msgid "Clear All-Debrid Auth"
+msgstr "Clear All-Debrid Auth"
+
+msgctxt "#32240"
+msgid "Re-Auth All-Debrid"
+msgstr "Re-Auth All-Debrid"
+
+msgctxt "#32241"
+msgid "Next Up"
+msgstr "Next Up"
+
+msgctxt "#32242"
+msgid "Auto play if no choice is made"
+msgstr "Auto play if no choice is made"
+
+msgctxt "#32243"
+msgid "Show next episode ... second before the end"
+msgstr "Show next episode ... second before the end"
+
+msgctxt "#32244"
+msgid "Activate next episode ... second before the end"
+msgstr "Activate next episode ... second before the end"
+
+msgctxt "#32245"
+msgid "Next up movie enabled"
+msgstr "Next up movie enabled"
+
+msgctxt "#32246"
+msgid "Show recommended movie ... second before the end"
+msgstr "Show recommended movie ... second before the end"
+
+msgctxt "#32247"
+msgid "Context Menu"
+msgstr "Context Menu"
+
+msgctxt "#32248"
+msgid "Cast"
+msgstr "Cast"
+
+msgctxt "#32249"
+msgid "One Click Play"
+msgstr "One Click Play"
+
+msgctxt "#32250"
+msgid "Any"
+msgstr "Any"
+
+msgctxt "#32251"
+msgid "Sources"
+msgstr "Sources"
+
+msgctxt "#32252"
+msgid "Max time for scraping"
+msgstr "Max time for scraping"
+
+msgctxt "#32253"
+msgid "Enable all"
+msgstr "Enable all"
+
+msgctxt "#32254"
+msgid "Disable all"
+msgstr "Disable all"
+
+msgctxt "#32255"
+msgid "Fav. scrapers"
+msgstr "Fav. scrapers"
+
+msgctxt "#32256"
+msgid "Externals"
+msgstr "Externals"
+
+msgctxt "#32257"
+msgid "Enable Furk Scraper"
+msgstr "Enable Furk Scraper"
+
+msgctxt "#32258"
+msgid "Login"
+msgstr "Login"
+
+msgctxt "#32259"
+msgid "Password"
+msgstr "Password"
+
+msgctxt "#32260"
+msgid "Furk API Key (optional)"
+msgstr "Furk API Key (optional)"
+
+msgctxt "#32261"
+msgid "Search Moderation Level"
+msgstr "Search Moderation Level"
+
+msgctxt "#32262"
+msgid "No"
+msgstr "No"
+
+msgctxt "#32263"
+msgid "Yes"
+msgstr "Yes"
+
+msgctxt "#32264"
+msgid "Full"
+msgstr "Full"
+
+msgctxt "#32265"
+msgid "Enable Easynews Scraper"
+msgstr "Enable Easynews Scraper"
+
+msgctxt "#32266"
+msgid "Quality vs Speed"
+msgstr "Quality vs Speed"
+
+msgctxt "#32267"
+msgid "More details on scraper results(Slower)"
+msgstr "More details on scraper results(Slower)"
+
+msgctxt "#32268"
+msgid "Basic details on scraper results(Faster)"
+msgstr "Basic details on scraper results(Faster)"
+
+msgctxt "#32269"
+msgid "Main Menu"
+msgstr "Main Menu"
+
+msgctxt "#32270"
+msgid "Episode Ends in"
+msgstr "Episode Ends in"
+
+msgctxt "#32271"
+msgid "Close"
+msgstr "Close"
+
+msgctxt "#32272"
+msgid "Watch"
+msgstr "Watch"
+
+msgctxt "#32273"
+msgid "Send"
+msgstr "Send"
+
+msgctxt "#32274"
+msgid "Wait...Auto Auth..."
+msgstr "Wait...Auto Auth..."
+
+msgctxt "#32275"
+msgid "Main Menu"
+msgstr "Main Menu"
+
+msgctxt "#32276"
+msgid "Auto Auth..."
+msgstr "Auto Auth..."
+
+msgctxt "#32277"
+msgid "Login"
+msgstr "Login"
+
+msgctxt "#32278"
+msgid "Code"
+msgstr "Code"
+
+msgctxt "#32279"
+msgid "Allow Acess "
+msgstr "Allow Acess "
+
+msgctxt "#32280"
+msgid "Waiting for RD"
+msgstr "Waiting for RD"
+
+msgctxt "#32281"
+msgid "Authentication is completed"
+msgstr "Authentication is completed"
+
+msgctxt "#32282"
+msgid "Auth"
+msgstr "Auth"
+
+msgctxt "#32283"
+msgid "Open this link in a browser: "
+msgstr "Open this link in a browser: "
+
+msgctxt "#32284"
+msgid "Enter the code: "
+msgstr "Enter the code: "
+
+msgctxt "#32285"
+msgid "This code has been copied to your clipboard"
+msgstr "This code has been copied to your clipboard"
+
+msgctxt "#32286"
+msgid "Rd Failed Try Auth. again"
+msgstr "Rd Failed Try Auth. again"
+
+msgctxt "#32287"
+msgid "addMagnet Single"
+msgstr "addMagnet Single"
+
+msgctxt "#32288"
+msgid "Sending Q"
+msgstr "Sending Q"
+
+msgctxt "#32289"
+msgid "RD Failed in torrent"
+msgstr "RD Failed in torrent"
+
+msgctxt "#32290"
+msgid "torrentSelect"
+msgstr "torrentSelect"
+
+msgctxt "#32291"
+msgid "torrentInfo"
+msgstr "torrentInfo"
+
+msgctxt "#32292"
+msgid "unrestrict_link"
+msgstr "unrestrict_link"
+
+msgctxt "#32293"
+msgid "deleteTorrent"
+msgstr "deleteTorrent"
+
+msgctxt "#32294"
+msgid "No streamable link found_1"
+msgstr "No streamable link found_1"
+
+msgctxt "#32295"
+msgid "Theaters"
+msgstr "Theaters"
+
+msgctxt "#32296"
+msgid "Sync"
+msgstr "Sync"
+
+msgctxt "#32297"
+msgid "Cancel"
+msgstr "Cancel"
+
+msgctxt "#32298"
+msgid "Code "
+msgstr "Code "
+
+msgctxt "#32299"
+msgid "Tv Shows"
+msgstr "Tv Shows"
+
+msgctxt "#32300"
+msgid "Encoding"
+msgstr "Encoding"
+
+msgctxt "#32301"
+msgid "Movies"
+msgstr "Movies"
+
+msgctxt "#32302"
+msgid "Open collection"
+msgstr "Open collection"
+
+msgctxt "#32303"
+msgid "Show open collection option"
+msgstr "Show open collection option"
+
+msgctxt "#32304"
+msgid "Trakt manager"
+msgstr "Trakt manager"
+
+msgctxt "#32305"
+msgid "Re-auth All-Debrid"
+msgstr "Re-auth All-Debrid"
+
+
+msgctxt "#32306"
+msgid "Watched status from trakt(slower)"
+msgstr "Watched status from trakt(slower)"
+
+msgctxt "#32307"
+msgid "Recently Updated Shows(week)"
+msgstr "Recently Updated Shows(week)"
+
+msgctxt "#32308"
+msgid "Recently Updated Shows(month)"
+msgstr "Recently Updated Shows(month)"
+
+msgctxt "#32309"
+msgid "My IMDB"
+msgstr "My IMDB"
+
+
+msgctxt "#32310"
+msgid "No subs"
+msgstr "No subs"
+
+
+msgctxt "#32311"
+msgid "Trakt progress in Series Tracker style"
+msgstr "Trakt progress in Series Tracker style"
+
+msgctxt "#32312"
+msgid "Show ended series in progress"
+msgstr "Show ended series in progress"
+
+msgctxt "#32313"
+msgid "Keywords movies"
+msgstr "Keywords movies"
+
+
+

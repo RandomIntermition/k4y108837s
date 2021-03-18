@@ -16,8 +16,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en']
-        self.domains = ['www.lunchflix.com']
-        self.base_link = 'https://www.lunchflix.com'
+        self.domains = ['www.lunchflix.net', 'www.lunchflix.com']
+        self.base_link = 'https://www.lunchflix.net'
         self.search_link = '/?s=%s'
         self.headers = {'User-Agent': client.agent(), 'Referer': self.base_link}
 

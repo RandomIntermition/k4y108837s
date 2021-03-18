@@ -24,12 +24,11 @@
 
 import os
 import sys
-import urlparse
-import xbmc
-import xbmcaddon
-import xbmcgui
-import base64
-import urllib2
+import six
+
+
+
+
 
 from resources.lib.modules import control
 from resources.lib.modules import trakt
@@ -47,18 +46,10 @@ traktCredentials = trakt.getTraktCredentialsInfo()
 
 traktIndicators = trakt.getTraktIndicatorsInfo()
 
-queueMenu = control.lang(32065).encode('utf-8')
+queueMenu = control.lang(32065)
 
 
 class navigator:
-    ADDON_ID = xbmcaddon.Addon().getAddonInfo('id')
-    HOMEPATH = xbmc.translatePath('special://home/')
-    ADDONSPATH = os.path.join(HOMEPATH, 'addons')
-    THISADDONPATH = os.path.join(ADDONSPATH, ADDON_ID)
-    NEWSFILE = base64.b64decode(
-        b'aHR0cHM6Ly9iaXRidWNrZXQub3JnL3RlYW0tY3Jldy90ZXh0X2ZpbGVzL3Jhdy9tYXN0ZXIvd2hhdHNuZXcueG1s')
-    LOCALNEWS = os.path.join(THISADDONPATH, 'whatsnew.txt')
-
     def root(self):
         # if self.getMenuEnabled('navi.holidays') == True:
         #self.addDirectoryItem(90157, 'holidaysNavigator', 'holidays.png', 'holidays.png')
@@ -121,49 +112,6 @@ class navigator:
         if (is_enabled == '' or is_enabled == 'false'):
             return False
         return True
-#######################################################################
-# News and Update Code
-
-    def news(self):
-        message = self.open_news_url(self.NEWSFILE)
-        r = open(self.LOCALNEWS)
-        compfile = r.read()
-        if len(message) > 1:
-            if compfile == message:
-                pass
-            else:
-                text_file = open(self.LOCALNEWS, "w")
-                text_file.write(message)
-                text_file.close()
-                compfile = message
-        self.showText('Information', compfile)
-
-    def open_news_url(self, url):
-        req = urllib2.Request(url)
-        req.add_header('User-Agent', 'klopp')
-        response = urllib2.urlopen(req)
-        link = response.read()
-        response.close()
-        print link
-        return link
-
-    def showText(self, heading, text):
-        id = 10147
-        xbmc.executebuiltin('ActivateWindow(%d)' % id)
-        xbmc.sleep(500)
-        win = xbmcgui.Window(id)
-        retry = 50
-        while (retry > 0):
-            try:
-                xbmc.sleep(10)
-                retry -= 1
-                win.getControl(1).setLabel(heading)
-                win.getControl(5).setText(text)
-                quit()
-                return
-            except:
-                pass
-#######################################################################
 
     def movies(self, lite=False):
         self.addDirectoryItem(32003, 'mymovieliteNavigator',
@@ -518,18 +466,16 @@ class navigator:
         try:
             control.idle()
 
-            items = [(control.lang(32001).encode('utf-8'), 'movies'), (control.lang(32002).encode('utf-8'), 'tvshows'),
-                     (control.lang(32054).encode('utf-8'), 'seasons'), (control.lang(32038).encode('utf-8'), 'episodes')]
+            items = [ (control.lang(32001), 'movies'), (control.lang(32002), 'tvshows'), (control.lang(32054), 'seasons'), (control.lang(32038), 'episodes') ]
 
-            select = control.selectDialog(
-                [i[0] for i in items], control.lang(32049).encode('utf-8'))
+            select = control.selectDialog([i[0] for i in items], control.lang(32049))
 
             if select == -1:
                 return
 
             content = items[select][1]
 
-            title = control.lang(32059).encode('utf-8')
+            title = control.lang(32059)
             url = '%s?action=addView&content=%s' % (sys.argv[0], content)
 
             poster, banner, fanart = control.addonPoster(
@@ -554,72 +500,65 @@ class navigator:
     def accountCheck(self):
         if traktCredentials == False and imdbCredentials == False:
             control.idle()
-            control.infoDialog(control.lang(32042).encode(
-                'utf-8'), sound=True, icon='WARNING')
+            control.infoDialog(control.lang(32042), sound=True, icon='WARNING')
             sys.exit()
 
     def infoCheck(self, version):
         try:
-            control.infoDialog('', control.lang(32074).encode(
-                'utf-8'), time=5000, sound=False)
+            control.infoDialog('', control.lang(32074), time=5000, sound=False)
             return '1'
         except:
             return '1'
 
     def clearCache(self):
         control.idle()
-        yes = control.yesnoDialog(control.lang(32056).encode('utf-8'), '', '')
+        yes = control.yesnoDialog(control.lang(32056))
         if not yes:
             return
         from resources.lib.modules import cache
         cache.cache_clear()
-        control.infoDialog(control.lang(32057).encode(
-            'utf-8'), sound=True, icon='INFO')
+        control.infoDialog(control.lang(32057), sound=True, icon='INFO')
 
     def clearCacheMeta(self):
         control.idle()
-        yes = control.yesnoDialog(control.lang(32056).encode('utf-8'), '', '')
+        yes = control.yesnoDialog(control.lang(32056))
         if not yes:
             return
         from resources.lib.modules import cache
         cache.cache_clear_meta()
-        control.infoDialog(control.lang(32057).encode(
-            'utf-8'), sound=True, icon='INFO')
+        control.infoDialog(control.lang(32057), sound=True, icon='INFO')
 
     def clearCacheProviders(self):
         control.idle()
-        yes = control.yesnoDialog(control.lang(32056).encode('utf-8'), '', '')
+        yes = control.yesnoDialog(control.lang(32056))
         if not yes:
             return
         from resources.lib.modules import cache
         cache.cache_clear_providers()
-        control.infoDialog(control.lang(32057).encode(
-            'utf-8'), sound=True, icon='INFO')
+        control.infoDialog(control.lang(32057), sound=True, icon='INFO')
 
     def clearCacheSearch(self):
         control.idle()
-        yes = control.yesnoDialog(control.lang(32056).encode('utf-8'), '', '')
+        yes = control.yesnoDialog(control.lang(32056))
         if not yes:
             return
         from resources.lib.modules import cache
         cache.cache_clear_search()
-        control.infoDialog(control.lang(32057).encode(
-            'utf-8'), sound=True, icon='INFO')
+        control.infoDialog(control.lang(32057), sound=True, icon='INFO')
         # TC 2/01/19 started
 
     def clearCacheAll(self):
         control.idle()
-        yes = control.yesnoDialog(control.lang(32056).encode('utf-8'), '', '')
+        yes = control.yesnoDialog(control.lang(32056))
         if not yes:
             return
         from resources.lib.modules import cache
         cache.cache_clear_all()
-        control.infoDialog(control.lang(32057).encode(
-            'utf-8'), sound=True, icon='INFO')
+        control.infoDialog(control.lang(32057), sound=True, icon='INFO')
 
     def addDirectoryItem(self, name, query, thumb, icon, context=None, queue=False, isAction=True, isFolder=True):
         try:
-            name = control.lang(name).encode('utf-8')
+            name = control.lang(name)
         except:
             pass
         url = '%s?action=%s' % (sysaddon, query) if isAction == True else query
@@ -627,9 +566,7 @@ class navigator:
         cm = []
         if queue == True:
             cm.append((queueMenu, 'RunPlugin(%s?action=queueItem)' % sysaddon))
-        if not context == None:
-            cm.append((control.lang(context[0]).encode(
-                'utf-8'), 'RunPlugin(%s?action=%s)' % (sysaddon, context[1])))
+        if not context == None: cm.append((control.lang(context[0]), 'RunPlugin(%s?action=%s)' % (sysaddon, context[1])))
         item = control.item(label=name)
         item.addContextMenuItems(cm)
         item.setArt({'icon': thumb, 'thumb': thumb})

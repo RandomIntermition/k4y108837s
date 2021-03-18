@@ -1,6 +1,31 @@
 Report any issues at https://github.com/Tempest0580/tempest/issues
 New Repo https://tempest0580.github.io/
 
+[B][COLOR gold] 5.0.87 [/COLOR][/B]
+- UstvGo Fix
+- Scraper Updates
+
+[B][COLOR gold] 5.0.85 [/COLOR][/B]
+- fix UstvGo
+
+[B][COLOR gold] 5.0.84 [/COLOR][/B]
+- Updated/Added Scraper
+
+[B][COLOR gold] 5.0.83 [/COLOR][/B]
+- Updated/Added Scraper
+
+[B][COLOR gold] 5.0.82 [/COLOR][/B]
+- Updated Scrapers
+
+[B][COLOR gold] 5.0.81 [/COLOR][/B]
+- Added Scrapers
+
+[B][COLOR gold] 5.0.80 [/COLOR][/B]
+- Updated UstvGo (Thanks jigoop1)
+- Removed Myustv
+- Added Allsprk
+- Minor Update
+
 [B][COLOR gold] 5.0.79 [/COLOR][/B]
 - Added Scrapers
 - Updated Scrapers

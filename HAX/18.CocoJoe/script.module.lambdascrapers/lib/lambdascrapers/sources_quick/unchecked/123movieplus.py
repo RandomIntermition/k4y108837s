@@ -108,7 +108,9 @@ class source:
                         if host == "thevideo": continue
                         if host == "flashx": continue
                         if host == "vidto": continue
+                        if host == "openload": continue
                         if 'other'in host: continue
+                        if 'openlaod'in url: continue
                         sources.append({
                             'source': host,
                             'quality': 'SD',

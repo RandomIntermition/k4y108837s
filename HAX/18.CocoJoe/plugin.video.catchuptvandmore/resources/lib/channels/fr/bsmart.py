@@ -1,41 +1,19 @@
 # -*- coding: utf-8 -*-
-"""
-    Catch-up TV & More
-    Copyright (C) 2019  SylvainCecchetto
+# Copyright: (c) 2019, SylvainCecchetto
+# GNU General Public License v2.0+ (see LICENSE.txt or https://www.gnu.org/licenses/gpl-2.0.txt)
 
-    This file is part of Catch-up TV & More.
+# This file is part of Catch-up TV & More
 
-    Catch-up TV & More is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Catch-up TV & More is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with Catch-up TV & More; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
-
-# The unicode_literals import only has
-# an effect on Python 2.
-# It makes string literals as unicode like in Python 3
 from __future__ import unicode_literals
-
-from codequick import Route, Resolver, Listitem, utils, Script
-
-from resources.lib import web_utils
-from resources.lib import resolver_proxy
-from resources.lib.menu_utils import item_post_treatment
-
 import json
 import re
+
+from codequick import Listitem, Resolver, Route, Script
 import urlquick
 
-# TODO
+from resources.lib import resolver_proxy, web_utils
+from resources.lib.menu_utils import item_post_treatment
+
 
 URL_ROOT = "https://www.bsmart.fr"
 
@@ -109,18 +87,21 @@ def list_videos_program(plugin, item_id, next_url, **kwargs):
 
     for video_datas in json_parser["videos"]:
         video_title = video_datas["program"]["title"] + ' - ' + video_datas["title"]
-        video_image = video_datas["asset"]["dailymotion"]["thumb"]
-        video_id = video_datas["asset"]["dailymotion"]["id"]
+        if 'dailymotion' in video_datas["providers"]:
+            video_image = ''
+            if 'thumb' in video_datas["providers"]["dailymotion"]:
+                video_image = video_datas["providers"]["dailymotion"]["thumb"]
+            video_id = video_datas["providers"]["dailymotion"]["id"]
 
-        item = Listitem()
-        item.label = video_title
-        item.art['thumb'] = item.art['landscape'] = video_image
+            item = Listitem()
+            item.label = video_title
+            item.art['thumb'] = item.art['landscape'] = video_image
 
-        item.set_callback(get_video_url,
-                          item_id=item_id,
-                          video_id=video_id)
-        item_post_treatment(item, is_playable=True, is_downloadable=True)
-        yield item
+            item.set_callback(get_video_url,
+                              item_id=item_id,
+                              video_id=video_id)
+            item_post_treatment(item, is_playable=True, is_downloadable=True)
+            yield item
 
 
 @Route.register
@@ -131,18 +112,21 @@ def list_videos(plugin, item_id, next_url, page, **kwargs):
 
     for video_datas in json_parser["results"]:
         video_title = video_datas["program"]["title"] + ' - ' + video_datas["title"]
-        video_image = video_datas["asset"]["dailymotion"]["thumb"]
-        video_id = video_datas["asset"]["dailymotion"]["id"]
+        if 'dailymotion' in video_datas["providers"]:
+            video_image = ''
+            if 'thumb' in video_datas["providers"]["dailymotion"]:
+                video_image = video_datas["providers"]["dailymotion"]["thumb"]
+            video_id = video_datas["providers"]["dailymotion"]["id"]
 
-        item = Listitem()
-        item.label = video_title
-        item.art['thumb'] = item.art['landscape'] = video_image
+            item = Listitem()
+            item.label = video_title
+            item.art['thumb'] = item.art['landscape'] = video_image
 
-        item.set_callback(get_video_url,
-                          item_id=item_id,
-                          video_id=video_id)
-        item_post_treatment(item, is_playable=True, is_downloadable=True)
-        yield item
+            item.set_callback(get_video_url,
+                              item_id=item_id,
+                              video_id=video_id)
+            item_post_treatment(item, is_playable=True, is_downloadable=True)
+            yield item
 
     # More videos...
     yield Listitem.next_page(item_id=item_id,
@@ -167,10 +151,7 @@ def get_live_url(plugin, item_id, **kwargs):
 
     resp = urlquick.get(
         URL_ROOT, headers={"User-Agent": web_utils.get_random_ua()}, max_age=-1)
-    js_id = re.compile(r'js\/bundle\.(.*?)\.js').findall(resp.text)[0]
-    resp2 = urlquick.get(
-        URL_LIVE_DATAS % js_id, headers={"User-Agent": web_utils.get_random_ua()}, max_age=-1)
-    live_id = re.compile(r'mi\,\{id\:\"(.*?)\"').findall(resp2.text)[0]
+    live_id = re.compile(r'dailymotion.com/embed/video/(.*?)[\?\"]').findall(resp.text)[0]
     return resolver_proxy.get_stream_dailymotion(plugin,
                                                  live_id,
                                                  False)

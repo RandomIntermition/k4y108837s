@@ -8,10 +8,11 @@ import json
 import base64
 import time
 import traceback
-from resources.lib.modules import client,  log_utils
+from resources.lib.modules import client
+from resources.lib.modules import log_utils
 from resources.lib.modules import cleantitle
 from resources.lib.modules import directstream
-from resources.lib.modules import source_utils
+from resources.lib.modules import scrape_source
 
 
 class source:
@@ -83,6 +84,7 @@ class source:
     def sources(self, url, hostDict, hostprDict):
         try:
             sources = []
+            items = []
 
             if url is None:
                 return sources
@@ -149,44 +151,14 @@ class source:
             r = re.findall('\'(http.+?)\'', r) + re.findall('\"(http.+?)\"', r)
 
             for i in r:
-                try:
-                    if 'google' in i:
-                        quality = 'SD'
+                if 'Season' in i:
+                    i = i.split(' - Season')[0]
+                if 'vidnode.net' in i:
+                    i = i.replace('vidnode.net', 'vidcloud9.com')
+                for source in scrape_source.getMore(i, hostDict):
+                    sources.append(source)
 
-                        if 'googleapis' in i:
-                            try:
-                                quality = source_utils.check_sd_url(i)
-                            except Exception:
-                                pass
 
-                        if 'googleusercontent' in i:
-                            i = directstream.googleproxy(i)
-                            try:
-                                quality = directstream.googletag(i)[0]['quality']
-                            except Exception:
-                                pass
-
-                        sources.append({'source': 'gvideo', 'quality': quality, 'language': 'en', 'url': i,
-                                        'direct': True, 'debridonly': False})
-
-                    elif 'llnwi.net' in i or 'vidcdn.pro' in i:
-                        try:
-                            quality = source_utils.check_sd_url(i)
-                            sources.append({'source': 'CDN', 'quality': quality, 'language': 'en', 'url': i,
-                                            'direct': True, 'debridonly': False})
-
-                        except Exception:
-                            pass
-                    else:
-                        valid, hoster = source_utils.is_host_valid(i, hostDict)
-                        if valid:
-                            if 'vidnode.net' in i:
-                                i = i.replace('vidnode.net', 'vidcloud9.com')
-                                hoster = 'vidcloud9'
-                            sources.append({'source': hoster, 'quality': '720p', 'language': 'en', 'url': i,
-                                            'direct': False, 'debridonly': False})
-                except Exception:
-                    pass
             return sources
         except Exception:
             failure = traceback.format_exc()

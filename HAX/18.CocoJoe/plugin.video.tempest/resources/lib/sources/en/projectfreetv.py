@@ -3,8 +3,9 @@
 
 import re, urllib, urlparse
 import traceback
-from resources.lib.modules import client,  log_utils
-from resources.lib.modules import source_utils
+from resources.lib.modules import client
+from resources.lib.modules import log_utils
+from resources.lib.modules import scrape_source
 
 
 class source:
@@ -61,11 +62,8 @@ class source:
             try:
                 data = re.compile('<a href="(.+?)" target="_blank" rel="nofollow" title.+?').findall(r)
                 for url in data:
-                    valid, host = source_utils.is_host_valid(url, hostDict)
-                    if valid:
-                        sources.append(
-                            {'source': host, 'quality': 'SD', 'language': 'en', 'url': url, 'direct': False,
-                             'debridonly': False})
+                    for source in scrape_source.getMore(url, hostDict):
+                        sources.append(source)
             except:
                 pass
             return sources

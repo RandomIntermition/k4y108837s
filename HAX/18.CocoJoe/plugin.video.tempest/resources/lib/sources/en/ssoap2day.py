@@ -57,7 +57,6 @@ class source:
                 try:
                     data = client.request(item[0])
                     url = re.compile('data-src="(.+?)"></iframe>').findall(data)
-                    log_utils.log('---7Torrents Testing - Exception: \n' + str(url))
                     for url in url:
                         if url.startswith('//'):
                             url = 'https:' + url

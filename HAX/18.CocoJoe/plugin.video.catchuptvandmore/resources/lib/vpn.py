@@ -1,33 +1,17 @@
 # -*- coding: utf-8 -*-
-"""
-    Catch-up TV & More
-    Original work (C) JUL1EN094, SPM, SylvainCecchetto
-    Copyright (C) 2016  SylvainCecchetto
+# Copyright: (c) JUL1EN094, SPM, SylvainCecchetto
+# Copyright: (c) 2016, SylvainCecchetto
+# GNU General Public License v2.0+ (see LICENSE.txt or https://www.gnu.org/licenses/gpl-2.0.txt)
 
-    This file is part of Catch-up TV & More.
-
-    Catch-up TV & More is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Catch-up TV & More is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with Catch-up TV & More; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
+# This file is part of Catch-up TV & More
 
 from builtins import str
 import os
-from kodi_six import xbmc
-from kodi_six import xbmcgui
-from resources.lib import openvpn as vpnlib
 
-from codequick import Route, utils, Script, storage
+from codequick import Script, storage
+from kodi_six import xbmc, xbmcgui
+
+from resources.lib import openvpn as vpnlib
 
 ip = "127.0.0.1"
 port = 1337
@@ -167,28 +151,27 @@ def select_ovpn():
     if len(ovpnfiles) == 0:
         return None
 
-    else:
-        response = vpnlib.is_running(ip, port)
-        Script.log('OpenVPN: Response from is_running: [%s] [%s] [%s]' %
-                   (response[0], response[1], response[2]))
-        if response[0]:
-            # Le VPN est connecté
-            disconnect_openvpn()
+    response = vpnlib.is_running(ip, port)
+    Script.log('OpenVPN: Response from is_running: [%s] [%s] [%s]' %
+               (response[0], response[1], response[2]))
+    if response[0]:
+        # Le VPN est connecté
+        disconnect_openvpn()
 
-        configs = []
-        ovpnfileslist = []
-        for name, configfilepath in list(ovpnfiles.items()):
-            configs.append(name)
-            ovpnfileslist.append(configfilepath)
+    configs = []
+    ovpnfileslist = []
+    for name, configfilepath in list(ovpnfiles.items()):
+        configs.append(name)
+        ovpnfileslist.append(configfilepath)
 
-        idx = xbmcgui.Dialog().select(
-            Script.localize(30352),
-            configs)
-        if idx >= 0:
-            Script.log('OpenVPN: Select conf: [%s]' % ovpnfileslist[idx])
-            return ovpnfileslist[idx]
-        else:
-            return ''
+    idx = xbmcgui.Dialog().select(
+        Script.localize(30352),
+        configs)
+    if idx < 0:
+        return ''
+
+    Script.log('OpenVPN: Select conf: [%s]' % ovpnfileslist[idx])
+    return ovpnfileslist[idx]
 
 
 @Script.register
@@ -204,35 +187,35 @@ def delete_ovpn(*args, **kwargs):
     if len(ovpnfiles) == 0:
         return None
 
-    else:
-        response = vpnlib.is_running(ip, port)
-        Script.log('OpenVPN: Response from is_running: [%s] [%s] [%s]' %
-                   (response[0], response[1], response[2]))
-        if response[0]:
-            # Le VPN est connecté
-            Script.log('OpenVPN: VPN still connected, we disconnect it')
-            disconnect_openvpn()
+    response = vpnlib.is_running(ip, port)
+    Script.log('OpenVPN: Response from is_running: [%s] [%s] [%s]' %
+               (response[0], response[1], response[2]))
+    if response[0]:
+        # Le VPN est connecté
+        Script.log('OpenVPN: VPN still connected, we disconnect it')
+        disconnect_openvpn()
 
-        configs = []
-        ovpnfileslist = []
-        for name, configfilepath in list(ovpnfiles.items()):
-            configs.append(name)
-            ovpnfileslist.append(configfilepath)
+    configs = []
+    ovpnfileslist = []
+    for name, configfilepath in list(ovpnfiles.items()):
+        configs.append(name)
+        ovpnfileslist.append(configfilepath)
 
-        idx = xbmcgui.Dialog().select(
-            Script.localize(30360),
-            configs)
-        if idx >= 0:
-            Script.log('Select: [%s]' % ovpnfileslist[idx])
-            new_ovpnfiles = {}
-            for name, configfilepath in list(ovpnfiles.items()):
-                if configfilepath != ovpnfileslist[idx]:
-                    new_ovpnfiles[name] = configfilepath
-            with storage.PersistentDict('vpn') as db:
-                db['ovpnfiles'] = new_ovpnfiles
-                db.flush()
-        else:
-            return ''
+    idx = xbmcgui.Dialog().select(
+        Script.localize(30360),
+        configs)
+
+    if idx < 0:
+        return ''
+
+    Script.log('Select: [%s]' % ovpnfileslist[idx])
+    new_ovpnfiles = {}
+    for name, configfilepath in list(ovpnfiles.items()):
+        if configfilepath != ovpnfileslist[idx]:
+            new_ovpnfiles[name] = configfilepath
+    with storage.PersistentDict('vpn') as db:
+        db['ovpnfiles'] = new_ovpnfiles
+        db.flush()
 
 
 @Script.register

@@ -15,7 +15,7 @@ class ustreamix:
 
     def root(self):
         url = 'https://ssl.ustreamix.com/index.html'
-        url = client.request(url, headers =self.headers)
+        url = client.request(url, headers=self.headers)
         url = re.findall('href="(.+?)" target="_blank">(.+?) <span class="(.+?)">', url)
         for item in url:
             if 'status_unknown' in item[2] or 'status_idle' in item[2]:

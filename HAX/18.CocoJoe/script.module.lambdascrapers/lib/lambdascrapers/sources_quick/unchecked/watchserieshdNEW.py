@@ -54,11 +54,20 @@ class source:
                         valid, host = source_utils.is_host_valid(link, hostDict)
                         if valid:
                             quality, info = source_utils.get_release_quality(link, link)
+                            if "streamsb" in host:
+                                quality = "720p"
+                            if "mstream" in host:
+                                quality = "720p"
+                            
                             sources.append({'source': host, 'quality': quality, 'language': 'en', 'info': info, 'url': link, 'direct': False, 'debridonly': False})
                 else:
                     valid, host = source_utils.is_host_valid(url, hostDict)
                     if valid:
                         quality, info = source_utils.get_release_quality(url, url)
+                        if "streamsb" in host:
+                            quality = "720p"
+                        if "mstream" in host:
+                            quality = "720p"
                         sources.append({'source': host, 'quality': quality, 'language': 'en', 'info': info, 'url': url, 'direct': False, 'debridonly': False})
             return sources
         except:

@@ -1,50 +1,22 @@
 # -*- coding: utf-8 -*-
-"""
-    Catch-up TV & More
-    Copyright (C) 2016  SylvainCecchetto
+# Copyright: (c) 2016, SylvainCecchetto
+# GNU General Public License v2.0+ (see LICENSE.txt or https://www.gnu.org/licenses/gpl-2.0.txt)
 
-    This file is part of Catch-up TV & More.
+# This file is part of Catch-up TV & More
 
-    Catch-up TV & More is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Catch-up TV & More is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with Catch-up TV & More; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
-
-# The unicode_literals import only has
-# an effect on Python 2.
-# It makes string literals as unicode like in Python 3
 from __future__ import unicode_literals
-
-# Core imports
 from builtins import str
-from builtins import range
 import importlib
 import sys
 
-# Kodi imports
 from codequick import Route, Resolver, Listitem, Script
 import urlquick
-from kodi_six import xbmc
-from kodi_six import xbmcgui
-from kodi_six import xbmcplugin
-from six import string_types
+from kodi_six import xbmc, xbmcgui, xbmcplugin
 
-# Local imports
-
-from resources.lib.kodi_utils import build_kodi_url, get_params_in_query
-import resources.lib.favourites as fav
-from resources.lib.menu_utils import get_sorted_menu, add_context_menus_to_item
 from resources.lib.addon_utils import get_item_label, get_item_media_path
+import resources.lib.favourites as fav
+from resources.lib.kodi_utils import build_kodi_url, get_params_in_query
+from resources.lib.menu_utils import get_sorted_menu, add_context_menus_to_item
 
 
 @Route.register
@@ -153,7 +125,7 @@ def tv_guide_menu(plugin, item_id, **kwargs):
 
     # Get tv_guide of this country
     xmltv = importlib.import_module('resources.lib.xmltv')
-    tv_guide = xmltv.grab_tv_guide(live_country_id)
+    tv_guide = xmltv.grab_current_programmes(live_country_id)
 
     # Treat this menu as a generic menu and add, if any, tv guide information
     for item in generic_menu(plugin, live_country_id):
@@ -206,6 +178,10 @@ def tv_guide_menu(plugin, item_id, **kwargs):
             if 'icon' in guide_infos:
                 item.art["clearlogo"] = item.art["thumb"]
                 item.art["thumb"] = guide_infos['icon']
+
+        # Playcount is useless for live streams
+        item.info['playcount'] = 0
+
         yield item
 
 

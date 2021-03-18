@@ -1,30 +1,29 @@
-﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.asgard" name="Asgard" version="1.0.7" provider-name="Narcacist">
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.asgard" name="[COLOR goldenrod]Asgard[/COLOR]" provider-name="Narcacist and cMaN" version="1.1.6">
     <requires>
-        <import addon="xbmc.python" version="2.19.0" />
-        <import addon="script.module.universalscrapers" version="1.0.0" />
-        <import addon="script.module.python.koding.aio.alt" version="1.1"/>
-        <import addon="script.module.beautifulsoup" version="3.2.1" />
-        <import addon="script.module.requests" version="2.9.1" />
-        <import addon="script.module.addon.common" version="2.0.0" />
-        <import addon="script.module.xmltodict" version="0.9.0" />
-        <import addon="script.module.dateutil" />
-		<import addon="script.module.feedparser" version="5.1.3"/>
-        <!--<import addon="script.module.web-pdb" version="1.0"/>-->
-        <import addon="script.module.resolveurl" />
-        <!--<import addon="script.module.urlresolver" />-->
+	    <import addon="script.module.six" version="0.0.1"/>
+		<import addon="script.module.requests"/>
+        <import addon="script.module.resolveurl"/>
     </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
+    <extension library="default.py" point="xbmc.python.pluginsource">
         <provides>video</provides>
     </extension>
-    <extension point="xbmc.service" library="service.py" start="[login|startup]" />
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Welcome to Asgard</summary>
-        <description lang="en">“Asgard is not a place, it's a people.”</description>
-        <disclaimer lang="en">The author is not responsible for the use of this addon. The author is not responsible for the content found using this addon. The author does not host or own any content found within this addon.[CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
-        <platform>all</platform>
-        <website/>
-        <video_guide></video_guide>
         <reuselanguageinvoker>false</reuselanguageinvoker>
+        <summary lang="en">Welcome to Asgard</summary>
+        <description lang="en">“Asgard is not a place, it's a people.” full credit to aa aa.</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <forum />
+        <website />
+        <source />
+        <disclaimer lang="en">The author of this add-on does not host any of the content which is found and has no affiliation with any of the content providers. This add-on simply searches websites for content. Use at your own risk!</disclaimer>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <news>
+
+        </news>
     </extension>
 </addon>

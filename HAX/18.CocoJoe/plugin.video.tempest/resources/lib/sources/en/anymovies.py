@@ -7,8 +7,8 @@
 
 import re, urllib, urlparse
 import traceback
-from resources.lib.modules import cleantitle, source_utils
-from resources.lib.modules import client, control
+from resources.lib.modules import source_utils
+from resources.lib.modules import client
 from resources.lib.modules import log_utils
 
 
@@ -64,7 +64,7 @@ class source:
             return sources
         except Exception:
             failure = traceback.format_exc()
-            log_utils.log('---7Torrents Testing - Exception: \n' + str(failure))
+            log_utils.log('---ANYMOVIES Testing - Exception: \n' + str(failure))
             return sources
 
     def resolve(self, url):

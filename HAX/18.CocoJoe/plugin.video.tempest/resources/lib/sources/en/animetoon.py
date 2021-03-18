@@ -3,7 +3,8 @@
 
 import re
 import traceback
-from resources.lib.modules import client,  log_utils
+from resources.lib.modules import client
+from resources.lib.modules import log_utils
 from resources.lib.modules import cleantitle
 
 

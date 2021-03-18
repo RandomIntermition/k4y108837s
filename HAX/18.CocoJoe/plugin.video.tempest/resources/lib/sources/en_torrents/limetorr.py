@@ -6,9 +6,13 @@ import traceback
 from resources.lib.modules import client2 as client
 from resources.lib.modules import dom_parser2 as dom
 from resources.lib.modules import cleantitle2 as cleantitle
-from resources.lib.modules import debrid,source_utils,workers,control
+from resources.lib.modules import debrid
+from resources.lib.modules import source_utils
+from resources.lib.modules import workers
+from resources.lib.modules import control
 from resources.lib.modules import log_utils
-from resources.lib.modules import rd_check, control
+from resources.lib.modules import rd_check
+from resources.lib.modules import control
 
 
 class source:

@@ -1,39 +1,20 @@
 # -*- coding: utf-8 -*-
-"""
-    Catch-up TV & More
-    Copyright (C) 2016  SylvainCecchetto
+# Copyright: (c) 2016, SylvainCecchetto
+# GNU General Public License v2.0+ (see LICENSE.txt or https://www.gnu.org/licenses/gpl-2.0.txt)
 
-    This file is part of Catch-up TV & More.
+# This file is part of Catch-up TV & More
 
-    Catch-up TV & More is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Catch-up TV & More is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with Catch-up TV & More; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
-
-# The unicode_literals import only has
-# an effect on Python 2.
-# It makes string literals as unicode like in Python 3
 from __future__ import unicode_literals
-from codequick import Script
-"""
-The following dictionaries describe
-the addon's tree architecture.
-* Key: item id
-* Value: item infos
-    - route (folder)/resolver (playable URL): Callback function to run once this item is selected
-    - thumb: Item thumb path relative to "media" folder
-    - fanart: Item fanart path relative to "meia" folder
-"""
+
+# The following dictionaries describe
+# the addon's tree architecture.
+# * Key: item id
+# * Value: item infos
+#     - route (folder)/resolver (playable URL): Callback function to run once this item is selected
+#     - thumb: Item thumb path relative to "media" folder
+#     - fanart: Item fanart path relative to "media" folder
+
+root = 'live_tv'
 
 menu = {
     'blaze': {
@@ -144,21 +125,21 @@ menu = {
         'order': 16
     },
     'quest': {
-        'resolver': '/resources/lib/channels/uk/dplay:get_live_url',
+        'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
         'label': 'Quest',
         'thumb': 'channels/uk/questtv.png',
         'fanart': 'channels/uk/questtv_fanart.jpg',
         'xmltv_id': '1230.tvguide.co.uk',
-        'enabled': True,
+        'enabled': False,
         'order': 18
     },
     'quest-red': {
-        'resolver': '/resources/lib/channels/uk/dplay:get_live_url',
+        'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
         'label': 'Quest RED',
         'thumb': 'channels/uk/questred.png',
         'fanart': 'channels/uk/questred_fanart.jpg',
         'xmltv_id': '1014.tvguide.co.uk',
-        'enabled': True,
+        'enabled': False,
         'order': 19
     },
     'bristollocal': {
@@ -282,35 +263,35 @@ menu = {
         'order': 36
     },
     'really': {
-        'resolver': '/resources/lib/channels/uk/dplay:get_live_url',
+        'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
         'label': 'Really',
         'thumb': 'channels/uk/really.png',
         'fanart': 'channels/uk/really_fanart.jpg',
-        'enabled': True,
+        'enabled': False,
         'order': 37
     },
     'food-network': {
-        'resolver': '/resources/lib/channels/uk/dplay:get_live_url',
+        'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
         'label': 'Food Network',
         'thumb': 'channels/uk/foodnetwork.png',
         'fanart': 'channels/uk/foodnetwork_fanart.jpg',
-        'enabled': True,
+        'enabled': False,
         'order': 38
     },
     'dmax': {
-        'resolver': '/resources/lib/channels/uk/dplay:get_live_url',
+        'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
         'label': 'DMAX',
         'thumb': 'channels/uk/dmax.png',
         'fanart': 'channels/uk/dmax_fanart.jpg',
-        'enabled': True,
+        'enabled': False,
         'order': 39
     },
     'home': {
-        'resolver': '/resources/lib/channels/uk/dplay:get_live_url',
+        'resolver': '/resources/lib/channels/uk/discoveryplus:get_live_url',
         'label': 'HGTV',
         'thumb': 'channels/uk/hgtv.png',
         'fanart': 'channels/uk/hgtv_fanart.jpg',
-        'enabled': True,
+        'enabled': False,
         'order': 40
     }
 }

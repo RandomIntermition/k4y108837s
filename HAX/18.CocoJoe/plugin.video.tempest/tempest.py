@@ -538,6 +538,10 @@ if action == 'entertainment':
     from resources.lib.indexers import lists
     lists.indexer().entertainment()
 
+if action == 'allsprk':
+    from resources.lib.indexers import lists
+    lists.indexer().allsprk()
+
 if action == 'movies':
     from resources.lib.indexers import lists
     lists.indexer().movies()
@@ -638,10 +642,10 @@ def toggleAll(setting, query=None, sourceList=None):
 
 
 if mode == "toggleAllNormal":
-    sourcelist = ['2embed', '5movies', 'anime1', 'animeram', 'animetoon', 'cartoonhd', 'anymovies', 'filmheaven',
-                  'fmovies', 'lunchflix', 'movie2k', 'projectfreetv', 'retrovisionmedia', 'series9', 'showbox',
-                  'soap2day', 'soap2day1', 'ssoap2day', 'swatchseries', 'themoviebay', 'toonova', 'watchepisodes4',
-                  'watchseries', 'watchserieshd']
+    sourcelist = ['2embed', '5movies', 'allmoviesforyou', 'anime1', 'animeram', 'animetoon', 'cartoonhd',
+                  'dbgo', 'filmxy', 'anymovies', 'fsapi', 'lunchflix', 'movie2k', 'projectfreetv', 'retrovisionmedia',
+                  'showbox', 'soap2day', 'soap2day1', 'sockshares', 'ssoap2day', 'swatchseries', 'toonova', 'vidnext',
+                  'vidsrc', 'watchepisodes4']
     toggleAll(params['setting'], params['query'], sourcelist)
 
 if mode == "toggleAllDebrid":

@@ -13,7 +13,8 @@ from resources.lib.modules import debrid
 from resources.lib.modules import source_utils
 from resources.lib.modules import dom_parser
 from resources.lib.modules import log_utils
-from resources.lib.modules import control, rd_check
+from resources.lib.modules import control
+from resources.lib.modules import rd_check
 
 
 class source:

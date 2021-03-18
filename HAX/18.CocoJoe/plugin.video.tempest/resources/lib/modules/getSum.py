@@ -2,8 +2,9 @@
 # --[getSum v1.4]--|--[From JewBMX]--
 # Lazy Module to make life a little easier.
 
-import re, time, traceback, xbmcgui
-from resources.lib.modules import log_utils, client
+import re, xbmcgui
+from resources.lib.modules import log_utils
+from resources.lib.modules import client
 import HTMLParser
 
 headers = {'User-Agent': client.agent()}

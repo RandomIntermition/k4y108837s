@@ -1,41 +1,19 @@
 # -*- coding: utf-8 -*-
-"""
-    Catch-up TV & More
-    Copyright (C) 2018  SylvainCecchetto
+# Copyright: (c) 2018, SylvainCecchetto
+# GNU General Public License v2.0+ (see LICENSE.txt or https://www.gnu.org/licenses/gpl-2.0.txt)
 
-    This file is part of Catch-up TV & More.
+# This file is part of Catch-up TV & More
 
-    Catch-up TV & More is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation; either version 2 of the License, or
-    (at your option) any later version.
-
-    Catch-up TV & More is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License along
-    with Catch-up TV & More; if not, write to the Free Software Foundation,
-    Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-"""
-
-# The unicode_literals import only has
-# an effect on Python 2.
-# It makes string literals as unicode like in Python 3
 from __future__ import unicode_literals
+import json
+import re
 
-from codequick import Route, Resolver, Listitem, utils, Script
+from codequick import Listitem, Resolver, Route
+import urlquick
 
-
-from resources.lib import web_utils
-from resources.lib import download
 from resources.lib import resolver_proxy
 from resources.lib.menu_utils import item_post_treatment
 
-import json
-import re
-import urlquick
 
 # TO DO
 
@@ -90,8 +68,11 @@ def list_videos(plugin, item_id, program_guid, **kwargs):
             "title"]
         video_image = video_datas["images"][0]["_filepath"]
         video_plot = video_datas["summary"]
-        video_duration = 60 * int(
-            video_datas["video"]["_duration"].split(' ')[0])
+        video_duration_datas = video_datas["video"]["_duration"].split(' ')
+        if (len(video_duration_datas) > 2):
+            video_duration = 3600 * int(video_duration_datas[0]) + 60 * int(video_duration_datas[2])
+        else:
+            video_duration = 60 * int(video_duration_datas[0])
         video_id = video_datas["video"]["id"]
 
         item = Listitem()
@@ -122,8 +103,8 @@ def get_video_url(plugin,
 
     resp = urlquick.get(URL_BRIGHTCOVE_DATAS)
 
-    data_account = re.compile(r'ACCOUNT_ID\:\"(.*?)\"').findall(resp.text)[0]
-    data_player = re.compile(r'PLAYER_ID\:\"(.*?)\"').findall(resp.text)[0]
+    data_account = re.compile(r'ACCOUNT_ID\:\"(.*?)\"').findall(resp.text)[1]
+    data_player = re.compile(r'PLAYER_ID\:\"(.*?)\"').findall(resp.text)[1]
     data_video_id = video_id
 
     return resolver_proxy.get_brightcove_video_json(plugin, data_account,

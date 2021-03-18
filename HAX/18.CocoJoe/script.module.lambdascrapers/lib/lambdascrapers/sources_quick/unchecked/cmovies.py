@@ -79,9 +79,14 @@ class source:
                     if url.startswith('//'):
                         url = 'https:' + url
                     valid, host = source_utils.is_host_valid(url, hostDict)
+                    quality = "SD"
+                    if "streamsb" in host:
+                        quality = "720p"
+                    if "mstream" in host:
+                        quality = "720p"
                     if valid:
                         sources.append(
-                            {'source': host, 'quality': 'SD', 'language': 'en', 'url': url,
+                            {'source': host, 'quality': quality, 'language': 'en', 'url': url,
                              'direct': False, 'debridonly': False})
             except:
                 pass
