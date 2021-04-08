@@ -1,3 +1,7 @@
+[B][COLOR red]Update - v1.18 - March 29, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Removed Marcel's beta repo and AuraMod repo due
+    to recent changes to Marcel's beta repo.[/I]
+
 [B][COLOR red]Update - v1.17 - March 11, 2021[/COLOR][/B]
 [COLOR yellow]--[/COLOR][I] AuraMod repo now set to only show in Kodi Leia.[/I]
 [COLOR yellow]--[/COLOR][I] Updated Jurial Munkey Alpha repo. v1.2 will now only

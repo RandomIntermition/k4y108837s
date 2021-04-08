@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.asgard" name="[COLOR goldenrod]Asgard[/COLOR]" provider-name="Narcacist and cMaN" version="1.1.6">
+<addon id="plugin.video.asgard" name="[COLOR goldenrod]Asgard[/COLOR]" provider-name="Narcacist and cMaN" version="1.2.0">
     <requires>
 	    <import addon="script.module.six" version="0.0.1"/>
 		<import addon="script.module.requests"/>

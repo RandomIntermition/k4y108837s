@@ -82,6 +82,8 @@
 		
 		<setting id="adults" label="32217" type="bool"  default="true" />
 		
+		<setting id="hyper_speed" label="hyper speed mode" type="bool"  default="false" />
+		<setting label="[COLOR lightblue][I]$ADDON[plugin.video.asgard 32220][/I][/COLOR]" option="close" type="action" action="RunPlugin(plugin://plugin.video.asgard?mode=163&url=www)" />
 		
 		<setting label="[COLOR lightblue][I]$ADDON[plugin.video.asgard 32220][/I][/COLOR]" option="close" type="action" action="RunPlugin(plugin://plugin.video.asgard?mode=163&url=www)" />
 		

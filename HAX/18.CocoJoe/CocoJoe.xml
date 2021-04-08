@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="context.venom" version="1.1.0" name="Venom - Global Context Menu Items" provider-name="Venom">
+<addon id="context.venom" name="Venom - Global Context Menu Items" provider-name="Venom" version="1.1.2">
 	<requires>
-		<import addon="xbmc.python" version="2.23.0" />
 		<import addon="script.module.requests" version="2.19.1" />
 	</requires>
 	<extension point="kodi.context.item">
@@ -39,8 +38,7 @@
 					!String.IsEmpty(Window(home).Property(context.venom.clearBookmark)) +
 					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
 					String.IsEqual(ListItem.Property(isVenom_widget),true) +
-<!-- 					!String.IsEqual(ListItem.Property(resumetime),0) + -->
-					!String.IsEqual(ListItem.Property(venom_resumetime),0) +
+					ListItem.IsResumable +
 					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
 				</visible>
 			</item>
@@ -51,11 +49,10 @@
 					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
 					String.IsEqual(ListItem.Property(isVenom_widget),true) +
 					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
-
 <!-- Future for Library CM to Rescrape -->
-<!-- 					!String.IsEmpty(Window(home).Property(context.venom.rescrape)) +
-					[String.Contains(ListItem.Path,plugin.video.venom) + String.IsEqual(ListItem.FileExtension,strm) | String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play)] +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)] -->
+<!-- 					!String.IsEmpty(Window(home).Property(context.venom.rescrape)) + -->
+<!-- 					[String.Contains(ListItem.Path,plugin.video.venom) + String.IsEqual(ListItem.FileExtension,strm) | String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play)] + -->
+<!-- 					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)] -->
 				</visible>
 			</item>
 			<item library="playFromHere.py">
@@ -132,11 +129,50 @@
 			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Update - v1.1.0 - Oct. 05, 2020[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Service module cleanup.[/I]
-[COLOR yellow]--[/COLOR][I] Changed to new fanart.[/I]
+[B][COLOR red]Update - v1.1.2 - March 10, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Change method of determining bookmarks to use "ListItem.IsResumable".[/I]
 		</news>
 	</extension>
+</addon>
+
+<addon id="metadata.common.themoviedb.org"
+       name="The Movie Database Scraper Library"
+       version="3.2.14"
+       provider-name="Team Kodi">
+  <requires>
+    <import addon="xbmc.metadata" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.metadata.scraper.library"
+             library="tmdb.xml"/>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary lang="bg">Библиотека за сваляне на инф. от TMDb</summary>
+    <summary lang="en">TMDb Scraper Library</summary>
+    <summary lang="es">Scraper de peliculas de TMDb</summary>
+    <summary lang="fi">TMDb elokuvatietojen lataajan kirjasto</summary>
+    <summary lang="fr">Scraper TMDb</summary>
+    <summary lang="hu">TMDb leolvasó-könyvtár</summary>
+    <summary lang="nl">TMDb-scraperfuncties</summary>
+    <summary lang="pl">Scraper biblioteki TMDb</summary>
+    <summary lang="pt">Scraper de filmes TMDb</summary>
+    <summary lang="ro">Bibliotecă catalog TMDb</summary>
+    <summary lang="ru">Обработчик для TMDb</summary>
+    <summary lang="se">Skrapebibliotek för TMDb</summary>
+    <summary lang="zh">TMDb刮削器代码库</summary>
+    <description lang="bg">Сваля миниатюри и fanarts от www.themoviedb.org</description>
+    <description lang="en">Download thumbs and fanarts from www.themoviedb.org</description>
+    <description lang="es">Descarga posters y fanart de www.themoviedb.org</description>
+    <description lang="fi">Lataa pienoiskuvia ja fanitaidetta www.themoviedb.org -sivustolta</description>
+    <description lang="fr">Télécharge vignettes et backdrops depuis www.themoviedb.org</description>
+    <description lang="hu">Bélyeg- és fanartképek letöltése a www.themoviedb.org webhelyről</description>
+    <description lang="nl">Miniaturen en fanart ophalen van www.themoviedb.org</description>
+    <description lang="pl">Pobieraj ikony i fanarty z www.themoviedb.org</description>
+    <description lang="pt">Descarregar informação de filmes de www.themoviedb.org</description>
+    <description lang="ro">Descărcați miniaturi și imagini realizate de fani de pe www.themoviedb.org</description>
+    <description lang="ru">Загружать миниатюры и фанарт с www.themoviedb.org</description>
+    <description lang="se">Ladda ner miniatyrer och fanart från www.themoviedb.org</description>
+    <description lang="zh">从www.themoviedb.org下载海报和同人画</description>
+  </extension>
 </addon>
 
 <addon id="metadata.tvdb.com"
@@ -282,33 +318,32 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.asgard" name="Asgard" version="1.1.0" provider-name="Narcacist">
+<addon id="plugin.video.asgard" name="[COLOR goldenrod]Asgard[/COLOR]" provider-name="Narcacist and cMaN" version="1.2.0">
     <requires>
-        <import addon="xbmc.python" version="2.19.0" />
-        <import addon="script.module.universaldebrid" version="1.2.3" />
-        <import addon="script.module.python.koding.aio.alt" version="1.1"/>
-        <import addon="script.module.beautifulsoup" version="3.2.1" />
-        <import addon="script.module.requests" version="2.9.1" />
-        <import addon="script.module.addon.common" version="2.0.0" />
-        <import addon="script.module.xmltodict" version="0.9.0" />
-        <import addon="script.module.dateutil" />
-		<import addon="script.module.feedparser" version="5.1.3"/>
-        <!--<import addon="script.module.web-pdb" version="1.0"/>-->
-        <import addon="script.module.resolveurl" />
-        <!--<import addon="script.module.urlresolver" />-->
+	    <import addon="script.module.six" version="0.0.1"/>
+		<import addon="script.module.requests"/>
+        <import addon="script.module.resolveurl"/>
     </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
+    <extension library="default.py" point="xbmc.python.pluginsource">
         <provides>video</provides>
     </extension>
-    <extension point="xbmc.jen" library="service.py" start="[login|startup]" />
     <extension point="xbmc.addon.metadata">
-        <summary lang="en">Welcome to Asgard</summary>
-        <description lang="en">“Asgard is not a place, it's a people.”</description>
-        <disclaimer lang="en">The author is not responsible for the use of this addon. The author is not responsible for the content found using this addon. The author does not host or own any content found within this addon.[CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
-        <platform>all</platform>
-        <website/>
-        <video_guide></video_guide>
         <reuselanguageinvoker>false</reuselanguageinvoker>
+        <summary lang="en">Welcome to Asgard</summary>
+        <description lang="en">“Asgard is not a place, it's a people.” full credit to aa aa.</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <forum />
+        <website />
+        <source />
+        <disclaimer lang="en">The author of this add-on does not host any of the content which is found and has no affiliation with any of the content providers. This add-on simply searches websites for content. Use at your own risk!</disclaimer>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+        <news>
+
+        </news>
     </extension>
 </addon>
 
@@ -351,7 +386,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.33~beta00" provider-name="SylvainCecchetto,wwark">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.34~beta07" provider-name="SylvainCecchetto,wwark">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -394,8 +429,17 @@
     <email>catch.up.tv.and.more at gmail dot com</email>
     <source>https://github.com/Catch-up-TV-and-More/plugin.video.catchuptvandmore</source>
     <news>
-[Version 0.2.32]
-[ALL] Remove notification "Plugin CUTVMore non compatible Kodi 19"
+[Version 0.2.34]
+[NRJ Hits TV - BE] Remove Live TV (not available anymore)
+[NRJ Hits TV - BE] Fix Catch-up TV
+[TeleQuebec - CA] Readd Catch-up TV
+[NOOVO - CA] Fix Catch-up TV
+[BFMTV - FR] Use DailyMotion to play Live TV
+[Languages] Update po files
+[LuckyJack - FR] Remove Live TV
+[ABWEB - BE] Fix Live TV (thanks chamchenko)
+[RMC Decouverte - FR] Fix Live TV
+[MA] Add some live TV for Morroco (M24, SNRT, Medi1 and Telemaroc) (thanks chamchenko)
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
@@ -520,7 +564,7 @@ Visit WebSite - http://mpdb.tv/#home which host the french forum used by users o
     </extension>
 </addon>
 
-<addon id="plugin.video.iplayerwww" name="iPlayer WWW" version="3.0.49" provider-name="CaptainT, Cas, ihurst, primaeval">
+<addon id="plugin.video.iplayerwww" name="iPlayer WWW" version="3.0.50" provider-name="CaptainT, Cas, ihurst, primaeval">
   <requires>
     <import addon="xbmc.python" version="2.25.0"/>
     <import addon="script.module.requests" version="2.7.0"/>
@@ -541,10 +585,20 @@ Visit WebSite - http://mpdb.tv/#home which host the french forum used by users o
         <fanart>resources/fanart.jpg</fanart>
     </assets>
     <news>
-v3.0.49
-Fixes for new subtitle XML format.
-Added initial compatibility with Python 3 (does not work on 19 yet).
-Fixed issue for programmes with multiple pages.
+v3.0.50
+Switched to PC mediaselector.
+COMPATIBILITY NOTE: As a result there are no more HD streams over HLS.
+In order to get HD streams, inputstream.adaptive is required.
+Set "Stream protocol" in the add-on settings to "DASH" to get HD streams after making sure inputstream.adaptive is available.
+New mediaselector also adds the following new features:
+- Access to new CDN Cloudfront (Amazon)
+- Access to new subtitle sources. If you experience issues with subtitles, first try the new "Subtitle source" setting in the add-on settings before reporting issues.
+
+Radio Categories now uses the Categories of BBC Sounds.
+
+Known issues:
+- Live TV and Radio over DASH is broken, most likely due to a bug in inputstream.adaptive.
+- Red Button is only available for HLS.
    </news>
   </extension>
 </addon>
@@ -673,7 +727,7 @@ Fixed issue for programmes with multiple pages.
   </extension>
 </addon>
 
-<addon id="plugin.video.placenta" version="2.3.0.4.1" name="Placenta" provider-name="Team Aftebirth">
+<addon id="plugin.video.placenta" version="2.3.0.4.3" name="Placenta" provider-name="Team Aftebirth">
 	<requires>
            <import addon="xbmc.python" version="2.19.0" />
            <import addon="script.module.placenta" />
@@ -831,7 +885,7 @@ Fixed issue for programmes with multiple pages.
 	</extension>
 </addon>
 
-<addon id="plugin.video.thecrew" version="0.0.98" name="[COLOR orchid]THE CREW[/COLOR]" provider-name="The Crew">
+<addon id="plugin.video.thecrew" version="0.1.0" name="[COLOR orchid]THE CREW[/COLOR]" provider-name="The Crew">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.thecrew" />
@@ -863,7 +917,7 @@ Fixed issue for programmes with multiple pages.
     </extension>
 </addon>
 
-<addon id="plugin.video.youtube" name="YouTube" version="6.8.9" provider-name="anxdpanic, bromix">
+<addon id="plugin.video.youtube" name="YouTube" version="6.8.10" provider-name="anxdpanic, bromix">
     <requires>
         <import addon="xbmc.python" version="2.20.0"/>
         <import addon="script.module.six" version="1.11.0"/>
@@ -877,11 +931,8 @@ Fixed issue for programmes with multiple pages.
     <extension point="xbmc.python.module" library="resources/lib/"/>
     <extension point="xbmc.addon.metadata">
         <news>
-[fix] my subscriptions section using YouTube RSS |contrib: PureHemp|
-[fix] items per page settings on Kodi 19
-[chg] recommendations only available for users with custom history playlist id configured
-[chg] no longer show watch later unless custom watch later playlist is configured
-[rem] remove usage of discontinued api and dual login (no longer required)
+[fix] fix javascript player retrieval and playback of some videos for affected users |contrib: thomazz-nl|
+    - Invalid URL &#39;http://&#39;: No host supplied
         </news>
         <assets>
             <icon>icon.png</icon>
@@ -1281,7 +1332,7 @@ Fixed issue for programmes with multiple pages.
     </extension>
 </addon>
 
-    <addon id="repository.Magnetic" name="Magnetic Repo" version="1.0.8" provider-name="1-cool-guy">
+    <addon id="repository.Magnetic" name="Magnetic Repo" version="1.0.9" provider-name="1-cool-guy">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
         </requires>
@@ -1328,10 +1379,13 @@ Fixed issue for programmes with multiple pages.
             <description>Welcome to magnetic repo. Please enjoy</description>
             <platform>all</platform>
             <genre>movies,usa</genre>
+			<assets>
+			    <icon>icon.png</icon>
+			</assets>
         </extension>
     </addon>
 
-    <addon id="repository.NarcacistWizard" name="Narcacist's Wizard Repository" version="1.1.2" provider-name="Narcacist">
+    <addon id="repository.NarcacistWizard" name="Narcacist's Wizard Repository" version="1.1.3" provider-name="Narcacist">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
         </requires>
@@ -1371,6 +1425,10 @@ Fixed issue for programmes with multiple pages.
             <summary>Install all the latest Builds</summary>
             <description>Welcome to the New and Improved Narcacist WIZARD for all your Community Builds.</description>
             <platform>all</platform>
+			<assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+    </assets>
     </extension>
 </addon>
 
@@ -1501,39 +1559,56 @@ Fixed issue for programmes with multiple pages.
 	</extension>
 </addon>
 
-<addon id="repository.thecrew" name="[COLOR deeppink]THE CREW[/COLOR]" provider-name="The Crew" version="0.0.8">
-	<requires>
-		<import addon="xbmc.addon" version="12.0.0"/>
-	</requires>
-	<extension name="The Crew" point="xbmc.addon.repository">
-		<dir>
-			<info compressed="false">https://bitbucket.org/threw/the-crew/raw/master/_zips/addons.xml</info>
-			<checksum>https://bitbucket.org/threw/the-crew/raw/master/_zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://bitbucket.org/threw/the-crew/raw/master/_zips/</datadir>
-		</dir>
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
-		</dir>
-		<dir>
+<addon id="repository.thecrew" name="[COLOR orchid]THE CREW REPO[/COLOR]" provider-name="The Crew" version="0.3.4">
+	<extension point="xbmc.addon.repository" name="The Crew" >
+			<dir minversion="16.0.0" maxversion="18.9.9">
+			<info compressed="false">https://raw.githubusercontent.com/thecrewwh/zips/master/_zip/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/thecrewwh/zips/master/_zip/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/thecrewwh/zips/master/_zip</datadir>
+			</dir>
+			<dir minversion="18.9.9">
+			<info compressed="false">https://raw.githubusercontent.com/thecrewwh/zips/master/matrix/_zip/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/thecrewwh/zips/master//matrix/_zip/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/thecrewwh/zips/master//matrix/_zip</datadir>
+			</dir>
+			<dir>
+			<info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+			</dir>
+			<dir>
 			<info compressed="false">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/teamuniversal/scrapers/master/_modules4all/zips/</datadir>
-		</dir>
-		<dir>
+			</dir>
+			<dir>
 			<info compressed="false">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/dobbelina/repository.dobbelina/master/</datadir>
-		</dir>
+			</dir>
+			<dir>
+			<info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
+			</dir>
+			<dir>
+			<info compressed="false">https://raw.githubusercontent.com/therealatreides/housetools/master/code/_housefiles/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/therealatreides/housetools/master/code/_housefiles/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/therealatreides/housetools/master/code/_housefiles/</datadir>
+			</dir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary>The Crew is a team of highly skilled talent that provide you with the best of the best.</summary>
-		<description>This addon does not form part of the Kodi Media Centre. Please do not seek assistance with this addon from any of the Official Kodi Support Channels.The author does not host any of the content in this addon and takes no responsibility for content found.</description>
+		<summary lang="en">The Crew is a team of individuals that does what it can to provide others, you the best in entertainment.</summary>
+		<description lang="en">Many come, Many go. The true and dedicated are here. We here</description>
 		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+		<disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
 		<assets>
 			<icon>icon.png</icon>
 			<fanart>fanart.jpg</fanart>
+			<screenshot>resources/art/ss/1.png</screenshot>
+			<screenshot>resources/art/ss/2.png</screenshot>
+			<screenshot>resources/art/ss/3.png</screenshot>
 		</assets>
 	</extension>
 </addon>
@@ -1568,7 +1643,7 @@ Fixed issue for programmes with multiple pages.
         </extension>
     </addon>
 
-<addon id="repository.venom" name="[COLOR red]Venom[/COLOR] Repository" version="1.14" provider-name="Venom">
+<addon id="repository.venom" name="[COLOR red]Venom[/COLOR] Repository" version="1.18" provider-name="Venom">
 	<extension point="xbmc.addon.repository" name="Venom Repo">
 		<dir>
 			<info compressed="false">https://raw.githubusercontent.com/123Venom/zips/master/addons.xml</info>
@@ -1588,6 +1663,17 @@ Fixed issue for programmes with multiple pages.
 			<datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/</datadir>
 		</dir>
 
+		<dir minversion="18.0" maxversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/123Venom/repository.metahandler/main/leia/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/123Venom/repository.metahandler/main/leia/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/123Venom/repository.metahandler/main/leia/zips/</datadir>
+		</dir>
+		<dir minversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/123Venom/repository.metahandler/main/matrix/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/123Venom/repository.metahandler/main/matrix/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/123Venom/repository.metahandler/main/matrix/zips/</datadir>
+		</dir>
+
 		<dir>
 			<info compressed="false">https://raw.githubusercontent.com/drinfernoo/repository.openwizard/master/zips/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/drinfernoo/repository.openwizard/master/zips/addons.xml.md5</checksum>
@@ -1595,9 +1681,20 @@ Fixed issue for programmes with multiple pages.
 		</dir>
 
 		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/skyfsza/repository.auramod/master/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/skyfsza/repository.auramod/master/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/skyfsza/repository.auramod/master/</datadir>
+			<info compressed="false">https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/</datadir>
+		</dir>
+
+		<dir minversion="18.0" maxversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/leia/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/leia/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/leia/zips/</datadir>
+		</dir>
+		<dir minversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/matrix/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/matrix/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/matrix/zips/</datadir>
 		</dir>
 
 		<dir minversion="18.0" maxversion="18.9.0">
@@ -1618,28 +1715,16 @@ Fixed issue for programmes with multiple pages.
 		</dir>
 
 		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/marcelveldt/repository.marcelveldt/master/</datadir>
-		</dir>
-
-		<dir>
 			<info compressed="false">https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml.crc</checksum>
 			<datadir>https://github.com/newt-sc/a4kSubtitles/archive</datadir>
 			<artdir>https://github.com/a4k-openproject/a4kSubtitles/releases/download/v0.0.13</artdir>
 		</dir>
 
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/</datadir>
-		</dir>
-
-		<dir minversion="17.9.0">
-			<info compressed="true">https://github.com/mikesilvo164/repo.aeon.nox.silvo/raw/master/leia/addons.xml</info>
-			<checksum>https://github.com/mikesilvo164/repo.aeon.nox.silvo/raw/master/leia/addons.xml.md5</checksum>
-			<datadir zip="true">https://github.com/mikesilvo164/repo.aeon.nox.silvo/raw/master/leia</datadir>
+		<dir minversion="18.0" maxversion="18.9.0">
+			<info compressed="true">https://raw.githubusercontent.com/mikesilvo164/repo.aeon.nox.silvo/master/leia/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/mikesilvo164/repo.aeon.nox.silvo/master/leia/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/mikesilvo164/repo.aeon.nox.silvo/master/leia/</datadir>
 		</dir>
 	</extension>
 
@@ -1655,10 +1740,9 @@ Fixed issue for programmes with multiple pages.
 			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Update - v1.14 - Jan. 26, 2021[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Removed OpenMeta repository as it's been removed
-    from a4k-openproject.[/I]
-[COLOR yellow]--[/COLOR][I] Added a4kstreaming repository.[/I]
+[B][COLOR red]Update - v1.18 - March 29, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Removed Marcel's beta repo and AuraMod repo due
+    to recent changes to Marcel's beta repo.[/I]
 		</news>
 	</extension>
 </addon>
@@ -1924,6 +2008,44 @@ This addon is NOT affiliated with official Kodi.
        	</extension>
 </addon>
 
+<addon id="script.module.backports.functools_lru_cache"
+       name="backports.functools_lru_cache"
+       version="1.6.1"
+       provider-name="Jason R. Coombs">
+  <requires>
+    <import addon="xbmc.python" version="2.14.0"/>
+  </requires>
+  <extension point="xbmc.python.module"
+             library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Backport of functools.lru_cache from Python 3.3</summary>
+    <description lang="en">Packed for Kodi from https://github.com/jaraco/backports.functools_lru_cache</description>
+    <platform>all</platform>
+    <license>MIT</license>
+    <website>https://github.com/jaraco/backports.functools_lru_cache</website>
+    <source>https://github.com/Razzeee/script.module.backports.functools_lru_cache</source>
+  </extension>
+</addon>
+
+<addon id="script.module.beautifulsoup4" name="BeautifulSoup4" version="4.9.3" provider-name="Leonard Richardson (leonardr@segfault.org)">
+	<requires>
+		<import addon="xbmc.python" version="2.26.0"/>
+		<import addon="script.module.soupsieve" version="1.9.6"/>
+	</requires>
+	<extension point="xbmc.python.module" library="lib" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">Screen-scraping library</summary>
+		<description lang="en_GB">Beautiful Soup is a library that makes it easy to scrape information from web pages. It sits atop an HTML or XML parser, providing Pythonic idioms for iterating, searching, and modifying the parse tree.</description>
+		<license>MIT</license>
+		<platform>all</platform>
+		<website>https://www.crummy.com/software/BeautifulSoup/</website>
+		<source>https://code.launchpad.net/beautifulsoup</source>
+		<assets>
+			<icon>icon.png</icon>
+		</assets>
+	</extension>
+</addon>
+
 <addon id="script.module.bottle" name="Bottle" version="0.12.8" provider-name="Team Kodi">
   <requires>
     <import addon="xbmc.python" version="2.19.0"/>
@@ -1962,7 +2084,7 @@ This addon is NOT affiliated with official Kodi.
     </extension>
 </addon>
 
-<addon id="script.module.codequick" name="CodeQuick" provider-name="willforde" version="1.0.1">
+<addon id="script.module.codequick" name="CodeQuick" provider-name="willforde" version="1.0.2">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.youtube.dl" version="19.912.1"/>
@@ -2172,7 +2294,7 @@ v0.5.0 (2020-06-25)
   </extension>
 </addon>
 
-<addon id="script.module.lambdascrapers" name="Lambdascrapers Module" version="2.3.0.4.1" provider-name="1Clowns">
+<addon id="script.module.lambdascrapers" name="Lambdascrapers Module" version="2.3.0.4.3" provider-name="1Clowns">
     <requires>
         <import addon="xbmc.python" version="2.1.0" />
         <import addon="script.module.beautifulsoup4"/>
@@ -2299,7 +2421,7 @@ v0.5.0 (2020-06-25)
 	</extension>
 </addon>
 
-<addon id="script.module.placenta" name="Placenta Module" version="2.3.0.4.1" provider-name="Team Aftebirth">
+<addon id="script.module.placenta" name="Placenta Module" version="2.3.0.4.3" provider-name="Team Aftebirth">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0" />
 		<import addon="script.module.beautifulsoup4"/>
@@ -2444,7 +2566,7 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
   </extension>
 </addon>
 
-<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.25" provider-name="gujal">
+<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.28" provider-name="gujal">
     <requires>
         <!-- <import addon="xbmc.python" version="3.0.0" /> -->
         <import addon="script.module.six" />
@@ -2559,6 +2681,47 @@ Documentation: https://github.com/tamland/kodi-plugin-routing</description>
   </extension>
 </addon>
 
+<addon id="script.module.six"
+       name="six"
+       version="1.15.0"
+       provider-name="gutworth">
+  <requires>
+    <import addon="xbmc.python"
+    		version="2.14.0"/>
+  </requires>
+  <extension point="xbmc.python.module" library="lib" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Python 2 and 3 compatibility utilities.</summary>
+    <description lang="en_GB">Six is a Python 2 and 3 compatibility library. It provides utility functions for smoothing over the differences between the Python versions with the goal of writing Python code that is compatible on both Python versions. See the documentation for more information on what is provided.</description>
+    <platform>all</platform>
+    <license>MIT</license>
+    <source>https://github.com/benjaminp/six</source>
+    <website>https://pypi.org/project/six/</website>
+    <assets>
+      <icon>icon.png</icon>
+    </assets>
+  </extension>
+</addon>
+
+<addon id="script.module.soupsieve" name="Soup Sieve" version="1.9.6+leia.1" provider-name="Isaac Muse">
+	<requires>
+		<import addon="xbmc.python" version="2.26.0"/>
+		<import addon="script.module.backports.functools_lru_cache" version="1.6.1"/>
+	</requires>
+	<extension point="xbmc.python.module" library="lib/" />
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_GB">A CSS selector library</summary>
+		<description lang="en_GB">Soup Sieve is a CSS selector library designed to be used with Beautiful Soup 4. It aims to provide selecting, matching, and filtering using modern CSS selectors.</description>
+		<license>MIT</license>
+		<platform>all</platform>
+		<website>https://pypi.org/project/soupsieve/</website>
+		<source>https://github.com/facelessuser/soupsieve</source>
+		<assets>
+			<icon>icon.png</icon>
+		</assets>
+	</extension>
+</addon>
+
 <addon id="script.module.streamlink.base" name="Streamlink Library" version="2019.06.23" provider-name="Streamlink Devs, Twilight0">
   <requires>
       <import addon="xbmc.python" version="2.24.0"/>
@@ -2596,7 +2759,7 @@ Documentation: https://github.com/tamland/kodi-plugin-routing</description>
   </extension>
 </addon>
 
-<addon id="script.module.thecrew" name="[COLOR orchid]THE CREW MODULE[/COLOR]" version="0.0.98" provider-name="The Crew">
+<addon id="script.module.thecrew" name="[COLOR orchid]THE CREW MODULE[/COLOR]" version="0.1.0a" provider-name="The Crew">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.beautifulsoup4"/>
@@ -2808,10 +2971,11 @@ Documentation: https://github.com/tamland/kodi-plugin-routing</description>
     </extension>
 </addon>
 
-<addon id="script.module.youtube.dl" name="youtube-dl Control" version="18.425.0" provider-name="Rick Phillips (ruuk)">
+<addon id="script.module.youtube.dl" name="youtube-dl Control" version="21.303.0" provider-name="ytdl-org,ruuk,sy6sy2,wwark">
     <requires>
-        <import addon="xbmc.python" version="2.1.0" />
-        <import addon="script.module.addon.signals" version="0.0.1"/>
+        <import addon="xbmc.python" version="2.26.0"/>
+        <import addon="script.module.addon.signals" version="0.0.5"/>
+        <import addon="script.module.kodi-six" version="0.1.3"/>
     </requires>
     <extension point="xbmc.python.script" library="control.py">
         <provides>executable</provides>
@@ -2819,13 +2983,18 @@ Documentation: https://github.com/tamland/kodi-plugin-routing</description>
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.addon.metadata">
         <platform>all</platform>
-        <summary lang="en">Module providing access to youtube-dl video stream extraction</summary>
-        <description lang="en">Module providing access to youtube-dl video stream extraction for hundreds of sites. Version is based on youtube-dl date version: YY.MDD.V where V is the addon specific sub-version. Also provides downloading with the option for background downloading with a queue and queue manager.</description>
-        <summary lang="es">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video</summary>
-        <description lang="es">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video de cientos de sitios. La versión está basada en la versión de fecha youtube-dl: YY.MDD.V donde V es la subversión específica del complemento. También permite descargas con la opción de descarga en segundo plano con una cola y un administrador de colas.</description>
-        <license>GNU GENERAL PUBLIC LICENSE. Version 2, June 1991</license>
-        <forum>http://forum.xbmc.org/showthread.php?tid=200877</forum>
-        <source>http://github.com/ruuk/script.module.youtube.dl</source>
+        <summary lang="en_GB">Module providing access to youtube-dl video stream extraction</summary>
+        <description lang="en_GB">Module providing access to youtube-dl video stream extraction for hundreds of sites. Version is based on youtube-dl date version: YY.MDD.V where V is the addon specific sub-version. Also provides downloading with the option for background downloading with a queue and queue manager.</description>
+        <summary lang="el_EL">Βοηθητική μονάδα πρόσβασης στους επιλυτές youtube-dl για την εξαγωγή ροών βίντεο</summary>
+        <description lang="el_EL">Βοηθητική μονάδα πρόσβασης στους επιλυτές youtube-dl για την εξαγωγή ροών βίντεο από εκατοντάδες ιστότοπους. Η έκδοση βασίζεται στην έκδοση ημερομηνίας του youtube-dl: EE.MHH.EK όπου ΕΚ η υπό-έκδοση συγκεκριμένα για το πρόσθετο. Επιπλέον δίνει δυνατότητα μεταφόρτωσης στο παρασκήνιο με ουρά και διαχειριστή αυτής.</description>
+        <summary lang="es_ES">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video</summary>
+        <description lang="es_ES">Módulo que proporciona acceso a YouTube-dl para la extracción de flujos de video de cientos de sitios. La versión está basada en la versión de fecha youtube-dl: YY.MDD.V donde V es la subversión específica del complemento. También permite descargas con la opción de descarga en segundo plano con una cola y un administrador de colas.</description>
+        <license>LGPL-2.1-only</license>
+        <forum>https://forum.kodi.tv/showthread.php?tid=200877</forum>
+        <source>https://github.com/Catch-up-TV-and-More/script.module.youtube.dl</source>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
     </extension>
 </addon>
 
@@ -3253,7 +3422,7 @@ This is a Non-profit resource, organized solely for educational purposes which i
   </extension>
 </addon>
 
-<addon id="weather.yahoo" name="Yahoo! Weather" version="5.0.6" provider-name="ronie">
+<addon id="weather.yahoo" name="Yahoo! Weather" version="5.1.0" provider-name="ronie">
 	<requires>
 		<import addon="xbmc.python" version="2.25.0"/>
 		<import addon="script.module.requests" version="2.19.1"/>
@@ -3381,15 +3550,14 @@ This is a Non-profit resource, organized solely for educational purposes which i
 		<disclaimer lang="tr_TR">Bu eklentinin kullanımı aynı zamanda http://developer.yahoo.com/weather/#terms adresindeki Kullanım Koşullarını da kabul ettiğiniz anlamına gelir.</disclaimer>
 		<disclaimer lang="uk_UA">Скориставшись цією надбудовою, ви тим самим погоджуєтеся з умовами використання: </disclaimer>
 		<disclaimer lang="zh_CN">使用此插件表示你已同意此服务条款：http://developer.yahoo.com/weather/#terms</disclaimer>
-		<language></language>
 		<platform>all</platform>
-		<license>GNU GENERAL PUBLIC LICENSE Version 2</license>
+		<license>GPL-2.0-only</license>
 		<forum>https://forum.kodi.tv/showthread.php?tid=169410</forum>
-		<source>https://gitlab.com/ronie/weather.yahoo</source>
 		<assets>
 			<icon>resources/icon.png</icon>
 			<fanart>resources/fanart.jpg</fanart>
 		</assets>
+		<broken>broken due to site changes</broken>
 	</extension>
 </addon>
 </addons>
