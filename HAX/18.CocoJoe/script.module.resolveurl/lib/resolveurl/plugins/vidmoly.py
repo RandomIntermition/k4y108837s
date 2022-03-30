@@ -23,12 +23,12 @@ from resolveurl.plugins.lib import helpers
 class VidMolyResolver(ResolveGeneric):
     name = "vidmoly"
     domains = ['vidmoly.me', 'vidmoly.to', 'vidmoly.net']
-    pattern = r'(?://|\.)(vidmoly\.(?:me|to|net))/(?:embed-)?([0-9a-zA-Z]+)'
+    pattern = r'(?://|\.)(vidmoly\.(?:me|to|net))/(?:embed-|w/)?([0-9a-zA-Z]+)'
 
     def get_media_url(self, host, media_id):
         return helpers.get_media_url(self.get_url(host, media_id),
-                                     patterns=[r'''sources:\s*\["(?P<url>[^"]+)'''],
+                                     patterns=[r'''sources:\s*\[{file:"(?P<url>[^"]+)'''],
                                      result_blacklist=['.mpd'])
 
     def get_url(self, host, media_id):
-        return self._default_get_url(host, media_id, template='https://vidmoly.to/embed-{media_id}.html')
+        return self._default_get_url(host, media_id, template='https://vidmoly.me/{media_id}.html')

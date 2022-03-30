@@ -113,7 +113,7 @@ def next_level(url,icon,fanart,plot,name,id):
             aa=addLink(name,link,6,False,image,image,summary,original_title=name,place_control=True)
             all_d.append(aa)
     if next_page:
-        aa=addDir3('[COLOR aqua][I]Next page[/I][/COLOR]','metacritic',193,'https://thumbs.dreamstime.com/b/next-page-icon-trendy-design-style-isolated-white-background-vector-simple-modern-flat-symbol-web-site-mobile-logo-135740961.jpg','http://copasi.org/images/next.png','Next page',id=url)
+        aa=addDir3('[COLOR goldenrod][I]Next page[/I][/COLOR]','metacritic',193,'https://thumbs.dreamstime.com/b/next-page-icon-trendy-design-style-isolated-white-background-vector-simple-modern-flat-symbol-web-site-mobile-logo-135740961.jpg','http://copasi.org/images/next.png','Next page',id=url)
         all_d.append(aa)
     xbmcplugin .addDirectoryItems(int(sys.argv[1]),all_d,len(all_d))
     return 0

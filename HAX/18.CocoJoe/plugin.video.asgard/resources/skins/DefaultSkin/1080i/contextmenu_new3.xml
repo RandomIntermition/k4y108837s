@@ -137,7 +137,7 @@
 						<width>1280</width>
 						<height>38</height>
 						<font>font-30</font>
-						<textcolor>lightblue</textcolor>
+						<textcolor>goldenrod</textcolor>
 						<aligny>center</aligny>		    
 						<align>left</align>
 						
@@ -276,8 +276,8 @@
 					<control type="image">
 						<posx>20</posx>
 						<posy>20</posy>
-						<width>200</width>
-						<height>200</height>
+						<width>150</width>
+						<height>150</height>
 						<visible>String.IsEqual(ListItem.Property(collection),yes)</visible>
 						
 						<texture background="true">$INFO[ListItem.Property(image_collection)]</texture>
@@ -395,7 +395,7 @@
 						<height>38</height>
 						<font>font-24</font>
 			
-						<textcolor>white</textcolor>
+						<textcolor>goldenrod</textcolor>
 						<aligny>center</aligny>		    
 						<align>left</align>
 						<info>ListItem.Label</info>
@@ -497,8 +497,8 @@
 					<control type="image">
 						<posx>20</posx>
 						<posy>20</posy>
-						<width>200</width>
-						<height>200</height>
+						<width>150</width>
+						<height>150</height>
 						<visible>String.IsEqual(ListItem.Property(collection),yes)</visible>
 						
 						<texture background="true">$INFO[ListItem.Property(image_collection)]</texture>
@@ -615,7 +615,7 @@
 						<height>38</height>
 						<font>font-24</font>
 			
-						<textcolor>white</textcolor>
+						<textcolor>goldenrod</textcolor>
 						<!-- <aligny>center</aligny>		     -->
 						<align>left</align>
 						<info>ListItem.Label</info>

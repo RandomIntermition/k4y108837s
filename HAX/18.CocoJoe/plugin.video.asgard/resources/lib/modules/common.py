@@ -26,7 +26,7 @@ import xbmc, xbmcaddon, xbmcgui, xbmcplugin,os,base64,sys,xbmcvfs,time
 
 import base64,hashlib,os,random,re,requests,shutil,string,sys,urllib,urllib2,json,resolveurl,ssl,zipfile,urlparse
 
-AddonTitle     = "[COLOR yellow]The Crew[/COLOR]"
+AddonTitle     = "[COLOR goldenrod]The Crew[/COLOR]"
 dialog         = xbmcgui.Dialog()
 addon_id       = 'plugin.video.thecrew'
 fanart         = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id , 'fanart.jpg'))
@@ -108,7 +108,7 @@ def GET_M3U_LIST(url):
         name = GetEncodeString(channel["display_name"])
         url = GetEncodeString(channel["url"])
         url = url.replace('\\n','').replace('\n','').replace('\\r','').replace('\\t','').replace('\r','').replace('\t','').replace(' ','').replace('m3u8','m3u8')
-        addLink('[COLOR pink]'+name.title()+'[/COLOR]',url,996,icon,fanart)
+        addLink('[COLOR goldenrod]'+name.title()+'[/COLOR]',url,996,icon,fanart)
 
 def GetEncodeString(str):
     try:

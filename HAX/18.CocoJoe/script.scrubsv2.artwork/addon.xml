@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="script.scrubsv2.artwork" version="1.4" name="[COLOR orange]Scrubs v2 Artwork[/COLOR]" provider-name="JewBMX">
-    <requires>
-        <import addon="xbmc.python" version="2.19.0"/>
-    </requires>
+<addon id="script.scrubsv2.artwork" version="1.5" name="[COLOR orange]Scrubs v2 Artwork[/COLOR]" provider-name="JewBMX">
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.addon.metadata">
         <summary>Scrubs v2 Artwork</summary>

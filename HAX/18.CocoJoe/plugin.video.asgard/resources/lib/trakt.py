@@ -126,7 +126,7 @@ class cTrakt:
             oOutputParameterHandler = cOutputParameterHandler()
             oOutputParameterHandler.addParameter('siteUrl', 'https://')
             oOutputParameterHandler.addParameter('type', 'movie')
-            oGui.addDir(SITE_IDENTIFIER, 'getToken()', self.ADDON.VSlang(30305), 'trakt.png', oOutputParameterHandler)
+            oGui.addDir(SITE_IDENTIFIER, 'getToken()', self.ADDON.VSlang(30305), 'basic.png', oOutputParameterHandler)
         else:
             # nom de l'user
             headers = {'Content-Type': 'application/json', 'trakt-api-key': API_KEY, 'trakt-api-version': API_VERS,
@@ -171,11 +171,11 @@ class cTrakt:
                 oOutputParameterHandler = cOutputParameterHandler()
                 oOutputParameterHandler.addParameter('siteUrl', 'https://')
                 oOutputParameterHandler.addParameter('type', 'custom-lists')
-                oGui.addDir(SITE_IDENTIFIER, 'getLists', self.ADDON.VSlang(30360), 'trakt.png', oOutputParameterHandler)
+                oGui.addDir(SITE_IDENTIFIER, 'getLists', self.ADDON.VSlang(30360), 'basic.png', oOutputParameterHandler)
 
             oOutputParameterHandler = cOutputParameterHandler()
             oOutputParameterHandler.addParameter('siteUrl', URL_API + 'users/me/history?page=1&limit=' + str(MAXRESULT))
-            oGui.addDir(SITE_IDENTIFIER, 'getTrakt', self.ADDON.VSlang(30308), 'trakt.png', oOutputParameterHandler)
+            oGui.addDir(SITE_IDENTIFIER, 'getTrakt', self.ADDON.VSlang(30308), 'basic.png', oOutputParameterHandler)
 
             # oOutputParameterHandler = cOutputParameterHandler()
             # oOutputParameterHandler.addParameter('siteUrl', URL_API + 'users/me/watching')
@@ -183,11 +183,11 @@ class cTrakt:
 
             oOutputParameterHandler = cOutputParameterHandler()
             oOutputParameterHandler.addParameter('siteUrl', URL_API + 'oauth/revoke')
-            oGui.addDir(SITE_IDENTIFIER, 'getCalendrier', self.ADDON.VSlang(30331), 'trakt.png', oOutputParameterHandler)
+            oGui.addDir(SITE_IDENTIFIER, 'getCalendrier', self.ADDON.VSlang(30331), 'basic.png', oOutputParameterHandler)
 
             oOutputParameterHandler = cOutputParameterHandler()
             oOutputParameterHandler.addParameter('siteUrl', URL_API + 'oauth/revoke')
-            oGui.addDir(SITE_IDENTIFIER, 'getBsout', self.ADDON.VSlang(30309), 'trakt.png', oOutputParameterHandler)
+            oGui.addDir(SITE_IDENTIFIER, 'getBsout', self.ADDON.VSlang(30309), 'basic.png', oOutputParameterHandler)
 
         oGui.setEndOfDirectory()
 
@@ -422,7 +422,7 @@ class cTrakt:
                     sTitle.encode('utf-8')
                     searchtext = ('%s') % (sTitle.encode('utf-8'))
                     sFile = ('%s - (%s)') % (sTitle.encode('utf-8'), sExtra)
-                    sTitle = ('[COLOR gold]%s %s [/COLOR]- %s %s') % (sType, 'vu', sTitle, sExtra)
+                    sTitle = ('[COLOR goldenrod]%s %s [/COLOR]- %s %s') % (sType, 'vu', sTitle, sExtra)
 
                 elif 'watchlist' in sUrl:
                     # commun
@@ -618,7 +618,7 @@ class cTrakt:
                 sNextPage = sUrl.replace('page=' + str(sPage), 'page=' + str(int(sPage) + 1))
                 oOutputParameterHandler = cOutputParameterHandler()
                 oOutputParameterHandler.addParameter('siteUrl', sNextPage)
-                oGui.addNext(SITE_IDENTIFIER, 'getTrakt', '[COLOR teal]Suivant >>>[/COLOR]', oOutputParameterHandler)
+                oGui.addNext(SITE_IDENTIFIER, 'getTrakt', '[COLOR goldenrod]Suivant >>>[/COLOR]', oOutputParameterHandler)
 
         oGui.setEndOfDirectory()
         return
@@ -760,7 +760,7 @@ class cTrakt:
         oGuiElement.setFunction(sFunction)
         oGuiElement.setTitle(sTitle)
         oGuiElement.setFileName(sFile)
-        oGuiElement.setIcon('trakt.png')
+        oGuiElement.setIcon('basic.png')
         # oGuiElement.setThumbnail(sThumb)
         oGuiElement.setImdbId(sImdb)
         oGuiElement.setTmdbId(sTmdb)
@@ -796,19 +796,19 @@ class cTrakt:
         lang.append(self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30310))
 
         disp.append(URL_API + 'sync/collection/remove')
-        lang.append('[COLOR red]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30310) + '[/COLOR]')
+        lang.append('[COLOR goldenrod]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30310) + '[/COLOR]')
 
         disp.append(URL_API + 'sync/watchlist')
         lang.append(self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30311))
 
         disp.append(URL_API + 'sync/watchlist/remove')
-        lang.append('[COLOR red]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30311) + '[/COLOR]')
+        lang.append('[COLOR goldenrod]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30311) + '[/COLOR]')
 
         disp.append(URL_API + 'sync/history')
         lang.append(self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30312))
 
         disp.append(URL_API + 'sync/history/remove')
-        lang.append('[COLOR red]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30312) + '[/COLOR]')
+        lang.append('[COLOR goldenrod]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30312) + '[/COLOR]')
 
         ret = self.DIALOG.select('Trakt', lang)
 
@@ -997,12 +997,12 @@ class cTrakt:
     def createContexTrakt(self, oGui, oGuiElement, oOutputParameterHandler=''):
 
         liste = []
-        liste.append(['[COLOR teal]' + self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30310) + '[/COLOR]', URL_API + 'sync/collection'])
-        liste.append(['[COLOR red]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30310) + '[/COLOR]', URL_API + 'sync/collection/remove'])
-        liste.append(['[COLOR teal]' + self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30311) + '[/COLOR]', URL_API + 'sync/watchlist'])
-        liste.append(['[COLOR red]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30311) + '[/COLOR]', URL_API + 'sync/watchlist/remove'])
-        liste.append(['[COLOR teal]' + self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30312) + '[/COLOR]', URL_API + 'sync/history'])
-        liste.append(['[COLOR red]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30312) + '[/COLOR]', URL_API + 'sync/history/remove'])
+        liste.append(['[COLOR goldenrod]' + self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30310) + '[/COLOR]', URL_API + 'sync/collection'])
+        liste.append(['[COLOR goldenrod]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30310) + '[/COLOR]', URL_API + 'sync/collection/remove'])
+        liste.append(['[COLOR goldenrod]' + self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30311) + '[/COLOR]', URL_API + 'sync/watchlist'])
+        liste.append(['[COLOR goldenrod]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30311) + '[/COLOR]', URL_API + 'sync/watchlist/remove'])
+        liste.append(['[COLOR goldenrod]' + self.ADDON.VSlang(30221) + ' ' + self.ADDON.VSlang(30312) + '[/COLOR]', URL_API + 'sync/history'])
+        liste.append(['[COLOR goldenrod]' + self.ADDON.VSlang(30222) + ' ' + self.ADDON.VSlang(30312) + '[/COLOR]', URL_API + 'sync/history/remove'])
 
         for sTitle,sUrl in liste:
             oOutputParameterHandler = cOutputParameterHandler()

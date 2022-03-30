@@ -778,7 +778,7 @@ term_colors = {
     'green': 42,
     'yellow': 43,
     'blue': 44,
-    'magenta': 45,
+    'goldenrod': 45,
     'cyan': 46,
     'light gray': 47,
     'light grey': 47,
@@ -790,5 +790,5 @@ term_colors = {
     'light yellow': 104,
     'light magenta': 105,
     'light cyan': 106,
-    'white': 107
+    'goldenrod': 107
 }

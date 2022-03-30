@@ -67,7 +67,7 @@ class cePg:
                     text += "(" + aEntry[3] + ") "
                 # title
                 if aEntry[4]:
-                    text += "     [COLOR khaki][UPPERCASE]" + aEntry[4] + "[/UPPERCASE][/COLOR] "
+                    text += "     [COLOR goldenrod][UPPERCASE]" + aEntry[4] + "[/UPPERCASE][/COLOR] "
                 # retour line
                 text += "\r\n"
 
@@ -97,7 +97,7 @@ class cePg:
                 # type
                 text += "[I]" + aEntry[3] + "[/I] - "
                 # title
-                text += "[COLOR khaki][UPPERCASE]" + aEntry[1] + "[/UPPERCASE][/COLOR] "
+                text += "[COLOR goldenrod][UPPERCASE]" + aEntry[1] + "[/UPPERCASE][/COLOR] "
                 # subtitle
                 text += aEntry[2]
                 # retour line

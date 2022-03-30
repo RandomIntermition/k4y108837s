@@ -1550,7 +1550,7 @@ class sources:
         elif n == '6':
             n = 'gold'
         elif n == '7':
-            n = 'magenta'
+            n = 'goldenrod'
         elif n == '8':
             n = 'yellowgreen'
         elif n == '9':

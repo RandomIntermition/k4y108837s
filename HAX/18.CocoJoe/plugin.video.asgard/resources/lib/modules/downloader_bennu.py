@@ -56,7 +56,7 @@ def downloader():
         control.addItem(handle=int(sys.argv[1]), url=sys.argv[0]+'?action=startDownload', listitem=item, isFolder=True)
 
     if status == 'downloading':
-        item = control.item('[COLOR gold]Download Status[/COLOR]', iconImage=thumb, thumbnailImage=thumb)
+        item = control.item('[COLOR goldenrod]Download Status[/COLOR]', iconImage=thumb, thumbnailImage=thumb)
         item.addContextMenuItems([], replaceItems=True)
         item.setProperty('Fanart_Image', fanart)
         control.addItem(handle=int(sys.argv[1]), url=sys.argv[0]+'?action=statusDownload', listitem=item, isFolder=True)
@@ -180,7 +180,7 @@ class MyDownloads(pyxbmct.AddonDialogWindow):
 
 
     def set_info_controls(self):
-        self.placeControl(pyxbmct.Label('[B][COLOR gold]'+control.window.getProperty(property + '.name')+'[/COLOR][/B]', alignment=pyxbmct.ALIGN_CENTER), 0, 1, 1, 1)
+        self.placeControl(pyxbmct.Label('[B][COLOR goldenrod]'+control.window.getProperty(property + '.name')+'[/COLOR][/B]', alignment=pyxbmct.ALIGN_CENTER), 0, 1, 1, 1)
 
         self.placeControl(pyxbmct.Label('Total File Size', alignment=pyxbmct.ALIGN_CENTER), 1, 0)
         self.placeControl(pyxbmct.Label(control.window.getProperty(property + '.size'), alignment=pyxbmct.ALIGN_CENTER), 2, 0)

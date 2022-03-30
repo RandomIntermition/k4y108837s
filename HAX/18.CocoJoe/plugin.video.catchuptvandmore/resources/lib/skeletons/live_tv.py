@@ -29,7 +29,8 @@ menu = {
         'order': 1
     },
     'ch_live': {
-        'route': '/resources/lib/main:generic_menu',
+        'route': '/resources/lib/main:tv_guide_menu'
+        if TV_GUIDE else '/resources/lib/main:generic_menu',
         'label': 30051,
         'thumb': 'channels/ch.png',
         'enabled': True,
@@ -44,7 +45,8 @@ menu = {
         'order': 3
     },
     'wo_live': {
-        'route': '/resources/lib/main:generic_menu',
+        'route': '/resources/lib/main:tv_guide_menu'
+        if TV_GUIDE else '/resources/lib/main:generic_menu',
         'label': 30053,
         'thumb': 'channels/wo.png',
         'enabled': True,
@@ -149,5 +151,19 @@ menu = {
         'thumb': 'channels/ma.png',
         'enabled': True,
         'order': 18
+    },
+    'sg_live': {
+        'route': '/resources/lib/main:generic_menu',
+        'label': 30068,
+        'thumb': 'channels/sg.png',
+        'enabled': True,
+        'order': 19
+    },
+    'lt_live': {
+        'route': '/resources/lib/main:generic_menu',
+        'label': 30069,
+        'thumb': 'channels/lt.png',
+        'enabled': True,
+        'order': 20
     }
 }

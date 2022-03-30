@@ -62,7 +62,7 @@ class HostedMediaFile:
         must pass either ``url`` or ``host`` AND ``media_id``.
     """
 
-    def __init__(self, url='', host='', media_id='', title='', include_disabled=False, include_universal=None, include_popups=None):
+    def __init__(self, url='', host='', media_id='', title='', include_disabled=False, include_universal=None, include_popups=None, return_all=False):
         """
         Args:
             url (str): a URL to a web page that represents a piece of media.
@@ -75,6 +75,7 @@ class HostedMediaFile:
         self._host = host
         self._media_id = media_id
         self._valid_url = None
+        self._return_all = return_all
         self.title = title if title else self._host
 
         if self._url:
@@ -184,7 +185,13 @@ class HostedMediaFile:
                         common.logger.log_debug('Resolving using %s plugin' % resolver.name)
                         resolver.login()
                         self._host, self._media_id = resolver.get_host_and_id(self._url)
-                        stream_url = resolver.get_media_url(self._host, self._media_id)
+                        if self._return_all and resolver.isUniversal():
+                            url_list = resolver.get_media_url(self._host, self._media_id, return_all=self._return_all)
+                            self.__resolvers = [resolver]
+                            self._valid_url = True
+                            return url_list
+                        else:
+                            stream_url = resolver.get_media_url(self._host, self._media_id)
                         if stream_url.startswith("//"):
                             stream_url = 'http:%s' % stream_url
                         if stream_url and self.__test_stream(stream_url):
@@ -248,9 +255,8 @@ class HostedMediaFile:
 
         try:
             import ssl
-            ssl_context = ssl.create_default_context()
-            ssl_context.check_hostname = False
-            ssl_context.verify_mode = ssl.CERT_NONE
+            ssl_context = ssl._create_unverified_context()
+            ssl._create_default_https_context = ssl._create_unverified_context
             opener = urllib_request.build_opener(urllib_request.HTTPSHandler(context=ssl_context))
             urllib_request.install_opener(opener)
         except:
@@ -284,7 +290,7 @@ class HostedMediaFile:
         except Exception as e:
             http_code = 601
             msg = str(e)
-            if msg == "''":
+            if msg == "''" or 'timed out' in msg:
                 http_code = 504
 
         # added this log line for now so that we can catch any logs on streams that are rejected due to test_stream failures

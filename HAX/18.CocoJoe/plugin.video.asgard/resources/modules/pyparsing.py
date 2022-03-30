@@ -202,7 +202,7 @@ __all__ = ['__version__', '__versionTime__', '__author__', '__compat__', '__diag
            'ParseBaseException', 'ParseElementEnhance', 'ParseException', 'ParseExpression', 'ParseFatalException',
            'ParseResults', 'ParseSyntaxException', 'ParserElement', 'QuotedString', 'RecursiveGrammarException',
            'Regex', 'SkipTo', 'StringEnd', 'StringStart', 'Suppress', 'Token', 'TokenConverter',
-           'White', 'Word', 'WordEnd', 'WordStart', 'ZeroOrMore', 'Char',
+           'goldenrod', 'Word', 'WordEnd', 'WordStart', 'ZeroOrMore', 'Char',
            'alphanums', 'alphas', 'alphas8bit', 'anyCloseTag', 'anyOpenTag', 'cStyleComment', 'col',
            'commaSeparatedList', 'commonHTMLEntity', 'countedArray', 'cppStyleComment', 'dblQuotedString',
            'dblSlashComment', 'delimitedList', 'dictOf', 'downcaseTokens', 'empty', 'hexnums',

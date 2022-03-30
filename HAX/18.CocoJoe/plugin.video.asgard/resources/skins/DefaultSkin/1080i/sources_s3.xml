@@ -51,7 +51,7 @@
 				<height>80</height>
 				<align>center</align>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-12</font>
 			</control>
 			
@@ -72,7 +72,7 @@
 				<height>80</height>
 				<align>center</align>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-12</font>
 			</control>
 			
@@ -93,7 +93,7 @@
 				<height>80</height>
 				<align>center</align>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-12</font>
 			</control>
 			
@@ -113,7 +113,7 @@
 				<height>80</height>
 				<align>center</align>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-12</font>
 			</control>
 			<control type="image" id="6005">
@@ -145,7 +145,7 @@
 				<height>80</height>
 				<align>center</align>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-28</font>
 			</control>
 			<control type="image" id="5002">
@@ -180,7 +180,7 @@
 				<height>80</height>
 				<align>center</align>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-28</font>
 			</control>
 			
@@ -194,7 +194,7 @@
 				<height>80</height>
 				<align>center</align>
 				<visible>!VideoPlayer.IsFullscreen</visible>
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-28</font>
 			</control>
 			

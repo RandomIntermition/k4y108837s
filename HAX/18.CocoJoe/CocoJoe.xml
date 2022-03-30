@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="context.venom" name="Venom - Global Context Menu Items" provider-name="Venom" version="1.1.2">
+<addon id="context.venom" name="Venom - Global Context Menu Items" provider-name="Venom" version="1.2.1">
 	<requires>
 		<import addon="script.module.requests" version="2.19.1" />
 	</requires>
@@ -26,10 +26,13 @@
 			<item library="clearProviders.py">
 				<label>[B][COLOR red]Venom[/COLOR][/B] - Clear Providers</label>
 				<visible>
-					!String.IsEmpty(Window(home).Property(context.venom.clearProviders)) +
+					[!String.IsEmpty(Window(home).Property(context.venom.clearProviders)) +
 					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
 					String.IsEqual(ListItem.Property(isVenom_widget),true) +
-					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]] |
+					[String.Contains(Container.FolderPath,videodb://) +
+					[String.Contains(Container.ListItem.Path,Window(home).Property(venom.movieLib.path)) | String.Contains(Container.ListItem.Path,Window(home).Property(venom.tvLib.path))] +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]]
 				</visible>
 			</item>
 			<item library="clearBookmark.py">
@@ -45,14 +48,18 @@
 			<item library="rescrape.py">
 				<label>[B][COLOR red]Venom[/COLOR][/B] - Rescrape Item</label>
 				<visible>
-					!String.IsEmpty(Window(home).Property(context.venom.rescrape)) +
+					[!String.IsEmpty(Window(home).Property(context.venom.rescrape)) +
 					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
 					String.IsEqual(ListItem.Property(isVenom_widget),true) +
+					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]]
+				</visible>
+			</item>
+			<item library="libRescrape.py">
+				<label>[B][COLOR red]Venom[/COLOR][/B] - Rescrape Lib Item</label>
+				<visible>
+					String.Contains(Container.FolderPath,videodb://) +
+					[String.Contains(Container.ListItem.Path,Window(home).Property(venom.movieLib.path)) | String.Contains(Container.ListItem.Path,Window(home).Property(venom.tvLib.path))] +
 					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]
-<!-- Future for Library CM to Rescrape -->
-<!-- 					!String.IsEmpty(Window(home).Property(context.venom.rescrape)) + -->
-<!-- 					[String.Contains(ListItem.Path,plugin.video.venom) + String.IsEqual(ListItem.FileExtension,strm) | String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play)] + -->
-<!-- 					[String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)] -->
 				</visible>
 			</item>
 			<item library="playFromHere.py">
@@ -67,7 +74,7 @@
 			<item library="autoPlay.py">
 				<label>[B][COLOR red]Venom[/COLOR][/B] - Auto Play</label>
 				<visible>
-					String.IsEmpty(Window(home).Property(plugin.video.venom.autoPlay)) +
+					String.IsEmpty(Window(home).Property(venom.autoPlay.enabled)) +
 					!String.IsEmpty(Window(home).Property(context.venom.autoPlay)) +
 					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
 					String.IsEqual(ListItem.Property(isVenom_widget),true) +
@@ -77,7 +84,7 @@
 			<item library="sourceSelect.py">
 				<label>[B][COLOR red]Venom[/COLOR][/B] - Source Select</label>
 				<visible>
-					!String.IsEmpty(Window(home).Property(plugin.video.venom.autoPlay)) +
+					!String.IsEmpty(Window(home).Property(venom.autoPlay.enabled)) +
 					!String.IsEmpty(Window(home).Property(context.venom.sourceSelect)) +
 					String.StartsWith(ListItem.FolderPath,plugin://plugin.video.venom/?action=play) +
 					String.IsEqual(ListItem.Property(isVenom_widget),true) +
@@ -129,8 +136,8 @@
 			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Update - v1.1.2 - March 10, 2021[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Change method of determining bookmarks to use "ListItem.IsResumable".[/I]
+[B][COLOR red]Update - v1.2.1 - Nov. 04, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] The "Rescrape Item" context menu now has a pop-up select method of 4 possible choices to rescrape.  You can set a preferred default action in the settings to bypass the select dialog pop up.[/I]
 		</news>
 	</extension>
 </addon>
@@ -318,7 +325,7 @@
     </extension>
 </addon>
 
-<addon id="plugin.video.asgard" name="[COLOR goldenrod]Asgard[/COLOR]" provider-name="Narcacist and cMaN" version="1.2.0">
+<addon id="plugin.video.asgard" name="[COLOR goldenrod]Asgard[/COLOR]" provider-name="Team Asgard" version="1.4.8">
     <requires>
 	    <import addon="script.module.six" version="0.0.1"/>
 		<import addon="script.module.requests"/>
@@ -327,10 +334,14 @@
     <extension library="default.py" point="xbmc.python.pluginsource">
         <provides>video</provides>
     </extension>
+	<extension library="resources/modules/" point="xbmc.python.module" />
+    <extension library="resources/sources/" point="xbmc.python.module" />
+    <extension library="resources/" point="xbmc.python.module" />
     <extension point="xbmc.addon.metadata">
-        <reuselanguageinvoker>false</reuselanguageinvoker>
+        <reuselanguageinvoker>true</reuselanguageinvoker>
+	<reuselanguageinvoker>true</reuselanguageinvoker>
         <summary lang="en">Welcome to Asgard</summary>
-        <description lang="en">“Asgard is not a place, it's a people.” full credit to aa aa.</description>
+        <description lang="en">“Asgard is not a place, it's a people.”</description>
         <platform>all</platform>
         <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
         <forum />
@@ -386,7 +397,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.34~beta07" provider-name="SylvainCecchetto,wwark">
+<addon id="plugin.video.catchuptvandmore" name="Catch-up TV &amp; More" version="0.2.38~beta00" provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <!-- xbmc.python -->
     <import addon="script.module.codequick" version="0.9.13"/>
@@ -429,17 +440,85 @@
     <email>catch.up.tv.and.more at gmail dot com</email>
     <source>https://github.com/Catch-up-TV-and-More/plugin.video.catchuptvandmore</source>
     <news>
-[Version 0.2.34]
-[NRJ Hits TV - BE] Remove Live TV (not available anymore)
-[NRJ Hits TV - BE] Fix Catch-up TV
-[TeleQuebec - CA] Readd Catch-up TV
-[NOOVO - CA] Fix Catch-up TV
-[BFMTV - FR] Use DailyMotion to play Live TV
-[Languages] Update po files
-[LuckyJack - FR] Remove Live TV
-[ABWEB - BE] Fix Live TV (thanks chamchenko)
-[RMC Decouverte - FR] Fix Live TV
-[MA] Add some live TV for Morroco (M24, SNRT, Medi1 and Telemaroc) (thanks chamchenko)
+[Version 0.2.37]
+[FR - Cnews] Fi live and replay (#568)
+[CH - SSR] Fix error on SSR channels replay (#574) Thanks @jmzambon for #587
+[FR - SSR] Fix Alsace 20 and LaChaineNormande (DRM) (#584) Thanks @jmzambon for #585
+[FR - MyTF1] Fix categories (#562) Thanks @aaitmouloud for #563
+[BE - RTLPlay] Add 'All programs'. Thanks @darodi for #582
+[IT - raiplay] Enhanced. Thanks @jmzambon for #583
+[Website - FFF] Fix error when no image (#586)
+[FR - CNEWS] Try hardcoded live id in case of error (#580)
+[BE - RTBF] Fix RTBF sometimes down (#526) Thanks @Gaet81 for #536
+[BE - RTLPlay] Fix replay (#576) Thanks @Gaet81 for #589
+[Live TV] Temp fix of tzlocal error (#592)
+[Website - FFF] Fix video playback error (#586)
+[IT - Rai] Fix live TV (#611)
+[FR - france.tv] Fix replay (#616, thanks @Arias800)
+[JP - FujiTV] Add the replay for FujiTV (#615)
+[Website - FFF] Add more replays (#614)
+[FR - AlbiTV] Add live for AlbiTV (#620)
+[FR - Mycanal] Fix replay pour mycanal (#624) Thanks @Arias800
+[Configuration] fix bug report (#618) Thanks @darodi
+[BE - RTLPlay] [FR - M6] choose live quality (#627) Thanks @darodi
+[FR - M6] add all programs section (#627) Thanks @darodi
+[BE - RTLPlay] add search (#627) Thanks @darodi
+[FR - Replay] Beginning of a new API for the replay of the RMC channels
+[FR - Replay] Complete the API for RMC channels replay: now working !! (#626) Thanks @Arias800
+[FR - Live ARTE] Workaround a FFMPEG bug (#619)
+[ES Live RTVE] Fix broken live url (#633) Thanks @Adrien Aubry
+[FR - Replay] Use v1 API instead of v2 API for ARTE replay (#557) Thanks @jmzambon
+[FR - RMC] Fix live for RMC channels (#594) Thanks @Arias800
+[FR - Replay] Fix a crash when retrieving RMC channels in replay
+[FR - Replay] Clean-up skeleton
+[FR - Replay] Fix Lumni replay
+[INTERNATIONAL - ARTE] Use Inpustream-adaptive to open the lives of ARTE
+[INTERNATIONAL - ARTE] Remove dead code
+[Website] Move to the more generic FFF site
+[BE - AB] Fix AB3 and AB Xplore (#636) Thanks @chamchenko
+[SG] Add Channel News Asia (CNA) live (issue #478)
+[Menu] Add some Hebrew translations
+[SG - CNA] Cosmetic changes
+[FR] Add Tahiti Nui Télévision (TNTV) live (issue #452)
+[ES live RealMadridTV] Fix broken url parsing (PR ##637) Thanks @Adrien Aubry
+[Website] Fix the route for the FFF website (PR #640) thanks @darodi
+[BE-RTC] fix live (PR #642) thanks @darodi
+[PL - TVP] Search specifically for m3u8 URLs (PR #639) Thanks @Piotr Pawlicki
+[PL - TVP] Gracefully handle not available streams (PR #639) Thanks @Piotr Pawlicki
+[PL - TVP] Rename 'TVP Poland In' to 'TVP World' (PR #639) Thanks @Piotr Pawlicki
+[PL - TVP] Use data-channel-id for Polonia (PR #639) Thanks @Piotr Pawlicki
+[FR - RMCBFMPLAY] Add a dialog box to advertise that credentials are not set (PR #644) Thanks Arias800
+[WO- TV5MONDE] Fix TV5Monde live (PR #643) Thanks Arias800
+[Project] Fix linting to be compliant with Flake8 (PR #646 #647 #649 #650 #651 #652 #652 #653 #654 #655) Thanks @Piotr Pawlicki
+[PL - TVP] Add stream for TVP Wilno (#PR  656) Thanks @Piotr Pawlicki
+[FR - RMCBFMPLAY] Fix a syntax error Thanks @Piotr Pawlicki
+[FR - RMCBMFPLAY] Correct linting on rmcbfmplay.py (PR #648) Thanks @Piotr Pawlicki
+[WO - TV5MONDE] Correct linting on tv5monde.py (PR #657) Thanks @Piotr Pawlicki
+[Website] Disable lesargonautes (PR #641) Thanks @darodi
+[BE - RTBFAuvio] Add TipikVision live (PR #661) Thanks @darodi
+[FR - AlbiTV] Add replay for AlbiTV (PR #662) Thanks Arias800
+[FR - Live] Remove a useless item in fr_live skeleton
+[FR - Live] Rearrange the items in fr_live skeleton
+[FR - Live] Replace the locals of BFM by the more generic BFM Régions
+[FR - RMC] Remove a useless file
+[FR - RTL] Fix live for RTL radios group (#663)
+[FR - DICI] Fix live for DICI and implement replay (PR #666) Thanks @Arias800
+[Project] Make Captchuptvmore more compliant with Flake8
+[FR - BFM] Remove a useless file
+[FR - REPLAY] Remove a useless item in fr_replay skeleton
+[FR - RMCBMFPLAY] Add local BFM channels (#665)
+addon.xml Change RMCBFMREPLAY into RMCBMFPLAY
+[LT] Add LRT Televizija live (issue #416)
+[LT - LIVE] Add LRT Plius live (issue #416)
+[LT - LIVE] Add LRT Lituanica live (issue #416)
+[LT - LIVE] Fix the path for LRT Televizija pictures
+[SG] Fix live skeleton
+[LT] Make Flake8 happy
+[WO - TV5MONDEPLUS] Enable TV5mondeplus (PR #673) Thanks @darodi
+[FR - BFM REGIONS] Fix a translation Thanks @darodi
+[WO - TV5MONDEPLUS] Fix Flake8 errors
+[LT] Capitalize LRT TELEVIZIJA in skeleton
+[Project] Add joaopa00 as releaser
 ----
 Visit WebSite - http://mpdb.tv/#home which host the french forum used by users of CU TV and More
     </news>
@@ -564,7 +643,7 @@ Visit WebSite - http://mpdb.tv/#home which host the french forum used by users o
     </extension>
 </addon>
 
-<addon id="plugin.video.iplayerwww" name="iPlayer WWW" version="3.0.50" provider-name="CaptainT, Cas, ihurst, primaeval">
+<addon id="plugin.video.iplayerwww" name="iPlayer WWW" version="3.0.52" provider-name="CaptainT, Cas, ihurst, primaeval">
   <requires>
     <import addon="xbmc.python" version="2.25.0"/>
     <import addon="script.module.requests" version="2.7.0"/>
@@ -585,19 +664,10 @@ Visit WebSite - http://mpdb.tv/#home which host the french forum used by users o
         <fanart>resources/fanart.jpg</fanart>
     </assets>
     <news>
-v3.0.50
-Switched to PC mediaselector.
-COMPATIBILITY NOTE: As a result there are no more HD streams over HLS.
-In order to get HD streams, inputstream.adaptive is required.
-Set "Stream protocol" in the add-on settings to "DASH" to get HD streams after making sure inputstream.adaptive is available.
-New mediaselector also adds the following new features:
-- Access to new CDN Cloudfront (Amazon)
-- Access to new subtitle sources. If you experience issues with subtitles, first try the new "Subtitle source" setting in the add-on settings before reporting issues.
-
-Radio Categories now uses the Categories of BBC Sounds.
+v3.0.52
+Fixed live HLS to match new URL (de)construction.
 
 Known issues:
-- Live TV and Radio over DASH is broken, most likely due to a bug in inputstream.adaptive.
 - Red Button is only available for HLS.
    </news>
   </extension>
@@ -764,30 +834,33 @@ Known issues:
 	</extension>
 </addon>
 
-<addon id="plugin.video.scrubsv2" name="[COLOR orange]Scrubs v2[/COLOR]" provider-name="JewBMX" version="4.6.2">
+<addon id="plugin.video.scrubsv2" version="5.0.10" name="[COLOR orange]Scrubs v2[/COLOR]" provider-name="JewBMX">
     <requires>
-        <import addon="xbmc.python" version="2.19.0" />
-        <import addon="script.module.scrubsv2" />
         <import addon="script.scrubsv2.artwork" />
+        <import addon="script.module.six" />
+        <import addon="script.module.kodi-six" />
+        <import addon="script.module.simplejson" />
+        <import addon="script.module.requests" />
         <import addon="script.module.resolveurl" />
-        <import addon="script.module.urlresolver" optional="true" />
+        <import addon="script.trakt" optional="true" />
+        <import addon="plugin.video.youtube" optional="true" />
     </requires>
     <extension library="main.py" point="xbmc.python.pluginsource">
         <provides>video</provides>
     </extension>
-    <extension library="service.py" point="xbmc.service" start="[startup|login]" />
+    <extension library="service.py" point="xbmc.service" start="startup" />
     <extension point="xbmc.addon.metadata">
-        <summary lang="en_US">A Clean Source To Dirty Things...</summary>
-        <description lang="en_US">Movies, Tv Shows, Anime, and What Not. [CR]See Settings for the Help/About tab. [CR]See bottom of Main Menu for Show Changelog Option. [CR]Providers are now sorted different in the settings and all the best normal ones are enabled. [CR]Disabled by Default: Debrid/Prem/Torr and a 'Sloppy' Stack too, Enable the ones you want from these sections in the settings. [CR]Instead of being confused with all those choices half enabled i decided to go another way. [CR]You enable/disable the ones you dont like and let me handle the broken providers. [CR]How it should be :)</description>
-        <disclaimer lang="en_US">The author is not responsible for the use of this addon. The author is not responsible for the content found using this addon. The author does not host or own any content found within this addon.[CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
+        <summary lang="en">A Clean Source To Dirty Things...</summary>
+        <description lang="en">Movies, Tv Shows, Anime, and What Not. [CR] See Changelog For Changes. [CR] You enable/disable the ones you dont like and let me handle the broken providers. [CR] How it should be :)</description>
+        <disclaimer lang="en">The author is not responsible for the use of this addon. The author is not responsible for the content found using this addon. The author does not host or own any content found within this addon.[CR]The author is in no way affiliated with Kodi, Team Kodi, or the XBMC Foundation.[CR]This is a Non-profit resource, organized solely for educational purposes which is protected under the Fair-Use doctrine of the Copyright Act, Specifically section 107, which does promote freedom of expression, by permitting the unlicensed use of copyright-protected works.</disclaimer>
         <license>Free the People!, Free the World!!</license>
         <platform>all</platform>
         <assets>
-            <icon>icon.png</icon>
-            <fanart>fanart.jpg</fanart>
-            <screenshot>resources/screenshots/screenshot_1.png</screenshot>
+            <icon>resources/images/icon.png</icon>
+            <fanart>resources/images/fanart.jpg</fanart>
+            <screenshot>resources/images/screenshot.png</screenshot>
         </assets>
-        <news>[B] Total CleanUp of EN Providers[/B]: Checked and all good as of 08-24-2019. [CR][B] (If a non-en provider is broken let me know, as i dont bother with em.)[/B] [CR][B] (Please Report Any Issues To Me Directly. Details Are in Settings.)[/B] </news>
+        <news>[B] Total CleanUp of Providers [/B]: Checked and Cleaned as of 03-20-2022. [CR][B] Check ChangeLog For More Details. [/B] [CR][B] (Please Report Any Issues To Me Directly By Email Or GitHub.) [/B]</news>
     </extension>
 </addon>
 
@@ -885,7 +958,7 @@ Known issues:
 	</extension>
 </addon>
 
-<addon id="plugin.video.thecrew" version="0.1.0" name="[COLOR orchid]THE CREW[/COLOR]" provider-name="The Crew">
+<addon id="plugin.video.thecrew" version="1.0.4" name="[COLOR orchid]THE CREW[/COLOR]" provider-name="The Crew">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.thecrew" />
@@ -988,17 +1061,39 @@ Known issues:
     </extension>
 </addon>
 
-<addon id="repository.addons4kodi" name="Addons4Kodi Repository" version="1.4" provider-name="A4K">
+<addon id="repository.addons4kodi" name="Addons4Kodi Repository" version="2.0" provider-name="A4K">
 	<extension point="xbmc.addon.repository" name="Addons4Kodi Repository">
-		<dir>
+        <dir minversion="18.0" maxversion="19.9.9">
             <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.addons4kodi/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.addons4kodi/master/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.addons4kodi/master/zips/</datadir>
         </dir>
-        <dir>
+        <dir minversion="18.0" maxversion="18.9.9">
             <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml</info>
             <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openscrapers/master/zips/</datadir>
+        </dir>
+        <dir minversion="18.0" maxversion="18.9.9">
+            <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openwizard/master/leia/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openwizard/master/leia/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openwizard/master/leia/zips/</datadir>
+        </dir>
+        <dir minversion="19.0" maxversion="19.9.9">
+            <info compressed="false">https://raw.githubusercontent.com/a4k-openproject/repository.openwizard/master/matrix/zips/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/a4k-openproject/repository.openwizard/master/matrix/zips/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/a4k-openproject/repository.openwizard/master/matrix/zips/</datadir>
+        </dir>
+        <dir minversion="18.0" maxversion="19.9.9">
+            <info>https://raw.githubusercontent.com/newt-sc/a4kStreaming/master/packages/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/newt-sc/a4kStreaming/master/packages/addons.xml.crc</checksum>
+            <datadir>https://github.com/newt-sc/a4kStreaming/archive</datadir>
+            <artdir>https://github.com/newt-sc/a4kStreaming/releases/download/v0.1.0</artdir>
+        </dir>
+        <dir minversion="18.0" maxversion="19.9.9">
+            <info>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml.crc</checksum>
+            <datadir>https://github.com/newt-sc/a4kSubtitles/archive</datadir>
+            <artdir>https://github.com/a4k-openproject/a4kSubtitles/releases/download/v0.0.13</artdir>
         </dir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
@@ -1225,20 +1320,18 @@ Known issues:
     </extension>
 </addon>
 
-<addon id="repository.jewrepo" name="[COLOR purple]JewRepo[/COLOR]" version="1.5.5" provider-name="JewBMX">
-    <requires>
-        <import addon="xbmc.addon" version="12.0.0"/>
-    </requires>
+<addon id="repository.jewrepo" name="[COLOR purple]JewRepo[/COLOR]" version="1.5.7" provider-name="JewBMX">
     <extension point="xbmc.addon.repository" name="[COLOR purple]JewRepo[/COLOR]">
+    <dir>
         <info compressed="false">https://raw.githubusercontent.com/jewbmx/repo/master/zips/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jewbmx/repo/master/zips/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jewbmx/repo/master/zips/</datadir>
-        <hashes>false</hashes>
-        <dir>
-            <info compressed="false">https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/jsergio123/zips/master/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/jsergio123/zips/master/</datadir>
-        </dir>
+        <checksum>https://raw.githubusercontent.com/jewbmx/repo/master/zips/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/jewbmx/repo/master/zips/</datadir>
+    </dir>
+    <dir>
+        <info compressed="false">https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml</info>
+        <checksum>https://raw.githubusercontent.com/Gujal00/smrzips/master/addons.xml.md5</checksum>
+        <datadir zip="true">https://raw.githubusercontent.com/Gujal00/smrzips/master/zips/</datadir>
+    </dir>
     </extension>
     <extension point="xbmc.addon.metadata">
         <summary>Free the People, Free the World!</summary>
@@ -1332,7 +1425,7 @@ Known issues:
     </extension>
 </addon>
 
-    <addon id="repository.Magnetic" name="Magnetic Repo" version="1.0.9" provider-name="1-cool-guy">
+    <addon id="repository.Magnetic" name="Magnetic Repo" version="1.1.0" provider-name="1-cool-guy">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
         </requires>
@@ -1643,26 +1736,33 @@ Known issues:
         </extension>
     </addon>
 
-<addon id="repository.venom" name="[COLOR red]Venom[/COLOR] Repository" version="1.18" provider-name="Venom">
+<addon id="repository.venom" name="[COLOR red]Venom[/COLOR] Repository" version="1.19" provider-name="Venom">
 	<extension point="xbmc.addon.repository" name="Venom Repo">
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/123Venom/zips/master/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/123Venom/zips/master/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/123Venom/zips/master/</datadir>
+		<dir minversion="18.0">
+			<info compressed="false">https://raw.githubusercontent.com/123Venom/repository.venom/main/repo/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/123Venom/repository.venom/main/repo/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/123Venom/repository.venom/main/repo/zips/</datadir>
 		</dir>
-
+		<dir minversion="18.0" maxversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/123Venom/repository.venom/main/leia/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/123Venom/repository.venom/main/leia/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/123Venom/repository.venom/main/leia/zips/</datadir>
+		</dir>
+		<dir minversion="18.9.0">
+			<info compressed="false">https://raw.githubusercontent.com/123Venom/repository.venom/main/matrix/zips/addons.xml</info>
+			<checksum>https://raw.githubusercontent.com/123Venom/repository.venom/main/matrix/zips/addons.xml.md5</checksum>
+			<datadir zip="true">https://raw.githubusercontent.com/123Venom/repository.venom/main/matrix/zips/</datadir>
+		</dir>
 		<dir>
 			<info compressed="false">https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.myaccounts/master/zips/</datadir>
 		</dir>
-
 		<dir>
 			<info compressed="false">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/mr-kodi/repository.fenomscrapers/master/zips/</datadir>
 		</dir>
-
 		<dir minversion="18.0" maxversion="18.9.0">
 			<info compressed="false">https://raw.githubusercontent.com/123Venom/repository.metahandler/main/leia/zips/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/123Venom/repository.metahandler/main/leia/zips/addons.xml.md5</checksum>
@@ -1672,59 +1772,6 @@ Known issues:
 			<info compressed="false">https://raw.githubusercontent.com/123Venom/repository.metahandler/main/matrix/zips/addons.xml</info>
 			<checksum>https://raw.githubusercontent.com/123Venom/repository.metahandler/main/matrix/zips/addons.xml.md5</checksum>
 			<datadir zip="true">https://raw.githubusercontent.com/123Venom/repository.metahandler/main/matrix/zips/</datadir>
-		</dir>
-
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/drinfernoo/repository.openwizard/master/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/drinfernoo/repository.openwizard/master/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/drinfernoo/repository.openwizard/master/zips/</datadir>
-		</dir>
-
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/drinfernoo/plugin.program.autowidget/repo/zips/</datadir>
-		</dir>
-
-		<dir minversion="18.0" maxversion="18.9.0">
-			<info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/leia/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/leia/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/leia/zips/</datadir>
-		</dir>
-		<dir minversion="18.9.0">
-			<info compressed="false">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/matrix/zips/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/matrix/zips/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/jurialmunkey/repository.jurialmunkey/master/matrix/zips/</datadir>
-		</dir>
-
-		<dir minversion="18.0" maxversion="18.9.0">
-			<info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/leia/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/packages/leia/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/leia/</datadir>
-		</dir>
-		<dir minversion="18.9.0">
-			<info compressed="false">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/matrix/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/nixgates/nixgates/master/packages/matrix/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/nixgates/nixgates/master/packages/matrix/</datadir>
-		</dir>
-
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/Tikipeter/repository.tikipeter/master/zip</datadir>
-		</dir>
-
-		<dir>
-			<info compressed="false">https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/newt-sc/a4kSubtitles/master/packages/addons.xml.crc</checksum>
-			<datadir>https://github.com/newt-sc/a4kSubtitles/archive</datadir>
-			<artdir>https://github.com/a4k-openproject/a4kSubtitles/releases/download/v0.0.13</artdir>
-		</dir>
-
-		<dir minversion="18.0" maxversion="18.9.0">
-			<info compressed="true">https://raw.githubusercontent.com/mikesilvo164/repo.aeon.nox.silvo/master/leia/addons.xml</info>
-			<checksum>https://raw.githubusercontent.com/mikesilvo164/repo.aeon.nox.silvo/master/leia/addons.xml.md5</checksum>
-			<datadir zip="true">https://raw.githubusercontent.com/mikesilvo164/repo.aeon.nox.silvo/master/leia/</datadir>
 		</dir>
 	</extension>
 
@@ -1740,9 +1787,8 @@ Known issues:
 			<screenshot></screenshot>
 		</assets>
 		<news>
-[B][COLOR red]Update - v1.18 - March 29, 2021[/COLOR][/B]
-[COLOR yellow]--[/COLOR][I] Removed Marcel's beta repo and AuraMod repo due
-    to recent changes to Marcel's beta repo.[/I]
+[B][COLOR red]Update - v1.19 - June 29, 2021[/COLOR][/B]
+[COLOR yellow]--[/COLOR][I] Moved to new repo.[/I]
 		</news>
 	</extension>
 </addon>
@@ -1775,8 +1821,8 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
 
 <addon id="resource.images.catchuptvandmore"
        name="Catch-up TV &amp; More channel logos and artwork"
-       version="1.0.12"
-       provider-name="SylvainCecchetto,wwark">
+       version="1.0.13"
+       provider-name="SylvainCecchetto,wwark,joaopa">
   <requires>
     <import addon="kodi.resource" version="1.0.0"/>
   </requires>
@@ -1791,14 +1837,35 @@ Kodi is a registered trademark of the XBMC Foundation. We are not connected to o
     <email>catch.up.tv.and.more at gmail dot com</email>
     <source>https://github.com/Catch-up-TV-and-More/resource.images.catchuptvandmore</source>
     <news>
-[Version 1.0.12]
-[Updates] update existing logos
+[Version 1.0.13]
+[Add/Updates] Some new logos and update existing logos
     </news>
     <assets>
       <icon>icon.png</icon>
       <fanart>fanart.jpg</fanart>
     </assets>
   </extension>
+</addon>
+
+<addon id="script.common.plugin.cache" name="Common plugin cache" provider-name="anxdpanic, TheCollective" version="2.6.3">
+    <requires>
+        <import addon="xbmc.python" version="2.24.0"/>
+    </requires>
+    <extension point="xbmc.service" library="resources/lib/entry_point.py" start="startup"/>
+    <extension point="xbmc.python.module" library="resources/lib/storage_server/"/>
+    <extension point="xbmc.addon.metadata">
+        <news>
+[fix] use xbmcvfs.translatePath when available, xbmc.translatePath deprecated(Matrix) and removed(Nexus) |contrib: Gujal00|
+        </news>
+        <assets>
+            <icon>icon.png</icon>
+        </assets>
+        <platform>all</platform>
+        <license>GPL-3.0-only</license>
+        <source>https://github.com/anxdpanic/script.common.plugin.cache</source>
+        <summary lang="en_GB">A common caching API for Kodi add-ons.</summary>
+        <description lang="en_GB">A common caching API for Kodi add-ons.</description>
+    </extension>
 </addon>
 
 ﻿<addon id="script.crew.sports"  name="[COLOR deeppink]THE CREW SPORTS[/COLOR]" version="0.0.28" provider-name="The Crew">
@@ -2205,7 +2272,7 @@ This addon is NOT affiliated with official Kodi.
    </extension>
 </addon>
 
-<addon id="script.module.inputstreamhelper" name="InputStream Helper" version="0.5.2" provider-name="emilsvennesson, dagwieers, mediaminister, horstle">
+<addon id="script.module.inputstreamhelper" name="InputStream Helper" version="0.5.8" provider-name="emilsvennesson, dagwieers, mediaminister, horstle">
   <requires>
     <!--py3 compliant-->
     <import addon="xbmc.python" version="2.25.0"/>
@@ -2229,6 +2296,28 @@ This addon is NOT affiliated with official Kodi.
     <description lang="fr_FR">Un simple module Kodi qui simplifie la vie des développeurs de modules complémentaires en s’appuyant sur des modules complémentaires basés sur InputStream et sur la lecture de DRM.</description>
     <description lang="es_ES">Un módulo Kodi simple que hace la vida más fácil para los desarrolladores de complementos que dependen de complementos basados en InputStream y reproducción de DRM.</description>
     <news>
+v0.5.8 (2021-09-09)
+- Simplify Widevine CDM installation on ARM hardware
+- Update Chrome OS ARM hardware id's
+- Update Japanese and Korean translations
+
+v0.5.7 (2021-07-02)
+- Further improve Widevine CDM installation on ARM hardware
+
+v0.5.6 (2021-06-24)
+- Improve Widevine CDM installation on ARM hardware
+- Postpone Widevine CDM updates when user rejects
+
+v0.5.5 (2021-06-02)
+- Improve Widevine CDM installation on ARM hardware
+
+v0.5.4 (2021-05-27)
+- Fix Widevine CDM installation on ARM hardware
+
+v0.5.3 (2021-05-10)
+- Temporary fix for Widevine CDM installation on ARM hardware
+- Fix Widevine CDM installation on 32-bit Linux
+
 v0.5.2 (2020-12-13)
 - Update Chrome OS ARM hardware id's
 
@@ -2566,11 +2655,12 @@ AMF3, the default serialization for ActionScript 3.0, provides various advantage
   </extension>
 </addon>
 
-<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.28" provider-name="gujal">
+<addon id="script.module.resolveurl" name="ResolveURL" version="5.1.62" provider-name="gujal">
     <requires>
         <!-- <import addon="xbmc.python" version="3.0.0" /> -->
         <import addon="script.module.six" />
         <import addon="script.module.kodi-six" />
+        <import addon="script.module.certifi" />
         <import addon="plugin.video.youtube" optional="true" />
         <import addon="script.module.python.twitch" optional="true" />
         <import addon="plugin.googledrive" optional="true" />
@@ -2759,7 +2849,7 @@ Documentation: https://github.com/tamland/kodi-plugin-routing</description>
   </extension>
 </addon>
 
-<addon id="script.module.thecrew" name="[COLOR orchid]THE CREW MODULE[/COLOR]" version="0.1.0a" provider-name="The Crew">
+<addon id="script.module.thecrew" name="[COLOR orchid]THE CREW MODULE[/COLOR]" version="1.0.5d" provider-name="The Crew">
     <requires>
         <import addon="xbmc.python" version="2.25.0"/>
         <import addon="script.module.beautifulsoup4"/>
@@ -3030,10 +3120,7 @@ This is a Non-profit resource, organized solely for educational purposes which i
 	</extension>
 </addon>
 
-<addon id="script.scrubsv2.artwork" version="1.4" name="[COLOR orange]Scrubs v2 Artwork[/COLOR]" provider-name="JewBMX">
-    <requires>
-        <import addon="xbmc.python" version="2.19.0"/>
-    </requires>
+<addon id="script.scrubsv2.artwork" version="1.5" name="[COLOR orange]Scrubs v2 Artwork[/COLOR]" provider-name="JewBMX">
     <extension point="xbmc.python.module" library="lib" />
     <extension point="xbmc.addon.metadata">
         <summary>Scrubs v2 Artwork</summary>
@@ -3098,6 +3185,42 @@ This is a Non-profit resource, organized solely for educational purposes which i
 		<description></description>
 		<platform>all</platform>
 	</extension>
+</addon>
+
+<addon id="script.thecrew.artwork" version="1.0.0" name="[COLOR orchid]THE CREW ARTWORK[/COLOR]" provider-name="The Crew">
+    <requires>
+        <!--<import addon="xbmc.python" version="2.25.0" />-->
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">The Crew is a team of individuals that does what it can to provide others, you the best in entertainment.</summary>
+        <description lang="en">Many come, Many go. The true and dedicated are here.</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
+</addon>
+
+<addon id="script.thecrew.metadata" version="1.0.0" name="[COLOR orchid]THE CREW METADATA[/COLOR]" provider-name="The Crew">
+    <requires>
+        <!--<import addon="xbmc.python" version="2.25.0" />-->
+    </requires>
+    <extension point="xbmc.python.module" library="lib" />
+    <extension point="xbmc.addon.metadata">
+        <summary lang="en">The Crew is a team of individuals that does what it can to provide others, you the best in entertainment.</summary>
+        <description lang="en">Many come, Many go. The true and dedicated are here.</description>
+        <platform>all</platform>
+        <license>GNU GENERAL PUBLIC LICENSE. Version 3, 29 June 2007</license>
+        <disclaimer lang="en">The author of this addon do not host any of the content which is found and have no affiliation with any of the content providers. This addon simply searches websites for content. Use at your own risk!</disclaimer>
+        <assets>
+            <icon>icon.png</icon>
+            <fanart>fanart.jpg</fanart>
+        </assets>
+    </extension>
 </addon>
 
 <addon id="script.tvskipintro" version="2018.02.21" name="TV Skip Intro" provider-name="aenema">
@@ -3397,28 +3520,26 @@ This is a Non-profit resource, organized solely for educational purposes which i
 	</extension>
 </addon>
 
-<addon
-  id="weather.metoffice"
-  version="2.0.1"
-  name="Met Office"
-  provider-name="powlo">
+<addon id="weather.metoffice" version="2.0.2" name="Met Office" provider-name="powlo">
   <requires>
-	<import addon="xbmc.python" version="2.25.0"/>
-	<import addon="script.module.pytz" version="2014.2"/>
-	<import addon="script.module.pil"/>
+    <import addon="xbmc.python" version="2.26.0" />
+    <import addon="script.module.pytz" version="2014.2" />
+    <import addon="script.module.pil" />
   </requires>
-  <extension point="xbmc.python.weather" library="src/metoffice/default.py"/>
+  <extension point="xbmc.python.weather" library="src/metoffice/default.py" />
   <extension point="xbmc.addon.metadata">
-	<summary lang="en">UK weather forecast from the Met Office.</summary>
-	<description lang="en">UK weather forecast provided by Met Office (http://www.metoffice.gov.uk/)</description>
-	<platform>all</platform>
-    <language>en</language>
-    <license>GNU GPL v2</license>
-    <forum>http://forum.kodi.tv/showthread.php?tid=166362</forum>
-    <website>http://www.metoffice.gov.uk/datapoint/</website>
+    <assets>
+      <icon>icon.png</icon>
+      <fanart>fanart.jpg</fanart>
+    </assets>
+    <summary lang="en_GB">UK weather forecast from the Met Office.</summary>
+    <description lang="en_GB">UK weather forecast provided by Met Office (http://www.metoffice.gov.uk/)</description>
+    <platform>all</platform>
+    <license>GPL-2.0-or-later</license>
+    <forum>https://forum.kodi.tv/showthread.php?tid=166362</forum>
+    <website>https://www.metoffice.gov.uk/services/data/datapoint</website>
     <source>https://github.com/powlo/weather.metoffice</source>
-    <email></email>
-    <disclaimer lang="en">In using this addon you agree to the terms and conditions specified under the Met Office Datapoint terms and conditions. http://www.metoffice.gov.uk/datapoint/terms-conditions. Data provided by Met Office Datapoint is covered by the Open Government License. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/. Use at your own risk. The authors accept no liability.</disclaimer>
+    <disclaimer lang="en_GB">In using this addon you agree to the terms and conditions specified under the Met Office Datapoint terms and conditions. http://www.metoffice.gov.uk/datapoint/terms-conditions. Data provided by Met Office Datapoint is covered by the Open Government License. http://www.nationalarchives.gov.uk/doc/open-government-licence/version/2/. Use at your own risk. The authors accept no liability.</disclaimer>
   </extension>
 </addon>
 

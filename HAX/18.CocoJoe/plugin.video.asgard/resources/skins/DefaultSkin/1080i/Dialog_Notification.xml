@@ -12,7 +12,7 @@
             <posx>1160</posx>
             <posy>-200</posy>
             <control type="image" description="background">
-                <width>620</width>
+                <width>720</width>
                 <height>134</height>
                 <texture border="44,0,44,0">notification.png</texture>
             </control>
@@ -38,7 +38,7 @@
                 <height>40</height>
                 <width>570</width>
                 <scroll>true</scroll>
-                <textcolor>lightblue</textcolor>
+                <textcolor>goldenrod</textcolor>
             </control>
             <control type="label" id="402" description="Message">
                 <posx>140</posx>
@@ -46,7 +46,7 @@
                 <height>40</height>
                 <width>550</width>
                 <scroll>true</scroll>
-                <textcolor>lightblue</textcolor>
+                <textcolor>goldenrod</textcolor>
             </control>
         </control>
     </controls>

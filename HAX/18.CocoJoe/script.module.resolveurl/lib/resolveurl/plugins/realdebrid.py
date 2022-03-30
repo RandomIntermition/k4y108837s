@@ -59,7 +59,7 @@ class RealDebridResolver(ResolveUrl):
         self.hosts = None
         self.headers = {'User-Agent': USER_AGENT}
 
-    def get_media_url(self, host, media_id, retry=False, cached_only=False):
+    def get_media_url(self, host, media_id, retry=False, cached_only=False, return_all=False):
         try:
             self.headers.update({'Authorization': 'Bearer %s' % self.get_setting('token')})
             if media_id.lower().startswith('magnet:'):
@@ -80,7 +80,13 @@ class RealDebridResolver(ResolveUrl):
                             while status == 'magnet_conversion' and _TIMEOUT > 0:
                                 cd.update(_TIMEOUT, line1=line1, line3=line3)
                                 if cd.is_canceled():
-                                    self.__delete_torrent(torrent_id)
+                                    keep_transfer = common.kodi.yesnoDialog(
+                                        heading,
+                                        'Continue trying transferring to Real-Debrid Cloud in the background?',
+                                        'You may have to select desired file(s) on real-debrid.com/torrents at this stage'
+                                    )
+                                    if not keep_transfer:
+                                        self.__delete_torrent(torrent_id)
                                     raise ResolverError('Real-Debrid: Torrent ID %s canceled by user' % torrent_id)
                                 elif any(x in status for x in STALLED):
                                     self.__delete_torrent(torrent_id)
@@ -99,13 +105,17 @@ class RealDebridResolver(ResolveUrl):
                         for _file in torrent_info.get('files'):
                             if any(_file.get('path').lower().endswith(x) for x in FORMATS):
                                 _videos.append(_file)
-                        try:
-                            _video = max(_videos, key=lambda x: x.get('bytes'))
-                            file_id = _video.get('id', 0)
-                        except ValueError:
-                            self.__delete_torrent(torrent_id)
-                            raise ResolverError('Real-Debrid Error: Failed to locate largest video file')
-                        file_selected = self.__select_file(torrent_id, file_id)
+                        if not return_all:
+                            try:
+                                _video = max(_videos, key=lambda x: x.get('bytes'))
+                                file_id = _video.get('id', 0)
+                            except ValueError:
+                                self.__delete_torrent(torrent_id)
+                                raise ResolverError('Real-Debrid Error: Failed to locate largest video file')
+                            file_selected = self.__select_file(torrent_id, file_id)
+                        else:
+                            files_ids = ','.join([str(v['id']) for v in _videos])
+                            file_selected = self.__select_file(torrent_id, files_ids)
                         if not file_selected:
                             self.__delete_torrent(torrent_id)
                             raise ResolverError('Real-Debrid Error: Failed to select file')
@@ -113,7 +123,8 @@ class RealDebridResolver(ResolveUrl):
                             torrent_info = self.__torrent_info(torrent_id)
                             status = torrent_info.get('status')
                             if not status == 'downloaded':
-                                file_size = round(float(_video.get('bytes')) / (1000 ** 3), 2)
+                                file_size = torrent_info.get('bytes') if return_all else _video.get('bytes')
+                                file_size = round(float(file_size) / (1000 ** 3), 2)
                                 if cached:
                                     line2 = 'Getting torrent from the Real-Debrid Cloud'
                                 else:
@@ -132,7 +143,12 @@ class RealDebridResolver(ResolveUrl):
                                         logger.log_debug(line3)
                                         pd.update(int(float(torrent_info.get('progress'))), line1=line1, line3=line3)
                                         if pd.is_canceled():
-                                            self.__delete_torrent(torrent_id)
+                                            keep_transfer = common.kodi.yesnoDialog(
+                                                heading,
+                                                'Keep transferring to Real-Debrid Cloud in the background?'
+                                            )
+                                            if not keep_transfer:
+                                                self.__delete_torrent(torrent_id)
                                             raise ResolverError('Real-Debrid: Torrent ID %s canceled by user' % torrent_id)
                                         elif any(x in status for x in STALLED):
                                             self.__delete_torrent(torrent_id)
@@ -145,8 +161,16 @@ class RealDebridResolver(ResolveUrl):
                     raise ResolverError('Real-Debrid Error: Failed to transfer torrent to/from the cloud')
 
             url = '%s/%s' % (rest_base_url, unrestrict_link_path)
-            data = {'link': media_id}
-            result = self.net.http_POST(url, form_data=data, headers=self.headers).content
+            if not return_all:
+                data = {'link': media_id}
+                result = self.net.http_POST(url, form_data=data, headers=self.headers).content
+            else:
+                files = [file for file in torrent_info.get('files') if file['selected']]
+                unresolved_links = []
+                for index, link in enumerate(torrent_info.get('links')):
+                    filename = re.sub('^/', '', files[index]['path'])
+                    unresolved_links.append({'name': filename, 'link': link})
+                return unresolved_links
         except urllib_error.HTTPError as e:
             if not retry and e.code == 401:
                 if self.get_setting('refresh'):

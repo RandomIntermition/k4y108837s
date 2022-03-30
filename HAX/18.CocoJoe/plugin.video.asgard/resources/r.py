@@ -19,7 +19,7 @@ for i in types:
         file.close()
         added_t=''
         if 'non_rd' in f_data:
-            added_t=' [COLOR lightblue](Free)[/COLOR]'
+            added_t=' [COLOR goldenrod](Free)[/COLOR]'
         if 'easynews' in f_data or 'furk' in f_data:
             added_t=' [COLOR red](Paid)[/COLOR]'
         added_id=''

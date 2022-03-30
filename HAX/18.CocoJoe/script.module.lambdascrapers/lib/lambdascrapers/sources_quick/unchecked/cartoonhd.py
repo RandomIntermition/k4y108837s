@@ -12,8 +12,8 @@ class source:
     def __init__(self):
         self.priority = 1
         self.language = ['en'] # Old  cartoonhd.care  cartoonhd.it  cartoonhd.de  cartoonhd.cz
-        self.domains = ['cartoonhd.com']
-        self.base_link = 'https://cartoonhd.com'
+        self.domains = ['cartoonhd.app']
+        self.base_link = 'https://cartoonhd.app'
 
 
     def movie(self, imdb, title, localtitle, aliases, year):

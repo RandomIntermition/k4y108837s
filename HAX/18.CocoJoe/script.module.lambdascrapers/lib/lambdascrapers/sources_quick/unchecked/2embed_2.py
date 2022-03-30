@@ -19,7 +19,7 @@ class source:
         self.domains = ['2embed.ru']
         self.base_link = 'https://www.2embed.ru'
         self.search_link = '/embed/imdb/movie?id=%s'
-        self.search_link2 = '/embed/imdb/tv?id=%s'
+        self.search_link2 = '/embed/tmdb/tv?id=%s&s=%s&e=%s'
         self.headers = {'User-Agent': client.agent(), 'Referer': self.base_link}
 
     def movie(self, imdb, title, localtitle, aliases, year):

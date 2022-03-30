@@ -2,6 +2,7 @@
 import logging,re,time,os
 from resources.modules import cache
 global local
+from resources.modules import log
 local=False
 try:
     import urllib3
@@ -21,8 +22,13 @@ except:
   pass
 hostprDict = ['1fichier.com', 'oboom.com', 'rapidgator.net', 'rg.to', 'uploaded.net',
                    'uploaded.to', 'ul.to', 'filefactory.com', 'nitroflare.com', 'turbobit.net', 'uploadrocket.net','uploadgig.com']
-
-addonPath = xbmc.translatePath(Addon.getAddonInfo("path"))
+KODI_VERSION = int(xbmc.getInfoLabel("System.BuildVersion").split('.', 1)[0])
+if KODI_VERSION<=18:
+    xbmc_tranlate_path=xbmc.translatePath
+else:
+    import xbmcvfs
+    xbmc_tranlate_path=xbmcvfs.translatePath
+addonPath = xbmc_tranlate_path(Addon.getAddonInfo("path"))
 if Addon.getSetting("theme")=='0':
     art_folder='artwork'
 elif Addon.getSetting("theme")=='1':
@@ -52,7 +58,7 @@ try:
    
 except:
     domain_s='https://'
-all_colors=['aliceblue', 'anitquewhite', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue', 'chartreuse', 'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkkhaki', 'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon', 'darkseagreen', 'darkslateblue', 'darkslategray', 'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue', 'dimgray', 'dodgerblue', 'firebrick', 'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'greenyellow', 'honeydew', 'hotpink', 'indianred ', 'indigo  ', 'ivory', 'khaki', 'kodi', 'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray', 'lightgreen', 'lightpink', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'lightslategray', 'lightsteelblue', 'lightyellow', 'lime', 'limegreen', 'linen', 'magenta', 'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple', 'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise', 'mediumvioletred', 'midnightblue', 'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy', 'none', 'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid', 'palegoldenrod', 'palegreen', 'paleturquoise', 'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink', 'plum', 'powderblue', 'purple', 'red', 'rosybrown', 'royalblue', 'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue', 'slategray', 'snow', 'springgreen', 'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'white', 'whitesmoke', 'yellow', 'yellowgreen']
+all_colors=['aliceblue', 'goldenrod', 'aqua', 'aquamarine', 'azure', 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood', 'cadetblue', 'chartreuse', 'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan', 'darkblue', 'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkgoldenrod', 'darkmagenta', 'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon', 'darkseagreen', 'darkslateblue', 'darkslategray', 'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue', 'dimgray', 'dodgerblue', 'firebrick', 'floralwhite', 'forestgreen', 'fuchsia', 'gainsboro', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'greenyellow', 'honeydew', 'hotpink', 'indianred ', 'indigo  ', 'ivory', 'goldenrod', 'kodi', 'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'goldenrod', 'lightcoral', 'lightcyan', 'lightgoldenrodyellow', 'lightgray', 'lightgreen', 'lightpink', 'lightsalmon', 'lightseagreen', 'lightskyblue', 'lightslategray', 'lightsteelblue', 'lightyellow', 'lime', 'limegreen', 'linen', 'goldenrod', 'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple', 'mediumseagreen', 'mediumslateblue', 'mediumspringgreen', 'mediumturquoise', 'mediumvioletred', 'midnightblue', 'mintcream', 'mistyrose', 'moccasin', 'navajowhite', 'navy', 'none', 'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid', 'palegoldenrod', 'palegreen', 'paleturquoise', 'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'goldenrod', 'plum', 'powderblue', 'purple', 'red', 'rosybrown', 'royalblue', 'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue', 'slategray', 'snow', 'springgreen', 'steelblue', 'tan', 'teal', 'thistle', 'tomato', 'turquoise', 'violet', 'goldenrod', 'whitesmoke', 'yellow', 'yellowgreen']
 from resources.modules.public import get_html_g
 from  resources.modules.client import get_html
 html_g_tv,html_g_movie=cache.get(get_html_g,72, table='posters')
@@ -97,8 +103,8 @@ def get_vstram_title(original_name,html2):
         match4=re.compile(regex,re.DOTALL).findall(html2)
     if len(match4)>0:
         name1=match4[0]
-    logging.warning(match4)
-    logging.warning(name1)
+    log.warning(match4)
+    log.warning(name1)
     return name1.replace("."," ").replace('Watch','').replace('watch','').replace(' mp4','').replace('watch','').replace(' MP4','').replace(' mkv','').replace(' MKV','').replace("_",".")
     
 def get_imdb(tv_movie,id):
@@ -188,7 +194,7 @@ def trakt_get_device_code():
 def trakt_authenticate():
     code = trakt_get_device_code()
     token = trakt_get_device_token(code)
-    logging.warning(token)
+    log.warning(token)
     if token and 'error_code' not in token:
         expires_at = time.time() + 60*60*24*30#*3
         Addon.setSetting(SETTING_TRAKT_EXPIRES_AT, str(expires_at))
@@ -262,15 +268,15 @@ def trakt_get_device_token(device_codes):
         except:
             monit = xbmc.Monitor()
             ab_req=monit.abortRequested()
-        logging.warning('while::') 
+        log.warning('while::') 
         while not ab_req and  time_passed < expires_in:        
             
             if progress_dialog.iscanceled():
                     break
             try:
                 response = call_trakt("oauth/device/token", data=data, with_auth=False)
-                logging.warning('response')
-                logging.warning(response)
+                log.warning('response')
+                log.warning(response)
                 if 'error_code' in response:
                     progress = int(100 * time_passed / expires_in)
                     progress_dialog.update(progress)
@@ -343,26 +349,26 @@ def cached_call_t(path, params={}, data=None, is_delete=False, with_auth=True, p
                 headers['Authorization'] = 'Bearer ' + token
         if data is not None:
             assert not params
-            logging.warning("trakt addr")
-            logging.warning("{0}/{1}".format(API_ENDPOINT, path))
-            logging.warning(data)
-            logging.warning(headers)
+            log.warning("trakt addr")
+            log.warning("{0}/{1}".format(API_ENDPOINT, path))
+            log.warning(data)
+            log.warning(headers)
             res=get_html("{0}/{1}".format(API_ENDPOINT, path), json=(data), headers=headers,timeout=15).json()
-            logging.warning(res)
+            log.warning(res)
             return res
         elif is_delete:
             import sys
-            path1=xbmc.translatePath('special://home/addons/script.module.requests/lib')
+            path1=xbmc_tranlate_path('special://home/addons/script.module.requests/lib')
             sys.path.append( path1)
-            path1=xbmc.translatePath('special://home/addons/script.module.urllib3/lib')
+            path1=xbmc_tranlate_path('special://home/addons/script.module.urllib3/lib')
             sys.path.append( path1)
-            path1=xbmc.translatePath('special://home/addons/script.module.chardet/lib')
+            path1=xbmc_tranlate_path('special://home/addons/script.module.chardet/lib')
             sys.path.append( path1)
-            path1=xbmc.translatePath('special://home/addons/script.module.certifi/lib')
+            path1=xbmc_tranlate_path('special://home/addons/script.module.certifi/lib')
             sys.path.append( path1)
-            path1=xbmc.translatePath('special://home/addons/script.module.idna/lib')
+            path1=xbmc_tranlate_path('special://home/addons/script.module.idna/lib')
             sys.path.append( path1)
-            path1=xbmc.translatePath('special://home/addons/script.module.futures/lib')
+            path1=xbmc_tranlate_path('special://home/addons/script.module.futures/lib')
             sys.path.append( path1)
             import requests
             return requests.delete("{0}/{1}".format(API_ENDPOINT, path), headers=headers,timeout=15)
@@ -906,7 +912,7 @@ def server_data(f_link,original_title,direct='NO',c_head={'User-Agent': 'Mozilla
                     
                     return original_title,' ',' ',False
        except Exception as e:
-        logging.warning('ee:'+str(e))
+        log.warning('ee:'+str(e))
         
         pass
        if 'mystream.to' in f_link:
@@ -1045,7 +1051,7 @@ def server_data(f_link,original_title,direct='NO',c_head={'User-Agent': 'Mozilla
         #if 'estream' in f_link or resolvable==False:
         #  return original_title,'estream',' ',True
         if  resolvable==False and a==False:
-          logging.warning('RETURN NON RESO')
+          log.warning('RETURN NON RESO')
           try:
               try_head = requests.head(f_link,headers=c_head, stream=True,verify=False,timeout=15)
               
@@ -1300,9 +1306,9 @@ def server_data(f_link,original_title,direct='NO',c_head={'User-Agent': 'Mozilla
         
         return name1,s_name,res,check
        except Exception as e:
-          logging.warning(e)
-          logging.warning('Error FALSE')
-          logging.warning(f_link)
+          log.warning(e)
+          log.warning('Error FALSE')
+          log.warning(f_link)
           return original_title,' ',' ',False
 ############################################################################
 

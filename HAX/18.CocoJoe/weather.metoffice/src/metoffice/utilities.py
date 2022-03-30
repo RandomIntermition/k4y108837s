@@ -3,17 +3,22 @@ from datetime import datetime
 import time
 import traceback
 import math
-import xbmc #@UnresolvedImport
-import xbmcgui #@UnresolvedImport
+import xbmc  # @UnresolvedImport
+import xbmcgui  # @UnresolvedImport
 
-from constants import WEATHER_WINDOW_ID, ADDON_BROWSER_WINDOW_ID, DIALOG, WINDOW, TEMPERATUREUNITS, ADDON
-#by importing utilities all messages in xbmc log will be prepended with LOGPREFIX
+from constants import (WEATHER_WINDOW_ID, ADDON_BROWSER_WINDOW_ID,
+                       DIALOG, WINDOW, TEMPERATUREUNITS, ADDON)
+
+
 def log(msg, level=xbmc.LOGNOTICE):
+    # by importing utilities all messages in xbmc log will be prepended with LOGPREFIX
     xbmc.log('weather.metoffice: {0}'.format(msg), level)
 
-#python datetime.strptime is not thread safe: sometimes causes 'NoneType is not callable' error
+
 def strptime(dt, fmt):
+    # python datetime.strptime is not thread safe: sometimes causes 'NoneType is not callable' error
     return datetime.fromtimestamp(time.mktime(time.strptime(dt, fmt)))
+
 
 def failgracefully(f):
     @wraps(f)
@@ -27,51 +32,57 @@ def failgracefully(f):
                 e.args = ('Error',)
             if len(e.args) == 1:
                 e.args = e.args + ('See log file for details',)
-            if xbmcgui.getCurrentWindowId() == WEATHER_WINDOW_ID or xbmcgui.getCurrentWindowId() == ADDON_BROWSER_WINDOW_ID:
+            if xbmcgui.getCurrentWindowId() == WEATHER_WINDOW_ID or \
+                    xbmcgui.getCurrentWindowId() == ADDON_BROWSER_WINDOW_ID:
                 args = (e.args[0].title(),) + e.args[1:4]
-                DIALOG.ok(*args)#@UndefinedVariable
+                DIALOG.ok(*args)  # @UndefinedVariable
     return wrapper
+
 
 def xbmcbusy(f):
     @wraps(f)
     def wrapper(*args, **kwds):
         if xbmcgui.getCurrentWindowId() == WEATHER_WINDOW_ID or xbmcgui.getCurrentWindowId() == ADDON_BROWSER_WINDOW_ID:
-            xbmc.executebuiltin( "ActivateWindow(busydialog)" )
+            xbmc.executebuiltin("ActivateWindow(busydialognocancel)")
         try:
             return f(*args, **kwds)
         finally:
-            xbmc.executebuiltin( "Dialog.Close(busydialog)" )
+            xbmc.executebuiltin("Dialog.Close(busydialognocancel)")
     return wrapper
+
 
 def panelbusy(pane):
     def decorate(f):
         @wraps(f)
         def wrapper(*args, **kwargs):
-            WINDOW.setProperty('{0}.IsBusy'.format(pane), 'true')#@UndefinedVariable
+            WINDOW.setProperty('{0}.IsBusy'.format(pane), 'true')  # @UndefinedVariable
             try:
                 return f(*args, **kwargs)
             finally:
-                WINDOW.clearProperty('{0}.IsBusy'.format(pane))#@UndefinedVariable
+                WINDOW.clearProperty('{0}.IsBusy'.format(pane))  # @UndefinedVariable
         return wrapper
     return decorate
+
 
 def f_or_nla(f):
     @wraps(f)
     def wrapper(*args, **kwds):
         try:
             return f(*args, **kwds)
-        except KeyError as e:
+        except KeyError:
             return 'n/a'
     return wrapper
+
 
 def f_or_na(f):
     @wraps(f)
     def wrapper(*args, **kwds):
         try:
             return f(*args, **kwds)
-        except KeyError as e:
+        except KeyError:
             return 'na'
     return wrapper
+
 
 def minutes_as_time(minutes):
     """
@@ -79,6 +90,7 @@ def minutes_as_time(minutes):
     as a time, starting at midnight.
     """
     return time.strftime('%H:%M', time.gmtime(minutes*60))
+
 
 def haversine_distance(lat1, lon1, lat2, lon2):
     """
@@ -96,17 +108,20 @@ def haversine_distance(lat1, lon1, lat2, lon2):
     c = 2 * math.asin(math.sqrt(a))
     return EARTH_RADIUS * c
 
+
 def rownd(x):
     try:
         return str(round(float(x))).split('.')[0]
     except ValueError:
         return ''
 
-#TODO: This implicitly assumes that temperatures are only either
-#Celsius or Farenheit. This isn't true, Kodi now supports Kelvin
-#and other crazy units. Given that this function is only used
-#for non-standard pages, which require a custom skin, its
-#unlikely that anyone will hit the problem.
+# TODO: This implicitly assumes that temperatures are only either
+# Celsius or Farenheit. This isn't true, Kodi now supports Kelvin
+# and other crazy units. Given that this function is only used
+# for non-standard pages, which require a custom skin, its
+# unlikely that anyone will hit the problem.
+
+
 def localised_temperature(t):
     if TEMPERATUREUNITS[-1] == 'C':
         return t
@@ -116,19 +131,22 @@ def localised_temperature(t):
         except ValueError:
             return ''
 
-#Convert miles per hour to kilomenters per hour
-#Required because Kodi assumes that wind speed is provided in
-#kilometers per hour
+# Convert miles per hour to kilomenters per hour
+# Required because Kodi assumes that wind speed is provided in
+# kilometers per hour
+
+
 @f_or_nla
 def mph_to_kmph(obj, key):
     return str(round(float(obj[key]) * 1.609344))
+
 
 def gettext(s):
     """
     gettext() gets around XBMCs cryptic "Ints For Strings" translation mechanism
     requires the translatable table is kept up to date with the contents of strings.po
     """
-    translatable = {"Observation Location" : 32000,
+    translatable = {"Observation Location": 32000,
                     "Forecast Location": 32001,
                     "Regional Location": 32002,
                     "API Key": 32003,
@@ -141,7 +159,7 @@ def gettext(s):
                     "No locations found containing": 32010,
                     "Matching Sites": 32011}
     try:
-        translation = ADDON.getLocalizedString(translatable[s]) #@UndefinedVariable
+        translation = ADDON.getLocalizedString(translatable[s])  # @UndefinedVariable
         if not translation:
             raise TranslationError
         else:
@@ -149,6 +167,7 @@ def gettext(s):
     except (KeyError, TranslationError):
         log('String "{0}" not translated.'.format(s), level=xbmc.LOGWARNING)
         return s
+
 
 class TranslationError(Exception):
     pass

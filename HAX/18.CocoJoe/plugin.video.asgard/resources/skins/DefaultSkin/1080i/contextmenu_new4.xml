@@ -4,12 +4,12 @@
 
     <controls>
 		<control type="label" id="202">
-						<posx>1350</posx>
+						<posx>700</posx>
 						<posy>50</posy>
 						<width>1280</width>
 						<height>38</height>
 						<font>font-30</font>
-						<textcolor>lightblue</textcolor>
+						<textcolor>goldenrod</textcolor>
 						<aligny>center</aligny>		    
 						<align>left</align>
 						<visible>true</visible>
@@ -22,7 +22,7 @@
 					<width>100%</width>
 					<height>100%</height>
 					<colordiffuse>FFFFFFFF</colordiffuse>
-					<texture background="false">back3.png</texture>   
+					<texture background="false">back3.jpg</texture>   
 					
 		</control>
 		<control type="image">
@@ -61,7 +61,7 @@
 						<width>600</width>
 						<height>38</height>
 						<font>font-13</font>
-						<textcolor>lightblue</textcolor>
+						<textcolor>goldenrod</textcolor>
 						<aligny>center</aligny>		    
 						<align>left</align>
 						<visible>true</visible>

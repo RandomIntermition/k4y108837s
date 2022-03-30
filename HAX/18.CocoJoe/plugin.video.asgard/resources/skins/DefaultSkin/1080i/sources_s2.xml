@@ -85,7 +85,7 @@
 				<height>80</height>
 				<aligny>center</aligny>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-28</font>
 			</control>
 			
@@ -147,7 +147,7 @@
 				<height>80</height>
 				<aligny>center</aligny>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-28</font>
 			</control>
 			
@@ -159,7 +159,7 @@
 				<height>80</height>
 				<aligny>center</aligny>
 				
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-28</font>
 			</control>
 			
@@ -207,7 +207,7 @@
 				<height>80</height>
 				<aligny>center</aligny>
 				<visible>!VideoPlayer.IsFullscreen</visible>
-				<textcolor>lightblue</textcolor>
+				<textcolor>goldenrod</textcolor>
 				<font>font-28</font>
 			</control>
 		</control>

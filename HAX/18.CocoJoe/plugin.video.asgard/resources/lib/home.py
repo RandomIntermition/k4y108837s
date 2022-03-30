@@ -386,7 +386,7 @@ class cHome:
 
         oOutputParameterHandler = cOutputParameterHandler()
         oOutputParameterHandler.addParameter('siteUrl', 'http://')
-        oGui.addDir('cTrakt', 'getLoad', self.addons.VSlang(30214), 'trakt.png', oOutputParameterHandler)
+        oGui.addDir('cTrakt', 'getLoad', self.addons.VSlang(30214), 'basic.png', oOutputParameterHandler)
 
         oOutputParameterHandler = cOutputParameterHandler()
         oOutputParameterHandler.addParameter('siteUrl', 'http://')

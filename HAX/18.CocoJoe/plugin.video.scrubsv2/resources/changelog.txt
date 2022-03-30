@@ -1,0 +1,22 @@
+[B][COLOR grey]
+(Contact me about any errors or issues. I dont really use Soc. Media)
+(Feel free to test anything and tell me what works and what dont.)
+(jewbmx@gmail.com OR https://github.com/jewbmx/repo/issues)[/COLOR][/B]
+
+- 5.0.10 small text adjustment in the settings. tossed the debug tools into cleantools_widget when the dev settings enabled. Fixed a couple more missed label errors for kodi 18. Added the Unaired Color code back in for movies that havent aired yet. Added a new "Watch [Show] Online" section in More Stuff. (still needs testing and work.)
+
+[B][COLOR fuchsia][Save the Providers Stress and me some work lol, Disable what you Dont use.][/COLOR][/B]
+
+[B][COLOR orange]Previous Log Info[/COLOR][/B]
+- Changed way too much to list lol.(along with the removal of pretty much all debrid stuff.)
+- Converted older versions of TheOath and Scrubs into this strange thing.
+- Updated for Kodi 19.0 Based off Host505 Changes mostly. and a few from other folks also.
+- Now designed to be english only and supporting Kodi 19 only.(I dont use older versions.)
+- Stuffed with likely twice the shit and probably half the size.(plus surprisingly speedy.)
+- As the first updates, expect problems and report em for me to fix em.(apoligies in advance.)
+- 5.0.1 - 5.0.6 Minor code changes and issues fixed.
+- 5.0.7 Fixes a small error in TVmaze networks names, and also changes that seems to fix the indicators.(aka watched icons.)
+- 5.0.8 Fixes another small error in TVmaze networks names, and some code changes to sources and the scrapers/providers.
+- 5.0.9 Fixes one more issue with Kodi 18. Also removed most base64 codeuse which was a waste of time.
+
+

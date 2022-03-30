@@ -5,7 +5,6 @@
 # This file is part of Catch-up TV & More
 
 from __future__ import unicode_literals
-from codequick import Script, utils
 
 # The following dictionaries describe
 # the addon's tree architecture.
@@ -23,6 +22,7 @@ menu = {
         'label': 'Télé-Québec',
         'thumb': 'channels/ca/telequebec.png',
         'fanart': 'channels/ca/telequebec_fanart.jpg',
+        'xmltv_id': 'I63040.labs.zap2it.com',
         'enabled': True,
         'order': 4
     },
@@ -31,19 +31,22 @@ menu = {
         'label': 'TVA',
         'thumb': 'channels/ca/tva.png',
         'fanart': 'channels/ca/tva_fanart.jpg',
+        'xmltv_id': 'I72755.labs.zap2it.com',
         'enabled': True,
         'order': 5
     },
     'icitele': {
         'resolver': '/resources/lib/channels/ca/icitele:get_live_url',
-        'label': 'ICI Télé (' + utils.ensure_unicode(Script.setting['icitele.language']) + ')',
+        'label': 'ICI Télé',
         'thumb': 'channels/ca/icitele.png',
         'fanart': 'channels/ca/icitele_fanart.jpg',
-        'available_languages': [
-            'Vancouver', 'Regina', 'Toronto', 'Edmonton', 'Rimouski',
-            'Québec', 'Winnipeg', 'Moncton', 'Ottawa',
-            'Montréal'
-        ],
+        'available_languages': {
+            'Vancouver': {}, 'Regina': {}, 'Toronto': {}, 'Edmonton': {}, 'Rimouski': {},
+            'Québec': {}, 'Winnipeg': {}, 'Moncton': {}, 'Ottawa': {}, 'Sherbrooke': {}, 'Trois-Rivières': {},
+            'Montréal': {
+                'xmltv_id': 'I45867.labs.zap2it.com'
+            }
+        },
         'enabled': True,
         'order': 6
     },
@@ -60,6 +63,7 @@ menu = {
         'label': 'Télé-Mag',
         'thumb': 'channels/ca/telemag.png',
         'fanart': 'channels/ca/telemag_fanart.jpg',
+        'xmltv_id': 'I72595.labs.zap2it.com',
         'enabled': True,
         'order': 9
     },
@@ -68,20 +72,24 @@ menu = {
         'label': 'Noovo',
         'thumb': 'channels/ca/noovo.png',
         'fanart': 'channels/ca/noovo_fanart.jpg',
+        'xmltv_id': 'I58688.labs.zap2it.com',
         'enabled': True,
         'order': 10
     },
     'cbc': {
         'resolver': '/resources/lib/channels/ca/cbc:get_live_url',
-        'label': 'CBC (' + utils.ensure_unicode(Script.setting['cbc.language']) + ')',
+        'label': 'CBC',
         'thumb': 'channels/ca/cbc.png',
         'fanart': 'channels/ca/cbc_fanart.jpg',
-        'available_languages': [
-            'Ottawa', 'Montreal', 'Charlottetown', 'Fredericton',
-            'Halifax', 'Windsor', 'Yellowknife', 'Winnipeg',
-            'Regina', 'Calgary', 'Edmonton', 'Vancouver',
-            'Toronto', 'St. John\'s'
-        ],
+        'available_languages': {
+            'Ottawa': {}, 'Montreal': {
+                'xmltv_id': 'I53502.labs.zap2it.com'
+            },
+            'Charlottetown': {}, 'Fredericton': {},
+            'Halifax': {}, 'Windsor': {}, 'Yellowknife': {}, 'Winnipeg': {},
+            'Regina': {}, 'Calgary': {}, 'Edmonton': {}, 'Vancouver': {},
+            'Toronto': {}, 'St. John\'s': {}
+        },
         'enabled': True,
         'order': 11
     },
@@ -90,6 +98,7 @@ menu = {
         'label': 'LCN',
         'thumb': 'channels/ca/lcn.png',
         'fanart': 'channels/ca/lcn_fanart.jpg',
+        'xmltv_id': 'I67231.labs.zap2it.com',
         'enabled': False,
         'order': 12
     },
@@ -98,6 +107,7 @@ menu = {
         'label': 'Yoopa',
         'thumb': 'channels/ca/yoopa.png',
         'fanart': 'channels/ca/yoopa_fanart.jpg',
+        'xmltv_id': 'I67449.labs.zap2it.com',
         'enabled': False,
         'order': 13
     }

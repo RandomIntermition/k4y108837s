@@ -19,24 +19,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 from resolveurl.plugins.lib import helpers
 from resolveurl.resolver import ResolveUrl, ResolverError
 from resolveurl import common
+from six.moves import urllib_parse
 
 
 class VidMojoResolver(ResolveUrl):
     name = "vidmojo"
-    domains = ['vidmojo.net']
-    pattern = r'(?://|\.)(vidmojo\.net)/(?:embed-)?([^\n]+)'
+    domains = ['vidmojo.net', 'vidflare.net', 'embedojo.com']
+    pattern = r'(?://|\.)((?:vid(?:mojo|flare)|embedojo)\.(?:net|com))/(?:embed-)?([^\n]+)'
 
     def get_media_url(self, host, media_id):
-        if '|' in media_id:
-            media_id, referer = media_id.split('|')
+        if '$$' in media_id:
+            media_id, referer = media_id.split('$$')
+            referer = urllib_parse.urljoin(referer, '/')
         else:
-            referer = None
+            referer = False
+
         web_url = self.get_url(host, media_id)
-        referer = web_url if referer is None else referer
+        if not referer:
+            referer = urllib_parse.urljoin(web_url, '/')
         headers = {'User-Agent': common.FF_USER_AGENT,
                    'Referer': referer}
         response = self.net.http_GET(web_url, headers=headers).content
-        srcs = helpers.scrape_sources(response, patterns=[r'''file:\s*"(?P<url>[^"]+)'''])
+        srcs = helpers.scrape_sources(response, patterns=[r'''sources:\s*[[{]+\s*file:\s*"(?P<url>[^"]+)'''], generic_patterns=False)
         if srcs:
             headers.update({'Referer': web_url})
             return helpers.pick_source(sorted(srcs, reverse=True)) + helpers.append_headers(headers)

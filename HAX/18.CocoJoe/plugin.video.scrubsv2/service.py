@@ -1,30 +1,40 @@
 # -*- coding: utf-8 -*-
 
+
 import threading
-from resources.lib.modules import control,log_utils
 
-control.execute('RunPlugin(plugin://%s)' % control.get_plugin_url({'action': 'service'}))
+from resources.lib.modules import control
+from resources.lib.modules import log_utils
 
-try:
-    AddonVersion = control.addon('plugin.video.scrubsv2').getAddonInfo('version')
-    ModuleVersion = control.addon('script.module.scrubsv2').getAddonInfo('version')
-    RepoVersion = control.addon('repository.jewrepo').getAddonInfo('version')
-    log_utils.log('===-[AddonVersion: %s]-' % str(AddonVersion) + '-[ModuleVersion: %s]-' % str(ModuleVersion) + '-[RepoVersion: %s]-' % str(RepoVersion), log_utils.LOGNOTICE)
-except:
-    log_utils.log('===-[Error Oppps...', log_utils.LOGNOTICE)
-    log_utils.log('===-[Had Trouble Getting Version Info. Make Sure You Have the JewRepo.', log_utils.LOGNOTICE)
 
 def syncTraktLibrary():
-    control.execute('RunPlugin(plugin://%s)' % 'plugin.video.scrubsv2/?action=tvshowsToLibrarySilent&url=traktcollection')
-    control.execute('RunPlugin(plugin://%s)' % 'plugin.video.scrubsv2/?action=moviesToLibrarySilent&url=traktcollection')
+    try:
+        control.execute('RunPlugin(plugin://%s)' % 'plugin.video.scrubsv2/?action=movies_to_library_silent&url=trakt_collection')
+        control.execute('RunPlugin(plugin://%s)' % 'plugin.video.scrubsv2/?action=tvshows_to_library_silent&url=trakt_collection')
+        log_utils.log('Trakt Library Sync Successful.')
+    except Exception:
+        log_utils.log('syncTraktLibrary', 1)
+        pass
 
-if control.setting('autoTraktOnStart') == 'true':
-    syncTraktLibrary()
 
-if int(control.setting('schedTraktTime')) > 0:
-    log_utils.log('===-[Starting Trakt Scheduling.', log_utils.LOGNOTICE)
-    log_utils.log('===-[Scheduled Time Frame '+ control.setting('schedTraktTime')  + ' Hours.', log_utils.LOGNOTICE)
-    timeout = 3600 * int(control.setting('schedTraktTime'))
-    schedTrakt = threading.Timer(timeout, syncTraktLibrary)
-    schedTrakt.start()
+try:
+    control.execute('RunPlugin(plugin://%s)' % 'plugin.video.scrubsv2/?action=service')
+    log_utils.log('Service Process Successful.')
+except Exception:
+    log_utils.log('Service Process Failed.', 1)
+    pass
+
+
+try:
+    if control.setting('trakt.sync') == 'true':
+        syncTraktLibrary()
+    if int(control.setting('trakt.synctime')) > 0:
+        timeout = 3600 * int(control.setting('trakt.synctime'))
+        log_utils.log('Trakt Library Sync Scheduled Time: ' + control.setting('trakt.synctime') + ' Hours. TimeOut: ' + timeout)
+        schedTrakt = threading.Timer(timeout, syncTraktLibrary)
+        schedTrakt.start()
+except Exception:
+    log_utils.log('Trakt Library Sync Failed.', 1)
+    pass
+
 

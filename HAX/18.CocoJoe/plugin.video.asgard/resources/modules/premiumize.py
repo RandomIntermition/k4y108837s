@@ -2,7 +2,7 @@
 
 import time
 
-
+from resources.modules import log
 import  json, re, logging,sys,xbmcgui,xbmc,os
 
 from resources.modules import tools
@@ -42,9 +42,9 @@ def copy2clip(txt):
 def colorString(text, color=None):
     
 
-    if color is 'default' or color is '' or color is None:
+    if color == 'default' or color == '' or color == None:
         color = ''
-        if color is '':
+        if color == '':
             color = 'deepskyblue'
 
     try:
@@ -80,7 +80,7 @@ class Premiumize:
                                     'Open this link in a browser: {}'.format(colorString(token['verification_uri']))+'\n'+
                                     'Enter the code: {}'.format(colorString(token['user_code'])))
         tools.progressDialog.update(0)
-        logging.warning(token)
+        log.warning(token)
         while poll_again and not token_ttl <= 0 and not tools.progressDialog.iscanceled():
             poll_again, success = self.poll_token(token['device_code'])
             progress_percent = 100 - int((float((expiry - token_ttl) / expiry) * 100))
@@ -120,6 +120,8 @@ class Premiumize:
             return None
         url = "https://www.premiumize.me/api{}".format(url)
         req = get_html(url, timeout=10, headers=self.headers).json()
+        log.warning('f_url')
+        log.warning(url)
         return req
 
     def post_url(self, url, data):
@@ -130,10 +132,10 @@ class Premiumize:
             xbmc.executebuiltin((u'Notification(%s,%s)' % ('Error', 'User is not authorised to make PM requests')))
             return None
         url = "https://www.premiumize.me/api{}".format(url)
-        logging.warning('f_url')
-        logging.warning(url)
+        log.warning('f_url')
+        log.warning(url)
         req = get_html(url, headers=self.headers, data=data, timeout=10).json()
-        logging.warning(req)
+        log.warning(req)
         return req
 
     def account_info(self):
@@ -177,8 +179,8 @@ class Premiumize:
     def direct_download(self, src):
         postData = {'src': src}
         url = '/transfer/directdl'
-        logging.warning(postData)
-        logging.warning(url)
+        log.warning(postData)
+        log.warning(url)
         return self.post_url(url, postData)
 
     def list_transfers(self):
@@ -279,7 +281,7 @@ class Premiumize:
 
             folder_details = self.direct_download(magnet)['content']
 
-            if pack_select is not False and pack_select is not None:
+            if pack_select != False and pack_select != None:
                 return self.user_select(folder_details)
 
             folder_details = source_utils.clear_extras_by_string(args, 'extras', folder_details)
@@ -299,7 +301,7 @@ class Premiumize:
             traceback.print_exc()
             return
 
-        if stream_link is not None:
+        if stream_link != None:
             self._handle_add_to_cloud(magnet)
 
         return stream_link
@@ -345,10 +347,10 @@ class Premiumize:
     def get_hosters(self, hosters):
 
         host_list = database.get(self.updateRelevantHosters, 1)
-        if host_list is None:
+        if host_list==None:
             host_list = self.updateRelevantHosters()
 
-        if host_list is not None:
+        if host_list != None:
             hosters['premium']['premiumize'] = [(i, i.split('.')[0]) for i in host_list['directdl']]
         else:
             hosters['premium']['premiumize'] = []

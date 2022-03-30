@@ -16,19 +16,37 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+import re
+import base64
+from resolveurl import common
 from resolveurl.plugins.lib import helpers
-from resolveurl.plugins.__resolve_generic__ import ResolveGeneric
+from resolveurl.resolver import ResolveUrl, ResolverError
 
 
-class VoeResolver(ResolveGeneric):
+class VoeResolver(ResolveUrl):
     name = "voe"
     domains = ["voe.sx"]
     pattern = r'(?://|\.)(voe\.sx)/(?:e/)?([0-9A-Za-z]+)'
 
     def get_media_url(self, host, media_id):
-        return helpers.get_media_url(self.get_url(host, media_id),
-                                     patterns=[r'''(?:mp4|hls)":\s*"(?P<url>[^"]+)",\s*"video_height":\s*(?P<label>[^,]+)'''],
-                                     generic_patterns=False)
+        web_url = self.get_url(host, media_id)
+        headers = {'User-Agent': common.RAND_UA}
+        html = self.net.http_GET(web_url, headers=headers).content
+        r = re.search(r'uttf0\((\[[^)]+)', html)
+        if r:
+            r = eval(r.group(1))
+            r = base64.b64decode(''.join(r)[::-1].encode('utf8')).decode('utf8')
+            return r + helpers.append_headers(headers)
+
+        sources = helpers.scrape_sources(
+            html,
+            patterns=[r'''hls":\s*"(?P<url>[^"]+)",\s*"video_height":\s*(?P<label>[^,]+)'''],
+            generic_patterns=False
+        )
+        if sources:
+            return helpers.pick_source(sources) + helpers.append_headers(headers)
+
+        raise ResolverError('No video found')
 
     def get_url(self, host, media_id):
         return self._default_get_url(host, media_id, template='https://{host}/e/{media_id}')

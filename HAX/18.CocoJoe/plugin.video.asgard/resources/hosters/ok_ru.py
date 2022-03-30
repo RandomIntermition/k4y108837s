@@ -26,7 +26,7 @@ class cHoster(iHoster):
         return self.__sDisplayName
 
     def setDisplayName(self, sDisplayName):
-        self.__sDisplayName = sDisplayName + ' [COLOR skyblue]' + self.__sDisplayName + '[/COLOR] [COLOR khaki]' + self.__sHD + '[/COLOR]'
+        self.__sDisplayName = sDisplayName + ' [COLOR skyblue]' + self.__sDisplayName + '[/COLOR] [COLOR goldenrod]' + self.__sHD + '[/COLOR]'
 
     def setFileName(self, sFileName):
         self.__sFileName = sFileName
